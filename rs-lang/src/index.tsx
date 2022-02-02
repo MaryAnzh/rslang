@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
 import { Header } from './views/components/header';
+import { StartPage } from './views/pages/StartPage';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <Header />
+    <StartPage />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -42,4 +42,5 @@ class Header extends React.Component {
 }
 //экспорт для функции
 //export default Header
+//экспорт для класса
 export { Header };
