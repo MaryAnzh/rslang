@@ -5,16 +5,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
 
-.header-logo {
-  height: 10vmin;
-}
+  &__logo {
+    height: 10vmin;
+  }
 
-.header-nav {
-  width: 60%;
-  display: flex;
-  justify-content: space-between;
-  color: #30C5FF;
-  list-style: none;
+  &__nav {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    color: #30C5FF;
+    list-style: none;
+  }
 }
