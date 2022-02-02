@@ -29,7 +29,7 @@ class Header extends React.Component {
     return (
       <header className="header">
         <img src={logo} className="header__logo" alt="logo" />
-        <ul className="heade__nav">
+        <ul className="header__nav">
           <li>Главная</li>
           <li>Учебник</li>
           <li>Игры</li>
