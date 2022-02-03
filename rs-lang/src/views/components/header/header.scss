@@ -9,20 +9,10 @@
 
   li {
     cursor: pointer;
-  }
 
-  li:hover {
-    text-decoration: underline #30C5FF;
-  }
-
-  &__logo {
-    height: 10vmin;
-    cursor: pointer;
-    opacity: .7;
-  }
-
-  &__logo:hover {
-    opacity: 1;
+    &:hover {
+      text-decoration: underline #30C5FF;
+    }
   }
 
   &__nav {
