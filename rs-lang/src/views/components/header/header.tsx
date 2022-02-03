@@ -1,13 +1,14 @@
 import React from 'react';
 import './header.scss';
 import logo from '../../../img/logo.svg';
+import { Logo } from '../Logo/Logo';
 //import { render } from '@testing-library/react';
 
 class Header extends React.Component {
   render() {
     return (
       <header className="header">
-        <img src= {logo} className="header__logo" alt="logo" />
+        <Logo />
         <ul className="header__nav">
           <li>Главная</li>
           <li>Учебник</li>
