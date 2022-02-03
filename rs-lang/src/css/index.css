@@ -1,8 +1,14 @@
-@import url(header.scss);
+@import-normalize;
 @import url(startPage.css);
+@import url(style.scss);
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
 body {
-  padding: 30px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -14,4 +20,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
