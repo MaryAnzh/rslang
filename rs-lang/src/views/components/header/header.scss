@@ -29,6 +29,7 @@
     width: 60%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     color: #30C5FF;
     list-style: none;
   }
@@ -45,5 +46,11 @@
   &__sign-icon {
     width: 30px;
     height: 30px;
+  }
+}
+
+.nav {
+  &__link {
+    color: #30C5FF;
   }
 }

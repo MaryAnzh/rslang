@@ -9,14 +9,14 @@ class Header extends React.Component {
     return (
       <header className="header">
         <Logo />
-        <ul className="header__nav">
+        <ul className="header__nav nav">
           <li>
-            <Link to="/">Главная</Link>
+            <Link to="/" className="nav__link link">Главная</Link>
           </li>
           <li>Учебник</li>
           <li>Игры</li>
           <li>
-            <Link to="/statistics">Статистика</Link>
+            <Link to="/statistics" className="nav__link link">Статистика</Link>
           </li>
         </ul>
         <ul className="header__sign">
