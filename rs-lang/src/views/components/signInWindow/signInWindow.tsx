@@ -1,1 +1,5 @@
-//заглушка
+class signInWindow {
+
+}
+
+export { signInWindow };

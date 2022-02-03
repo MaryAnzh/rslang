@@ -6,9 +6,22 @@
   justify-content: space-between;
   align-items: center;
 
+  & li {
+    cursor: pointer;
+  }
+
+  & li:hover {
+    text-decoration: underline #30C5FF;
+  }
+
   &__logo {
     height: 10vmin;
     cursor: pointer;
+    opacity: .7;
+  }
+
+    &__logo:hover {
+    opacity: 1;
   }
 
   &__nav {
@@ -17,5 +30,18 @@
     justify-content: space-between;
     color: #30C5FF;
     list-style: none;
+  }
+
+  &__sign {
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+    color: #30C5FF;
+    list-style: none;
+  }
+
+  &__sign-icon {
+    width: 30px;
+    height: 30px;
   }
 }

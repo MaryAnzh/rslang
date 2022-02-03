@@ -1,1 +1,5 @@
-//заглушка
+class DataServer {
+
+}
+
+export { DataServer };

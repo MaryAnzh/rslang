@@ -1,1 +1,5 @@
-//заглушка
+class Module {
+
+}
+
+export { Module };
