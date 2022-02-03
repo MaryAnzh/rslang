@@ -6,12 +6,14 @@ import { Header } from './views/components/header/header';
 import { StartPage } from './views/pages/startPage/StartPage';
 import reportWebVitals from './reportWebVitals';
 import { Footer } from './views/components/Footer/Footer';
+import App from './views/components/App/App';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Header />
-    <StartPage />
-    <Footer />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );
