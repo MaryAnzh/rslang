@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from '../../img/logo.svg';
-import '../../css/header.scss';
-import { render } from '@testing-library/react';
+import './startPage.scss';
+import logo from '../../../img/logo.svg';
+//import { render } from '@testing-library/react';
 
 class StartPage extends React.Component {
   render() {
