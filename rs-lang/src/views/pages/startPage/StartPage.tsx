@@ -6,7 +6,7 @@ import logo from '../../../img/logo.svg';
 class StartPage extends React.Component {
   render() {
     return (
-      <main className="start-page">
+      <main className="start-page main">
         <img src={logo} className="start-page-logo" alt="logo" />
       </main>
     );

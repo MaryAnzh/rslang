@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
+import 'typeface-roboto';
 import { Header } from './views/components/header/header';
 import { StartPage } from './views/pages/startPage/StartPage';
 import reportWebVitals from './reportWebVitals';
+import { Footer } from './views/components/Footer/Footer';
 
 ReactDOM.render(
   <React.StrictMode>
     <Header />
     <StartPage />
+    <Footer />
   </React.StrictMode>,
   document.getElementById('root'),
 );
