@@ -2,17 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
 import 'typeface-roboto';
-import { Header } from './views/components/header/header';
-import { StartPage } from './views/pages/startPage/StartPage';
 import reportWebVitals from './reportWebVitals';
-import { Footer } from './views/components/Footer/Footer';
-import App from './views/components/App/App';
+import AppRouter from './views/components/AppRouter/AppRouter';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AppRouter />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
