@@ -1,6 +1,5 @@
 import React from 'react';
 import './popUp.scss';
-import { Cross } from '../cross/cross';
 
 //import { render } from '@testing-library/react';
 
@@ -10,10 +9,8 @@ class PopUp extends React.Component {
     return (
       <div className='pop-up'>
         <div className='pop-up__body'>
-          <Cross/>
           { this.props.children }
-        </div>
-       
+        </div>       
       </div>
     );
   }

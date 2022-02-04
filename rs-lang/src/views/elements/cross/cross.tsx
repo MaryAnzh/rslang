@@ -14,9 +14,9 @@ class Cross extends React.Component {
   }
 
   closeSignInOnClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {    
-    const signIn = document.getElementById('register');
-    if (signIn !== null) {
-      signIn.style.display = 'none';
+    const wrap = document.getElementById('headerForm');
+    if (wrap !== null) {
+      wrap.style.display = 'none';
     }
   }
 }
