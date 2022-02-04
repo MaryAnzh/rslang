@@ -1,5 +1,6 @@
 import React from 'react';
 import '../RegisterForm/registerForm.scss';
+import './SignInForm.scss';
 
 class SignInForm extends React.Component {
   render() {
@@ -25,8 +26,7 @@ class SignInForm extends React.Component {
 					//onChange={changeInputRegister}
 					/>
 					<button type="submit">Войти</button>
-					<p>или</p>
-					<button type="button">Регистрация</button>
+					<p>Нет акаунта? <a className='register-link'>Зарегистрироваться</a></p>
 				</form>
 			</div>
     );
