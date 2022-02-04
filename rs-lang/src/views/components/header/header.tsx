@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 import './header.scss';
 import { Logo } from '../Logo/Logo';
 import { SignInWindow } from '../../components/signInWindow/signInWindow';
@@ -27,7 +27,6 @@ class Header extends React.Component {
 
   signInOnClick(e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
     const signIn = document.getElementById('sign-in');
-   
     if (signIn !== null) {
       signIn.style.display = 'flex';
     }
