@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import { Cross } from '../../elements/cross/cross';
 import { PopUp } from '../../elements/popUp/popUp';
 import { RegisterForm } from '../RegisterForm/registerForm';
-import { throws } from 'assert';
-import { disconnect } from 'process';
+import { SignInForm } from '../SignInForm/SignInForm';
+// import { throws } from 'assert';
+// import { disconnect } from 'process';
 
 // type HeaderProperties = {
 //   foo: string;
@@ -37,7 +38,7 @@ class Header extends React.Component {
               <RegisterForm />
             </div>
             <div id='sign-in-form' className='sign-in-wrap'>
-              <p>Войти</p>
+              <SignInForm />
             </div>
           </PopUp>
         </div>
