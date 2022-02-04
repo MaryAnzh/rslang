@@ -1,58 +1,55 @@
-@import '../../../css/variables';
-
 .header {
-  padding: 0 $side-padding;
-  width: 100%;
+  width: 97%;
   height: 5rem;
-  margin: auto;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-content: center;
+  color: #30C5FF;
+  margin-top: 1rem;
 
   li {
     cursor: pointer;
+
+    &:hover {
+      text-decoration: underline #30C5FF;
+    }
   }
 
-  li:hover {
-    text-decoration: underline $font-color;
-  }
+  .pop-up {
 
-  &__logo {
-    height: 10vmin;
-    opacity: .7;
-    cursor: pointer;
-  }
-
-  &__logo:hover {
-    opacity: 1;
+    &__body {
+       width: 25rem;
+       height: 30rem;
+       padding: 2rem;
+       display: flex;
+		   align-items: center;
+		   flex-direction: column;
+       background: #022b3b;
+       border: 3px solid #30C5FF;
+       border-radius: 10px;
+    }
   }
 
   &__nav {
     width: 60%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: $font-color;
     list-style: none;
   }
 
   &__sign {
-    width: 100px;
+    width: 6rem;
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: $font-color;
     list-style: none;
   }
 
   &__sign-icon {
     width: 30px;
     height: 30px;
-  }
-}
-
-.nav {
-  &__link {
-    color: $font-color;
   }
 }
