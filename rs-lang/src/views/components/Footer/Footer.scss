@@ -1,5 +1,7 @@
+@import '../../../css/variables';
+
 .footer {
-  padding: 1rem 2rem;
+  padding: 1rem $side-padding;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

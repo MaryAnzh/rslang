@@ -5,7 +5,7 @@ import './Footer.scss';
 class Footer extends React.Component {
   render() {
     return (
-      <header className="footer">
+      <footer className="footer">
         <a href="https://rs.school/">
           <img src={logoSchool} className="footer__logo" alt="logo"/>
         </a>
@@ -18,7 +18,7 @@ class Footer extends React.Component {
           </li>
         </ul>
         <p className="footer__copyright">&copy; 2022, RSLang</p>
-      </header>
+      </footer>
     );
   }    
 }
