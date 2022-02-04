@@ -15,14 +15,19 @@
     }
   }
 
-  &__logo {
-    height: 10vmin;
-    cursor: pointer;
-    opacity: .7;
-  }
+  .pop-up {
 
-  &__logo:hover {
-    opacity: 1;
+    &__body {
+       width: 25rem;
+       height: 30rem;
+       padding: 2rem;
+       display: flex;
+		   align-items: center;
+		   flex-direction: column;
+       background: #022b3b;
+       border: 3px solid #30C5FF;
+       border-radius: 10px;
+    }
   }
 
   &__nav {
@@ -30,7 +35,7 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
-    color: #30C5FF;
+    align-items: center;
     list-style: none;
   }
 
@@ -46,11 +51,5 @@
   &__sign-icon {
     width: 30px;
     height: 30px;
-  }
-}
-
-.nav {
-  &__link {
-    color: #30C5FF;
   }
 }
