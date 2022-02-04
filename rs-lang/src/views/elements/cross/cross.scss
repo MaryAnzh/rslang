@@ -1,6 +1,6 @@
 .cross {
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	align-self: end;
 	display: flex;
 	flex-direction: column;
@@ -8,9 +8,16 @@
 	align-items: center;
 	border-radius: 50%;
 	border: 1px solid #30C5FF;
+	opacity: 0.7;
+	transition: .5s;
+
+	&:hover {
+		opacity: 1;
+		border-width: 2px;
+	}
 
 	& div {
-		width: 12px;
+		width: 15px;
 		height: 2px;
 		background: #30C5FF;
 		position: absolute;
