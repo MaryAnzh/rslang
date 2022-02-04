@@ -6,9 +6,11 @@ import { RegisterForm } from '../RegisterForm/registerForm';
 class SignInWindow extends React.Component {
   render() {
     return (
+      <div id='register'>
       <PopUp>
         <RegisterForm />
-      </PopUp>
+        </PopUp>
+      </div>
     );
   }
 }

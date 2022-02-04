@@ -26,7 +26,8 @@ class Header extends React.Component {
           </li>
         </ul>
         <ul className="header__sign">
-          <li onClick={(e) => this.signInOnClick(e)} >Вход</li>
+          <li>Вход</li>
+          <li onClick={(e) => this.signInOnClick(e)} >Регистрация</li>
           <li className="header__sign-icon"><img src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/32072b0672f4d7289dc4b4af3117022d1cfe5ce7/assets/svg/sign-in.svg"></img></li>
         </ul>
       </header>
@@ -34,7 +35,7 @@ class Header extends React.Component {
   }
 
   signInOnClick(e: React.MouseEvent<HTMLLIElement>) {
-    const signIn = document.getElementById('sign-in');
+    const signIn = document.getElementById('register');
     if (signIn !== null) {
       signIn.style.display = 'flex';
     }
