@@ -25,7 +25,7 @@ class Header extends React.Component {
     );
   }
 
-  signInOnClick(e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
+  signInOnClick(e: React.MouseEvent<HTMLLIElement>) {
     const signIn = document.getElementById('sign-in');
     if (signIn !== null) {
       signIn.style.display = 'flex';

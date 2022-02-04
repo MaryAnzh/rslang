@@ -5,7 +5,9 @@ import './Logo.scss';
 class Logo extends React.Component {
   render() {
     return (
-      <img src={logo} className="logo" alt="logo" />
+      <a href="/">
+        <img src={logo} className="logo" alt="logo" />
+      </a>
     );
   }
 }
