@@ -1,55 +1,55 @@
 class StartPageModule {
-	closeSignInOnClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-		const wrap = document.getElementById('headerForm');
-		if (wrap !== null) {
-			wrap.style.display = 'none';
-		}
-	}
+  closeSignInOnClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    const wrap = document.getElementById('headerForm');
+    if (wrap !== null) {
+      wrap.style.display = 'none';
+    }
+  }
 
-	hiddenELem(isWrapHudden: boolean, isRegisterHidden: boolean, isSignInHidden: boolean) {
-		const formWrap = document.getElementById('headerForm');
-		const registerForm = document.getElementById('register-form');
-		const signInForm = document.getElementById('sign-in-form');
-		if (isWrapHudden === false) {
-			if (formWrap !== null) {
-				formWrap.style.display = 'flex';
-			}
-		} else {
-			if (formWrap !== null) {
-				formWrap.style.display = 'none';
-			}
-		}
+  hiddenELem(isWrapHudden: boolean, isRegisterHidden: boolean, isSignInHidden: boolean) {
+    const formWrap = document.getElementById('headerForm');
+    const registerForm = document.getElementById('register-form');
+    const signInForm = document.getElementById('sign-in-form');
+    if (isWrapHudden === false) {
+      if (formWrap !== null) {
+        formWrap.style.display = 'flex';
+      }
+    } else {
+      if (formWrap !== null) {
+        formWrap.style.display = 'none';
+      }
+    }
 
-		if (isRegisterHidden && !isSignInHidden) {
-			if (registerForm !== null) {
-				registerForm.style.display = 'flex';
-			}
-			if (signInForm !== null) {
-				signInForm.style.display = 'none';
-			}
-		} else {
-			if (registerForm !== null) {
-				registerForm.style.display = 'none';
-			}
-			if (signInForm !== null) {
-				signInForm.style.display = 'flex';
-			}
-		}
-	}
+    if (isRegisterHidden && !isSignInHidden) {
+      if (registerForm !== null) {
+        registerForm.style.display = 'flex';
+      }
+      if (signInForm !== null) {
+        signInForm.style.display = 'none';
+      }
+    } else {
+      if (registerForm !== null) {
+        registerForm.style.display = 'none';
+      }
+      if (signInForm !== null) {
+        signInForm.style.display = 'flex';
+      }
+    }
+  }
 
-	registerOnClick(e: React.MouseEvent<HTMLLIElement>) {
-		const isWrapHudden = false;
-		const registerForm = true;
-		const signInForm = false;
-		this.hiddenELem(isWrapHudden, registerForm, signInForm);
-	}
+  registerOnClick(e: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>) {
+    const isWrapHudden = false;
+    const registerForm = true;
+    const signInForm = false;
+    this.hiddenELem(isWrapHudden, registerForm, signInForm);
+  }
 
-	signInOnClick(e: React.MouseEvent<HTMLLIElement>) {
-		const isWrapHudden = false;
-		const registerForm = false;
-		const signInForm = true;
-		this.hiddenELem(isWrapHudden, registerForm, signInForm);
-	}
+  signInOnClick(e: React.MouseEvent<HTMLLIElement>) {
+    const isWrapHudden = false;
+    const registerForm = false;
+    const signInForm = true;
+    this.hiddenELem(isWrapHudden, registerForm, signInForm);
+  }
 }
 
 const startPageModule = new StartPageModule();
