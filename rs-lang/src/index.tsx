@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
-import '@fontsource/roboto/100.css';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/700.css';
+import 'typeface-roboto';
 import reportWebVitals from './reportWebVitals';
 import AppRouter from './views/components/AppRouter/AppRouter';
 import { BrowserRouter } from 'react-router-dom';
