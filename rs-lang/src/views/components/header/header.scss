@@ -1,0 +1,55 @@
+.header {
+  width: 97%;
+  height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  color: #30C5FF;
+  margin-top: 1rem;
+
+  li {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline #30C5FF;
+    }
+  }
+
+  .pop-up {
+
+    &__body {
+       width: 25rem;
+       height: 30rem;
+       padding: 2rem;
+       display: flex;
+		   align-items: center;
+		   flex-direction: column;
+       background: #022b3b;
+       border: 3px solid #30C5FF;
+       border-radius: 10px;
+    }
+  }
+
+  &__nav {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+  }
+
+  &__sign {
+    width: 6rem;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+  }
+
+  &__sign-icon {
+    width: 30px;
+    height: 30px;
+  }
+}

@@ -1,0 +1,48 @@
+.register-form {
+	width: 90%;
+	height: 90%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	
+	h2 {
+		color: #29bffa;
+	}
+
+	form {
+		width: 90%;
+		height: 80%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	input {
+		width: 100%;
+		height: 25px;
+		background: black;
+		color: #29bffa;
+		border: 1px solid #30C5FF;
+	}
+	
+	button {
+		width: 60%;
+		height: 30px;
+		background: #30C5FF;
+		border: 1px solid #0f85b4;
+		border-radius: 5px;
+		transition: 0.5s;
+
+		&:hover {
+			background: #8bd4f1;
+		}
+
+		&:active {
+			background-color: #b3dcec;
+		}
+	}
+
+	
+	
+}

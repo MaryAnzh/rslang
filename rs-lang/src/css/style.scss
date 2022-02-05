@@ -1,0 +1,36 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #fff;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.root-container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  color: #fff;
+}
+
+.header {
+  flex: 0 0 auto;
+}
+
+.main {
+  padding: 2rem 2rem;
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.link {
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  text-decoration: none;
+  color: #fff;
+}
