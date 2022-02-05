@@ -6,6 +6,7 @@ import { Cross } from '../../elements/cross/cross';
 import { PopUp } from '../../elements/popUp/popUp';
 import { RegisterForm } from '../RegisterForm/registerForm';
 import { SignInForm } from '../SignInForm/SignInForm';
+import { startPageModule } from '../../../module/startPageModule';
 // import { throws } from 'assert';
 // import { disconnect } from 'process';
 
@@ -59,57 +60,12 @@ class Header extends React.Component {
           </li>
         </ul>
         <ul className="header__sign">
-          <li onClick={(e) => this.signInOnClick(e)}>Вход</li>
-          <li onClick={(e) => this.registerOnClick(e)} >Регистрация</li>
+          <li onClick={(e) => startPageModule.signInOnClick(e)}>Вход</li>
+          <li onClick={(e) => startPageModule.registerOnClick(e)} >Регистрация</li>
           <li className="header__sign-icon"><img src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/32072b0672f4d7289dc4b4af3117022d1cfe5ce7/assets/svg/sign-in.svg"></img></li>
         </ul>
       </header>
     );
-  }
-
-  hiddenELem(isWrapHudden: boolean, isRegisterHidden: boolean, isSignInHidden: boolean) {
-    const formWrap = document.getElementById('headerForm');
-    const registerForm = document.getElementById('register-form');
-    const signInForm = document.getElementById('sign-in-form');
-    if (isWrapHudden === false) {
-      if (formWrap !== null) {
-        formWrap.style.display = 'flex';
-      }
-    } else {
-      if (formWrap !== null) {
-        formWrap.style.display = 'none';
-      }
-    }
-
-    if (isRegisterHidden && !isSignInHidden) {
-      if (registerForm !== null) {
-        registerForm.style.display = 'flex';
-      }
-      if (signInForm !== null) {
-        signInForm.style.display = 'none';
-      }
-    } else {
-      if (registerForm !== null) {
-        registerForm.style.display = 'none';
-      }
-      if (signInForm !== null) {
-        signInForm.style.display = 'flex';
-      }
-    }
-  }
-
-  registerOnClick(e: React.MouseEvent<HTMLLIElement>) {
-    const isWrapHudden = false;
-    const registerForm = true;
-    const signInForm = false;
-    this.hiddenELem(isWrapHudden, registerForm, signInForm);
-  }
-
-  signInOnClick(e: React.MouseEvent<HTMLLIElement>) {
-    const isWrapHudden = false;
-    const registerForm = false;
-    const signInForm = true;
-    this.hiddenELem(isWrapHudden, registerForm, signInForm);
   }
 }
 
