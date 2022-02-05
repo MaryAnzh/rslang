@@ -1,9 +1,28 @@
 .start-page {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-}
+  background-color: #999;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
 
-.start-page-logo {
-	width: 50%;
+  &__title {
+    font-weight: 100;
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  &__subtitle {
+    font-weight: 100;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
 }
