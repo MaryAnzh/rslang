@@ -10,18 +10,30 @@ class TextBook extends React.Component {
           <div className='book-page-wrap__book-wrap'>
             <div className='book-page-wrap__book-wrap__book'>
               <div className='book-page-wrap__book-wrap__book__sections'>
-                <div className='book-page-wrap__book-wrap__book__sections__section'></div>
-                <div className='book-page-wrap__book-wrap__book__sections__section'></div>
-                <div className='book-page-wrap__book-wrap__book__sections__section'></div>
-                <div className='book-page-wrap__book-wrap__book__sections__section'></div>
-                <div className='book-page-wrap__book-wrap__book__sections__section'></div>
-                <div className='book-page-wrap__book-wrap__book__sections__section'></div>
-                <div className='book-page-wrap__book-wrap__book__sections__section'></div>
+                <div className='book-page-wrap__book-wrap__book__sections__section'>Уровень сложности 1</div>
+                <div className='book-page-wrap__book-wrap__book__sections__section'>Уровень сложности 2</div>
+                <div className='book-page-wrap__book-wrap__book__sections__section'>Уровень сложности 3</div>
+                <div className='book-page-wrap__book-wrap__book__sections__section'>Уровень сложности 4</div>
+                <div className='book-page-wrap__book-wrap__book__sections__section'>Уровень сложности 5</div>
+                <div className='book-page-wrap__book-wrap__book__sections__section'>Уровень сложности 6</div>
+                <div className='book-page-wrap__book-wrap__book__sections__section'>Сложные слова</div>
               </div>
               <div className='book-page-wrap__book-wrap__book__page-wrap'>
-                <div className='book-page-wrap__book-wrap__book__page-wrap__left'></div>
-                <div className='book-page-wrap__book-wrap__book__page-wrap__page'></div>
-                <div className='book-page-wrap__book-wrap__book__page-wrap__right'></div>
+                <div className='book-page-wrap__book-wrap__book__page-wrap__page'>
+                  <div className='book-page-wrap__book-wrap__book__page-wrap__page__controls'>
+                    <div className='left-arrow'>
+                      <div className='left-arrow__top'></div>
+                      <div className='left-arrow__bottom'></div>
+                    </div>
+                    <div className='right-arrow'>
+                      <div className='right-arrow__top'></div>
+                      <div className='right-arrow__bottom'></div>
+                    </div>
+                  </div>
+                  <div className='book-page-wrap__book-wrap__book__page-wrap__page__content'>
+                  </div>
+                </div>
+                
               </div>
               
             </div>
