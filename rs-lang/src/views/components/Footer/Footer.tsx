@@ -1,5 +1,5 @@
 import React from 'react';
-import logoSchool from '../../../img/rs_school_js.svg';
+// import logoSchool from '../../../img/rs_school_js.svg';
 import './Footer.scss';
 
 class Footer extends React.Component {
@@ -7,7 +7,8 @@ class Footer extends React.Component {
     return (
       <footer className="footer">
         <a href="https://rs.school/">
-          <img src={logoSchool} className="footer__logo" alt="logo"/>
+          <img src='https://raw.githubusercontent.com/MaryAnzh/rslang-assets/61538a7429ec8a4b3eeab95ff3e595de36afad43/assets/svg/rs_school_white.svg'
+          className="footer__logo" alt="logo" />
         </a>
         <ul className="footer__links">
           <li>
