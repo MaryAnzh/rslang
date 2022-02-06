@@ -4,11 +4,17 @@
   padding: 1rem $side-padding;
   display: flex;
   flex-direction: row;
+  gap: 2rem;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  background-color: $main-color;
-  -webkit-box-shadow: inset 0px 10px 9px -5px $main-color-dark; 
-  box-shadow: inset 0px 10px 9px -5px $main-color-dark;
+  background-color: $second-color;
+  -webkit-box-shadow: inset 0px 7px 9px -5px $second-color-dark; 
+  box-shadow: inset 0px 7px 9px -5px $second-color-dark;
+
+  @media screen and (max-width: 710px) {
+    justify-content: center;
+  }
 
   &__links {
     display: flex;
@@ -18,10 +24,11 @@
   &__copyright {
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1rem;
-    color: #fff;
+    color: #000;
   }
-
+  
   &__link {
+    color: #000;
     font-weight: 300;
   }
 

@@ -15,6 +15,11 @@
   overflow: hidden;
   transition: 0.4s ease-in-out;
   cursor: pointer;
+
+  @media screen and (max-width: 609px) {
+    width: 18rem;
+    justify-content: center;
+  }
   
   &__icon {
     padding: 1rem;
