@@ -12,6 +12,7 @@ h6 {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  align-content: center;
   color: #fff;
 }
 
@@ -20,7 +21,6 @@ h6 {
 }
 
 .main {
-  padding: 1rem 2rem;
   flex: 1 0 auto;
 }
 

@@ -5,13 +5,17 @@ class TextBook extends React.Component {
   render() {
     return (
       <main className="main">
-        <h1>TextBook</h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum temporibus, dolore dicta reprehenderit eos neque hic! Ipsum maxime nulla laborum mollitia dolorum animi ipsa voluptatum sapiente asperiores deleniti? Exercitationem, iusto!</p>
+        <div className='book-wrap'>
+          <h1>У ч е б н и к</h1>
+          <div className='book-wrap__book'>
+            <div className='book-wrap__book__page-wrap'>
+
+            </div>
+          </div>
+        </div>        
       </main>
     );
   }
 }
-//экспорт для функции
-//export default Header
-//экспорт для класса
+
 export { TextBook };
