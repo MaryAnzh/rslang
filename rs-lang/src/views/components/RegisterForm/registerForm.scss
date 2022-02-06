@@ -1,4 +1,4 @@
-.register-form {
+.register-form-wrap {
 	width: 90%;
 	height: 90%;
 	display: flex;
@@ -7,7 +7,7 @@
 	justify-content: space-between;
 	
 	h2 {
-		color: #29bffa;
+		color: #00488D;
 	}
 
 	form {
@@ -16,33 +16,49 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-	}
+		color: #00488D;
 
-	input {
-		width: 100%;
-		height: 25px;
-		background: black;
-		color: #29bffa;
-		border: 1px solid #30C5FF;
-	}
-	
-	button {
-		width: 60%;
-		height: 30px;
-		background: #30C5FF;
-		border: 1px solid #0f85b4;
-		border-radius: 5px;
-		transition: 0.5s;
+		input {
+			width: 100%;
+			height: 25px;
+			padding: 5px;
+			background: white;
+			color: #00488D;
+			border: 1px solid #3B95EC;
+		}
+		
+		button {
+			width: 60%;
+			height: 30px;
+			color: white;
+			background: #3B95EC;
+			border: 1px solid #00488D;
+			border-radius: 5px;
+			transition: 0.5s;
 
-		&:hover {
-			background: #8bd4f1;
+			&:hover {
+				background: #8dc2f7;
+			}
+
+			&:active {
+				background-color: #a4c9ee;
+			}
 		}
 
-		&:active {
-			background-color: #b3dcec;
-		}
-	}
+		p {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 10px;
 
-	
+			span {
+				cursor: pointer;
+
+				&:hover {
+					text-decoration: underline #00488D;
+				}
+			}
+		}
+
+	}
 	
 }

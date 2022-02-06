@@ -6,7 +6,7 @@ import { startPageModule } from '../../../module/startPageModule';
 class SignInForm extends React.Component {
   render() {
     return (
-			<div className="register-form">
+			<div className="register-form-wrap">
 				<h2>Вход:</h2>
 				<form>
 					<label form='username'>Имя:</label>
@@ -27,8 +27,8 @@ class SignInForm extends React.Component {
 					//onChange={changeInputRegister}
 					/>
 					<button type="submit">Войти</button>
-				<p>Нет акаунта? <a className='register-link' onClick={(e) => startPageModule.registerOnClick(e)}>
-					Зарегистрироваться</a></p>
+				<p>Нет акаунта? <span onClick={(e) => startPageModule.registerOnClick(e)}>
+					Зарегистрироваться</span></p>
 				</form>
 			</div>
     );

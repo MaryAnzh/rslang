@@ -45,25 +45,25 @@ class Header extends React.Component {
         </div>
         
         <Logo />
-        <ul className="header__nav nav">
+        <ul className="header__nav">
           <li>
-            <Link to="/" className="nav__link link">Главная</Link>
+            <Link to="/" className="header__nav__link">Главная</Link>
           </li>
           <li>
-            <Link to="/textbook" className="nav__link link">Учебник</Link>
+            <Link to="/textbook" className="header__nav__link">Учебник</Link>
           </li>
           <li>
-            <Link to="/games" className="nav__link link">Игры</Link>
+            <Link to="/games" className="header__nav__link">Игры</Link>
           </li>
           <li>
-            <Link to="/statistics" className="nav__link link">Статистика</Link>
+            <Link to="/statistics" className="header__nav__link">Статистика</Link>
           </li>
         </ul>
         <ul className="header__sign">
           <li onClick={(e) => startPageModule.signInOnClick(e)}>Вход</li>
           <li onClick={(e) => startPageModule.registerOnClick(e)} >Регистрация</li>
           <li className="header__sign-icon"><img
-            src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/32072b0672f4d7289dc4b4af3117022d1cfe5ce7/assets/svg/sign-in.svg"
+            src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/4e8ba3073aa691a28f7c0a0619cc32b350c31bf4/assets/svg/sign.svg"
             alt='Sign In'></img>
           </li>
         </ul>

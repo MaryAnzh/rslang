@@ -13,7 +13,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+  background-color: white;
+  background-image: url(https://github.com/MaryAnzh/rslang-assets/blob/main/assets/png/bg-body.png?raw=true);
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
 }
 
 code {
