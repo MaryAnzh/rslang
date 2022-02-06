@@ -25,6 +25,13 @@ class TextBook extends React.Component {
                       <div className='left-arrow__top'></div>
                       <div className='left-arrow__bottom'></div>
                     </div>
+                    <p>Prev</p>
+                    <div className='page-info'>
+                      <p>Страница 1</p>
+                    <p>Сложность 1</p>
+                    </div>
+                    
+                    <p>Nwxt</p>
                     <div className='right-arrow'>
                       <div className='right-arrow__top'></div>
                       <div className='right-arrow__bottom'></div>

@@ -97,6 +97,10 @@
 						align-items: center;
 						border-bottom: 1px dashed #00488D;
 
+						p {
+							color: #00488D;
+						}
+
 						.left-arrow,
 						.right-arrow {
 							width: 38px;
@@ -135,6 +139,12 @@
 						.right-arrow {
 							transform: rotate(180deg)
 
+						}
+
+						.page-info {
+							width: 50%;
+							display: flex;
+							justify-content: space-around;
 						}
 					}
 
