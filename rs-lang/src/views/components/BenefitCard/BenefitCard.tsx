@@ -1,13 +1,8 @@
 import React from 'react';
+import { CardType } from '../../../interfaces/types';
 import './BenefitCard.scss';
 
-type BenefitType = {
-  url: string;
-  title: string;
-  text: string;
-}
-
-class BenefitCard extends React.Component<BenefitType> {
+class BenefitCard extends React.Component<CardType> {
   render() {
     return (
       <div className="benefit-card">

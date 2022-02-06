@@ -1,12 +1,15 @@
-$main-color: #065cb4;
+@import '../../../css/variables';
 
 .start-page {
-  background-color: #eef6fd;
+  background-color: $bg-color;
   color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  padding: 1rem 2rem;
+  width: 100%;
+  height: 100%;
   gap: 1rem;
 
   &__title {
