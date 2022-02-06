@@ -45,18 +45,18 @@ class Header extends React.Component {
         </div>
         
         <Logo />
-        <ul className="header__nav nav">
+        <ul className="header__nav">
           <li>
-            <Link to="/" className="nav__link link">Главная</Link>
+            <Link to="/" className="header__nav__link">Главная</Link>
           </li>
           <li>
-            <Link to="/textbook" className="nav__link link">Учебник</Link>
+            <Link to="/textbook" className="header__nav__link">Учебник</Link>
           </li>
           <li>
-            <Link to="/games" className="nav__link link">Игры</Link>
+            <Link to="/games" className="header__nav__link">Игры</Link>
           </li>
           <li>
-            <Link to="/statistics" className="nav__link link">Статистика</Link>
+            <Link to="/statistics" className="header__nav__link">Статистика</Link>
           </li>
         </ul>
         <ul className="header__sign">
