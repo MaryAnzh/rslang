@@ -18,6 +18,11 @@ class TextBook extends React.Component {
                 <div className='book-page-wrap__book-wrap__book__sections__section'></div>
                 <div className='book-page-wrap__book-wrap__book__sections__section'></div>
               </div>
+              <div className='book-page-wrap__book-wrap__book__page-wrap'>
+                <div className='book-page-wrap__book-wrap__book__page-wrap__left'></div>
+                <div className='book-page-wrap__book-wrap__book__page-wrap__page'></div>
+                <div className='book-page-wrap__book-wrap__book__page-wrap__right'></div>
+              </div>
               
             </div>
           </div>

@@ -47,8 +47,27 @@
 
 				  &:hover {
 					transform: translate(2rem, 0);
-				}
+				   }
+			    }
 			}
+
+			&__page-wrap {
+				width: 60%;
+				height: 100%;
+				display: flex;
+				justify-content: space-between;
+
+				&__lrft,
+				&__right {
+					width: 15%;
+				}
+
+				&__page {
+					width: 55%;
+					height: 100%;
+					background: white;
+				}
+
 			}	
 		}
 	}
