@@ -63,7 +63,7 @@ class Header extends React.Component {
           <li onClick={(e) => startPageModule.signInOnClick(e)}>Вход</li>
           <li onClick={(e) => startPageModule.registerOnClick(e)} >Регистрация</li>
           <li className="header__sign-icon"><img
-            src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/32072b0672f4d7289dc4b4af3117022d1cfe5ce7/assets/svg/sign-in.svg"
+            src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/4e8ba3073aa691a28f7c0a0619cc32b350c31bf4/assets/svg/sign.svg"
             alt='Sign In'></img>
           </li>
         </ul>
