@@ -37,14 +37,14 @@ class StartPageModule {
     }
   }
 
-  registerOnClick(e: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>) {
+  registerOnClick(e: React.MouseEvent<HTMLElement | HTMLSpanElement>) {
     const isWrapHudden = false;
     const registerForm = true;
     const signInForm = false;
     this.hiddenELem(isWrapHudden, registerForm, signInForm);
   }
 
-  signInOnClick(e: React.MouseEvent<HTMLLIElement>) {
+  signInOnClick(e: React.MouseEvent<HTMLLIElement | HTMLSpanElement>) {
     const isWrapHudden = false;
     const registerForm = false;
     const signInForm = true;
