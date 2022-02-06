@@ -31,7 +31,7 @@ class StartPage extends React.Component {
           <section className='start-page__team-wrapper team'>
             <h2 className="start-page__title team__title">Наша команда</h2>
             <div className="start-page__list">
-            <PersonCard title='Мария Вашчяева' text={cardTexts[0]} url={process.env.PUBLIC_URL + '/avatars/mary.jfif'} github="https://github.com/MaryAnzh"/>
+            <PersonCard title='Мария Ващаева' text={cardTexts[0]} url={process.env.PUBLIC_URL + '/avatars/mary.jfif'} github="https://github.com/MaryAnzh"/>
             <PersonCard title='Сергей Масюк' text={cardTexts[0]} url={process.env.PUBLIC_URL + '/avatars/sergey.jpg'} github="https://github.com/mayerror"/>
             </div>
           </section>
