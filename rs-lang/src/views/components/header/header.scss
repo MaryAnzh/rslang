@@ -1,17 +1,21 @@
 .header {
   width: 97%;
   height: 5rem;
+  margin: auto;
   display: flex;
   justify-content: space-between;
   align-content: center;
-  color: #30C5FF;
+  color: white;
   margin-top: 1rem;
 
   li {
     cursor: pointer;
+    color: white;
+    font-size: 1.2em;
+    list-style: none;
 
     &:hover {
-      text-decoration: underline #30C5FF;
+      text-decoration: underline white;
     }
   }
 
@@ -32,8 +36,8 @@
        display: flex;
 		   align-items: center;
 		   flex-direction: column;
-       background: #022b3b;
-       border: 3px solid #30C5FF;
+       background: white;
+       border: 3px solid #A66200;
        border-radius: 10px;
      }
    }
@@ -45,6 +49,11 @@
     justify-content: space-between;
     align-items: center;
     list-style: none;
+
+    &__link {
+      color: white;
+      text-decoration: none;
+    }
   }
 
   &__sign {
