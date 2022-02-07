@@ -11,6 +11,7 @@ type AppProperties = {
 type FormState = {
   email: string;
   password: string;
+  formErrors: { email: string, password: string },
   emailValid: boolean,
   passwordValid: boolean,
   formValid: boolean
@@ -24,6 +25,7 @@ class RegisterForm extends React.Component {
     this.state = {
       email: '',
       password: '',
+      formErrors: { email: '', password: '' },
       emailValid: false,
       passwordValid: false,
       formValid: false,
@@ -41,7 +43,7 @@ class RegisterForm extends React.Component {
             id="new-user-email"
             name="email"
             value={ this.state.email }
-            //value={register.email}
+            onChange={this.handleUserInput}
             //onChange={changeInputRegister}
             //formnovalidate
           />
@@ -50,8 +52,9 @@ class RegisterForm extends React.Component {
             type="password"
             id="new-user-password"
             name="password"
-            value={ this.state.password }
-            //onChange={changeInputRegister}
+            value={this.state.password}
+            onChange={this.handleUserInput}
+            
           />
           <label>Повторите пароль:</label>
           <input
@@ -61,15 +64,26 @@ class RegisterForm extends React.Component {
             autoComplete=''
             //value={register.password2}
             //onChange={changeInputRegister}
-          />
+          />          
           <button type="submit">Регистрация</button>
           <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => startPageModel.signInOnClick(e)}>Войти</span></p>
+          <div className='formErrors'>
+            {Object.keys(this.state.formErrors).map((fieldName, i) => {
+              if (this.state.formErrors.email.length > 0) {
+                return (
+                  <p key={i}>{fieldName} {this.state.formErrors.email}</p>
+                )
+              } else {
+                return '';
+              }
+            })}
+          </div>
         </form>
       </div>
     );
   }
 
-  handleUserInput = (e: React.MouseEvent<HTMLInputElement>) => {
+  handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const elem = e.target as HTMLInputElement;
     const name = elem.name;
     const value = elem.value;

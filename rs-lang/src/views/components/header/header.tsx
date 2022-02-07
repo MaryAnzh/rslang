@@ -10,24 +10,7 @@ import { startPageModel } from '../../../model/StartPageModel';
 // import { throws } from 'assert';
 // import { disconnect } from 'process';
 
-// type HeaderProperties = {
-//   foo: string;
-//   bar: Number;
-//   fooBar: boolean;
-// }
-
 class Header extends React.Component {
-  // isRegicter: boolean;
-
-  // isSignIn: boolean;
-  
-  // constructor(props: HeaderProperties, isRegicter: boolean, isSignIn: boolean) {
-  //   super(props);
-
-  //   this.props.bar;
-  //   this.props.foo;
-  //   this.props.fooBar;
-  // }
 
   render() {
     return (
