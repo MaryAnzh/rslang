@@ -11,6 +11,9 @@ type AppProperties = {
 type FormState = {
   email: string;
   password: string;
+  emailValid: boolean,
+  passwordValid: boolean,
+  formValid: boolean
 }
 
 class RegisterForm extends React.Component {
@@ -21,6 +24,9 @@ class RegisterForm extends React.Component {
     this.state = {
       email: '',
       password: '',
+      emailValid: false,
+      passwordValid: false,
+      formValid: false,
     }
   }
   
@@ -61,6 +67,13 @@ class RegisterForm extends React.Component {
         </form>
       </div>
     );
+  }
+
+  handleUserInput = (e: React.MouseEvent<HTMLInputElement>) => {
+    const elem = e.target as HTMLInputElement;
+    const name = elem.name;
+    const value = elem.value;
+    this.setState({ [name]: value });
   }
 }
 
