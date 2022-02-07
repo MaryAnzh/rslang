@@ -127,9 +127,9 @@ class RegisterForm extends React.Component {
     const elem = e.target as HTMLInputElement;
     const name = elem.name;
     const value = elem.value;
+    console.log(name, value);
     this.setState({ [name]: value });
-    const a = () => { this.validateField(name, value) };
-    a();
+    this.validateField(name, value);
   }
 }
 
