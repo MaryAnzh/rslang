@@ -19,7 +19,7 @@ type FormState = {
 
 class RegisterForm extends React.Component {
   state: FormState;
-    
+
   constructor(props: AppProperties) {
     super(props);
     this.state = {
@@ -31,7 +31,7 @@ class RegisterForm extends React.Component {
       formValid: false,
     }
   }
-  
+
   render() {
     return (
       <div className="register-form-wrap">
@@ -42,10 +42,10 @@ class RegisterForm extends React.Component {
             type="email"
             id="new-user-email"
             name="email"
-            value={ this.state.email }
+            value={this.state.email}
             onChange={this.handleUserInput}
-            //onChange={changeInputRegister}
-            //formnovalidate
+          //onChange={changeInputRegister}
+          //formnovalidate
           />
           <label>Пароль:</label>
           <input
@@ -54,7 +54,7 @@ class RegisterForm extends React.Component {
             name="password"
             value={this.state.password}
             onChange={this.handleUserInput}
-            
+
           />
           <label>Повторите пароль:</label>
           <input
@@ -62,10 +62,9 @@ class RegisterForm extends React.Component {
             id="password2"
             name="password2"
             autoComplete=''
-            //value={register.password2}
-            //onChange={changeInputRegister}
-          />          
-          <button type="submit">Регистрация</button>
+          />
+          <button type="submit"
+            disabled={!this.state.formValid}>Регистрация</button>
           <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => startPageModel.signInOnClick(e)}>Войти</span></p>
           <div className='formErrors'>
             {Object.keys(this.state.formErrors).map((fieldName, i) => {
@@ -83,11 +82,54 @@ class RegisterForm extends React.Component {
     );
   }
 
+  validateForm() {
+    this.setState({
+      formValid: this.state.emailValid &&
+        this.state.passwordValid,
+    });
+  }
+
+  validateField(fieldName: string, value: string) {
+    let fieldValidationErrors = this.state.formErrors;
+    let emailValid = this.state.emailValid;
+    let passwordValid = this.state.formValid;
+    switch (fieldName) {
+      case 'email':
+        if (value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) == null) {
+          fieldValidationErrors.email = 'Некорректный Email';
+          emailValid = false;
+        } else {
+          fieldValidationErrors.email = 'Некорректный Email';
+          emailValid = true;
+        }  
+        break;
+      case 'password':
+        if (value.length > 8) {
+          fieldValidationErrors.password = 'Пароль слишком короткий';
+          passwordValid = false;
+        } else {
+          fieldValidationErrors.password = 'Пароль слишком короткий';
+          passwordValid = true;
+        }
+        break;
+      default:
+        break;
+    }
+
+    this.setState({
+      formErrors: fieldValidationErrors,
+      emailValid: emailValid,
+      passwordValid: passwordValid,
+    }, this.validateForm);
+  }
+
   handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const elem = e.target as HTMLInputElement;
     const name = elem.name;
     const value = elem.value;
     this.setState({ [name]: value });
+    const a = () => { this.validateField(name, value) };
+    a();
   }
 }
 
