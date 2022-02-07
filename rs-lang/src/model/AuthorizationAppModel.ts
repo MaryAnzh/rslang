@@ -1,17 +1,15 @@
-import { DataService } from '../dataServer/dataService';;
+import { newDataService } from '../dataServer/dataService';
+import { DataService } from '../dataServer/dataService';
 
 class AuthorizationAppModel {
 	//принимаем данные
-	private dataService: DataService;
+	dataServ: DataService;
 
-	constructor(dataService: DataService) {
-		this.dataService = dataService;
+	constructor(dataServ: DataService) {
+		this.dataServ = dataServ;
 	}
 }
 
-//URL в ''
-const base = ``;
-const dataService = new DataService(base);
-const authorizationAppModel = new AuthorizationAppModel(dataService);
+const authorizationAppModel = new AuthorizationAppModel(newDataService);
 
 export { authorizationAppModel };

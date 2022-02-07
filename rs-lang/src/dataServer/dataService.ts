@@ -1,5 +1,5 @@
 import { IUser } from '../interfaces/userInterface';
-	;
+
 class DataService {
 	private baseURL: string;
 	private user: string;
@@ -22,5 +22,7 @@ class DataService {
 	}
 
 }
+const dataUrl = '';
+const newDataService = new DataService(dataUrl);
 
-export { DataService };
+export { newDataService, DataService };
