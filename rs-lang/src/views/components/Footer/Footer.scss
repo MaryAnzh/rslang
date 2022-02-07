@@ -9,8 +9,9 @@
   justify-content: space-between;
   align-items: center;
   // background-color: $second-color;
-  -webkit-box-shadow: inset 0px 7px 9px -5px $second-color-dark; 
-  box-shadow: inset 0px 7px 9px -5px $second-color-dark;
+  // -webkit-box-shadow: inset 0px 7px 9px -5px $second-color-dark; 
+  // box-shadow: inset 0px 7px 9px -5px $second-color-dark;
+  border-top: 1px solid $main-color-dark;
 
   @media screen and (max-width: 710px) {
     justify-content: center;
