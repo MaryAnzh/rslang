@@ -1,6 +1,6 @@
 import { DataService } from '../dataServer/dataService';;
 
-class ApplicationModelCars {
+class AuthorizationAppModel {
 	//принимаем данные
 	private dataService: DataService;
 
@@ -9,9 +9,9 @@ class ApplicationModelCars {
 	}
 }
 
-//URL в скобках
+//URL в ''
 const base = ``;
 const dataService = new DataService(base);
-const applicationModelCars = new ApplicationModelCars(dataService);
+const authorizationAppModel = new AuthorizationAppModel(dataService);
 
-export { ApplicationModelCars };
+export { authorizationAppModel };
