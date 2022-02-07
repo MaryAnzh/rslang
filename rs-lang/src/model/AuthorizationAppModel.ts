@@ -8,6 +8,10 @@ class AuthorizationAppModel {
 	constructor(dataServ: DataService) {
 		this.dataServ = dataServ;
 	}
+
+	getUserData() {
+		const email = 
+	}
 }
 
 const authorizationAppModel = new AuthorizationAppModel(newDataService);

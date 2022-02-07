@@ -8,15 +8,6 @@ class RegisterForm extends React.Component {
       <div className="register-form-wrap">
         <h2>Регистрация:</h2>
         <form>
-          <label form='username'>Имя:</label>
-          <input
-            type="username"
-            id="username"
-            name="username"
-            aria-placeholder="Имя"
-            //value={register.usernamr}
-            //onChange={changeInputRegister}
-          />
           <label>Email:</label>
           <input
             type="email"
