@@ -1,6 +1,6 @@
 import React from 'react';
 import './registerForm.scss';
-import { startPageModule } from '../../../module/startPageModule';
+import { startPageModel } from '../../../model/StartPageModel';
 
 class RegisterForm extends React.Component {
   render() {
@@ -44,7 +44,7 @@ class RegisterForm extends React.Component {
             //onChange={changeInputRegister}
           />
           <button type="submit">Регистрация</button>
-          <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => startPageModule.signInOnClick(e)}>Войти</span></p>
+          <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => startPageModel.signInOnClick(e)}>Войти</span></p>
         </form>
       </div>
     );
