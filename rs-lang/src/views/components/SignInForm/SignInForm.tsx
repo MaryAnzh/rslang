@@ -1,7 +1,7 @@
 import React from 'react';
 import '../RegisterForm/registerForm.scss';
 import './SignInForm.scss';
-import { startPageModule } from '../../../module/startPageModule';
+import { startPageModel } from '../../../model/StartPageModel';
 
 class SignInForm extends React.Component {
   render() {
@@ -27,7 +27,7 @@ class SignInForm extends React.Component {
 					//onChange={changeInputRegister}
 					/>
 					<button type="submit">Войти</button>
-				<p>Нет акаунта? <span onClick={(e) => startPageModule.registerOnClick(e)}>
+				<p>Нет акаунта? <span onClick={(e) => startPageModel.registerOnClick(e)}>
 					Зарегистрироваться</span></p>
 				</form>
 			</div>

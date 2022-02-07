@@ -1,4 +1,4 @@
-class StartPageModule {
+class StartPageModel {
   closeSignInOnClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const wrap = document.getElementById('headerForm');
     if (wrap !== null) {
@@ -52,6 +52,6 @@ class StartPageModule {
   }
 }
 
-const startPageModule = new StartPageModule();
+const startPageModel = new StartPageModel();
 
-export { startPageModule };
+export { startPageModel };

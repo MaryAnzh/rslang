@@ -6,7 +6,7 @@ import { Cross } from '../../elements/cross/cross';
 import { PopUp } from '../../elements/popUp/popUp';
 import { RegisterForm } from '../RegisterForm/registerForm';
 import { SignInForm } from '../SignInForm/SignInForm';
-import { startPageModule } from '../../../module/startPageModule';
+import { startPageModel } from '../../../model/StartPageModel';
 // import { throws } from 'assert';
 // import { disconnect } from 'process';
 
@@ -60,8 +60,8 @@ class Header extends React.Component {
           </li>
         </ul>
         <ul className="header__sign">
-          <li onClick={(e) => startPageModule.signInOnClick(e)}>Вход</li>
-          <li onClick={(e) => startPageModule.registerOnClick(e)} >Регистрация</li>
+          <li onClick={(e) => startPageModel.signInOnClick(e)}>Вход</li>
+          <li onClick={(e) => startPageModel.registerOnClick(e)} >Регистрация</li>
           <li className="header__sign-icon"><img
             src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/4e8ba3073aa691a28f7c0a0619cc32b350c31bf4/assets/svg/sign.svg"
             alt='Sign In'></img>
