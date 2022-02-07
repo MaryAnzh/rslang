@@ -2,7 +2,28 @@ import React from 'react';
 import './registerForm.scss';
 import { startPageModel } from '../../../model/StartPageModel';
 
+type AppProperties = {
+  foo: string;
+  bar: Number;
+  fooBar: boolean;
+}
+
+type FormState = {
+  email: string;
+  password: string;
+}
+
 class RegisterForm extends React.Component {
+  state: FormState;
+    
+  constructor(props: AppProperties) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+    }
+  }
+  
   render() {
     return (
       <div className="register-form-wrap">
@@ -11,8 +32,9 @@ class RegisterForm extends React.Component {
           <label>Email:</label>
           <input
             type="email"
-            id="email"
+            id="new-user-email"
             name="email"
+            value={ this.state.email }
             //value={register.email}
             //onChange={changeInputRegister}
             //formnovalidate
@@ -20,9 +42,9 @@ class RegisterForm extends React.Component {
           <label>Пароль:</label>
           <input
             type="password"
-            id="password"
+            id="new-user-password"
             name="password"
-            //value={register.password}
+            value={ this.state.password }
             //onChange={changeInputRegister}
           />
           <label>Повторите пароль:</label>

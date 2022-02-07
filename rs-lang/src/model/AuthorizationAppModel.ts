@@ -10,7 +10,10 @@ class AuthorizationAppModel {
 	}
 
 	getUserData() {
-		const email = 
+		const email = <HTMLInputElement>document.getElementById('new-user-email');
+		const password = <HTMLInputElement>document.getElementById('new-user-password');
+		const emailValue = email.value;
+		const passwordValue = password.value;
 	}
 }
 
