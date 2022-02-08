@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import './formErrors.scss';
 import { RegisterForm } from '../../components/RegisterForm/registerForm';
 import { AppProperties } from '../../../interfaces/appProperties';
-import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
+import { applicationModel } from '../../../model/ApplicationModel';
 
 type FormErrorsProperties = {
   name: keyof FormErrorsProperties;
@@ -24,7 +24,7 @@ class FormErrors extends React.Component<FormErrorsProperties> {
             content = 'Некорректный Email';
           } else {
             content = '';
-            authorizationAppModel.currentMail = propValue;
+            applicationModel.currentMail = propValue;
           }
           break;
         case 'password':
@@ -32,11 +32,11 @@ class FormErrors extends React.Component<FormErrorsProperties> {
             content = 'Пароль слишком короткий';
           } else {
             content = '';
-            authorizationAppModel.currentPassword = propValue;
+            applicationModel.currentPassword = propValue;
           }
           break;
         case 'passwordRepeat':
-          if (propValue != authorizationAppModel.currentPassword) {
+          if (propValue != applicationModel.currentPassword) {
             content = 'Пароли не совпадают';
           } else {
             content = '';
@@ -49,16 +49,16 @@ class FormErrors extends React.Component<FormErrorsProperties> {
     } else {
       switch (propName) {
         case 'email':
-          authorizationAppModel.currentMail = '';
+          applicationModel.currentMail = '';
           break;
         case 'password':
-          authorizationAppModel.currentPassword = '';
+          applicationModel.currentPassword = '';
           break;
         default:
           break;
       }
     }
-    
+
     return (
       <div className='formErrors'>
         {console.log(this.props.name)}

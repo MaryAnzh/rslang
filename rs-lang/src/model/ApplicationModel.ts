@@ -1,12 +1,22 @@
 import { newDataService } from '../dataServer/dataService';
 import { DataService } from '../dataServer/dataService';
 
-class AuthorizationAppModel {
+class ApplicationModel {
   //принимаем данные
   dataServ: DataService;
 
+  currentMail: string;
+  
+  currentPassword: string;
+  
+  isAuthorization: boolean;
+
+
   constructor(dataServ: DataService) {
     this.dataServ = dataServ;
+    this.currentMail = '';
+    this.currentPassword = '';
+    this.isAuthorization = false;
   }
 
   getUserData() {
@@ -17,6 +27,6 @@ class AuthorizationAppModel {
   }
 }
 
-const authorizationAppModel = new AuthorizationAppModel(newDataService);
+const applicationModel = new ApplicationModel(newDataService);
 
-export { authorizationAppModel };
+export { applicationModel };

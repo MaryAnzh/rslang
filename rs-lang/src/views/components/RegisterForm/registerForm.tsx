@@ -3,6 +3,7 @@ import './registerForm.scss';
 import { startPageModel } from '../../../model/StartPageModel';
 import { FormErrors } from '../../elements/FormErrors/FormErrors';
 import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
+import { applicationModel } from '../../../model/ApplicationModel';
  
 type AppProperties = {
   foo: string;
