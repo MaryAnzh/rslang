@@ -1,4 +1,4 @@
-import { IUser, IUserLogInResponse, IUserRegisterResponse } from '../interfaces/userInterface';
+import { IUser, IUserLogInResponse, IUserRegisterResponse, ISignInResponse } from '../interfaces/userInterface';
 
 class DataService {
   private baseURL: string;
@@ -13,7 +13,7 @@ class DataService {
     this.signin = `${this.baseURL}/signin`;
   }
 
-  async createUser(newUser: IUser) {
+  async registereUser(newUser: IUser): Promise<IUserRegisterResponse> {
     const response = await fetch(`${this.user}`, {
       method: 'POST',
       headers: {
@@ -25,8 +25,8 @@ class DataService {
     return <IUserRegisterResponse>(await response.json());
   }
 
-  async signinUser(user: IUser) {
-    const response = await fetch(`${this.user}`, {
+  async signInUser(user: IUser): Promise<IUserRegisterResponse> {
+    const response = await fetch(`${this.signin}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -34,11 +34,7 @@ class DataService {
       },
       body: JSON.stringify(user),
     });
-    const a = <IUserLogInResponse>(await response.json());
-    console.log('Этaп 2');
-    console.log('Запрос отработал');
-    console.log(a);
-    return a;
+    return <IUserRegisterResponse>(await response.json());
   }
 }
 

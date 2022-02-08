@@ -68,7 +68,7 @@ class RegisterForm extends React.Component {
             autoComplete=''
           />
           <FormErrors password={this.state.password} passwordRepeat={this.state.passwordRepeat} name="passwordRepeat" />
-          <button type="button" onClick={(e) => { applicationModel.getUserData(e) }}
+          <button type="button" onClick={(e) => { applicationModel.registerUser(e) }}
             disabled={!this.state.formValid}>Регистрация</button>
           <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => startPageModel.signInOnClick(e)}>Войти</span></p>
           

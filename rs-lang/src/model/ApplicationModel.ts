@@ -9,10 +9,12 @@ class ApplicationModel {
   currentMail: string;
   
   currentPassword: string;
-  
+
   isAuthorization: boolean;
 
   currentUserName: string;
+
+  currentUserId: string;
 
 
   constructor(dataServ: DataService) {
@@ -21,19 +23,22 @@ class ApplicationModel {
     this.currentPassword = '';
     this.isAuthorization = false;
     this.currentUserName = '';
+    this.currentUserId = '';
   }
 
-  async getUserData(e: React.MouseEvent<HTMLButtonElement>) {
+  async registerUser(e: React.MouseEvent<HTMLButtonElement>) {
     const user: IUser = {
       name: 'Mary',
       email: this.currentMail,
       password: this.currentPassword,
     }
-    console.log('Этaп 1');
-    const a = await this.dataServ.createUser(user);
-    console.log(a);
 
+    const registerResponse: IUserRegisterResponse = await this.dataServ.registereUser(user);
+    this.currentUserId = registerResponse.id;
+    console.log(this.currentUserId);
   }
+
+
 }
 
 const applicationModel = new ApplicationModel(newDataService);
