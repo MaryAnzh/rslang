@@ -1,5 +1,6 @@
 import { newDataService } from '../dataServer/dataService';
 import { DataService } from '../dataServer/dataService';
+import { IUser } from '../interfaces/userInterface';
 
 class ApplicationModel {
   //принимаем данные
@@ -19,11 +20,11 @@ class ApplicationModel {
     this.isAuthorization = false;
   }
 
-  getUserData() {
-    const email = <HTMLInputElement>document.getElementById('new-user-email');
-    const password = <HTMLInputElement>document.getElementById('new-user-password');
-    const emailValue = email.value;
-    const passwordValue = password.value;
+  getUserData(e: React.MouseEvent<HTMLButtonElement>) {
+    const user: IUser = {
+      
+    }
+    console.log(this.currentMail, this.currentPassword);
   }
 }
 

@@ -1,5 +1,10 @@
 export interface IUser {
-  id: number;
-  name: string;
-  color: string;
+  email: string;
+  password: string;
+}
+
+export interface IUserStatus {
+  message: string;
+  token: string;
+  userId: string;
 }

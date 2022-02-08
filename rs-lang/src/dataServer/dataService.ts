@@ -1,4 +1,4 @@
-import { IUser } from '../interfaces/userInterface';
+import { IUser, IUserStatus } from '../interfaces/userInterface';
 
 class DataService {
   private baseURL: string;
@@ -22,7 +22,19 @@ class DataService {
     return (response.json());
   }
 
+  async logInUser(user: IUser) {
+    const response = await fetch(`${this.user}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+    return <IUserStatus>(await response.json());
+  }
 }
+
 const dataUrl = '';
 const newDataService = new DataService(dataUrl);
 
