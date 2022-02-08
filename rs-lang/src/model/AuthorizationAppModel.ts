@@ -5,8 +5,14 @@ class AuthorizationAppModel {
   //принимаем данные
   dataServ: DataService;
 
+  currentMail: string;
+
+  currentPassword: string;
+
   constructor(dataServ: DataService) {
     this.dataServ = dataServ;
+    this.currentMail = '';
+    this.currentPassword = '';
   }
 
   getUserData() {

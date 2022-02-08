@@ -2,7 +2,8 @@ import React from 'react';
 import './registerForm.scss';
 import { startPageModel } from '../../../model/StartPageModel';
 import { FormErrors } from '../../elements/FormErrors/FormErrors';
-
+import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
+ 
 type AppProperties = {
   foo: string;
   bar: Number;
@@ -120,7 +121,7 @@ class RegisterForm extends React.Component {
     const elem = e.target as HTMLInputElement;
     const name = elem.name;
     const value = elem.value;
-    console.log(name, value);
+    
     this.setState({ [name]: value });
     this.validateField(name, value);
   }
