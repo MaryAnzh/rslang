@@ -61,8 +61,8 @@ class FormErrors extends React.Component<FormErrorsProperties> {
 
     return (
       <div className='formErrors'>
-        {console.log(this.props.name)}
-        {console.log(this.props[this.props.name])}
+        {/* {console.log(this.props.name)}
+        {console.log(this.props[this.props.name])} */}
         <p>{ content }</p>
         
         {/* {Object.entries(this.props.formErrorsObj).map(([fieldName, value], i) => {
