@@ -1,6 +1,7 @@
 import React from 'react';
 import './registerForm.scss';
 import { startPageModel } from '../../../model/StartPageModel';
+import { FormErrors } from '../../elements/FormErrors/FormErrors';
 
 type AppProperties = {
   foo: string;
@@ -66,17 +67,7 @@ class RegisterForm extends React.Component {
           <button type="submit"
             disabled={!this.state.formValid}>Регистрация</button>
           <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => startPageModel.signInOnClick(e)}>Войти</span></p>
-          <div className='formErrors'>
-            {Object.keys(this.state.formErrors).map((fieldName, i) => {
-              if (this.state.formErrors.email.length > 0) {
-                return (
-                  <p key={i}>{fieldName} {this.state.formErrors.email}</p>
-                )
-              } else {
-                return '';
-              }
-            })}
-          </div>
+          <FormErrors formErrorsObj={this.state.formErrors} />
         </form>
       </div>
     );
