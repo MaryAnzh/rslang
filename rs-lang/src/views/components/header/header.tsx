@@ -7,29 +7,13 @@ import { PopUp } from '../../elements/popUp/popUp';
 import { RegisterForm } from '../RegisterForm/registerForm';
 import { SignInForm } from '../SignInForm/SignInForm';
 import { startPageModel } from '../../../model/StartPageModel';
-// import { throws } from 'assert';
-// import { disconnect } from 'process';
-
-// type HeaderProperties = {
-//   foo: string;
-//   bar: Number;
-//   fooBar: boolean;
-// }
+import { applicationModel } from '../../../model/ApplicationModel';
 
 class Header extends React.Component {
-  // isRegicter: boolean;
-
-  // isSignIn: boolean;
-  
-  // constructor(props: HeaderProperties, isRegicter: boolean, isSignIn: boolean) {
-  //   super(props);
-
-  //   this.props.bar;
-  //   this.props.foo;
-  //   this.props.fooBar;
-  // }
 
   render() {
+    let authorizationClass = (applicationModel.isAuthorization ? 'visible' : 'blocked');
+    let iconClass = 'header__sign-icon ' + authorizationClass;
     return (
       <header className="header">
         <div id='headerForm' className='header__form'>
@@ -55,14 +39,14 @@ class Header extends React.Component {
           <li>
             <Link to="/games" className="header__nav__link">Игры</Link>
           </li>
-          <li>
-            <Link to="/statistics" className="header__nav__link">Статистика</Link>
+          <li className={authorizationClass }>
+            <Link to="/statistics" className="header__nav__link" >Статистика</Link>
           </li>
         </ul>
         <ul className="header__sign">
           <li onClick={(e) => startPageModel.signInOnClick(e)}>Вход</li>
           <li onClick={(e) => startPageModel.registerOnClick(e)} >Регистрация</li>
-          <li className="header__sign-icon"><img
+          <li className= { iconClass } ><img
             src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/4e8ba3073aa691a28f7c0a0619cc32b350c31bf4/assets/svg/sign.svg"
             alt='Sign In'></img>
           </li>
