@@ -12,6 +12,7 @@ type AppProperties = {
 type FormState = {
   email: string;
   password: string;
+  passwordRepeat: string;
   formErrors: { email: string, password: string },
   emailValid: boolean,
   passwordValid: boolean,
@@ -26,6 +27,7 @@ class RegisterForm extends React.Component {
     this.state = {
       email: '',
       password: '',
+      passwordRepeat: '',
       formErrors: { email: '', password: '' },
       emailValid: false,
       passwordValid: false,
@@ -45,9 +47,8 @@ class RegisterForm extends React.Component {
             name="email"
             value={this.state.email}
             onChange={this.handleUserInput}
-          //onChange={changeInputRegister}
-          //formnovalidate
           />
+          <FormErrors email={this.state.email} name="email" />
           <label>Пароль:</label>
           <input
             type="password"
@@ -55,8 +56,8 @@ class RegisterForm extends React.Component {
             name="password"
             value={this.state.password}
             onChange={this.handleUserInput}
-
           />
+          <FormErrors password={this.state.password} name="password" />
           <label>Повторите пароль:</label>
           <input
             type="password"
@@ -64,10 +65,11 @@ class RegisterForm extends React.Component {
             name="password2"
             autoComplete=''
           />
+          <FormErrors password={this.state.password} passwordRepeat={this.state.passwordRepeat} name="passwordRepeat" />
           <button type="submit"
             disabled={!this.state.formValid}>Регистрация</button>
           <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => startPageModel.signInOnClick(e)}>Войти</span></p>
-          <FormErrors formErrorsObj={this.state.formErrors} />
+          
         </form>
       </div>
     );
@@ -90,16 +92,16 @@ class RegisterForm extends React.Component {
           fieldValidationErrors.email = 'Некорректный Email';
           emailValid = false;
         } else {
-          fieldValidationErrors.email = 'Некорректный Email';
+          fieldValidationErrors.email = '';
           emailValid = true;
         }  
         break;
       case 'password':
-        if (value.length > 8) {
+        if (value.length < 8) {
           fieldValidationErrors.password = 'Пароль слишком короткий';
           passwordValid = false;
         } else {
-          fieldValidationErrors.password = 'Пароль слишком короткий';
+          fieldValidationErrors.password = '';
           passwordValid = true;
         }
         break;
