@@ -1,7 +1,13 @@
 import React from 'react';
+import { WordCard } from '../../components/WordCard/WordCard';
 import './TextBook.scss';
 
 class TextBook extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.words = 
+  // }
+
   render() {
     return (
       <main className="main">
@@ -18,7 +24,10 @@ class TextBook extends React.Component {
                 <div className='book-page-wrap__book-wrap__book__sections__section'>Уровень сложности 6</div>
                 <div className='book-page-wrap__book-wrap__book__sections__section'>Сложные слова</div>
               </div>
-              <div className='book-page-wrap__book-wrap__book__page-wrap'>
+              <div className='book-page-wrap__card-container'>
+                {/* <WordCard /> */}
+              </div>
+              {/* <div className='book-page-wrap__book-wrap__book__page-wrap'>
                 <div className='book-page-wrap__book-wrap__book__page-wrap__page'>
                   <div className='book-page-wrap__book-wrap__book__page-wrap__page__controls'>
                     <div className='left-arrow'>
@@ -31,7 +40,7 @@ class TextBook extends React.Component {
                     <p>Сложность 1</p>
                     </div>
                     
-                    <p>Nwxt</p>
+                    <p>Next</p>
                     <div className='right-arrow'>
                       <div className='right-arrow__top'></div>
                       <div className='right-arrow__bottom'></div>
@@ -40,12 +49,10 @@ class TextBook extends React.Component {
                   <div className='book-page-wrap__book-wrap__book__page-wrap__page__content'>
                   </div>
                 </div>
-                
-              </div>
-              
+              </div> */}
             </div>
           </div>
-        </div>        
+        </div>
       </main>
     );
   }
