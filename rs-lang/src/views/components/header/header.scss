@@ -6,7 +6,6 @@
   justify-content: space-between;
   align-content: center;
   color: white;
-  margin-top: 1rem;
 
   li {
     cursor: pointer;
@@ -59,6 +58,7 @@
   &__sign {
     width: 20%;
     height: 100%;
+    padding-right: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
