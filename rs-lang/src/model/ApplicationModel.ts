@@ -1,6 +1,6 @@
 import { newDataService } from '../dataServer/dataService';
 import { DataService } from '../dataServer/dataService';
-import { IUser } from '../interfaces/userInterface';
+import { IUser, IUserRegisterResponse } from '../interfaces/userInterface';
 
 class ApplicationModel {
   //принимаем данные
@@ -12,19 +12,27 @@ class ApplicationModel {
   
   isAuthorization: boolean;
 
+  currentUserName: string;
+
 
   constructor(dataServ: DataService) {
     this.dataServ = dataServ;
     this.currentMail = '';
     this.currentPassword = '';
     this.isAuthorization = false;
+    this.currentUserName = '';
   }
 
-  getUserData(e: React.MouseEvent<HTMLButtonElement>) {
+  async getUserData(e: React.MouseEvent<HTMLButtonElement>) {
     const user: IUser = {
-      
+      name: 'Mary',
+      email: this.currentMail,
+      password: this.currentPassword,
     }
-    console.log(this.currentMail, this.currentPassword);
+    console.log('Этaп 1');
+    const a = await this.dataServ.createUser(user);
+    console.log(a);
+
   }
 }
 
