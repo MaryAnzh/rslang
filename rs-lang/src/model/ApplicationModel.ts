@@ -1,6 +1,6 @@
 import { newDataService } from '../dataServer/dataService';
 import { DataService } from '../dataServer/dataService';
-import { IUser, IUserRegisterResponse } from '../interfaces/userInterface';
+import { IUser, IUserRegisterResponse, ISignInUserInfo } from '../interfaces/userInterface';
 
 class ApplicationModel {
   //принимаем данные
@@ -37,6 +37,15 @@ class ApplicationModel {
     this.currentUserId = registerResponse.id;
     console.log(this.currentUserId);
   }
+
+  signInUser(e: React.MouseEvent<HTMLButtonElement>) {
+    const signInInfo: ISignInUserInfo = {
+      email: this.currentMail,
+      password: this.currentPassword,
+    }
+    this.dataServ.signInUser(signInInfo);
+}
+
 
 
 }

@@ -22,3 +22,8 @@ export interface ISignInResponse {
   userId: string,
   name: string
 }
+
+export interface ISignInUserInfo {
+  email: string;
+  password: string;
+}

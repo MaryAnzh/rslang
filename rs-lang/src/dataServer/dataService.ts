@@ -1,4 +1,4 @@
-import { IUser, IUserLogInResponse, IUserRegisterResponse, ISignInResponse } from '../interfaces/userInterface';
+import { IUser, IUserLogInResponse, IUserRegisterResponse, ISignInResponse, ISignInUserInfo } from '../interfaces/userInterface';
 
 class DataService {
   private baseURL: string;
@@ -25,7 +25,7 @@ class DataService {
     return <IUserRegisterResponse>(await response.json());
   }
 
-  async signInUser(user: IUser): Promise<IUserRegisterResponse> {
+  async signInUser(user: ISignInUserInfo): Promise<IUserRegisterResponse> {
     const response = await fetch(`${this.signin}`, {
       method: 'POST',
       headers: {
