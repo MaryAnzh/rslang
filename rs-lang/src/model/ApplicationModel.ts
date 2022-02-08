@@ -38,13 +38,14 @@ class ApplicationModel {
     console.log(this.currentUserId);
   }
 
-  signInUser(e: React.MouseEvent<HTMLButtonElement>) {
+  async signInUser(e: React.MouseEvent<HTMLButtonElement>) {
     const signInInfo: ISignInUserInfo = {
       email: this.currentMail,
       password: this.currentPassword,
     }
-    this.dataServ.signInUser(signInInfo);
-}
+    const a = await this.dataServ.signInUser(signInInfo);
+    console.log(a);
+  }
 
 
 
