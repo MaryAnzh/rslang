@@ -50,7 +50,7 @@ class SignInForm extends React.Component {
 					/>
           <button type="button" onClick={(e) => { this.getUserDataOnClick(e) }}
           >Войти</button>
-				<p>Нет акаунта? <span onClick={(e) => startPageModel.registerOnClick(e)}>
+          <p>Нет акаунта? <span onClick={(e) => authorizationAppModel.registerOnClick(e)}>
 					Зарегистрироваться</span></p>
 				</form>
 			</div>

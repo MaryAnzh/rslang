@@ -77,52 +77,11 @@ class RegisterForm extends React.Component {
           <button type="button" onClick={(e) => { this.getUserDataOnClick(e) }}
             // disabled={!this.state.formValid}
           >Регистрация</button>
-          <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => startPageModel.signInOnClick(e)}>Войти</span></p>
+          <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => authorizationAppModel.signInOnClick(e)}>Войти</span></p>
         </form>
       </div>
     );
   }
-
-  // validateForm() {
-  //   this.setState({
-  //     formValid: this.state.emailValid &&
-  //       this.state.passwordValid,
-  //   });
-  // }
-
-  // validateField(fieldName: string, value: string) {
-  //   let fieldValidationErrors = this.state.formErrors;
-  //   let emailValid = this.state.emailValid;
-  //   let passwordValid = this.state.formValid;
-  //   switch (fieldName) {
-  //     case 'email':
-  //       if (value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) == null) {
-  //         fieldValidationErrors.email = 'Некорректный Email';
-  //         emailValid = false;
-  //       } else {
-  //         fieldValidationErrors.email = '';
-  //         emailValid = true;
-  //       }  
-  //       break;
-  //     case 'password':
-  //       if (value.length < 8) {
-  //         fieldValidationErrors.password = 'Пароль слишком короткий';
-  //         passwordValid = false;
-  //       } else {
-  //         fieldValidationErrors.password = '';
-  //         passwordValid = true;
-  //       }
-  //       break;
-  //     default:
-  //       break;
-  //   }
-
-  //   this.setState({
-  //     formErrors: fieldValidationErrors,
-  //     emailValid: emailValid,
-  //     passwordValid: passwordValid,
-  //   }, this.validateForm);
-  // }
 
   handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = authorizationAppModel.handleUserInput(e);

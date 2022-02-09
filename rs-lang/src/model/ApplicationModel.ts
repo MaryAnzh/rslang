@@ -7,7 +7,7 @@ class ApplicationModel {
   dataServ: DataService;
 
   currentMail: string;
-  
+
   currentPassword: string;
 
   isAuthorization: boolean;
@@ -47,8 +47,11 @@ class ApplicationModel {
     console.log(a);
   }
 
-
-
+  removeUserDataMainInfo() {
+    this.currentUserName = '';
+    this.currentMail = '';
+    this.currentPassword = '';
+  }
 }
 
 const applicationModel = new ApplicationModel(newDataService);
