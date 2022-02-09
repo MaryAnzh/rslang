@@ -31,7 +31,6 @@
 
      &__body {
         width: 25rem;
-       height: 30rem;
        padding: 2rem;
        display: flex;
 		   align-items: center;
@@ -39,6 +38,14 @@
        background: white;
        border: 3px solid #A66200;
        border-radius: 10px;
+     }
+
+     &__body-register-form {
+       height: 35rem;
+     }
+
+     &__body-sign-in-form {
+       height: 26rem;
      }
    }
 

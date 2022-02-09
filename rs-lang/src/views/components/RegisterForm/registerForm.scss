@@ -1,6 +1,6 @@
 .register-form-wrap {
 	width: 90%;
-	height: 90%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -12,12 +12,15 @@
 
 	form {
 		width: 90%;
-		height: 80%;
+		height: 90%;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
+		
 		color: #00488D;
 
+    label {
+      padding-top: 1rem;
+    }
 		input {
 			width: 100%;
 			height: 25px;
@@ -31,6 +34,7 @@
 			width: 60%;
 			height: 30px;
 			color: white;
+      margin: 2rem 0;
 			background: #3B95EC;
 			border: 1px solid #00488D;
 			border-radius: 5px;

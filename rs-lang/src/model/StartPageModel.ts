@@ -8,6 +8,7 @@ class StartPageModel {
 
   hiddenELem(isWrapHudden: boolean, isRegisterHidden: boolean, isSignInHidden: boolean) {
     const formWrap = document.getElementById('headerForm');
+    const formBody = document.getElementById('form-body');
     const registerForm = document.getElementById('register-form');
     const signInForm = document.getElementById('sign-in-form');
     if (isWrapHudden === false) {
@@ -21,18 +22,18 @@ class StartPageModel {
     }
 
     if (isRegisterHidden && !isSignInHidden) {
-      if (registerForm !== null) {
+      if (registerForm !== null && formBody !== null && signInForm !== null) {
         registerForm.style.display = 'flex';
-      }
-      if (signInForm !== null) {
         signInForm.style.display = 'none';
+        formBody.classList.remove('pop-up__body-sign-in-form');
+        formBody.classList.add('pop-up__body-register-form');
       }
     } else {
-      if (registerForm !== null) {
+      if (registerForm !== null && signInForm !== null && formBody !== null) {
         registerForm.style.display = 'none';
-      }
-      if (signInForm !== null) {
         signInForm.style.display = 'flex';
+        formBody.classList.remove('pop-up__body-register-form');
+        formBody.classList.add('pop-up__body-sign-in-form');
       }
     }
   }

@@ -8,7 +8,7 @@ class PopUp extends React.Component {
   render() {
     return (
       <div className='pop-up'>
-        <div className='pop-up__body'>
+        <div id='form-body' className='pop-up__body pop-up__body-refister-form'>
           { this.props.children }
         </div>       
       </div>
