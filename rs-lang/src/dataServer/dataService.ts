@@ -10,11 +10,18 @@ class DataService {
 
   private words: string;
 
+  private currentToken: string;
+
+  private currentRefreshToken: string;
+
+
   constructor(baseURL: string) {
     this.baseURL = baseURL;
     this.user = `${this.baseURL}/users`;
     this.signin = `${this.baseURL}/signin`;
     this.words = `${this.baseURL}/words`;
+    this.currentToken = '';
+    this.currentRefreshToken = '';
   }
 
   async registereUser(newUser: IUser): Promise<IUserRegisterResponse> {
@@ -29,7 +36,7 @@ class DataService {
     return <IUserRegisterResponse>(await response.json());
   }
 
-  async signInUser(user: ISignInUserInfo): Promise<IUserRegisterResponse> {
+  async signInUser(user: ISignInUserInfo): Promise<ISignInResponse> {
     const response = await fetch(`${this.signin}`, {
       method: 'POST',
       headers: {
@@ -38,7 +45,10 @@ class DataService {
       },
       body: JSON.stringify(user),
     });
-    return <IUserRegisterResponse>(await response.json());
+    const responseJson: ISignInResponse = await response.json();
+    this.currentToken = responseJson.token;
+    this.currentRefreshToken = responseJson.refreshToken;
+    return responseJson;
   }
 
   async getWords(group: number, page: number): Promise<WordCardType[]> {
