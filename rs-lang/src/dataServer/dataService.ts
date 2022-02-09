@@ -1,20 +1,25 @@
+import { WordCardType } from '../interfaces/types';
 import { IUser, IUserLogInResponse, IUserRegisterResponse, ISignInResponse, ISignInUserInfo } from '../interfaces/userInterface';
 
 class DataService {
-  private baseURL: string;
+  baseURL: string;
 
   private user: string;
 
   private signin: string;
 
+  private words: string;
+
   private currentToken: string;
 
   private currentRefreshToken: string;
+
 
   constructor(baseURL: string) {
     this.baseURL = baseURL;
     this.user = `${this.baseURL}/users`;
     this.signin = `${this.baseURL}/signin`;
+    this.words = `${this.baseURL}/words`;
     this.currentToken = '';
     this.currentRefreshToken = '';
   }
@@ -46,6 +51,13 @@ class DataService {
     return responseJson;
   }
 
+  async getWords(group: number, page: number): Promise<WordCardType[]> {
+    const requestOptions = {
+      method: 'GET',
+    };
+    const response = await fetch(`${this.words}?group=${group}&page=${page}`, requestOptions);
+    return <WordCardType[]>(await response.json());
+  }
 }
 
 const dataUrl = 'https://react-rslang-team-mary.herokuapp.com';
