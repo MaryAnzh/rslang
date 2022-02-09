@@ -29,7 +29,7 @@ class SignInForm extends React.Component {
 			<div className="register-form-wrap">
 				<h2>Вход:</h2>
 				<form>
-					<label form='username'>Имя:</label>
+          <label form='email'>*Email:</label>
           <FormErrors email={this.state.email} name="email" />
           <input
             type="email"
