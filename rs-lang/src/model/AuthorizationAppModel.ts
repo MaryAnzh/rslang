@@ -9,13 +9,6 @@ class AuthorizationAppModel {
     this.dataServ = dataServ;
   }
 
-  getUserData() {
-    const email = <HTMLInputElement>document.getElementById('new-user-email');
-    const password = <HTMLInputElement>document.getElementById('new-user-password');
-    const emailValue = email.value;
-    const passwordValue = password.value;
-  }
-
   handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const elem = e.target as HTMLInputElement;
     const name = elem.name;

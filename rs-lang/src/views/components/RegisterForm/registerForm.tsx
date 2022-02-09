@@ -4,12 +4,7 @@ import { startPageModel } from '../../../model/StartPageModel';
 import { FormErrors } from '../../elements/FormErrors/FormErrors';
 import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
 import { applicationModel } from '../../../model/ApplicationModel';
- 
-type AppProperties = {
-  foo: string;
-  bar: Number;
-  fooBar: boolean;
-}
+import { AppProperties } from '../../../interfaces/appProperties';
 
 type FormState = {
   email: string;
@@ -85,12 +80,12 @@ class RegisterForm extends React.Component {
     );
   }
 
-  validateForm() {
-    this.setState({
-      formValid: this.state.emailValid &&
-        this.state.passwordValid,
-    });
-  }
+  // validateForm() {
+  //   this.setState({
+  //     formValid: this.state.emailValid &&
+  //       this.state.passwordValid,
+  //   });
+  // }
 
   // validateField(fieldName: string, value: string) {
   //   let fieldValidationErrors = this.state.formErrors;
