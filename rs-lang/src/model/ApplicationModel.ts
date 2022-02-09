@@ -36,7 +36,17 @@ class ApplicationModel {
       const registerResponse: IUserRegisterResponse = await this.dataServ.registereUser(user);
       this.currentUserId = registerResponse.id;
     } catch (error) {
-      console.log('Такой маил уже есть')
+      const serverError = error as Error;
+      const serverErrorCode = serverError.message;
+      console.log(serverErrorCode);
+      switch (serverErrorCode) {
+        case '417':
+          console.log('Ошибка, я тебя поймал');
+          break;
+      
+        default:
+          break;
+      }
     }
 
   }

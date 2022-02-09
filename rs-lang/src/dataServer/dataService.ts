@@ -29,9 +29,8 @@ class DataService {
       body: JSON.stringify(newUser),
     });
     const status = await response.status; 
-    if (status == 417) {
-      throw new Error('Пользователь с таким меилом сущетвует');
-      
+    if (status !== 200) {
+      throw new Error(status.toString());
     } else {
        
       return response.json();
