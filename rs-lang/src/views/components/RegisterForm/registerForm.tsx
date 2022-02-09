@@ -92,7 +92,7 @@ class RegisterForm extends React.Component {
     applicationModel.currentUserName = this.state.name;
     applicationModel.currentMail = this.state.email;
     applicationModel.currentPassword = this.state.password;
-    console.log(applicationModel.currentMail, applicationModel.currentPassword, this.state.name);
+    applicationModel.registerUser();
   }
 }
 

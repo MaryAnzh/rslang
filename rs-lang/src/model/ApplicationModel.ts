@@ -26,16 +26,19 @@ class ApplicationModel {
     this.currentUserId = '';
   }
 
-  async registerUser(e: React.MouseEvent<HTMLButtonElement>) {
+  async registerUser() {
     const user: IUser = {
-      name: 'Mary',
+      name: this.currentUserName,
       email: this.currentMail,
       password: this.currentPassword,
     }
+    try {
+      const registerResponse: IUserRegisterResponse = await this.dataServ.registereUser(user);
+      this.currentUserId = registerResponse.id;
+    } catch (error) {
+      console.log('Такой маил уже есть')
+    }
 
-    const registerResponse: IUserRegisterResponse = await this.dataServ.registereUser(user);
-    this.currentUserId = registerResponse.id;
-    console.log(this.currentUserId);
   }
 
   async signInUser(e: React.MouseEvent<HTMLButtonElement>) {
