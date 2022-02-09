@@ -1,6 +1,12 @@
 .formErrors {
   width: 100%;
   height: 1.2rem;
+  display: flex;
+  align-items: center;
   font-size: 11px;
   color: red;
+&__text {
+  padding-bottom: 5px;
+}
+
 }
