@@ -7,10 +7,16 @@ class DataService {
 
   private signin: string;
 
+  private currentToken: string;
+
+  private currentRefreshToken: string;
+
   constructor(baseURL: string) {
     this.baseURL = baseURL;
     this.user = `${this.baseURL}/users`;
     this.signin = `${this.baseURL}/signin`;
+    this.currentToken = '';
+    this.currentRefreshToken = '';
   }
 
   async registereUser(newUser: IUser): Promise<IUserRegisterResponse> {
@@ -25,7 +31,7 @@ class DataService {
     return <IUserRegisterResponse>(await response.json());
   }
 
-  async signInUser(user: ISignInUserInfo): Promise<IUserRegisterResponse> {
+  async signInUser(user: ISignInUserInfo): Promise<ISignInResponse> {
     const response = await fetch(`${this.signin}`, {
       method: 'POST',
       headers: {
@@ -34,8 +40,12 @@ class DataService {
       },
       body: JSON.stringify(user),
     });
-    return <IUserRegisterResponse>(await response.json());
+    const responseJson: ISignInResponse = await response.json();
+    this.currentToken = responseJson.token;
+    this.currentRefreshToken = responseJson.refreshToken;
+    return responseJson;
   }
+
 }
 
 const dataUrl = 'https://react-rslang-team-mary.herokuapp.com';
