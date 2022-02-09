@@ -33,8 +33,9 @@ class SignInForm extends React.Component {
           <FormErrors email={this.state.email} name="email" />
           <input
             type="email"
-            id="email"
+            id="sugn-in-email"
             name="email"
+            value={this.state.email}
             aria-placeholder="*Email"
             onChange={(e) => { this.handleUserInput(e) }}
 					/>
@@ -42,11 +43,12 @@ class SignInForm extends React.Component {
           <FormErrors password={this.state.password} name="password" />
           <input
 						type="password"
-						id="password"
+						id="sign-in password"
             name="password"
+            value={this.state.password}
             onChange={(e) => { this.handleUserInput(e) }}
 					/>
-          <button type="button" onClick={(e) => { applicationModel.signInUser(e) }}
+          <button type="button" onClick={(e) => { this.getUserDataOnClick(e) }}
           >Войти</button>
 				<p>Нет акаунта? <span onClick={(e) => startPageModel.registerOnClick(e)}>
 					Зарегистрироваться</span></p>
@@ -56,9 +58,14 @@ class SignInForm extends React.Component {
   }
 
   handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const a = authorizationAppModel.handleUserInput(e);
-    this.setState(a);
-    //this.validateField(name, value);
+    const inputValue = authorizationAppModel.handleUserInput(e);
+    this.setState(inputValue);
+  }
+
+  getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
+    applicationModel.currentMail = this.state.email;
+    applicationModel.currentPassword = this.state.password;
+    console.log(applicationModel.currentMail, applicationModel.currentPassword );
   }
 }
 

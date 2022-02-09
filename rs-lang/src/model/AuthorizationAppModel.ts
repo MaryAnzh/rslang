@@ -1,5 +1,6 @@
 import { newDataService } from '../dataServer/dataService';
 import { DataService } from '../dataServer/dataService';
+import { applicationModel } from './ApplicationModel';
 
 class AuthorizationAppModel {
   //принимаем данные

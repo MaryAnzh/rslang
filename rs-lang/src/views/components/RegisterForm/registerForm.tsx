@@ -7,6 +7,7 @@ import { applicationModel } from '../../../model/ApplicationModel';
 import { AppProperties } from '../../../interfaces/appProperties';
 
 type FormState = {
+  name: string;
   email: string;
   password: string;
   passwordRepeat: string;
@@ -22,6 +23,7 @@ class RegisterForm extends React.Component {
   constructor(props: AppProperties) {
     super(props);
     this.state = {
+      name: '',
       email: '',
       password: '',
       passwordRepeat: '',
@@ -38,12 +40,12 @@ class RegisterForm extends React.Component {
         <h2>Регистрация:</h2>
         <form>
           <label>*Имя:</label>
-          
+
           <input
-            type="email"
-            id="new-user-email"
-            name="email"
-            value={this.state.email}
+            type="nnme"
+            id="new-user-nnme"
+            name="name"
+            value={this.state.name}
             onChange={this.handleUserInput}
           />
           <label>*Email:</label>
@@ -72,8 +74,9 @@ class RegisterForm extends React.Component {
             name="password2"
             autoComplete=''
           />
-          <button type="button" onClick={(e) => { applicationModel.registerUser(e) }}
-            disabled={!this.state.formValid}>Регистрация</button>
+          <button type="button" onClick={(e) => { this.getUserDataOnClick(e) }}
+            // disabled={!this.state.formValid}
+          >Регистрация</button>
           <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => startPageModel.signInOnClick(e)}>Войти</span></p>
         </form>
       </div>
@@ -122,9 +125,15 @@ class RegisterForm extends React.Component {
   // }
 
   handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const a = authorizationAppModel.handleUserInput(e);
-    this.setState( a );
-    //this.validateField(name, value);
+    const inputValue = authorizationAppModel.handleUserInput(e);
+    this.setState(inputValue);
+  }
+
+  getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
+    applicationModel.currentUserName = this.state.name;
+    applicationModel.currentMail = this.state.email;
+    applicationModel.currentPassword = this.state.password;
+    console.log(applicationModel.currentMail, applicationModel.currentPassword, this.state.name);
   }
 }
 
