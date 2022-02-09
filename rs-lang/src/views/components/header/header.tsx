@@ -8,6 +8,7 @@ import { RegisterForm } from '../RegisterForm/registerForm';
 import { SignInForm } from '../SignInForm/SignInForm';
 import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
 import { applicationModel } from '../../../model/ApplicationModel';
+import { ErrorText } from '../../elements/errorText/errorText';
 
 class Header extends React.Component {
 
@@ -19,6 +20,7 @@ class Header extends React.Component {
         <div id='headerForm' className='header__form'>
           <PopUp>
             <Cross />
+            <ErrorText />
             <div id='register-form' className='register-wrap'>
               <RegisterForm />
             </div>
@@ -54,6 +56,13 @@ class Header extends React.Component {
       </header>
     );
   }
+  
+  // textError() {
+  //   if (applicationModel.isServerError) {
+  //     console.log('Отработлало');
+  //     return <ErrorText textError={applicationModel.currentTextError} />
+  //   }
+  // }
 }
 
 export { Header };

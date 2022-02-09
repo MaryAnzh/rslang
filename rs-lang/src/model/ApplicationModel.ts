@@ -1,6 +1,9 @@
 import { newDataService } from '../dataServer/dataService';
 import { DataService } from '../dataServer/dataService';
 import { IUser, IUserRegisterResponse, ISignInUserInfo } from '../interfaces/userInterface';
+import { authorizationAppModel } from './AuthorizationAppModel';
+import { ErrorText } from '../views/elements/errorText/errorText';
+import { JsxFlags } from 'typescript';
 
 class ApplicationModel {
   //принимаем данные
@@ -16,6 +19,10 @@ class ApplicationModel {
 
   currentUserId: string;
 
+  isServerError: boolean;
+
+  currentTextError: string;
+
 
   constructor(dataServ: DataService) {
     this.dataServ = dataServ;
@@ -24,6 +31,8 @@ class ApplicationModel {
     this.isAuthorization = false;
     this.currentUserName = '';
     this.currentUserId = '';
+    this.isServerError = true;
+    this.currentTextError = 'Тестирование';
   }
 
   async registerUser() {
@@ -41,14 +50,19 @@ class ApplicationModel {
       console.log(serverErrorCode);
       switch (serverErrorCode) {
         case '417':
-          console.log('Ошибка, я тебя поймал');
+          this.currentTextError = 'Такой e-mail уже существует.';
+          console.log('Ошибка 417, я тебя поймал');
           break;
-      
+        case '422':
+          this.currentTextError = 'Вы ввели некорректный e-mail или пароль';
+          console.log('Ошибка 422, я тебя поймал');
+          break;
+
         default:
           break;
       }
+      authorizationAppModel.errorMessage('417');
     }
-
   }
 
   async signInUser(e: React.MouseEvent<HTMLButtonElement>) {

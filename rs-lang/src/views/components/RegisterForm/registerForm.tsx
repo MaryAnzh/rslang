@@ -36,6 +36,7 @@ class RegisterForm extends React.Component {
 
   render() {
     return (
+      
       <div className="register-form-wrap">
         <h2>Регистрация:</h2>
         <form>
