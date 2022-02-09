@@ -1,5 +1,4 @@
-import React from 'react';
-import { Routes, Route, Outlet, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Statistics } from '../../pages/Statistics/Statistics';
 import { StartPage } from '../../pages/startPage/StartPage';
 import { Footer } from '../Footer/Footer';
