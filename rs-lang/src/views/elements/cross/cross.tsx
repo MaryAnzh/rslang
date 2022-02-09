@@ -7,7 +7,10 @@ class Cross extends React.Component {
 
   render() {
     return (
-      <div className='cross' onClick={(e) => startPageModel.closeSignInOnClick(e)}>
+      <div
+        id='cross'
+        className='cross'
+        onClick={(e) => startPageModel.closeSignInOnClick(e)}>
         <div className='cross__line-1'></div>
         <div className='cross__line-2'></div>
       </div>

@@ -24,7 +24,7 @@ class DataService {
     this.currentRefreshToken = '';
   }
 
-  async registereUser(newUser: IUser): Promise<IUserRegisterResponse> {
+  async registereUser(newUser: IUser) {
     const response = await fetch(`${this.user}`, {
       method: 'POST',
       headers: {
@@ -33,7 +33,15 @@ class DataService {
       },
       body: JSON.stringify(newUser),
     });
-    return <IUserRegisterResponse>(await response.json());
+    const status = await response.status; 
+    if (status !== 200) {
+      throw new Error(status.toString());
+    } else {
+       
+      return response.json();
+    }
+
+   
   }
 
   async signInUser(user: ISignInUserInfo): Promise<ISignInResponse> {

@@ -3,35 +3,54 @@ import '../RegisterForm/registerForm.scss';
 import './SignInForm.scss';
 import { startPageModel } from '../../../model/StartPageModel';
 import { applicationModel } from '../../../model/ApplicationModel';
+import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
+import { AppProperties } from '../../../interfaces/appProperties';
+import { FormErrors } from '../../elements/FormErrors/FormErrors';
+
+
+type SignInFormState = {
+  email: string;
+  password: string;
+}
 
 class SignInForm extends React.Component {
+  state: SignInFormState;
+
+  constructor(props: AppProperties) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+    }
+  }
+  
   render() {
     return (
 			<div className="register-form-wrap">
 				<h2>Вход:</h2>
 				<form>
 					<label form='username'>Имя:</label>
-					<input
-						type="username"
-						id="username"
-						name="username"
-            aria-placeholder="Имя"
+          <FormErrors email={this.state.email} name="email" />
+          <input
+            type="email"
+            id="sugn-in-email"
+            name="email"
+            value={this.state.email}
+            aria-placeholder="*Email"
             onChange={(e) => { this.handleUserInput(e) }}
-					//value={register.usernamr}
-					//onChange={changeInputRegister}
 					/>
-					<label>Пароль:</label>
-					<input
+					<label>*Пароль:</label>
+          <FormErrors password={this.state.password} name="password" />
+          <input
 						type="password"
-						id="password"
+						id="sign-in password"
             name="password"
+            value={this.state.password}
             onChange={(e) => { this.handleUserInput(e) }}
-					//value={register.password}
-					//onChange={changeInputRegister}
 					/>
-          <button type="button" onClick={(e) => { applicationModel.signInUser(e) }}
+          <button type="button" onClick={(e) => { this.getUserDataOnClick(e) }}
           >Войти</button>
-				<p>Нет акаунта? <span onClick={(e) => startPageModel.registerOnClick(e)}>
+          <p>Нет акаунта? <span onClick={(e) => authorizationAppModel.registerOnClick(e)}>
 					Зарегистрироваться</span></p>
 				</form>
 			</div>
@@ -39,15 +58,14 @@ class SignInForm extends React.Component {
   }
 
   handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const elem = e.target as HTMLInputElement;
-    const name = elem.name;
-    const value = elem.value;
-    if (name == 'username') {
-      applicationModel.currentMail = value;
-    } else {
-      applicationModel.currentPassword = value;
-    }
-    // this.setState({ [name]: value });
+    const inputValue = authorizationAppModel.handleUserInput(e);
+    this.setState(inputValue);
+  }
+
+  getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
+    applicationModel.currentMail = this.state.email;
+    applicationModel.currentPassword = this.state.password;
+    console.log(applicationModel.currentMail, applicationModel.currentPassword );
   }
 }
 
