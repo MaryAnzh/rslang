@@ -80,7 +80,6 @@ class RegisterForm extends React.Component {
           <button type="button" onClick={(e) => { applicationModel.registerUser(e) }}
             disabled={!this.state.formValid}>Регистрация</button>
           <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => startPageModel.signInOnClick(e)}>Войти</span></p>
-          
         </form>
       </div>
     );
@@ -128,11 +127,8 @@ class RegisterForm extends React.Component {
   // }
 
   handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const elem = e.target as HTMLInputElement;
-    const name = elem.name;
-    const value = elem.value;
-    
-    this.setState({ [name]: value });
+    const a = authorizationAppModel.handleUserInput(e);
+    this.setState( a );
     //this.validateField(name, value);
   }
 }

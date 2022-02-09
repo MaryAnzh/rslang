@@ -15,6 +15,13 @@ class AuthorizationAppModel {
     const emailValue = email.value;
     const passwordValue = password.value;
   }
+
+  handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const elem = e.target as HTMLInputElement;
+    const name = elem.name;
+    const value = elem.value;
+    return { [name]: value };
+  }
 }
 
 const authorizationAppModel = new AuthorizationAppModel(newDataService);
