@@ -1,0 +1,26 @@
+@import '../../../css/variables';
+
+.pagination {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  background: $main-color-dark;
+  color: #fff;
+
+  &__btn {
+    padding: 0 1rem;
+    border: none;
+    outline: none;
+    background: #0000;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover img {
+      transform: scale(1.1);
+    }
+  }
+
+  &__text {
+    padding: 0 1rem;
+  }
+}
