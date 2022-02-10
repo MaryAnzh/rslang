@@ -55,7 +55,6 @@ class DataService {
   }
 
   async signInUser(user: ISignInUserInfo): Promise<ISignInResponse> {
-    console.log('Запрос пошел');
     const response = await fetch(`${this.signin}`, {
       method: 'POST',
       headers: {
