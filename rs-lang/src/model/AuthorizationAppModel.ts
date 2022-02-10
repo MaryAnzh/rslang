@@ -82,9 +82,10 @@ class AuthorizationAppModel {
   }
 
   errorMessage(formType: string) {
-    const registerform = document.getElementById('register-form-wrap');
+    const registerform = document.getElementById('register-form');
     const signinForm = document.getElementById('sign-in-form');
-    if (formType == 'regicter') {
+    
+    if (this.isRegisterForm) {
       if (registerform !== null) {
         registerform.style.display = 'none';
       }

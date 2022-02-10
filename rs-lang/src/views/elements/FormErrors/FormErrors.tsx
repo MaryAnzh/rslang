@@ -23,6 +23,7 @@ class FormErrors extends React.Component<FormErrorsProperties> {
         case 'email':
           if (propValue.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) == null) {
             content = 'Некорректный Email';
+            authorizationAppModel.isMailValid = false;
           } else {
             content = '';
             applicationModel.currentMail = propValue;
@@ -32,6 +33,7 @@ class FormErrors extends React.Component<FormErrorsProperties> {
         case 'password':
           if (propValue.length < 8) {
             content = 'Пароль слишком короткий';
+            authorizationAppModel.isPasswordValid = false;
           } else {
             content = '';
             applicationModel.currentPassword = propValue;
@@ -41,6 +43,7 @@ class FormErrors extends React.Component<FormErrorsProperties> {
         case 'passwordRepeat':
           if (propValue != applicationModel.currentPassword) {
             content = 'Пароли не совпадают';
+            authorizationAppModel.isPasswordRepeatValid = false;
           } else {
             content = '';
             authorizationAppModel.isPasswordRepeatValid = true;
