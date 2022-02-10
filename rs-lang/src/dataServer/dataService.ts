@@ -7,16 +7,31 @@ class DataService {
 
   private signin: string;
 
-  private currentToken: string;
+  public myStorage: Storage;
 
-  private currentRefreshToken: string;
+  get currentRefreshToken() {
+    return this.myStorage.localStorage.getItem('refreshtoken');
+  }
+
+  set currentRefreshToken(value: string) {
+    this.myStorage.localStorage.setItem('refreshtoken', value);
+  }
+
+  get currentToken() {
+    return this.myStorage.localStorage.getItem('token');
+  }
+
+  set currentToken(value: string) {
+    this.myStorage.localStorage.setItem('token', value);
+  }
+
+  // private currentRefreshToken: string;
 
   constructor(baseURL: string) {
     this.baseURL = baseURL;
     this.user = `${this.baseURL}/users`;
     this.signin = `${this.baseURL}/signin`;
-    this.currentToken = '';
-    this.currentRefreshToken = '';
+    this.myStorage = window.localStorage;
   }
 
   async registereUser(newUser: IUser) {
@@ -28,15 +43,15 @@ class DataService {
       },
       body: JSON.stringify(newUser),
     });
-    const status = await response.status; 
+    const status = await response.status;
     if (status !== 200) {
       throw new Error(status.toString());
     } else {
-       
+
       return response.json();
     }
 
-   
+
   }
 
   async signInUser(user: ISignInUserInfo): Promise<ISignInResponse> {
@@ -51,9 +66,16 @@ class DataService {
     const responseJson: ISignInResponse = await response.json();
     this.currentToken = responseJson.token;
     this.currentRefreshToken = responseJson.refreshToken;
-    return responseJson;
-  }
 
+    const status = await response.status;
+    if (status !== 200) {
+      throw new Error(status.toString());
+    } else {
+
+      return responseJson;
+    }
+
+  }
 }
 
 const dataUrl = 'https://react-rslang-team-mary.herokuapp.com';
