@@ -30,11 +30,18 @@ class SignInForm extends React.Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div className="register-form-wrap">
         <h2>Вход:</h2>
         <p className='form-error-on-click'>{ this.state.errorText }</p>
         <form>
+          <label form='username'>Имя:</label>
+=======
+			<div className="register-form-wrap">
+				<h2>Вход:</h2>
+				<form>
           <label form='email'>*Email:</label>
+>>>>>>> origin/develop
           <FormErrors email={this.state.email} name="email" />
           <input
             type="email"

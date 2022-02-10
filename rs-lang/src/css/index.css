@@ -36,3 +36,7 @@ ul {
   opacity: 1;
   pointer-events: all;
 }
+
+.hidden {
+  opacity: 0;
+}

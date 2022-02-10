@@ -12,9 +12,7 @@ type FormState = {
   password: string;
   passwordRepeat: string;
   formErrors: { email: string, password: string },
-  emailValid: boolean,
-  passwordValid: boolean,
-  formValid: boolean
+  errorText: string;
 }
 
 class RegisterForm extends React.Component {
@@ -28,9 +26,7 @@ class RegisterForm extends React.Component {
       password: '',
       passwordRepeat: '',
       formErrors: { email: '', password: '' },
-      emailValid: false,
-      passwordValid: false,
-      formValid: false,
+      errorText: '',
     }
   }
 
@@ -39,6 +35,7 @@ class RegisterForm extends React.Component {
       
       <div className="register-form-wrap">
         <h2>Регистрация:</h2>
+        <p className='form-error-on-click'>{this.state.errorText}</p>
         <form>
           <label>*Имя:</label>
 
@@ -86,14 +83,28 @@ class RegisterForm extends React.Component {
 
   handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = authorizationAppModel.handleUserInput(e);
+    this.state.errorText = '';
     this.setState(inputValue);
+    this.setState({ correct: (this.state.errorText) });
   }
 
   getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
-    applicationModel.currentUserName = this.state.name;
-    applicationModel.currentMail = this.state.email;
-    applicationModel.currentPassword = this.state.password;
-    applicationModel.registerUser();
+    console.log(authorizationAppModel.isMailValid);
+    console.log('authorizationAppModel.isMailValid');
+
+    if (this.state.name == '' || this.state.email === '' || this.state.password === '') {
+      this.state.errorText = 'Заполните все поля';
+      this.setState({ correct: (this.state.errorText) });
+
+    } else if (!authorizationAppModel.isMailValid || !authorizationAppModel.isPasswordValid) {
+      this.state.errorText = 'Одно из полей заполнено неверно';
+      this.setState({ correct: (this.state.errorText) });
+
+    } else {
+      applicationModel.currentMail = this.state.email;
+      applicationModel.currentPassword = this.state.password;
+      applicationModel.signInUser();
+    }
   }
 }
 

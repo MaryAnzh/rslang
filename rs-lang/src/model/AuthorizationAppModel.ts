@@ -7,6 +7,16 @@ class AuthorizationAppModel {
   //принимаем данные
   dataServ: DataService;
 
+  isMailValid = false;
+
+  isPasswordValid = false;
+
+  isPasswordRepeatValid = false;
+
+  isRegisterForm = false;
+
+  isSignInForm = false;
+
   constructor(dataServ: DataService) {
     this.dataServ = dataServ;
   }
@@ -52,6 +62,9 @@ class AuthorizationAppModel {
   }
 
   registerOnClick(e: React.MouseEvent<HTMLElement | HTMLSpanElement>) {
+    this.isRegisterForm = true;
+    this.isSignInForm = false;
+    this.remuveFormValidFlags();
     const isWrapHudden = false;
     const registerForm = true;
     const signInForm = false;
@@ -59,28 +72,43 @@ class AuthorizationAppModel {
   }
 
   signInOnClick(e: React.MouseEvent<HTMLLIElement | HTMLSpanElement>) {
+    this.isRegisterForm = false;
+    this.isSignInForm = true;
+    this.remuveFormValidFlags();
     const isWrapHudden = false;
     const registerForm = false;
     const signInForm = true;
     this.hiddenELem(isWrapHudden, registerForm, signInForm);
   }
 
-  errorMessage(message: string) {
-    const registerForm = document.getElementById('register-form');
+  errorMessage(formType: string) {
+    const registerform = document.getElementById('register-form');
+    const signinForm = document.getElementById('sign-in-form');
+    
+    if (this.isRegisterForm) {
+      if (registerform !== null) {
+        registerform.style.display = 'none';
+      }
+    } else {
+      if (signinForm !== null) {
+        signinForm.style.display = 'none';
+      }
+    }
     const formBody = document.getElementById('form-body');
     const errorForm = document.getElementById('server-error');
     const cross = document.getElementById('cross');
 
-    if (registerForm !== null && formBody !== null && errorForm !== null && cross !== null) {
-      registerForm.style.display = 'none';
+    if (formBody !== null && errorForm !== null && cross !== null) {
+
       formBody.classList.remove('pop-up__body-register-form');
       formBody.classList.add('pop-up__body-error');
       cross.style.display = 'none';
       errorForm.style.display = 'flex';
       const errorFormText = document.getElementById('server-error-text');
-      if (errorFormText !== null) { 
+      if (errorFormText !== null) {
         errorFormText.textContent = applicationModel.currentTextError;
       }
+
     }
   }
 
@@ -93,10 +121,24 @@ class AuthorizationAppModel {
       cross.removeAttribute('style');
       errorForm.removeAttribute('style');
     }
-    const isWrapHudden = false;
-    const registerForm = true;
-    const signInForm = false;
-    this.hiddenELem(isWrapHudden, registerForm, signInForm);
+    if (this.isRegisterForm) {
+      const isWrapHudden = false;
+      const registerForm = true;
+      const signInForm = false;
+      this.hiddenELem(isWrapHudden, registerForm, signInForm);
+    } else {
+      const isWrapHudden = false;
+      const registerForm = false;
+      const signInForm = true;
+      this.hiddenELem(isWrapHudden, registerForm, signInForm);
+    }
+
+  }
+
+  remuveFormValidFlags() {
+    this.isMailValid = false;
+    this.isPasswordValid = false;
+    this.isPasswordRepeatValid = false;
   }
 }
 
