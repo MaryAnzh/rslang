@@ -33,3 +33,7 @@ export type TextBookState = {
 export type CardButtonsState = {
   isPlay: boolean;
 }
+
+export type CardButtonsProps = {
+  soundUrls: string[];
+}

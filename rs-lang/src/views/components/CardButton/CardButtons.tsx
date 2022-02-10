@@ -4,13 +4,14 @@ import playPic from '../../../img/svg/play.svg';
 import pausePic from '../../../img/svg/pause.svg';
 import addPic from '../../../img/svg/add.svg';
 import applyPic from '../../../img/svg/check.svg';
-import { CardButtonsState } from '../../../interfaces/types';
+import { CardButtonsProps, CardButtonsState } from '../../../interfaces/types';
+import { soundModel } from '../../../model/SoundModel';
 
 
-class CardButtons extends React.Component {
+class CardButtons extends React.Component<CardButtonsProps> {
   state: CardButtonsState;
 
-  constructor(props: {}) {
+  constructor(props: CardButtonsProps) {
     super(props);
     this.state = {
       isPlay: false,
@@ -18,17 +19,30 @@ class CardButtons extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    this.setState((prev: CardButtonsState) => ({
-      isPlay: !prev.isPlay,
-    }));
+  async handleClick() {
+    if (!soundModel.isPlay) {
+      this.setState((prev: CardButtonsState) => ({
+        isPlay: !prev.isPlay,
+      }));
+      await soundModel.play(this.props.soundUrls);
+      this.setState((prev: CardButtonsState) => ({
+        isPlay: !prev.isPlay,
+      }));
+    } else {
+      if (this.state.isPlay) {
+        this.setState((prev: CardButtonsState) => ({
+          isPlay: !prev.isPlay,
+        }));
+        soundModel.stop();
+      }
+    }
   }
 
   render() {
     return (
       <div className="card-buttons">
-        <button className="card-buttons__btn-sound card-buttons__btn">
-          <img onClick={this.handleClick} src={this.state.isPlay ? pausePic : playPic} alt="sound" className="card-buttons__pic"/>
+        <button onClick={this.handleClick} className="card-buttons__btn-sound card-buttons__btn">
+          <img  src={this.state.isPlay ? pausePic : playPic} alt="sound" className="card-buttons__pic"/>
         </button>
         <button className="card-buttons__btn-sound card-buttons__btn">
           <img src={addPic} alt="add" className="card-buttons__pic"/>
