@@ -68,6 +68,8 @@ class ApplicationModel {
 
   catchError(error: Error) {
     const message = error.message;
+    console.log('message');
+    console.log(message);
     switch (message) {
       case '417':
         this.currentTextError = 'Такой e-mail уже существует.';
