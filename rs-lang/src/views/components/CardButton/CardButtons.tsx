@@ -20,16 +20,21 @@ class CardButtons extends React.Component<CardButtonsProps> {
   }
 
   async handleClick() {
-    this.setState((prev: CardButtonsState) => ({
-      isPlay: !prev.isPlay,
-    }));
-    if (this.state.isPlay) {
-      soundModel.stop();
-    } else {
+    if (!soundModel.isPlay) {
+      this.setState((prev: CardButtonsState) => ({
+        isPlay: !prev.isPlay,
+      }));
       await soundModel.play(this.props.soundUrls);
       this.setState((prev: CardButtonsState) => ({
         isPlay: !prev.isPlay,
       }));
+    } else {
+      if (this.state.isPlay) {
+        this.setState((prev: CardButtonsState) => ({
+          isPlay: !prev.isPlay,
+        }));
+        soundModel.stop();
+      }
     }
   }
 

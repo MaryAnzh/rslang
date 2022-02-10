@@ -13,7 +13,7 @@ class WordCard extends React.Component<WordCardProps> {
   }
 
   render() {
-    const arrUrls = [this.props.word.audio, this.props.word.audioExample, this.props.word.audioMeaning];
+    const arrUrls = [this.props.word.audio, this.props.word.audioMeaning, this.props.word.audioExample];
     return (
       <div className="word-card">
         <img className="word-card__picture" src={this.baseURL + this.props.word.image} alt="pic" />
