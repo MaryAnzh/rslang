@@ -46,21 +46,7 @@ class ApplicationModel {
       this.currentUserId = registerResponse.id;
     } catch (error) {
       const serverError = error as Error;
-      const serverErrorCode = serverError.message;
-      console.log(serverErrorCode);
-      switch (serverErrorCode) {
-        case '417':
-          this.currentTextError = 'Такой e-mail уже существует.';
-          console.log('Ошибка 417, я тебя поймал');
-          break;
-        case '422':
-          this.currentTextError = 'Вы ввели некорректный e-mail или пароль';
-          console.log('Ошибка 422, я тебя поймал');
-          break;
-
-        default:
-          break;
-      }
+      this.catchError(serverError);
       authorizationAppModel.errorMessage('417');
     }
   }
@@ -70,8 +56,33 @@ class ApplicationModel {
       email: this.currentMail,
       password: this.currentPassword,
     }
-    const a = await this.dataServ.signInUser(signInInfo);
-    console.log(a);
+    try {
+      const a = await this.dataServ.signInUser(signInInfo);
+    } catch (error) {
+      const serverError = error as Error;
+      this.catchError(serverError);
+    }
+  }
+
+  catchError(error: Error) {
+    const message = error.message;
+    switch (message) {
+      case '417':
+        this.currentTextError = 'Такой e-mail уже существует.';
+        console.log('Ошибка 417, я тебя поймал');
+        break;
+      case '422':
+        this.currentTextError = 'Вы ввели некорректный e-mail или пароль';
+        console.log('Ошибка 422, я тебя поймал');
+        break;
+      case '403':
+        this.currentTextError = 'Вы ввели неверный e-mail или пароль';
+        console.log('Ошибка 402, я тебя поймал');
+        break;
+
+      default:
+        break;
+    }
   }
 
   removeUserDataMainInfo() {

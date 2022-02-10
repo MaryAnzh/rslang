@@ -71,7 +71,6 @@ class DataService {
     if (status !== 200) {
       throw new Error(status.toString());
     } else {
-
       return responseJson;
     }
 
