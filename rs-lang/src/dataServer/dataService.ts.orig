@@ -8,9 +8,13 @@ class DataService {
 
   private signin: string;
 
+<<<<<<< HEAD
   public myStorage: Storage;
-
+=======
   private words: string;
+
+  private currentToken: string;
+>>>>>>> origin/develop
 
   get currentRefreshToken() {
     return this.myStorage.localStorage.getItem('refreshtoken');
@@ -28,12 +32,20 @@ class DataService {
     this.myStorage.localStorage.setItem('token', value);
   }
 
+  // private currentRefreshToken: string;
+
+
   constructor(baseURL: string) {
     this.baseURL = baseURL;
     this.user = `${this.baseURL}/users`;
     this.signin = `${this.baseURL}/signin`;
+<<<<<<< HEAD
     this.myStorage = window.localStorage;
+=======
     this.words = `${this.baseURL}/words`;
+    this.currentToken = '';
+    this.currentRefreshToken = '';
+>>>>>>> origin/develop
   }
 
   async registereUser(newUser: IUser) {
@@ -52,6 +64,8 @@ class DataService {
 
       return response.json();
     }
+
+
   }
 
   async signInUser(user: ISignInUserInfo): Promise<ISignInResponse> {
@@ -64,6 +78,7 @@ class DataService {
       body: JSON.stringify(user),
     });
 
+<<<<<<< HEAD
     const status = await response.status;
     if (status !== 200) {
       throw new Error(status.toString());
@@ -73,14 +88,15 @@ class DataService {
       this.currentRefreshToken = responseJson.refreshToken;
       return responseJson;
     }
-  }
 
+=======
   async getWords(group: number, page: number): Promise<WordCardType[]> {
     const requestOptions = {
       method: 'GET',
     };
     const response = await fetch(`${this.words}?group=${group}&page=${page}`, requestOptions);
     return <WordCardType[]>(await response.json());
+>>>>>>> origin/develop
   }
 }
 
