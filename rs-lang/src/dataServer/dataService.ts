@@ -12,22 +12,6 @@ class DataService {
 
   private words: string;
 
-  get currentRefreshToken() {
-    return this.myStorage.localStorage.getItem('refreshtoken');
-  }
-
-  set currentRefreshToken(value: string) {
-    this.myStorage.localStorage.setItem('refreshtoken', value);
-  }
-
-  get currentToken() {
-    return this.myStorage.localStorage.getItem('token');
-  }
-
-  set currentToken(value: string) {
-    this.myStorage.localStorage.setItem('token', value);
-  }
-
   constructor(baseURL: string) {
     this.baseURL = baseURL;
     this.user = `${this.baseURL}/users`;
@@ -65,12 +49,13 @@ class DataService {
     });
 
     const status = await response.status;
+
     if (status !== 200) {
       throw new Error(status.toString());
     } else {
       const responseJson: ISignInResponse = await response.json();
-      this.currentToken = responseJson.token;
-      this.currentRefreshToken = responseJson.refreshToken;
+      this.myStorage.setItem('token', responseJson.token);
+      //console.log(this.myStorage.getItem('token'));
       return responseJson;
     }
   }
