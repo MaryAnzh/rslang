@@ -1,10 +1,14 @@
 .pop-up {
 	position: absolute;
 	display: flex;
-	width: 100%;
-	height: calc(100% - 2rem);
+	width:100%;
+  min-height:100%;
+  overflow:hidden;
+  position:fixed;
+  top:0px;
 	justify-content: center;
 	background: rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 	
 	&__body {
 	margin-top: 10rem;
