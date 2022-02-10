@@ -1,3 +1,5 @@
+import { MouseEventHandler } from 'react'
+
 export type CardType = {
   url: string;
   title: string;
@@ -28,6 +30,8 @@ export type WordCardProps = {
 
 export type TextBookState = {
   words: WordCardType[];
+  page: number;
+  group: number;
 }
 
 export type CardButtonsState = {
@@ -36,4 +40,10 @@ export type CardButtonsState = {
 
 export type CardButtonsProps = {
   soundUrls: string[];
+}
+
+export type PaginationProps = {
+  page: number;
+  downHandler: MouseEventHandler<HTMLButtonElement>;
+  upHandler: MouseEventHandler<HTMLButtonElement>;
 }
