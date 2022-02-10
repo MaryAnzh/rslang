@@ -36,8 +36,8 @@ class CardButtons extends React.Component<CardButtonsProps> {
   render() {
     return (
       <div className="card-buttons">
-        <button className="card-buttons__btn-sound card-buttons__btn">
-          <img onClick={this.handleClick} src={this.state.isPlay ? pausePic : playPic} alt="sound" className="card-buttons__pic"/>
+        <button onClick={this.handleClick} className="card-buttons__btn-sound card-buttons__btn">
+          <img  src={this.state.isPlay ? pausePic : playPic} alt="sound" className="card-buttons__pic"/>
         </button>
         <button className="card-buttons__btn-sound card-buttons__btn">
           <img src={addPic} alt="add" className="card-buttons__pic"/>
