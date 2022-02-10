@@ -47,20 +47,22 @@ class ApplicationModel {
     } catch (error) {
       const serverError = error as Error;
       this.catchError(serverError);
-      authorizationAppModel.errorMessage('417');
+      authorizationAppModel.errorMessage('register');
     }
   }
 
-  async signInUser(e: React.MouseEvent<HTMLButtonElement>) {
+  async signInUser() {
     const signInInfo: ISignInUserInfo = {
       email: this.currentMail,
       password: this.currentPassword,
     }
     try {
       const a = await this.dataServ.signInUser(signInInfo);
+      console.log(a);
     } catch (error) {
       const serverError = error as Error;
       this.catchError(serverError);
+      authorizationAppModel.errorMessage('signin');
     }
   }
 
@@ -77,7 +79,7 @@ class ApplicationModel {
         break;
       case '403':
         this.currentTextError = 'Вы ввели неверный e-mail или пароль';
-        console.log('Ошибка 402, я тебя поймал');
+        console.log('Ошибка 403, я тебя поймал');
         break;
 
       default:

@@ -65,22 +65,33 @@ class AuthorizationAppModel {
     this.hiddenELem(isWrapHudden, registerForm, signInForm);
   }
 
-  errorMessage(message: string) {
-    const registerForm = document.getElementById('register-form');
+  errorMessage(formType: string) {
+    const registerform = document.getElementById('register-form-wrap');
+    const signinForm = document.getElementById('sign-in-form');
+    if (formType == 'regicter') {
+      if (registerform !== null) {
+        registerform.style.display = 'none';
+      }
+    } else {
+      if (signinForm !== null) {
+        signinForm.style.display = 'none';
+      }
+    }
     const formBody = document.getElementById('form-body');
     const errorForm = document.getElementById('server-error');
     const cross = document.getElementById('cross');
 
-    if (registerForm !== null && formBody !== null && errorForm !== null && cross !== null) {
-      registerForm.style.display = 'none';
+    if (formBody !== null && errorForm !== null && cross !== null) {
+
       formBody.classList.remove('pop-up__body-register-form');
       formBody.classList.add('pop-up__body-error');
       cross.style.display = 'none';
       errorForm.style.display = 'flex';
       const errorFormText = document.getElementById('server-error-text');
-      if (errorFormText !== null) { 
+      if (errorFormText !== null) {
         errorFormText.textContent = applicationModel.currentTextError;
       }
+
     }
   }
 

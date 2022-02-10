@@ -55,6 +55,7 @@ class DataService {
   }
 
   async signInUser(user: ISignInUserInfo): Promise<ISignInResponse> {
+    console.log('Запрос пошел');
     const response = await fetch(`${this.signin}`, {
       method: 'POST',
       headers: {
@@ -63,14 +64,14 @@ class DataService {
       },
       body: JSON.stringify(user),
     });
-    const responseJson: ISignInResponse = await response.json();
-    this.currentToken = responseJson.token;
-    this.currentRefreshToken = responseJson.refreshToken;
 
     const status = await response.status;
     if (status !== 200) {
       throw new Error(status.toString());
     } else {
+      const responseJson: ISignInResponse = await response.json();
+      this.currentToken = responseJson.token;
+      this.currentRefreshToken = responseJson.refreshToken;
       return responseJson;
     }
 

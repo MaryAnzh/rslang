@@ -65,7 +65,7 @@ class SignInForm extends React.Component {
   getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
     applicationModel.currentMail = this.state.email;
     applicationModel.currentPassword = this.state.password;
-    console.log(applicationModel.currentMail, applicationModel.currentPassword );
+    applicationModel.signInUser();
   }
 }
 
