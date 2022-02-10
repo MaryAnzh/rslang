@@ -3,6 +3,7 @@ import './formErrors.scss';
 import { RegisterForm } from '../../components/RegisterForm/registerForm';
 import { AppProperties } from '../../../interfaces/appProperties';
 import { applicationModel } from '../../../model/ApplicationModel';
+import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
 
 type FormErrorsProperties = {
   name: keyof FormErrorsProperties;
@@ -12,7 +13,7 @@ type FormErrorsProperties = {
 }
 
 class FormErrors extends React.Component<FormErrorsProperties> {
-  
+
   render() {
     let content = '';
     const propName = this.props.name;
@@ -25,6 +26,7 @@ class FormErrors extends React.Component<FormErrorsProperties> {
           } else {
             content = '';
             applicationModel.currentMail = propValue;
+            authorizationAppModel.isMailValid = true;
           }
           break;
         case 'password':
@@ -33,6 +35,7 @@ class FormErrors extends React.Component<FormErrorsProperties> {
           } else {
             content = '';
             applicationModel.currentPassword = propValue;
+            authorizationAppModel.isPasswordValid = true;
           }
           break;
         case 'passwordRepeat':
@@ -40,9 +43,10 @@ class FormErrors extends React.Component<FormErrorsProperties> {
             content = 'Пароли не совпадают';
           } else {
             content = '';
+            authorizationAppModel.isPasswordRepeatValid = true;
           }
           break;
-      
+
         default:
           break;
       }
@@ -61,10 +65,8 @@ class FormErrors extends React.Component<FormErrorsProperties> {
 
     return (
       <div className='formErrors'>
-        {/* {console.log(this.props.name)}
-        {console.log(this.props[this.props.name])} */}
-        <p>{ content }</p>
-        
+        <p>{content}</p>
+
         {/* {Object.entries(this.props.formErrorsObj).map(([fieldName, value], i) => {
 				  if (value.length > 0) {
 				    return (
@@ -77,7 +79,7 @@ class FormErrors extends React.Component<FormErrorsProperties> {
       </div>
     );
   }
-  
+
 }
 
 export { FormErrors };

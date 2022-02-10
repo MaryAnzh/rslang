@@ -7,6 +7,16 @@ class AuthorizationAppModel {
   //принимаем данные
   dataServ: DataService;
 
+  isMailValid = false;
+
+  isPasswordValid = false;
+
+  isPasswordRepeatValid = false;
+
+  isRegisterForm = false;
+
+  isSignInForm = false;
+
   constructor(dataServ: DataService) {
     this.dataServ = dataServ;
   }
@@ -52,6 +62,9 @@ class AuthorizationAppModel {
   }
 
   registerOnClick(e: React.MouseEvent<HTMLElement | HTMLSpanElement>) {
+    this.isRegisterForm = true;
+    this.isSignInForm = false;
+    this.remuveFormValidFlags();
     const isWrapHudden = false;
     const registerForm = true;
     const signInForm = false;
@@ -59,6 +72,9 @@ class AuthorizationAppModel {
   }
 
   signInOnClick(e: React.MouseEvent<HTMLLIElement | HTMLSpanElement>) {
+    this.isRegisterForm = false;
+    this.isSignInForm = true;
+    this.remuveFormValidFlags();
     const isWrapHudden = false;
     const registerForm = false;
     const signInForm = true;
@@ -104,10 +120,24 @@ class AuthorizationAppModel {
       cross.removeAttribute('style');
       errorForm.removeAttribute('style');
     }
-    const isWrapHudden = false;
-    const registerForm = true;
-    const signInForm = false;
-    this.hiddenELem(isWrapHudden, registerForm, signInForm);
+    if (this.isRegisterForm) {
+      const isWrapHudden = false;
+      const registerForm = true;
+      const signInForm = false;
+      this.hiddenELem(isWrapHudden, registerForm, signInForm);
+    } else {
+      const isWrapHudden = false;
+      const registerForm = false;
+      const signInForm = true;
+      this.hiddenELem(isWrapHudden, registerForm, signInForm);
+    }
+
+  }
+
+  remuveFormValidFlags() {
+    this.isMailValid = false;
+    this.isPasswordValid = false;
+    this.isPasswordRepeatValid = false;
   }
 }
 
