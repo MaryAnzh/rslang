@@ -4,9 +4,7 @@ import './SignInForm.scss';
 import { startPageModel } from '../../../model/StartPageModel';
 import { applicationModel } from '../../../model/ApplicationModel';
 import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
-import { AppProperties } from '../../../interfaces/appProperties';
 import { FormErrors } from '../../elements/FormErrors/FormErrors';
-
 
 type SignInFormState = {
   email: string;
@@ -15,10 +13,15 @@ type SignInFormState = {
   errorText: string;
 }
 
-class SignInForm extends React.Component {
+type SignInFormProps = {
+  upDateHeader: Function;
+  alertHidden: Function;
+}
+
+class SignInForm extends React.Component<SignInFormProps> {
   state: SignInFormState;
 
-  constructor(props: AppProperties) {
+  constructor(props: SignInFormProps) {
     super(props);
     this.state = {
       email: '',
@@ -30,9 +33,10 @@ class SignInForm extends React.Component {
 
   render() {
     return (
-      <div className="register-form-wrap">
+      <div
+        className="register-form-wrap">
         <h2>Вход:</h2>
-        <p className='form-error-on-click'>{ this.state.errorText }</p>
+        <p className='form-error-on-click'>{this.state.errorText}</p>
         <form>
           <label form='email'>*Email:</label>
           <FormErrors email={this.state.email} name="email" />
@@ -69,8 +73,11 @@ class SignInForm extends React.Component {
     this.setState({ correct: (this.state.errorText) });
   }
 
-  getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
-    
+  test() {
+    this.props.alertHidden();
+  }
+
+  async getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
     if (this.state.email === '' || this.state.password === '') {
       this.state.classError = 'form-error-on-click';
       this.state.errorText = 'Заполните все поля';
@@ -79,12 +86,19 @@ class SignInForm extends React.Component {
     } else if (!authorizationAppModel.isMailValid || !authorizationAppModel.isPasswordValid) {
       this.state.errorText = 'Одно из полей заполнено неверно';
       this.setState({ correct: (this.state.errorText) });
-    }  else {
+    } else {
       applicationModel.currentMail = this.state.email;
       applicationModel.currentPassword = this.state.password;
-      applicationModel.signInUser();
+      let signInUser = await applicationModel.signInUser();
+      if (signInUser) {
+        authorizationAppModel.closeForm();
+        await this.props.upDateHeader();
+        setTimeout(() => {
+          this.test();
+          console.log('Таймаут сработал');
+        }, 2000);
+      }
     }
-
   }
 }
 

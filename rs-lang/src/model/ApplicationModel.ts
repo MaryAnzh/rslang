@@ -57,12 +57,17 @@ class ApplicationModel {
       password: this.currentPassword,
     }
     try {
-      const a = await this.dataServ.signInUser(signInInfo);
-      console.log(a);
+      const response = await this.dataServ.signInUser(signInInfo);
+      this.isAuthorization = true;
+      this.currentUserName = response.name;
+      console.log(`Добро пожаловать на сайт ${this.currentUserName}`);
+      return true;
+
     } catch (error) {
       const serverError = error as Error;
       this.catchError(serverError);
       authorizationAppModel.errorMessage('signin');
+      return false;
     }
   }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import './cross.scss';
 import { startPageModel } from '../../../model/StartPageModel';
-//import { render } from '@testing-library/react';
 
 class Cross extends React.Component {
 

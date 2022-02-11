@@ -140,6 +140,14 @@ class AuthorizationAppModel {
     this.isPasswordValid = false;
     this.isPasswordRepeatValid = false;
   }
+
+  closeForm() {
+    this.remuveFormValidFlags();
+    this.isSignInForm = false;
+    this.isRegisterForm = false;
+    const formWrap = document.getElementById('headerForm') as HTMLElement;
+    formWrap.style.display = 'none';
+  }
 }
 
 const authorizationAppModel = new AuthorizationAppModel(newDataService);

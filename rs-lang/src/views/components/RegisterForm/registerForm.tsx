@@ -88,10 +88,7 @@ class RegisterForm extends React.Component {
     this.setState({ correct: (this.state.errorText) });
   }
 
-  getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
-    console.log(authorizationAppModel.isMailValid);
-    console.log('authorizationAppModel.isMailValid');
-
+  async getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
     if (this.state.name == '' || this.state.email === '' || this.state.password === '') {
       this.state.errorText = 'Заполните все поля';
       this.setState({ correct: (this.state.errorText) });
@@ -104,8 +101,9 @@ class RegisterForm extends React.Component {
       applicationModel.currentMail = this.state.email;
       applicationModel.currentPassword = this.state.password;
       applicationModel.currentUserName = this.state.name;
-      console.log(applicationModel.currentMail, applicationModel.currentPassword, applicationModel.currentUserName);
-      applicationModel.registerUser();
+      let registerUser = await applicationModel.registerUser();
+      console.log(registerUser);
+      console.log(registerUser);
     }
   }
 }
