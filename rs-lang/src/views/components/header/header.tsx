@@ -33,10 +33,11 @@ class Header extends React.Component {
       signIconClass: 'header__sign-icon blocked',
       signBlockClass: { display: 'block' },
       outStyle: { display: 'none' },
-      burger: { display: 'flex' },
+      burger: { display: 'none' },
     }
     this.authorizationUpDate = this.authorizationUpDate.bind(this);
     this.alertHiddenWrap = this.alertHiddenWrap.bind(this);
+    this.burgerUp = this.burgerUp.bind(this);
   }
 
   render() {
@@ -62,7 +63,7 @@ class Header extends React.Component {
           </li>
         </div>
         <div className='header__burger'>
-          <Burger />
+          <Burger burgerUp={this.burgerUp} />
         </div>
         <Alert alertTwxt={greating} alertStyle={this.state.alertStyle} />
         <div id='headerForm' className='header__form'>
@@ -143,13 +144,10 @@ class Header extends React.Component {
     this.upDateUserState('none', 'block', 'blocked');
   }
 
-  burgerUp() {
-    this.setState(this.state.burger = { display: 'flex' })
+  async burgerUp(value: string) {
+    this.setState(this.state.burger = { display: value });
   }
 
-  burgerUpOnClick(e: React.MouseEvent<HTMLElement>) {
-    this.burgerUp();
-  }
 }
 
 export { Header };
