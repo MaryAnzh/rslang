@@ -10,7 +10,8 @@ import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
 import { applicationModel } from '../../../model/ApplicationModel';
 import { ErrorText } from '../../elements/errorText/errorText';
 import { Alert } from '../../elements/alert/alert';
-import { AppProperties } from '../../../interfaces/appProperties';
+import { Burger } from '../Burger/Burger';
+
 
 type HeaderState = {
   alertStyle: { display: string },
@@ -18,6 +19,7 @@ type HeaderState = {
   signIconClass: string,
   signBlockClass: { display: string },
   outStyle: { display: string },
+  burger: { display: string },
 }
 
 class Header extends React.Component {
@@ -31,15 +33,39 @@ class Header extends React.Component {
       signIconClass: 'header__sign-icon blocked',
       signBlockClass: { display: 'block' },
       outStyle: { display: 'none' },
+      burger: { display: 'none' },
     }
     this.authorizationUpDate = this.authorizationUpDate.bind(this);
     this.alertHiddenWrap = this.alertHiddenWrap.bind(this);
+    this.burgerUp = this.burgerUp.bind(this);
   }
 
   render() {
+    let greating = 'Добро пожаловать ' + applicationModel.currentUserName;
     return (
       <header className="header">
-        <Alert alertTwxt='Добро пожаловать' alertStyle={this.state.alertStyle} />
+        <div
+          className='header__hidden-burger-menu'
+          style={this.state.burger}
+        >
+          <li className="header__nav__link"></li>
+          <li>
+            <Link to="/" className="header__nav__link">Главная</Link>
+          </li>
+          <li>
+            <Link to="/textbook" className="header__nav__link">Учебник</Link>
+          </li>
+          <li>
+            <Link to="/games" className="header__nav__link">Игры</Link>
+          </li>
+          <li className={this.state.statisticsLinkClass}>
+            <Link to="/statistics" className="header__nav__link" >Статистика</Link>
+          </li>
+        </div>
+        <div className='header__burger'>
+          <Burger burgerUp={this.burgerUp} />
+        </div>
+        <Alert alertTwxt={greating} alertStyle={this.state.alertStyle} />
         <div id='headerForm' className='header__form'>
           <PopUp>
             <Cross />
@@ -80,13 +106,13 @@ class Header extends React.Component {
             onClick={(e) => authorizationAppModel.registerOnClick(e)} >Регистрация</li>
           <li
             style={this.state.outStyle}
-            onClick={(e) => { this.authorizationOut(e) } }
+            onClick={(e) => { this.authorizationOut(e) }}
           >Выйти</li>
           <li className={this.state.signIconClass}>
-            
+
             <img
-            src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/4e8ba3073aa691a28f7c0a0619cc32b350c31bf4/assets/svg/sign.svg"
-            alt='Sign In'></img>
+              src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/4e8ba3073aa691a28f7c0a0619cc32b350c31bf4/assets/svg/sign.svg"
+              alt='Sign In'></img>
           </li>
         </ul>
       </header>
@@ -117,6 +143,11 @@ class Header extends React.Component {
     applicationModel.isAuthorization = false;
     this.upDateUserState('none', 'block', 'blocked');
   }
+
+  async burgerUp(value: string) {
+    this.setState(this.state.burger = { display: value });
+  }
+
 }
 
 export { Header };
