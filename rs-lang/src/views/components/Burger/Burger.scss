@@ -1,0 +1,21 @@
+.burger-wrap {
+  position: absolute;
+
+  &__burger {
+  width: 30px;
+  height: 25px;
+  margin-top: 2rem;
+  position: absolute;
+  left: 9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 15;
+
+  &__line {
+    width: 30px;
+    height: 2px;
+    background: white;
+   }
+  }
+}
