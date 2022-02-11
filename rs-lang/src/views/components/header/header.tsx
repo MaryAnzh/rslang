@@ -44,6 +44,11 @@ class Header extends React.Component {
     let greating = 'Добро пожаловать ' + applicationModel.currentUserName;
     return (
       <header className="header">
+        <Logo />
+        <div className='header__burger'>
+          <Burger burgerUp={this.burgerUp} />
+        </div>
+        
         <div
           className='header__hidden-burger-menu'
           style={this.state.burger}
@@ -62,9 +67,7 @@ class Header extends React.Component {
             <Link to="/statistics" className="header__nav__link" >Статистика</Link>
           </li>
         </div>
-        <div className='header__burger'>
-          <Burger burgerUp={this.burgerUp} />
-        </div>
+       
         <Alert alertTwxt={greating} alertStyle={this.state.alertStyle} />
         <div id='headerForm' className='header__form'>
           <PopUp>
@@ -81,8 +84,6 @@ class Header extends React.Component {
             </div>
           </PopUp>
         </div>
-
-        <Logo />
         <ul className="header__nav">
           <li>
             <Link to="/" className="header__nav__link">Главная</Link>

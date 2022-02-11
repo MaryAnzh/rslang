@@ -27,6 +27,7 @@
     justify-content: space-between;
     background: #006DD9;
     border: 1px solid white;
+    justify-self: start;
 
     li {
       font-size: 1.5rem;
@@ -129,4 +130,18 @@
        width: 40%;
     }
   }
+}
+
+@media (max-width: 500px) {
+  .header {
+  &__sign {
+    flex-direction: column;
+    align-items: flex-end;
+
+    li {
+
+      padding-bottom: 1rem;
+    }
+  }
+}
 }
