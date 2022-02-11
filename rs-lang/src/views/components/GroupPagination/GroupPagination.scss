@@ -1,0 +1,92 @@
+@import '../../../css/variables';
+
+.group-pagination {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  background: $second-color-dark;
+  color: #fff;
+  font-size: 1.2rem;
+
+  &__btn {
+    height: 100%;
+    padding: 0 1.3rem;
+    border: none;
+    outline: none;
+    background: #0000;
+    font-size: 1.2rem;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:nth-child(2) {
+      background: #FFB140;
+      border-right: 1px dashed white;
+    }
+    
+    &:nth-child(3) {
+      background: #DEA854;
+      border-right: 1px dashed white;
+    }
+    
+    &:nth-child(4) {
+      background: #AE9B71;
+      border-right: 1px dashed white;
+    }
+    
+    &:nth-child(5) {
+      background: #818F8C;
+      border-right: 1px dashed white;
+    }
+    
+    &:nth-child(6) {
+      background: #66889C;
+      border-right: 1px dashed white;
+    }
+    
+    &:nth-child(7) {
+      background: #66889C;
+      border-right: 1px dashed white;
+    }
+    
+    &:nth-child(8) {
+      background: #006DD9;
+    }
+    
+    &:hover {
+      box-shadow: inset 0 0 6px rgba(10, 10, 10, 0.5), 0 0 6px rgba(65, 65, 65, 0.2);
+      outline-color: rgba(255, 255, 255, 0);
+      outline-offset: 15px;
+      text-shadow: 1px 1px 2px #2a4b58; 
+    }
+  }
+  
+  &__text {
+    height: 100%;
+    line-height: 3rem;
+    border-right: 1px dashed white;
+    padding: 0 1rem;
+  }
+  &__tooltip {
+    position: relative;
+
+    &:hover:after {
+      opacity: 1;
+    }
+
+    &::after {
+      z-index: 200;
+      opacity: 0;
+      content: "Сложные слова";
+      font-size: 0.9rem;
+      border-radius: 0.2rem;
+      padding: 0.5rem;
+      position: absolute;
+      background: #555;
+      color: #fff;
+      bottom: -3.5rem;
+      left: 1.5rem;
+      transform: translate(-50%);
+    }
+  }
+}

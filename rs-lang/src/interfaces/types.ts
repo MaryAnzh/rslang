@@ -47,3 +47,7 @@ export type PaginationProps = {
   downHandler: MouseEventHandler<HTMLButtonElement>;
   upHandler: MouseEventHandler<HTMLButtonElement>;
 }
+
+export type GroupPaginationProps = {
+  groupHandler: Function;
+}

@@ -10,6 +10,7 @@
 
   &__controls {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     background-image: linear-gradient(to right, #015AB3, #5382C0 52%, #87A8D4 83%, #8AAAD5 93%, #A5BDDC);
