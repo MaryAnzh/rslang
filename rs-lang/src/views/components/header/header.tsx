@@ -17,6 +17,7 @@ type HeaderState = {
   statisticsLinkClass: string,
   signIconClass: string,
   signBlockClass: { display: string },
+  outStyle: { display: string },
 }
 
 class Header extends React.Component {
@@ -29,6 +30,7 @@ class Header extends React.Component {
       statisticsLinkClass: 'header__nav__link blocked',
       signIconClass: 'header__sign-icon blocked',
       signBlockClass: { display: 'block' },
+      outStyle: { display: 'none' },
     }
     this.authorizationUpDate = this.authorizationUpDate.bind(this);
     this.alertHiddenWrap = this.alertHiddenWrap.bind(this);
@@ -76,7 +78,13 @@ class Header extends React.Component {
           <li
             style={this.state.signBlockClass}
             onClick={(e) => authorizationAppModel.registerOnClick(e)} >Регистрация</li>
-          <li className={this.state.signIconClass}><img
+          <li
+            style={this.state.outStyle}
+            onClick={(e) => { this.authorizationOut(e) } }
+          >Выйти</li>
+          <li className={this.state.signIconClass}>
+            
+            <img
             src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/4e8ba3073aa691a28f7c0a0619cc32b350c31bf4/assets/svg/sign.svg"
             alt='Sign In'></img>
           </li>
@@ -85,11 +93,12 @@ class Header extends React.Component {
     );
   }
 
-  upDateUserState() {
-    this.setState(this.state.alertStyle = { display: 'flex' });
-    this.setState(this.state.signBlockClass = { display: 'none' });
-    this.setState({ correct: this.state.signIconClass = 'header__sign-icon visible' });
-    this.setState({ correct: this.state.statisticsLinkClass = 'header__nav__lin visible' });
+  upDateUserState(a: string, b: string, c: string) {
+    this.setState(this.state.alertStyle = { display: a });
+    this.setState(this.state.signBlockClass = { display: b });
+    this.setState({ correct: this.state.signIconClass = 'header__sign-icon ' + c });
+    this.setState({ correct: this.state.statisticsLinkClass = 'header__nav__lin ' + c });
+    this.setState(this.state.outStyle = { display: a });
   }
 
   alertHidden() {
@@ -97,11 +106,16 @@ class Header extends React.Component {
   }
 
   async authorizationUpDate() {
-    this.upDateUserState();
+    this.upDateUserState('flex', 'none', 'visible');
   }
 
   async alertHiddenWrap() {
     this.alertHidden();
+  }
+
+  authorizationOut(e: React.MouseEvent<HTMLLIElement>) {
+    applicationModel.isAuthorization = false;
+    this.upDateUserState('none', 'block', 'blocked');
   }
 }
 
