@@ -5,18 +5,19 @@ import { AppProperties } from '../../../interfaces/appProperties';
 
 
 type CrossUpDateType = {
-  
+  crossId: string;  
 }
 
-class CrossUpDate extends React.Component {
-  constructor(props: AppProperties) {
-    super(props);
-}
+class CrossUpDate extends React.Component<CrossUpDateType> {
+  // constructor(props: CrossUpDateType) {
+  //   super(props);
+  // }
+
   render() {
     return (
       <div
         className='cross'
-      id='{ this.props.id }'>
+      id={ this.props.crossId }>
         <div className='cross__line-1'></div>
         <div className='cross__line-2'></div>
       </div>

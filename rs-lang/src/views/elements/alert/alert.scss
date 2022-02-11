@@ -1,0 +1,22 @@
+.alert {
+  display: none;
+  width: 18rem;
+  height: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  background: #e0ecf7;
+  border: 2px dashed #00488D;
+  border-radius: 10px;
+  top: 20%;
+  left: 50%;
+  position: absolute;
+  z-index: 10;
+
+  &__text {
+    color: #00488D;
+    text-align: center;
+    
+  }
+}
