@@ -15,10 +15,15 @@ type FormState = {
   errorText: string;
 }
 
-class RegisterForm extends React.Component {
+type RegisterFormProps = {
+  upDateHeader: Function;
+  alertHidden: Function;
+}
+
+class RegisterForm extends React.Component<RegisterFormProps> {
   state: FormState;
 
-  constructor(props: AppProperties) {
+  constructor(props: RegisterFormProps) {
     super(props);
     this.state = {
       name: '',
@@ -94,6 +99,10 @@ class RegisterForm extends React.Component {
     this.setState({ correct: this.state.password = '' });
   }
 
+  test() {
+    this.props.alertHidden();
+  }
+
   async getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
     if (this.state.name == '' || this.state.email === '' || this.state.password === '') {
       this.state.errorText = 'Заполните все поля';
@@ -108,8 +117,18 @@ class RegisterForm extends React.Component {
       applicationModel.currentPassword = this.state.password;
       applicationModel.currentUserName = this.state.name;
       let registerUser = await applicationModel.registerUser();
-      console.log('registerUser');
-      console.log(registerUser);
+      if (registerUser) {
+        const signIn = await applicationModel.signInUser();
+        if (signIn) {
+          authorizationAppModel.closeForm();
+          const greating = 'Регистрация прошла успешно. Добро пожаловать на сайт, ' + applicationModel.currentUserName;
+          this.props.upDateHeader(greating);
+          setTimeout(() => {
+            this.test();
+          }, 3000);
+          this.removeInputValue();
+        }
+      }
     }
   }
 

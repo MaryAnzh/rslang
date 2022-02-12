@@ -44,10 +44,13 @@ class ApplicationModel {
     try {
       const registerResponse: IUserRegisterResponse = await this.dataServ.registereUser(user);
       this.currentUserId = registerResponse.id;
+      this.currentUserName = registerResponse.email;
+      return true;
     } catch (error) {
       const serverError = error as Error;
       this.catchError(serverError);
       authorizationAppModel.errorMessage('register');
+      return false;
     }
   }
 

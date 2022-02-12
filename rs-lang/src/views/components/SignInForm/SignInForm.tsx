@@ -97,11 +97,11 @@ class SignInForm extends React.Component<SignInFormProps> {
       let signInUser = await applicationModel.signInUser();
       if (signInUser) {
         authorizationAppModel.closeForm();
-        await this.props.upDateHeader();
+        const greating = 'Добро пожаловать на сайт, ' + applicationModel.currentUserName;
+        await this.props.upDateHeader(greating);
         setTimeout(() => {
           this.test();
-          console.log('Таймаут сработал');
-        }, 2000);
+        }, 3000);
         this.removeInputValue();
       }
     }
