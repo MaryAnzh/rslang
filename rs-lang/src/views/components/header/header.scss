@@ -41,6 +41,23 @@
     li:nth-child(1){
       border-bottom: none;
     }
+
+    &__enclosed-burger {
+
+      &__arrow {
+        transform: rotate(0.75turn) translate(0, 2rem) scale(80%, 80%);
+
+        &:hover div {
+			     background: #FF9700;
+		      }
+
+		    &:active div {
+			    background: #fac679;
+		    }
+        
+      }
+
+    }
   }
 
   &__form {

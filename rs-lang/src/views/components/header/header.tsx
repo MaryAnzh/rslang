@@ -11,6 +11,7 @@ import { applicationModel } from '../../../model/ApplicationModel';
 import { ErrorText } from '../../elements/errorText/errorText';
 import { Alert } from '../../elements/alert/alert';
 import { Burger } from '../Burger/Burger';
+import { Arrow } from '../../elements/arrow/arrow';
 
 
 type HeaderState = {
@@ -43,6 +44,7 @@ class Header extends React.Component {
   }
 
   render() {
+    const arrow = 'header__hidden-burger-menu__enclosed-burger__arrow left-arrow';
     return (
       <header className="header">
         <Logo />
@@ -58,8 +60,9 @@ class Header extends React.Component {
           <li>
             <Link to="/" className="header__nav__link">Главная</Link>
           </li>
-          <li>
+          <li className='header__hidden-burger-menu__enclosed-burger'>
             <Link to="/textbook" className="header__nav__link">Учебник</Link>
+            <Arrow arrowClass={arrow} />
           </li>
           <li>
             <Link to="/games" className="header__nav__link">Игры</Link>
@@ -119,7 +122,7 @@ class Header extends React.Component {
               src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/4e8ba3073aa691a28f7c0a0619cc32b350c31bf4/assets/svg/sign.svg"
               alt='Sign In'></img>
             <p
-            style={ this.state.outStyle }
+              style={this.state.outStyle}
             > {applicationModel.currentUserName} </p>
           </li>
         </ul>
