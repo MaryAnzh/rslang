@@ -1,22 +1,19 @@
 import React from 'react';
 import { newDataService } from '../../../dataServer/dataService';
-import { TextBookState, WordCardProps, WordCardType } from '../../../interfaces/types';
+import { TextBookState } from '../../../interfaces/types';
 import { GroupPagination } from '../../components/GroupPagination/GroupPagination';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { WordCard } from '../../components/WordCard/WordCard';
 import './TextBook.scss';
 
 class TextBook extends React.Component {
-  page: number;
-
-  group: number;
+  bg: string;
 
   state: TextBookState;
 
   constructor(props: {}) {
     super(props);
-    this.page = 0;
-    this.group = 0;
+    this.bg = '#fcddb1';
     this.state = {
       words: [],
       page: 0,
@@ -36,9 +33,34 @@ class TextBook extends React.Component {
     }
   }
 
-  GroupHandler(group: number) {
+  GroupHandler(group: number, page: number = 0) {
+    switch (group) {
+      case 0:
+        this.bg = '#fcddb1';
+        break;
+      case 1:
+        this.bg = '#f0dab6';
+        break;
+      case 2:
+        this.bg = '#dbd3c0';
+        break;
+      case 3:
+        this.bg = '#c4cfcd';
+        break;
+      case 4:
+        this.bg = '#aebfca';
+        break;
+      case 5:
+        this.bg = '#c3d1df';
+        break;
+      case 6:
+        this.bg = '#abc1d8';
+        break;
+      default:
+        break;
+    }
     if (this.state.group !== group) {
-      newDataService.getWords(group, this.state.page).then(response => {
+      newDataService.getWords(group, page).then(response => {
         this.setState((prev: TextBookState) => {
           if (prev.words !== response) {
             return {
@@ -49,6 +71,7 @@ class TextBook extends React.Component {
       });
       this.setState(() => ({
         group: group,
+        page: page,
       }));
     }
   }
@@ -112,7 +135,7 @@ class TextBook extends React.Component {
               <Pagination downHandler={this.PageDownHandler} upHandler={this.PageUpHandler} page={this.state.page + 1}/>
               <GroupPagination groupHandler={this.GroupHandler}/>
             </div>
-            <div className='book-page-wrap__book-wrap__book'>
+            <div className='book-page-wrap__book-wrap__book' style={ { backgroundColor: this.bg } }>
               <div className='book-page-wrap__card-container'>
                 {words}
               </div>
