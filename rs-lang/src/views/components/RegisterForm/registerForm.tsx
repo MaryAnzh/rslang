@@ -32,7 +32,7 @@ class RegisterForm extends React.Component {
 
   render() {
     return (
-      
+
       <div className="register-form-wrap">
         <h2>Регистрация:</h2>
         <p className='form-error-on-click'>{this.state.errorText}</p>
@@ -73,9 +73,9 @@ class RegisterForm extends React.Component {
             autoComplete=''
           />
           <button type="button" onClick={(e) => { this.getUserDataOnClick(e) }}
-            // disabled={!this.state.formValid}
+          // disabled={!this.state.formValid}
           >Регистрация</button>
-          <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => authorizationAppModel.signInOnClick(e)}>Войти</span></p>
+          <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => this.navTosignInOnClick(e)}>Войти</span></p>
         </form>
       </div>
     );
@@ -86,6 +86,12 @@ class RegisterForm extends React.Component {
     this.state.errorText = '';
     this.setState(inputValue);
     this.setState({ correct: (this.state.errorText) });
+  }
+
+  removeInputValue() {
+    this.setState({ correct: this.state.name = '' });
+    this.setState({ correct: this.state.email = '' });
+    this.setState({ correct: this.state.password = '' });
   }
 
   async getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
@@ -102,9 +108,14 @@ class RegisterForm extends React.Component {
       applicationModel.currentPassword = this.state.password;
       applicationModel.currentUserName = this.state.name;
       let registerUser = await applicationModel.registerUser();
-      console.log(registerUser);
+      console.log('registerUser');
       console.log(registerUser);
     }
+  }
+
+  navTosignInOnClick(e: React.MouseEvent<HTMLElement>) {
+    authorizationAppModel.signInOnClick(e);
+    this.removeInputValue();
   }
 }
 

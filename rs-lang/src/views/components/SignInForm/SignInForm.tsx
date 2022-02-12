@@ -59,7 +59,7 @@ class SignInForm extends React.Component<SignInFormProps> {
           />
           <button type="button" onClick={(e) => { this.getUserDataOnClick(e) }}
           >Войти</button>
-          <p>Нет акаунта? <span onClick={(e) => authorizationAppModel.registerOnClick(e)}>
+          <p>Нет акаунта? <span onClick={(e) => this.navToRegisterFormOnClick(e)}>
             Зарегистрироваться</span></p>
         </form>
       </div>
@@ -75,6 +75,11 @@ class SignInForm extends React.Component<SignInFormProps> {
 
   test() {
     this.props.alertHidden();
+  }
+
+  removeInputValue() {
+    this.setState({ correct: this.state.email = '' });
+    this.setState({ correct: this.state.password = '' });
   }
 
   async getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
@@ -97,8 +102,14 @@ class SignInForm extends React.Component<SignInFormProps> {
           this.test();
           console.log('Таймаут сработал');
         }, 2000);
+        this.removeInputValue();
       }
     }
+  }
+
+  navToRegisterFormOnClick(e: React.MouseEvent<HTMLElement>) {
+    authorizationAppModel.registerOnClick(e);
+    this.removeInputValue();
   }
 }
 
