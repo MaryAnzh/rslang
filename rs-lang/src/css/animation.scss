@@ -1,0 +1,12 @@
+.test {
+  align-self: start;
+  padding-top: 1rem;
+  height: 10rem;
+  transition: 3s;
+  animation: open-list 1s fill-mode;
+}
+
+@keyframes open-list {
+  from {height: 2rem;}
+  to {height: 10rem;}
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import './header.scss';
+import '../../../css/animation.scss';
 import { Logo } from '../Logo/Logo';
 import { Link } from 'react-router-dom';
 import { Cross } from '../../elements/cross/cross';
@@ -22,6 +23,7 @@ type HeaderState = {
   outStyle: { display: string },
   burger: { display: string },
   alertGreating: string,
+  bookListANumatuin: { animation: string },
 }
 
 class Header extends React.Component {
@@ -37,6 +39,9 @@ class Header extends React.Component {
       outStyle: { display: 'none' },
       burger: { display: 'none' },
       alertGreating: '',
+      bookListANumatuin: {
+        animation: 'open-list 3s forwards',
+      },
     }
     this.authorizationUpDate = this.authorizationUpDate.bind(this);
     this.alertHiddenWrap = this.alertHiddenWrap.bind(this);
@@ -60,7 +65,11 @@ class Header extends React.Component {
           <li>
             <Link to="/" className="header__nav__link">Главная</Link>
           </li>
-          <li className='header__hidden-burger-menu__enclosed-burger'>
+          <li
+            className='header__hidden-burger-menu__enclosed-burger'
+            style={this.state.bookListANumatuin}
+            id='enclosed-burger'
+          >
             <Link to="/textbook" className="header__nav__link">Учебник</Link>
             <Arrow arrowClass={arrow} />
           </li>

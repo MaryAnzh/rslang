@@ -42,7 +42,13 @@
       border-bottom: none;
     }
 
+    #enclosed-burger {
+      align-items: start;
+    }
+
     &__enclosed-burger {
+      padding-top: 1rem;
+      
 
       &__arrow {
         transform: rotate(0.75turn) translate(0, 2rem) scale(80%, 80%);
