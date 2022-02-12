@@ -20,6 +20,7 @@ type HeaderState = {
   signBlockClass: { display: string },
   outStyle: { display: string },
   burger: { display: string },
+  alertGreating: string,
 }
 
 class Header extends React.Component {
@@ -34,6 +35,7 @@ class Header extends React.Component {
       signBlockClass: { display: 'block' },
       outStyle: { display: 'none' },
       burger: { display: 'none' },
+      alertGreating: '',
     }
     this.authorizationUpDate = this.authorizationUpDate.bind(this);
     this.alertHiddenWrap = this.alertHiddenWrap.bind(this);
@@ -41,14 +43,13 @@ class Header extends React.Component {
   }
 
   render() {
-    let greating = 'Добро пожаловать ' + applicationModel.currentUserName;
     return (
       <header className="header">
         <Logo />
         <div className='header__burger'>
           <Burger burgerUp={this.burgerUp} />
         </div>
-        
+
         <div
           className='header__hidden-burger-menu'
           style={this.state.burger}
@@ -67,14 +68,17 @@ class Header extends React.Component {
             <Link to="/statistics" className="header__nav__link" >Статистика</Link>
           </li>
         </div>
-       
-        <Alert alertTwxt={greating} alertStyle={this.state.alertStyle} />
+
+        <Alert alertTwxt={this.state.alertGreating} alertStyle={this.state.alertStyle} />
         <div id='headerForm' className='header__form'>
           <PopUp>
             <Cross />
             <ErrorText />
             <div id='register-form' className='register-wrap'>
-              <RegisterForm />
+              <RegisterForm
+                upDateHeader={this.authorizationUpDate}
+                alertHidden={this.alertHiddenWrap}
+              />
             </div>
             <div id='sign-in-form' className='sign-in-wrap'>
               <SignInForm
@@ -114,14 +118,18 @@ class Header extends React.Component {
             <img
               src="https://raw.githubusercontent.com/MaryAnzh/rslang-assets/4e8ba3073aa691a28f7c0a0619cc32b350c31bf4/assets/svg/sign.svg"
               alt='Sign In'></img>
+            <p
+            style={ this.state.outStyle }
+            > {applicationModel.currentUserName} </p>
           </li>
         </ul>
       </header>
     );
   }
 
-  upDateUserState(a: string, b: string, c: string) {
+  upDateUserState(a: string, b: string, c: string, alertGreating: string) {
     this.setState(this.state.alertStyle = { display: a });
+    this.setState({ correct: this.state.alertGreating = alertGreating })
     this.setState(this.state.signBlockClass = { display: b });
     this.setState({ correct: this.state.signIconClass = 'header__sign-icon ' + c });
     this.setState({ correct: this.state.statisticsLinkClass = 'header__nav__lin ' + c });
@@ -132,8 +140,8 @@ class Header extends React.Component {
     this.setState(this.state.alertStyle = { display: 'none' });
   }
 
-  async authorizationUpDate() {
-    this.upDateUserState('flex', 'none', 'visible');
+  async authorizationUpDate(alertGreating: string) {
+    this.upDateUserState('flex', 'none', 'visible', alertGreating);
   }
 
   async alertHiddenWrap() {
@@ -142,7 +150,7 @@ class Header extends React.Component {
 
   authorizationOut(e: React.MouseEvent<HTMLLIElement>) {
     applicationModel.isAuthorization = false;
-    this.upDateUserState('none', 'block', 'blocked');
+    this.upDateUserState('none', 'block', 'blocked', '');
   }
 
   async burgerUp(value: string) {

@@ -15,10 +15,15 @@ type FormState = {
   errorText: string;
 }
 
-class RegisterForm extends React.Component {
+type RegisterFormProps = {
+  upDateHeader: Function;
+  alertHidden: Function;
+}
+
+class RegisterForm extends React.Component<RegisterFormProps> {
   state: FormState;
 
-  constructor(props: AppProperties) {
+  constructor(props: RegisterFormProps) {
     super(props);
     this.state = {
       name: '',
@@ -32,7 +37,7 @@ class RegisterForm extends React.Component {
 
   render() {
     return (
-      
+
       <div className="register-form-wrap">
         <h2>Регистрация:</h2>
         <p className='form-error-on-click'>{this.state.errorText}</p>
@@ -73,9 +78,9 @@ class RegisterForm extends React.Component {
             autoComplete=''
           />
           <button type="button" onClick={(e) => { this.getUserDataOnClick(e) }}
-            // disabled={!this.state.formValid}
+          // disabled={!this.state.formValid}
           >Регистрация</button>
-          <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => authorizationAppModel.signInOnClick(e)}>Войти</span></p>
+          <p>Уже зарегистрированы? <span className='register-link' onClick={(e) => this.navTosignInOnClick(e)}>Войти</span></p>
         </form>
       </div>
     );
@@ -86,6 +91,16 @@ class RegisterForm extends React.Component {
     this.state.errorText = '';
     this.setState(inputValue);
     this.setState({ correct: (this.state.errorText) });
+  }
+
+  removeInputValue() {
+    this.setState({ correct: this.state.name = '' });
+    this.setState({ correct: this.state.email = '' });
+    this.setState({ correct: this.state.password = '' });
+  }
+
+  test() {
+    this.props.alertHidden();
   }
 
   async getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
@@ -102,9 +117,24 @@ class RegisterForm extends React.Component {
       applicationModel.currentPassword = this.state.password;
       applicationModel.currentUserName = this.state.name;
       let registerUser = await applicationModel.registerUser();
-      console.log(registerUser);
-      console.log(registerUser);
+      if (registerUser) {
+        const signIn = await applicationModel.signInUser();
+        if (signIn) {
+          authorizationAppModel.closeForm();
+          const greating = 'Регистрация прошла успешно. Добро пожаловать на сайт, ' + applicationModel.currentUserName;
+          this.props.upDateHeader(greating);
+          setTimeout(() => {
+            this.test();
+          }, 3000);
+          this.removeInputValue();
+        }
+      }
     }
+  }
+
+  navTosignInOnClick(e: React.MouseEvent<HTMLElement>) {
+    authorizationAppModel.signInOnClick(e);
+    this.removeInputValue();
   }
 }
 

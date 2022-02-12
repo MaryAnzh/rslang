@@ -59,7 +59,7 @@ class SignInForm extends React.Component<SignInFormProps> {
           />
           <button type="button" onClick={(e) => { this.getUserDataOnClick(e) }}
           >Войти</button>
-          <p>Нет акаунта? <span onClick={(e) => authorizationAppModel.registerOnClick(e)}>
+          <p>Нет акаунта? <span onClick={(e) => this.navToRegisterFormOnClick(e)}>
             Зарегистрироваться</span></p>
         </form>
       </div>
@@ -77,6 +77,11 @@ class SignInForm extends React.Component<SignInFormProps> {
     this.props.alertHidden();
   }
 
+  removeInputValue() {
+    this.setState({ correct: this.state.email = '' });
+    this.setState({ correct: this.state.password = '' });
+  }
+
   async getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
     if (this.state.email === '' || this.state.password === '') {
       this.state.classError = 'form-error-on-click';
@@ -92,13 +97,19 @@ class SignInForm extends React.Component<SignInFormProps> {
       let signInUser = await applicationModel.signInUser();
       if (signInUser) {
         authorizationAppModel.closeForm();
-        await this.props.upDateHeader();
+        const greating = 'Добро пожаловать на сайт, ' + applicationModel.currentUserName;
+        await this.props.upDateHeader(greating);
         setTimeout(() => {
           this.test();
-          console.log('Таймаут сработал');
-        }, 2000);
+        }, 3000);
+        this.removeInputValue();
       }
     }
+  }
+
+  navToRegisterFormOnClick(e: React.MouseEvent<HTMLElement>) {
+    authorizationAppModel.registerOnClick(e);
+    this.removeInputValue();
   }
 }
 

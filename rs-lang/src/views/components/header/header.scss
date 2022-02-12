@@ -109,8 +109,17 @@
   }
 
   &__sign-icon {
-    width: 30px;
-    height: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    pointer-events: none;
+    
+
+    img {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 5px;
+    }
   }
 }
 .register-wrap,
