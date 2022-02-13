@@ -38,6 +38,11 @@ class Header extends React.Component {
   isBooKSectionOpen = false;
 
   isGameSectionOpen = false;
+  
+  isNavBooKSectionOpen = false;
+
+  isNavGameSectionOpen = false;
+
 
   constructor(props: {}) {
     super(props);
@@ -54,8 +59,8 @@ class Header extends React.Component {
       gameListtAnimation: { animation: 'none' },
       bookSection: { display: 'none' },
       gameSection: { display: 'none' },
-      bookNavSection: { display: 'flex' },
-      gameNavSection: { display: 'flex' },
+      bookNavSection: { display: 'none' },
+      gameNavSection: { display: 'none' },
     }
     this.authorizationUpDate = this.authorizationUpDate.bind(this);
     this.alertHiddenWrap = this.alertHiddenWrap.bind(this);
@@ -148,20 +153,41 @@ class Header extends React.Component {
             <div className='header__nav__li__enclosed'>
               <div className='header__nav__li__enclosed__name'>
                 <Link to="/textbook">Учебник</Link>
-                <div className='header__nav__li__enclosed__name__arrow'>
+                <div className='header__nav__li__enclosed__name__arrow'
+                  onClick={(e) => { this.openNavBookSectionOnClick(e)}}>
                   <Arrow arrowClass={arrowNav} />
                 </div>
               </div>
+            </div>
+            <div
+              className='wrap-book-lists'
+              style={this.state.bookNavSection}>
+              <Link to="/textbook" className="wrap-book-lists__link">Уровень 1</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Уровень 2</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Уровень 3</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Уровень 4</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Уровень 5</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Уровень 6</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Сложные слова</Link>
             </div>
           </li>
           <li className='header__nav__li'>
             <div className='header__nav__li__enclosed'>
               <div className='header__nav__li__enclosed__name'>
                 <Link to="/games" className="header__nav__li__link">Игры</Link>
-                <div className='header__nav__li__enclosed__name__arrow'>
+                <div
+                  className='header__nav__li__enclosed__name__arrow'
+                  onClick={(e) => { this.openNavGameSectionOnClick(e) }}>
+
                   <Arrow arrowClass={arrowNav} />
                 </div>
               </div>
+            </div>
+            <div
+              className='wrap-game-lists'
+              style={this.state.gameNavSection}>
+              <Link to="/games" className="wrap-game-lists__link">Аудиовызов</Link>
+              <Link to="/games" className="wrap-game-lists__link">Спринт</Link>
             </div>
           </li>
           <li className='header__nav__li'>
@@ -247,6 +273,25 @@ class Header extends React.Component {
     }
   }
 
+  openNavBookSectionOnClick(r: React.MouseEvent<HTMLElement>) {
+    if (!this.isNavBooKSectionOpen) {
+      this.setState(this.state.bookNavSection = { display: 'flex' });
+      this.isNavBooKSectionOpen = true;
+    } else {
+      this.setState(this.state.bookNavSection = { display: 'none' });
+      this.isNavBooKSectionOpen = false;
+    }
+  }
+
+  openNavGameSectionOnClick(r: React.MouseEvent<HTMLElement>) {
+    if (!this.isNavGameSectionOpen) {
+      this.setState(this.state.gameNavSection = { display: 'flex' });
+      this.isNavGameSectionOpen = true;
+    } else {
+      this.setState(this.state.gameNavSection = { display: 'none' });
+      this.isNavGameSectionOpen = false;
+    }
+  }
 }
 
 export { Header };
