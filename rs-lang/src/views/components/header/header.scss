@@ -63,104 +63,6 @@
           }        
         }
       }
-
-      &__wrap-book-lists {
-        display: flex;
-        flex-direction: column;
-
-        &__link {
-          color: white;
-          font-size: 1.2rem;
-          text-decoration: none;
-          padding-left: 3rem;
-          width: calc(13rem - 2px);
-          height: 1.8rem;
-          display: flex;
-          align-items: center;
-          transition: 0.5s;
-          animation: open-section .2s;
-          animation-delay: .3s;
-          animation-fill-mode: forwards;
-          opacity: 0;
-      
-
-           &:hover {
-            font-size: 1.3rem;
-          }
-          &:active {
-            opacity: 0.5;
-          }
-        }
-
-        &__link:nth-child(1) {
-          background: #FFB140;
-        }
-
-        &__link:nth-child(2) {
-          background: #D39F4D;
-        }
-
-        &__link:nth-child(3) {
-          background: #AC8F59;
-        }
-
-        &__link:nth-child(4) {
-          background: #7E7C67;
-        }
-
-        &__link:nth-child(5) {
-          background: #506975;
-        }
-
-         &__link:nth-child(6) {
-          background: #285981;
-        }
-         &__link:nth-child(7) {
-          background: #022d58;
-        }
-
-
-      }
-
-      &__wrap-game-lists {
-        display: flex;
-        flex-direction: column;
-        
-        &__link {
-          color: white;
-          font-size: 1.2rem;
-          text-decoration: none;
-          padding-left: 3rem;
-          width: calc(13rem - 2px);
-          height: 1.8rem;
-          display: flex;
-          align-items: center;
-          transition: 0.5s;
-          animation: open-section .2s;
-          animation-delay: .3s;
-          animation-fill-mode: forwards;
-          opacity: 0;
-
-            &:hover {
-            font-size: 1.3rem;
-          }
-          &:active {
-            opacity: 0.5;
-          }
-
-          
-        }
-
-        &__link:nth-child(1) {
-          background: #AC8F59;
-        }
-
-        &__link:nth-child(2) {
-          background: #7E7C67;
-        }
-
-
-      }
     }
   }
 
@@ -304,3 +206,101 @@
   }
 }
 }
+
+ .wrap-book-lists {
+        display: flex;
+        flex-direction: column;
+
+        &__link {
+          color: white;
+          font-size: 1.2rem;
+          text-decoration: none;
+          padding-left: 3rem;
+          width: calc(13rem - 2px);
+          height: 1.8rem;
+          display: flex;
+          align-items: center;
+          transition: 0.5s;
+          animation: open-section .2s;
+          animation-delay: .3s;
+          animation-fill-mode: forwards;
+          opacity: 0;
+      
+
+           &:hover {
+            font-size: 1.3rem;
+          }
+          &:active {
+            opacity: 0.5;
+          }
+        }
+
+        &__link:nth-child(1) {
+          background: #FFB140;
+        }
+
+        &__link:nth-child(2) {
+          background: #D39F4D;
+        }
+
+        &__link:nth-child(3) {
+          background: #AC8F59;
+        }
+
+        &__link:nth-child(4) {
+          background: #7E7C67;
+        }
+
+        &__link:nth-child(5) {
+          background: #506975;
+        }
+
+         &__link:nth-child(6) {
+          background: #285981;
+        }
+         &__link:nth-child(7) {
+          background: #022d58;
+        }
+
+
+      }
+
+      .wrap-game-lists {
+        display: flex;
+        flex-direction: column;
+        
+        &__link {
+          color: white;
+          font-size: 1.2rem;
+          text-decoration: none;
+          padding-left: 3rem;
+          width: calc(13rem - 2px);
+          height: 1.8rem;
+          display: flex;
+          align-items: center;
+          transition: 0.5s;
+          animation: open-section .2s;
+          animation-delay: .3s;
+          animation-fill-mode: forwards;
+          opacity: 0;
+
+            &:hover {
+            font-size: 1.3rem;
+          }
+          &:active {
+            opacity: 0.5;
+          }
+
+          
+        }
+
+        &__link:nth-child(1) {
+          background: #AC8F59;
+        }
+
+        &__link:nth-child(2) {
+          background: #7E7C67;
+        }
+
+
+      }

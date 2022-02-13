@@ -28,6 +28,8 @@ type HeaderState = {
   gameListtAnimation: { animation: string },
   bookSection: { display: string, },
   gameSection: { display: string, },
+  bookNavSection: { display: string, },
+  gameNavSection: { display: string, },
 }
 
 class Header extends React.Component {
@@ -52,6 +54,8 @@ class Header extends React.Component {
       gameListtAnimation: { animation: 'none' },
       bookSection: { display: 'none' },
       gameSection: { display: 'none' },
+      bookNavSection: { display: 'flex' },
+      gameNavSection: { display: 'flex' },
     }
     this.authorizationUpDate = this.authorizationUpDate.bind(this);
     this.alertHiddenWrap = this.alertHiddenWrap.bind(this);
@@ -84,16 +88,16 @@ class Header extends React.Component {
               </div>
             </div>
             <div
-              className='enclosed-burger__wrap-book-lists'
+              className='wrap-book-lists'
               style={this.state.bookSection}>
 
-              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 1</Link>
-              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 2</Link>
-              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 3</Link>
-              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 4</Link>
-              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 5</Link>
-              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 6</Link>
-              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Сложные слова</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Уровень 1</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Уровень 2</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Уровень 3</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Уровень 4</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Уровень 5</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Уровень 6</Link>
+              <Link to="/textbook" className="wrap-book-lists__link">Сложные слова</Link>
             </div>
           </li>
           <li
@@ -105,12 +109,11 @@ class Header extends React.Component {
                 <Arrow arrowClass={arrow} />
               </div>
             </div>
-
             <div
-              className='enclosed-burger__wrap-game-lists'
+              className='wrap-game-lists'
               style={this.state.gameSection}>
-              <Link to="/games" className="enclosed-burger__wrap-game-lists__link">Аудиовызов</Link>
-              <Link to="/games" className="enclosed-burger__wrap-game-lists__link">Спринт</Link>
+              <Link to="/games" className="wrap-game-lists__link">Аудиовызов</Link>
+              <Link to="/games" className="wrap-game-lists__link">Спринт</Link>
             </div>
           </li>
           <li className='header__hidden-burger-menu__list'>
