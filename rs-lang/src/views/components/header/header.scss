@@ -207,12 +207,38 @@
     align-items: center;
     list-style: none;
 
-    &__link {
-      color: white;
+    &__li {
+
+      a {
+        color: white;
       text-decoration: none;
       cursor: pointer;
       font-size: 1.2em;
       list-style: none;
+      }
+      
+      &__enclosed {
+       
+        &__name {
+          display: flex;
+          align-items: center;
+
+          &__arrow {
+
+          transform: rotate(0.75turn) scale(60%, 60%);
+
+          &:hover div {
+            background: #FF9700;
+            }
+
+          &:active div {
+            background: #fac679;
+          }        
+        }
+        }
+
+      }
+
     }
   }
 

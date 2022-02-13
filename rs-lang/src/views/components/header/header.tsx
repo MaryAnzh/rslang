@@ -17,7 +17,8 @@ import { Arrow } from '../../elements/arrow/arrow';
 
 type HeaderState = {
   alertStyle: { display: string },
-  statisticsLinkClass: string,
+  statisticsBurgerLinkClass: string,
+  statisticsNavLinkClass: string,
   signIconClass: string,
   signBlockClass: { display: string },
   outStyle: { display: string },
@@ -40,7 +41,8 @@ class Header extends React.Component {
     super(props);
     this.state = {
       alertStyle: { display: 'none' },
-      statisticsLinkClass: 'header__hidden-burger-menu__list__link blocked',
+      statisticsBurgerLinkClass: 'header__hidden-burger-menu__list__link blocked',
+      statisticsNavLinkClass: 'header__nav__li__link blocked',
       signIconClass: 'header__sign-icon blocked',
       signBlockClass: { display: 'block' },
       outStyle: { display: 'none' },
@@ -58,6 +60,7 @@ class Header extends React.Component {
 
   render() {
     const arrow = 'enclosed-burger__wrap__arrow left-arrow';
+    const arrowNav = 'left-arrow';
     return (
       <header className="header">
         <Logo />
@@ -73,8 +76,7 @@ class Header extends React.Component {
           </li>
           <li
             className='header__hidden-burger-menu__list enclosed-burger'
-            style={this.state.bookListAnimation}
-            id='enclosed-burger'>
+            style={this.state.bookListAnimation}>
             <div className='enclosed-burger__wrap'>
               <Link to="/textbook" className="header__hidden-burger-menu__list__link">Учебник</Link>
               <div onClick={(e) => { this.openGameSectionOnClick(e) }}>
@@ -99,11 +101,11 @@ class Header extends React.Component {
             style={this.state.gameListtAnimation}>
             <div className='enclosed-burger__wrap'>
               <Link to="/games" className="header__hidden-burger-menu__list__link">Игры</Link>
-              <div onClick={(e)=> {this.openBookSectionOnClick(e)}}>
+              <div onClick={(e) => { this.openBookSectionOnClick(e) }}>
                 <Arrow arrowClass={arrow} />
-            </div>
               </div>
-              
+            </div>
+
             <div
               className='enclosed-burger__wrap-game-lists'
               style={this.state.gameSection}>
@@ -112,7 +114,7 @@ class Header extends React.Component {
             </div>
           </li>
           <li className='header__hidden-burger-menu__list'>
-            <Link to="/statistics" className={this.state.statisticsLinkClass} >Статистика</Link>
+            <Link to="/statistics" className={this.state.statisticsBurgerLinkClass} >Статистика</Link>
           </li>
         </div >
 
@@ -136,17 +138,31 @@ class Header extends React.Component {
           </PopUp>
         </div>
         <ul className="header__nav">
-          <li>
-            <Link to="/" className="header__nav__link">Главная</Link>
+          <li className='header__nav__li'>
+            <Link to="/" className="header__nav__li__link">Главная</Link>
           </li>
-          <li>
-            <Link to="/textbook" className="header__nav__link">Учебник</Link>
+          <li className='header__nav__li'>
+            <div className='header__nav__li__enclosed'>
+              <div className='header__nav__li__enclosed__name'>
+                <Link to="/textbook">Учебник</Link>
+                <div className='header__nav__li__enclosed__name__arrow'>
+                  <Arrow arrowClass={arrowNav} />
+                </div>
+              </div>
+            </div>
           </li>
-          <li>
-            <Link to="/games" className="header__nav__link">Игры</Link>
+          <li className='header__nav__li'>
+            <div className='header__nav__li__enclosed'>
+              <div className='header__nav__li__enclosed__name'>
+                <Link to="/games" className="header__nav__li__link">Игры</Link>
+                <div className='header__nav__li__enclosed__name__arrow'>
+                  <Arrow arrowClass={arrowNav} />
+                </div>
+              </div>
+            </div>
           </li>
-          <li className={this.state.statisticsLinkClass}>
-            <Link to="/statistics" className="header__nav__link" >Статистика</Link>
+          <li className='header__nav__li'>
+            <Link to="/statistics" className={this.state.statisticsNavLinkClass} >Статистика</Link>
           </li>
         </ul>
         <ul className="header__sign">
@@ -179,7 +195,7 @@ class Header extends React.Component {
     this.setState({ correct: this.state.alertGreating = alertGreating })
     this.setState(this.state.signBlockClass = { display: b });
     this.setState({ correct: this.state.signIconClass = 'header__sign-icon ' + c });
-    this.setState({ correct: this.state.statisticsLinkClass = 'header__nav__lin ' + c });
+    this.setState({ correct: this.state.statisticsBurgerLinkClass = 'header__nav__lin ' + c });
     this.setState(this.state.outStyle = { display: a });
   }
 
