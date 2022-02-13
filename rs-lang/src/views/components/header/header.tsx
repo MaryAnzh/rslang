@@ -247,6 +247,9 @@ class Header extends React.Component {
 
   async burgerUp(value: string) {
     this.setState(this.state.burger = { display: value });
+    this.setState(this.state.bookListAnimation = { animation: 'none' });
+    this.setState(this.state.gameListtAnimation = { animation: 'none' });
+
   }
 
   openBookSectionOnClick(e: React.MouseEvent<HTMLElement>) {
