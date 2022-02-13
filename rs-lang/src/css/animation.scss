@@ -6,7 +6,12 @@
   animation: open-list 1s fill-mode;
 }
 
-@keyframes open-list {
+@keyframes open-book-list {
   from {height: 2rem;}
   to {height: 16rem;}
+}
+
+@keyframes open-game-list {
+  from {height: 2rem;}
+  to {height: 7rem;}
 }

@@ -49,7 +49,7 @@
       display: flex;
       flex-direction: column;
 
-      &__wrap-book {
+      &__wrap {
         display: flex;
         margin-bottom: 5px;
 
@@ -66,7 +66,7 @@
         }
       }
 
-      &__wrap-lists {
+      &__wrap-book-lists {
         display: flex;
         flex-direction: column;
 
@@ -79,6 +79,14 @@
           height: 1.8rem;
           display: flex;
           align-items: center;
+          transition: 0.5s;
+
+           &:hover {
+            font-size: 1.3rem;
+          }
+          &:active {
+            opacity: 0.5;
+          }
         }
 
         &__link:nth-child(1) {
@@ -106,6 +114,42 @@
         }
          &__link:nth-child(7) {
           background: #022d58;
+        }
+
+
+      }
+
+      &__wrap-game-lists {
+        display: flex;
+        flex-direction: column;
+        
+        &__link {
+          color: white;
+          font-size: 1.2rem;
+          text-decoration: none;
+          padding-left: 3rem;
+          width: calc(13rem - 2px);
+          height: 1.8rem;
+          display: flex;
+          align-items: center;
+          transition: 0.5s;
+
+            &:hover {
+            font-size: 1.3rem;
+          }
+          &:active {
+            opacity: 0.5;
+          }
+
+          
+        }
+
+        &__link:nth-child(1) {
+          background: #AC8F59;
+        }
+
+        &__link:nth-child(2) {
+          background: #7E7C67;
         }
 
 

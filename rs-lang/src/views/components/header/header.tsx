@@ -24,6 +24,7 @@ type HeaderState = {
   burger: { display: string },
   alertGreating: string,
   bookListANumatuin: { animation: string },
+  gameListANumatuin: { animation: string },
 }
 
 class Header extends React.Component {
@@ -40,7 +41,10 @@ class Header extends React.Component {
       burger: { display: 'none' },
       alertGreating: '',
       bookListANumatuin: {
-        animation: 'open-list 3s forwards',
+        animation: 'open-book-list 3s forwards',
+      },
+      gameListANumatuin: {
+        animation: 'open-game-list 3s forwards',
       },
     }
     this.authorizationUpDate = this.authorizationUpDate.bind(this);
@@ -49,7 +53,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const arrow = 'enclosed-burger__wrap-book__arrow left-arrow';
+    const arrow = 'enclosed-burger__wrap__arrow left-arrow';
     return (
       <header className="header">
         <Logo />
@@ -67,22 +71,31 @@ class Header extends React.Component {
             className='header__hidden-burger-menu__list enclosed-burger'
             style={this.state.bookListANumatuin}
             id='enclosed-burger'>
-            <div className='enclosed-burger__wrap-book'>
+            <div className='enclosed-burger__wrap'>
               <Link to="/textbook" className="header__hidden-burger-menu__list__link">Учебник</Link>
               <Arrow arrowClass={arrow} />
             </div>
-            <div className='enclosed-burger__wrap-lists'>
-              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Уровень 1</Link>
-              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Уровень 2</Link>
-              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Уровень 3</Link>
-              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Уровень 4</Link>
-              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Уровень 5</Link>
-              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Уровень 6</Link>
-              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Сложные слова</Link>
+            <div className='enclosed-burger__wrap-book-lists'>
+              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 1</Link>
+              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 2</Link>
+              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 3</Link>
+              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 4</Link>
+              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 5</Link>
+              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 6</Link>
+              <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Сложные слова</Link>
             </div>
           </li>
-          <li className='header__hidden-burger-menu__list'>
-            <Link to="/games" className="header__hidden-burger-menu__list__link">Игры</Link>
+          <li
+            className='header__hidden-burger-menu__list enclosed-burger'
+            style={this.state.gameListANumatuin}>
+            <div className='enclosed-burger__wrap'>
+              <Link to="/games" className="header__hidden-burger-menu__list__link">Игры</Link>
+              <Arrow arrowClass={arrow} />
+            </div>
+            <div className='enclosed-burger__wrap-game-lists'>
+              <Link to="/games" className="enclosed-burger__wrap-game-lists__link">Аудиовызов</Link>
+              <Link to="/games" className="enclosed-burger__wrap-game-lists__link">Спринт</Link>
+            </div>
           </li>
           <li className='header__hidden-burger-menu__list'>
             <Link to="/statistics" className={this.state.statisticsLinkClass} >Статистика</Link>
