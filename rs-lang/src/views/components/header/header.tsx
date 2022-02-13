@@ -23,8 +23,8 @@ type HeaderState = {
   outStyle: { display: string },
   burger: { display: string },
   alertGreating: string,
-  bookListANumatuin: { animation: string },
-  gameListANumatuin: { animation: string },
+  bookListAnimation: { animation: string },
+  gameListtAnimation: { animation: string },
 }
 
 class Header extends React.Component {
@@ -40,10 +40,10 @@ class Header extends React.Component {
       outStyle: { display: 'none' },
       burger: { display: 'none' },
       alertGreating: '',
-      bookListANumatuin: {
+      bookListAnimation: {
         animation: 'open-book-list 3s forwards',
       },
-      gameListANumatuin: {
+      gameListtAnimation: {
         animation: 'open-game-list 3s forwards',
       },
     }
@@ -69,7 +69,7 @@ class Header extends React.Component {
           </li>          
           <li
             className='header__hidden-burger-menu__list enclosed-burger'
-            style={this.state.bookListANumatuin}
+            style={this.state.bookListAnimation}
             id='enclosed-burger'>
             <div className='enclosed-burger__wrap'>
               <Link to="/textbook" className="header__hidden-burger-menu__list__link">Учебник</Link>
@@ -87,7 +87,7 @@ class Header extends React.Component {
           </li>
           <li
             className='header__hidden-burger-menu__list enclosed-burger'
-            style={this.state.gameListANumatuin}>
+            style={this.state.gameListtAnimation}>
             <div className='enclosed-burger__wrap'>
               <Link to="/games" className="header__hidden-burger-menu__list__link">Игры</Link>
               <Arrow arrowClass={arrow} />
