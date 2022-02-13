@@ -5,6 +5,7 @@ import { authorizationAppModel } from './AuthorizationAppModel';
 import { ErrorText } from '../views/elements/errorText/errorText';
 import { JsxFlags } from 'typescript';
 
+
 class ApplicationModel {
   //принимаем данные
   dataServ: DataService;

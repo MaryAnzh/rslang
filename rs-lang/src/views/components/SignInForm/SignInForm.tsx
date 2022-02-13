@@ -82,7 +82,13 @@ class SignInForm extends React.Component<SignInFormProps> {
     this.setState({ correct: this.state.password = '' });
   }
 
+  upDateValue() {
+    this.setState({ correct: this.state.email });
+    this.setState({ correct: this.state.password });
+  }
+
   async getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
+    this.upDateValue();
     if (this.state.email === '' || this.state.password === '') {
       this.state.classError = 'form-error-on-click';
       this.state.errorText = 'Заполните все поля';

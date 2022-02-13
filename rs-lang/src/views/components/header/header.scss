@@ -7,39 +7,54 @@
   align-content: center;
   color: white;
 
-  li {
-    cursor: pointer;
-    color: white;
-    font-size: 1.2em;
-    list-style: none;
-
-    &:hover {
-      text-decoration: underline white;
-    }
-  }
-
   &__hidden-burger-menu {
     position: absolute;
     z-index: 10;
     width: 13rem;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: space-between;
     background: #006DD9;
     border: 1px solid white;
     justify-self: start;
 
-    li {
-      font-size: 1.5rem;
-      padding-left: 2rem;
-      height: 4rem;
+    &__list {
+      // padding-left: 2rem;
+      height: 3rem;
       display: flex;
-      align-items: center;
       border-bottom: 1px solid white;
+
+    &__link {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+        padding-top: 0.7rem;
+        padding-left: 1rem;
+      }
     }
 
     li:nth-child(1){
       border-bottom: none;
+    }
+
+    #enclosed-burger {
+      align-items: start;
+    }
+
+    .enclosed-burger {
+      display: flex;
+      flex-direction: column;
+
+      &__wrap {
+        display: flex;
+        width: 11rem;
+        justify-content: space-between;
+        margin-bottom: 5px;
+
+        &__arrow {
+        transform: rotate(0.75turn) translate(0, 2rem) scale(80%, 80%);     
+        }
+      }
     }
   }
 
@@ -79,16 +94,42 @@
 
   &__nav {
     width: 50%;
-    height: 100%;
-    padding-top: 1rem;
+    padding-top: 2rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     list-style: none;
+    
+    &__li:nth-child(1){
+      width: 20%;
+    }
 
-    &__link {
+    &__li {
+      width: 26%;
+
+      a {
       color: white;
       text-decoration: none;
+      cursor: pointer;
+      font-size: 1.2em;
+      list-style: none;
+      }
+      
+      &__enclosed {
+       
+        &__name {
+          display: flex;
+
+          &__arrow {
+          transform: rotate(0.75turn) scale(60%, 60%) translate(50%, 0%);
+          opacity: 0.7;
+          
+            &:hover duv {
+              opacity: 1;
+            }          
+        }
+      }
+
+      }
     }
   }
 
@@ -154,3 +195,98 @@
   }
 }
 }
+
+ .wrap-book-lists {
+        display: flex;
+        flex-direction: column;
+
+        &__link {
+          color: white;
+          font-size: 1.2rem;
+          text-decoration: none;
+          padding-left: 3rem;
+          width: calc(13rem - 2px);
+          height: 1.8rem;
+          display: flex;
+          align-items: center;
+          transition: 0.5s;
+          animation: open-section .2s;
+          animation-delay: .3s;
+          animation-fill-mode: forwards;
+          opacity: 0;
+      
+
+           &:hover {
+            font-size: 1.3rem;
+          }
+          &:active {
+            opacity: 0.5;
+          }
+        }
+
+        &__link:nth-child(1) {
+          background: #FFB140;
+        }
+
+        &__link:nth-child(2) {
+          background: #D39F4D;
+        }
+
+        &__link:nth-child(3) {
+          background: #AC8F59;
+        }
+
+        &__link:nth-child(4) {
+          background: #7E7C67;
+        }
+
+        &__link:nth-child(5) {
+          background: #506975;
+        }
+
+         &__link:nth-child(6) {
+          background: #285981;
+        }
+
+         &__link:nth-child(7) {
+          background: #022d58;
+        }
+      }
+
+      .wrap-game-lists {
+        display: flex;
+        flex-direction: column;
+        
+        &__link {
+          color: white;
+          font-size: 1.2rem;
+          text-decoration: none;
+          padding-left: 3rem;
+          width: calc(13rem - 2px);
+          height: 1.8rem;
+          display: flex;
+          align-items: center;
+          transition: 0.5s;
+          animation: open-section .2s;
+          animation-delay: .3s;
+          animation-fill-mode: forwards;
+          opacity: 0;
+
+            &:hover {
+            font-size: 1.3rem;
+          }
+          &:active {
+            opacity: 0.5;
+          }
+        }
+
+        &__link:nth-child(1) {
+          background: #AC8F59;
+        }
+
+        &__link:nth-child(2) {
+          background: #7E7C67;
+        }
+
+
+      }
