@@ -25,10 +25,14 @@ type HeaderState = {
   alertGreating: string,
   bookListAnimation: { animation: string },
   gameListtAnimation: { animation: string },
+  bookSection: { display: string, },
+  gameSection: { display: string, },
 }
 
 class Header extends React.Component {
   state: HeaderState;
+
+  isBooKSectionOpen = false;
 
   constructor(props: {}) {
     super(props);
@@ -40,16 +44,15 @@ class Header extends React.Component {
       outStyle: { display: 'none' },
       burger: { display: 'none' },
       alertGreating: '',
-      bookListAnimation: {
-        animation: 'open-book-list 3s forwards',
-      },
-      gameListtAnimation: {
-        animation: 'open-game-list 3s forwards',
-      },
+      bookListAnimation: { animation: 'none' },
+      gameListtAnimation: { animation: 'none' },
+      bookSection: { display: 'none' },
+      gameSection: { display: 'none' },
     }
     this.authorizationUpDate = this.authorizationUpDate.bind(this);
     this.alertHiddenWrap = this.alertHiddenWrap.bind(this);
     this.burgerUp = this.burgerUp.bind(this);
+    this.openBookSectionOnClick = this.openBookSectionOnClick.bind(this);
   }
 
   render() {
@@ -66,16 +69,22 @@ class Header extends React.Component {
           <li className="header__hidden-burger-menu__list"></li>
           <li className='header__hidden-burger-menu__list'>
             <Link to="/" className="header__hidden-burger-menu__list__link">Главная</Link>
-          </li>          
+          </li>
           <li
             className='header__hidden-burger-menu__list enclosed-burger'
             style={this.state.bookListAnimation}
             id='enclosed-burger'>
             <div className='enclosed-burger__wrap'>
               <Link to="/textbook" className="header__hidden-burger-menu__list__link">Учебник</Link>
-              <Arrow arrowClass={arrow} />
+              <Arrow
+                arrowClass={arrow}
+                openSection={this.openBookSectionOnClick}
+              />
             </div>
-            <div className='enclosed-burger__wrap-book-lists'>
+            <div
+              className='enclosed-burger__wrap-book-lists'
+              style={this.state.bookSection}>
+
               <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 1</Link>
               <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 2</Link>
               <Link to="/textbook" className="enclosed-burger__wrap-book-lists__link">Уровень 3</Link>
@@ -90,9 +99,13 @@ class Header extends React.Component {
             style={this.state.gameListtAnimation}>
             <div className='enclosed-burger__wrap'>
               <Link to="/games" className="header__hidden-burger-menu__list__link">Игры</Link>
-              <Arrow arrowClass={arrow} />
+              <Arrow
+                arrowClass={arrow}
+                openSection={this.openBookSectionOnClick} />
             </div>
-            <div className='enclosed-burger__wrap-game-lists'>
+            <div
+              className='enclosed-burger__wrap-game-lists'
+              style={this.state.gameSection}>
               <Link to="/games" className="enclosed-burger__wrap-game-lists__link">Аудиовызов</Link>
               <Link to="/games" className="enclosed-burger__wrap-game-lists__link">Спринт</Link>
             </div>
@@ -190,6 +203,19 @@ class Header extends React.Component {
     this.setState(this.state.burger = { display: value });
   }
 
+  openBookSectionOnClick() {
+    if (this.isBooKSectionOpen) {
+      this.isBooKSectionOpen = false;
+      this.setState(this.state.bookListAnimation = { animation: 'close-book-list .3s' });
+      this.setState(this.state.bookSection = { display: 'none' });
+    } else {
+      this.isBooKSectionOpen = true;
+      this.setState(this.state.bookListAnimation = { animation: 'open-book-list .3s forwards' });
+      this.setState(this.state.bookSection = { display: 'flex' });
+
+    }
+
+  }
 }
 
 export { Header };
