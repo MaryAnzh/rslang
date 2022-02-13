@@ -34,6 +34,8 @@ class Header extends React.Component {
 
   isBooKSectionOpen = false;
 
+  isGameSectionOpen = false;
+
   constructor(props: {}) {
     super(props);
     this.state = {
@@ -52,7 +54,6 @@ class Header extends React.Component {
     this.authorizationUpDate = this.authorizationUpDate.bind(this);
     this.alertHiddenWrap = this.alertHiddenWrap.bind(this);
     this.burgerUp = this.burgerUp.bind(this);
-    this.openBookSectionOnClick = this.openBookSectionOnClick.bind(this);
   }
 
   render() {
@@ -76,10 +77,9 @@ class Header extends React.Component {
             id='enclosed-burger'>
             <div className='enclosed-burger__wrap'>
               <Link to="/textbook" className="header__hidden-burger-menu__list__link">Учебник</Link>
-              <Arrow
-                arrowClass={arrow}
-                openSection={this.openBookSectionOnClick}
-              />
+              <div onClick={(e) => { this.openGameSectionOnClick(e) }}>
+                <Arrow arrowClass={arrow} />
+              </div>
             </div>
             <div
               className='enclosed-burger__wrap-book-lists'
@@ -99,10 +99,11 @@ class Header extends React.Component {
             style={this.state.gameListtAnimation}>
             <div className='enclosed-burger__wrap'>
               <Link to="/games" className="header__hidden-burger-menu__list__link">Игры</Link>
-              <Arrow
-                arrowClass={arrow}
-                openSection={this.openBookSectionOnClick} />
+              <div onClick={(e)=> {this.openBookSectionOnClick(e)}}>
+                <Arrow arrowClass={arrow} />
             </div>
+              </div>
+              
             <div
               className='enclosed-burger__wrap-game-lists'
               style={this.state.gameSection}>
@@ -113,7 +114,7 @@ class Header extends React.Component {
           <li className='header__hidden-burger-menu__list'>
             <Link to="/statistics" className={this.state.statisticsLinkClass} >Статистика</Link>
           </li>
-        </div>
+        </div >
 
         <Alert alertTwxt={this.state.alertGreating} alertStyle={this.state.alertStyle} />
         <div id='headerForm' className='header__form'>
@@ -169,7 +170,7 @@ class Header extends React.Component {
             > {applicationModel.currentUserName} </p>
           </li>
         </ul>
-      </header>
+      </header >
     );
   }
 
@@ -203,7 +204,19 @@ class Header extends React.Component {
     this.setState(this.state.burger = { display: value });
   }
 
-  openBookSectionOnClick() {
+  openBookSectionOnClick(e: React.MouseEvent<HTMLElement>) {
+    if (this.isGameSectionOpen) {
+      this.isGameSectionOpen = false;
+      this.setState(this.state.gameListtAnimation = { animation: 'close-game-list .3s' });
+      this.setState(this.state.gameSection = { display: 'none' });
+    } else {
+      this.isGameSectionOpen = true;
+      this.setState(this.state.gameListtAnimation = { animation: 'open-game-list .3s forwards' });
+      this.setState(this.state.gameSection = { display: 'flex' });
+    }
+  }
+
+  openGameSectionOnClick(e: React.MouseEvent<HTMLElement>) {
     if (this.isBooKSectionOpen) {
       this.isBooKSectionOpen = false;
       this.setState(this.state.bookListAnimation = { animation: 'close-book-list .3s' });
@@ -212,10 +225,9 @@ class Header extends React.Component {
       this.isBooKSectionOpen = true;
       this.setState(this.state.bookListAnimation = { animation: 'open-book-list .3s forwards' });
       this.setState(this.state.bookSection = { display: 'flex' });
-
     }
-
   }
+
 }
 
 export { Header };

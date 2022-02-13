@@ -136,6 +136,10 @@
           display: flex;
           align-items: center;
           transition: 0.5s;
+          animation: open-section .2s;
+          animation-delay: .3s;
+          animation-fill-mode: forwards;
+          opacity: 0;
 
             &:hover {
             font-size: 1.3rem;
