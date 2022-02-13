@@ -33,7 +33,7 @@ class Header extends React.Component {
     super(props);
     this.state = {
       alertStyle: { display: 'none' },
-      statisticsLinkClass: 'header__nav__link blocked',
+      statisticsLinkClass: 'header__hidden-burger-menu__list__link blocked',
       signIconClass: 'header__sign-icon blocked',
       signBlockClass: { display: 'block' },
       outStyle: { display: 'none' },
@@ -49,35 +49,43 @@ class Header extends React.Component {
   }
 
   render() {
-    const arrow = 'header__hidden-burger-menu__enclosed-burger__arrow left-arrow';
+    const arrow = 'enclosed-burger__wrap-book__arrow left-arrow';
     return (
       <header className="header">
         <Logo />
         <div className='header__burger'>
           <Burger burgerUp={this.burgerUp} />
         </div>
-
         <div
           className='header__hidden-burger-menu'
-          style={this.state.burger}
-        >
-          <li className="header__nav__link"></li>
-          <li>
-            <Link to="/" className="header__nav__link">Главная</Link>
-          </li>
+          style={this.state.burger}>
+          <li className="header__hidden-burger-menu__list"></li>
+          <li className='header__hidden-burger-menu__list'>
+            <Link to="/" className="header__hidden-burger-menu__list__link">Главная</Link>
+          </li>          
           <li
-            className='header__hidden-burger-menu__enclosed-burger'
+            className='header__hidden-burger-menu__list enclosed-burger'
             style={this.state.bookListANumatuin}
-            id='enclosed-burger'
-          >
-            <Link to="/textbook" className="header__nav__link">Учебник</Link>
-            <Arrow arrowClass={arrow} />
+            id='enclosed-burger'>
+            <div className='enclosed-burger__wrap-book'>
+              <Link to="/textbook" className="header__hidden-burger-menu__list__link">Учебник</Link>
+              <Arrow arrowClass={arrow} />
+            </div>
+            <div className='enclosed-burger__wrap-lists'>
+              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Уровень 1</Link>
+              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Уровень 2</Link>
+              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Уровень 3</Link>
+              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Уровень 4</Link>
+              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Уровень 5</Link>
+              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Уровень 6</Link>
+              <Link to="/textbook" className="enclosed-burger__wrap-lists__link">Сложные слова</Link>
+            </div>
           </li>
-          <li>
-            <Link to="/games" className="header__nav__link">Игры</Link>
+          <li className='header__hidden-burger-menu__list'>
+            <Link to="/games" className="header__hidden-burger-menu__list__link">Игры</Link>
           </li>
-          <li className={this.state.statisticsLinkClass}>
-            <Link to="/statistics" className="header__nav__link" >Статистика</Link>
+          <li className='header__hidden-burger-menu__list'>
+            <Link to="/statistics" className={this.state.statisticsLinkClass} >Статистика</Link>
           </li>
         </div>
 
