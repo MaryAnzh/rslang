@@ -6,36 +6,21 @@ import { SettingPanel } from '../../elements/settingPanel/settingPanel';
 
 class Games extends React.Component {
   render() {
-    if (audioCallPageModel.isSetting) {
-      return (
-        <main className="main">
-          <div className='games-page-wrap'>
-            <h1>А У Д И О  В Ы З О В</h1>
-            <div className='games-page-wrap__games-wrap'>
-              <SettingPanel />
-              <div className='games-page-wrap__games-wrap__audio-call'>
-                <h2>Аудиовызов</h2>
-                <div className='games-page-wrap__games-wrap__audio-call__game-start'>Играть</div>
-              </div>
+    return (
+      <main className="main">
+        <div className='games-page-wrap'>
+          <h1>И Г Р Ы</h1>
+          <div className='games-page-wrap__games-wrap'>
+            <SettingPanel />
+            <div className='games-page-wrap__games-wrap__audio-call'>
+              <h2>Игра</h2>
+              <div className='games-page-wrap__games-wrap__audio-call__game-start'>Играть</div>
             </div>
           </div>
-        </main >
-      );
-    } else {
-      return (
-        <main className="main">
-          <div className='games-page-wrap'>
-            <h1>А У Д И О  В Ы З О В</h1>
-            <div className='games-page-wrap__games-wrap'>
-              Game
-            </div>
-          </div>
-        </main >
-      );
-    }
+        </div>
+      </main >
+    );
   }
 }
-//экспорт для функции
-//export default Header
-//экспорт для класса
+
 export { Games };

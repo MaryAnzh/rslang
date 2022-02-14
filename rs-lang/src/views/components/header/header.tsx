@@ -114,16 +114,17 @@ class Header extends React.Component<HeaderProps> {
           <li
             className='header__hidden-burger-menu__list enclosed-burger'
             style={this.state.gameListtAnimation}>
-            <div className='enclosed-burger__wrap'>
-              <Link to="/games" className="header__hidden-burger-menu__list__link">Игры</Link>
-              <div onClick={(e) => { this.openBookSectionOnClick(e) }}>
+            <div className='enclosed-burger__wrap'
+              onClick={(e) => { this.openBookSectionOnClick(e) }}>
+              <a className="header__hidden-burger-menu__list__link">Игры</a>
+              <div>
                 <Arrow arrowClass={arrow} />
               </div>
             </div>
             <div
               className='wrap-game-lists'
               style={this.state.gameSection}>
-              <Link to="/games" className="wrap-game-lists__link">Аудиовызов</Link>
+              <Link to="/audiocall" className="wrap-game-lists__link">Аудиовызов</Link>
               <Link to="/games" className="wrap-game-lists__link">Спринт</Link>
             </div>
           </li>
@@ -178,12 +179,12 @@ class Header extends React.Component<HeaderProps> {
             </div>
           </li>
           <li className='header__nav__li'>
-            <div className='header__nav__li__enclosed'>
+            <div className='header__nav__li__enclosed'
+              onClick={(e) => { this.openNavGameSectionOnClick(e) }}>
+
               <div className='header__nav__li__enclosed__name'>
                 <Link to="/games" className="header__nav__li__link">Игры</Link>
-                <div
-                  className='header__nav__li__enclosed__name__arrow'
-                  onClick={(e) => { this.openNavGameSectionOnClick(e) }}>
+                <div className='header__nav__li__enclosed__name__arrow'>
 
                   <Arrow arrowClass={arrowNav} />
                 </div>
@@ -192,7 +193,7 @@ class Header extends React.Component<HeaderProps> {
             <div
               className='wrap-game-lists'
               style={this.state.gameNavSection}>
-              <Link to="/games" className="wrap-game-lists__link">Аудиовызов</Link>
+              <Link to="/audiocall" className="wrap-game-lists__link">Аудиовызов</Link>
               <Link to="/games" className="wrap-game-lists__link">Спринт</Link>
             </div>
           </li>
