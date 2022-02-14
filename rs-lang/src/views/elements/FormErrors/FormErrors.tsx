@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react';
 import './formErrors.scss';
-import { RegisterForm } from '../../components/RegisterForm/registerForm';
-import { AppProperties } from '../../../interfaces/appProperties';
 import { applicationModel } from '../../../model/ApplicationModel';
 import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
 
