@@ -7,7 +7,11 @@ import { CrossUpDate } from '../../elements/crossUpDate/crossUpDate';
 import { HeardsError } from '../../audioCallElements/heardsErrior/heardsError';
 
 type AudioCallGameType = {
-  heardFill: string,
+  heardFill_1: string,
+  heardFill_2: string,
+  heardFill_3: string,
+  heardFill_4: string,
+  heardFill_5: string,
   heardStroke: string,
 }
 
@@ -17,7 +21,11 @@ class AudioCallGame extends React.Component {
   constructor(props: {}) {
     super(props);
     this.state = {
-      heardFill: '#000000',
+      heardFill_1: 'none',
+      heardFill_2: '#000000',
+      heardFill_3: '#000000',
+      heardFill_4: '#000000',
+      heardFill_5: '#000000',
       heardStroke: '#000000',
     }
   }
@@ -53,11 +61,11 @@ class AudioCallGame extends React.Component {
               </div>
               <div className='games-page-wrap__game-wrap__audio-call'>
                 <div className='games-page-wrap__game-wrap__audio-call__heards-error'>
-                  <HeardsError heardFill={this.state.heardFill} heardStroke={this.state.heardStroke} />
-                  <HeardsError heardFill={this.state.heardFill} heardStroke={this.state.heardStroke} />
-                  <HeardsError heardFill={this.state.heardFill} heardStroke={this.state.heardStroke} />
-                  <HeardsError heardFill={this.state.heardFill} heardStroke={this.state.heardStroke} />
-                  <HeardsError heardFill={this.state.heardFill} heardStroke={this.state.heardStroke} />
+                  <HeardsError heardFill={this.state.heardFill_1} heardStroke={this.state.heardStroke} />
+                  <HeardsError heardFill={this.state.heardFill_2} heardStroke={this.state.heardStroke} />
+                  <HeardsError heardFill={this.state.heardFill_3} heardStroke={this.state.heardStroke} />
+                  <HeardsError heardFill={this.state.heardFill_4} heardStroke={this.state.heardStroke} />
+                  <HeardsError heardFill={this.state.heardFill_5} heardStroke={this.state.heardStroke} />
                   
                 </div>
 
