@@ -10,6 +10,7 @@ class Games extends React.Component {
           <div className='games-page-wrap__games-wrap'>
             <div className='games-page-wrap__games-wrap__audio-call'>
               <h2>Аудиовызов</h2>
+              <div className='games-page-wrap__games-wrap__audio-call__game-start'>Играть</div>
             </div>
             <div className='games-page-wrap__games-wrap__setting'>
               <div className='games-page-wrap__games-wrap__setting__sections'>
@@ -53,7 +54,7 @@ class Games extends React.Component {
             </div>
             <div className='games-page-wrap__games-wrap__sprint'>
               <h2>Спринт</h2>
-
+              <div className='games-page-wrap__games-wrap__audio-call__game-start'>Играть</div>
             </div>
           </div>
         </div>
