@@ -8,7 +8,7 @@ interface IAudioCallWords {
 class AudioCallGameModel {
   words: IAudioCallWords[];
 
-  isSetting = false;
+  isSetting = true;
 
   constructor(words: IAudioCallWords[]) {
     this.words = words;

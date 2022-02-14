@@ -185,7 +185,6 @@ class Header extends React.Component<HeaderProps> {
               <div className='header__nav__li__enclosed__name'>
                 <Link to="/games" className="header__nav__li__link">Игры</Link>
                 <div className='header__nav__li__enclosed__name__arrow'>
-
                   <Arrow arrowClass={arrowNav} />
                 </div>
               </div>
