@@ -4,10 +4,26 @@ import playPic from '../../../img/svg/play.svg';
 import pausePic from '../../../img/svg/pause.svg';
 import addPic from '../../../img/svg/add.svg';
 import applyPic from '../../../img/svg/check.svg';
-import { CardButtonsProps, CardButtonsState } from '../../../interfaces/types';
+import { ButtonsGlobState, CardButtonsProps, CardButtonsState } from '../../../interfaces/types';
 import { soundModel } from '../../../model/SoundModel';
-import { applicationModel } from '../../../model/ApplicationModel';
+import { connect, ConnectedProps } from 'react-redux';
 
+
+
+
+const mapStateToProps = (state: ButtonsGlobState, ownProps: CardButtonsProps ) => {
+  return {
+    soundUrls: ownProps.soundUrls,
+    isAutorize: state.buttons.isAutorize,
+  }
+};
+
+const connector = connect(mapStateToProps, null);
+// const connector = connect(null, null);
+
+// type PropsFromRedux = ConnectedProps<typeof connector>;
+
+// type Props = PropsFromRedux & CardButtonsProps;
 
 class CardButtons extends React.Component<CardButtonsProps> {
   state: CardButtonsState;
@@ -40,15 +56,16 @@ class CardButtons extends React.Component<CardButtonsProps> {
   }
 
   render() {
+    // console.log('PROPS ' + JSON.stringify(this.props));
     return (
       <div className="card-buttons">
-        <button onClick={this.handleClick} className={applicationModel.isAuthorization ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-fix'}>
+        <button onClick={this.handleClick} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-fix'}>
           <img  src={this.state.isPlay ? pausePic : playPic} alt="sound" className="card-buttons__pic"/>
         </button>
-        <button className={applicationModel.isAuthorization ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
+        <button className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
           <img src={addPic} alt="add" className="card-buttons__pic"/>
         </button>
-        <button className={applicationModel.isAuthorization ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
+        <button className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
           <img src={applyPic} alt="apply" className="card-buttons__pic"/>
         </button>
       </div>
@@ -56,4 +73,9 @@ class CardButtons extends React.Component<CardButtonsProps> {
   }
 }
 
-export { CardButtons };
+
+
+const CARD_BUTTONS_W = connector(CardButtons);
+export default CARD_BUTTONS_W;
+
+// export { CardButtons };

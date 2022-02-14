@@ -40,6 +40,7 @@ export type CardButtonsState = {
 
 export type CardButtonsProps = {
   soundUrls: string[];
+  isAutorize?: boolean;
 }
 
 export type PaginationProps = {
@@ -51,3 +52,12 @@ export type PaginationProps = {
 export type GroupPaginationProps = {
   groupHandler: Function;
 }
+
+export type ButtonsGlobState = { 
+  buttons: { isAutorize: boolean }
+}
+
+export type ActionType = { 
+  type: string,
+  value: boolean
+} 

@@ -1,7 +1,8 @@
 import React from 'react';
 import { newDataService } from '../../../dataServer/dataService';
 import { WordCardProps } from '../../../interfaces/types';
-import { CardButtons } from '../CardButton/CardButtons';
+import CARD_BUTTONS_W from '../CardButton/CardButtons';
+// import { CardButtons } from '../CardButton/CardButtons'; 
 import './WordCard.scss';
 
 class WordCard extends React.Component<WordCardProps> {
@@ -31,7 +32,7 @@ class WordCard extends React.Component<WordCardProps> {
             <p className='word-card__text word-card__second-text'>{this.props.word.textExampleTranslate}</p>
           </div>
         </div>
-        <CardButtons soundUrls={arrUrls}/>
+        <CARD_BUTTONS_W soundUrls={arrUrls} isAutorize={false}/>
       </div>
     );
   }    
