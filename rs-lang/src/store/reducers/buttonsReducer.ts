@@ -8,7 +8,6 @@ const initialState = {
 
 // eslint-disable-next-line @typescript-eslint/default-param-last
 export const buttonsReducer = (state = initialState, action: ActionType) => {
-  // console.log('reducer action: ' + JSON.stringify(action));
   switch (action.type) {
     case UPDATE:
       return { ...state, isAutorize: action.value }
