@@ -24,7 +24,6 @@ class TextBook extends React.Component {
     this.GroupHandler = this.GroupHandler.bind(this);
   }
 
-
   shouldComponentUpdate(nextProps: {}, nextState: TextBookState) {
     if (nextState.words !== this.state.words) {
       return true;

@@ -12,6 +12,8 @@ import { applicationModel } from '../../../model/ApplicationModel';
 import { ErrorText } from '../../elements/errorText/errorText';
 import { Alert } from '../../elements/alert/alert';
 import { Burger } from '../Burger/Burger';
+import { connect } from 'react-redux';
+import { updateAction } from '../../../store/actionCreators/actionCreators';
 import { Arrow } from '../../elements/arrow/arrow';
 
 
@@ -32,7 +34,11 @@ type HeaderState = {
   gameNavSection: { display: string, },
 }
 
-class Header extends React.Component {
+type HeaderProps = {
+  updateAction: Function,
+}
+
+class Header extends React.Component<HeaderProps> {
   state: HeaderState;
 
   isBooKSectionOpen = false;
@@ -44,7 +50,7 @@ class Header extends React.Component {
   isNavGameSectionOpen = false;
 
 
-  constructor(props: {}) {
+  constructor(props: HeaderProps) {
     super(props);
     this.state = {
       alertStyle: { display: 'none' },
@@ -220,6 +226,8 @@ class Header extends React.Component {
   }
 
   upDateUserState(a: string, b: string, c: string, alertGreating: string) {
+    this.props.updateAction(applicationModel.isAuthorization); // Emit dispatch for card list update
+    
     this.setState(this.state.alertStyle = { display: a });
     this.setState({ correct: this.state.alertGreating = alertGreating })
     this.setState(this.state.signBlockClass = { display: b });
@@ -227,11 +235,11 @@ class Header extends React.Component {
     this.setState({ correct: this.state.statisticsBurgerLinkClass = 'header__nav__lin ' + c });
     this.setState(this.state.outStyle = { display: a });
   }
-
+  
   alertHidden() {
     this.setState(this.state.alertStyle = { display: 'none' });
   }
-
+  
   async authorizationUpDate(alertGreating: string) {
     this.upDateUserState('flex', 'none', 'visible', alertGreating);
   }
@@ -297,4 +305,8 @@ class Header extends React.Component {
   }
 }
 
-export { Header };
+const mapDispatchToProps = {
+  updateAction,
+};
+
+export default connect(null, mapDispatchToProps)(Header);
