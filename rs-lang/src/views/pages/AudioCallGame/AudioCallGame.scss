@@ -102,21 +102,43 @@
     &__audio-call {
       width: 65rem;
       height: 34rem;
+      padding: 1rem;
       align-self: center;
       background: #fcd395;
       margin-bottom: 1rem;
       border-radius: 10px;
 
-      &__heards-error {
-        width: 200px;
-        height: 35px;
+
+      &__top-settings {
         display: flex;
         justify-content: space-between;
-        gap: 5px;
-          
-        
 
+        &__left {
+          width: 100px;
+          height: 10px;
+          border: 1px solid black;
+        }
+
+        &__right {
+          width: 300px;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+
+          &__heards-error {
+            width: 200px;
+            height: 35px;
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+          }
+
+          &__cross {
+            transform: scale(150%, 150%);
+          }
+        }
       }
+      
     }
   }
 }

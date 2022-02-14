@@ -21,11 +21,11 @@ class AudioCallGame extends React.Component {
   constructor(props: {}) {
     super(props);
     this.state = {
-      heardFill_1: 'none',
-      heardFill_2: '#000000',
-      heardFill_3: '#000000',
-      heardFill_4: '#000000',
-      heardFill_5: '#000000',
+      heardFill_1: '#000000',
+      heardFill_2: 'none',
+      heardFill_3: 'none',
+      heardFill_4: 'none',
+      heardFill_5: 'none',
       heardStroke: '#000000',
     }
   }
@@ -54,20 +54,30 @@ class AudioCallGame extends React.Component {
           <div className='games-page-wrap'>
             <h1>А У Д И О  В Ы З О В</h1>
             <div className='games-page-wrap__game-wrap'>
-              <div
-                className='games-page-wrap__game-wrap__cross'
-                onClick={(e) => { this.closeGameOnClick(e) }}>
-                <CrossUpDate crossId='audio-game-cross' />
-              </div>
               <div className='games-page-wrap__game-wrap__audio-call'>
-                <div className='games-page-wrap__game-wrap__audio-call__heards-error'>
-                  <HeardsError heardFill={this.state.heardFill_1} heardStroke={this.state.heardStroke} />
-                  <HeardsError heardFill={this.state.heardFill_2} heardStroke={this.state.heardStroke} />
-                  <HeardsError heardFill={this.state.heardFill_3} heardStroke={this.state.heardStroke} />
-                  <HeardsError heardFill={this.state.heardFill_4} heardStroke={this.state.heardStroke} />
-                  <HeardsError heardFill={this.state.heardFill_5} heardStroke={this.state.heardStroke} />
+                <div className='games-page-wrap__game-wrap__audio-call__top-settings'>
+                  <div className='games-page-wrap__game-wrap__audio-call__top-settings__left'>
+
+                  </div>
+                  <div className='games-page-wrap__game-wrap__audio-call__top-settings__right'>
+                    <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__heards-error'>
+                      <HeardsError heardFill={this.state.heardFill_1} heardStroke={this.state.heardStroke} />
+                      <HeardsError heardFill={this.state.heardFill_2} heardStroke={this.state.heardStroke} />
+                      <HeardsError heardFill={this.state.heardFill_3} heardStroke={this.state.heardStroke} />
+                      <HeardsError heardFill={this.state.heardFill_4} heardStroke={this.state.heardStroke} />
+                      <HeardsError heardFill={this.state.heardFill_5} heardStroke={this.state.heardStroke} />
+                    </div>
+                    <div
+                      className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'
+                    onClick={(e) => { this.closeGameOnClick(e) }}>
+                    <CrossUpDate crossId='audio-game-cross' />
+                  </div>
+                  </div>
+
                   
                 </div>
+
+
 
               </div>
             </div>
