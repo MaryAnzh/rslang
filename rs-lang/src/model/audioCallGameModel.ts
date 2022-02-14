@@ -2,7 +2,7 @@
 interface IAudioCallWords {
   word: string;
   iconURL: string;
-  soundURL:string,
+  soundURL: string,
 }
 
 class AudioCallGameModel {
@@ -10,11 +10,9 @@ class AudioCallGameModel {
 
   isSetting = false;
 
-  isGame = false;
-  
   constructor(words: IAudioCallWords[]) {
     this.words = words;
-}
+  }
 }
 
 export { AudioCallGameModel };
