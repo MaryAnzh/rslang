@@ -18,35 +18,7 @@ class Games extends React.Component {
                 <div className='games-page-wrap__games-wrap__setting__sections__section'>Уровень сложности 6</div>
                 <div className='games-page-wrap__games-wrap__setting__sections__section'>Сложные слова</div>
               </div>
-              <div className='games-page-wrap__games-wrap__setting__checkboxs'>
-                <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox'>
-                  <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox__oval'></div>
-                </div>
-                <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox'>
-                  <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox__oval'></div>
-
-                </div>
-                <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox'>
-                  <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox__oval'></div>
-
-                </div>
-                <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox'>
-                  <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox__oval'></div>
-
-                </div>
-                <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox'>
-                  <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox__oval'></div>
-
-                </div>
-                <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox'>
-                  <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox__oval'></div>
-
-                </div>
-                <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox'>
-                  <div className='games-page-wrap__games-wrap__setting__checkboxs__checkbox__oval'></div>
-
-                </div>
-              </div>
+             
             </div>
             <div className='games-page-wrap__games-wrap__audio-call'>
               <h2>Аудиовызов</h2>

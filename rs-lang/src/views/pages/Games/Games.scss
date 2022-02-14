@@ -83,6 +83,10 @@
 				  border: 1px dashed white;
 				  transition: .3s;
 
+          &:hover {
+            transform: translate(30%, 0);
+          }
+
 				   &:nth-child(1) {
 					background: #FFB140;
 				   }
