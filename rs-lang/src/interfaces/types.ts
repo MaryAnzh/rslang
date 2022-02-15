@@ -52,6 +52,7 @@ export type PaginationProps = {
 export type GroupPaginationProps = {
   groupHandler: Function;
   group: number;
+  isAutorize?: boolean;
 }
 
 export type ButtonsGlobState = { 

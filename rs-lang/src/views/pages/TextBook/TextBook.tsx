@@ -2,7 +2,7 @@ import React from 'react';
 import { newDataService } from '../../../dataServer/dataService';
 import { TextBookState } from '../../../interfaces/types';
 import { userStorage } from '../../../model/UserStorage';
-import { GroupPagination } from '../../components/GroupPagination/GroupPagination';
+import  GroupPagination from '../../components/GroupPagination/GroupPagination';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { WordCard } from '../../components/WordCard/WordCard';
 import './TextBook.scss';

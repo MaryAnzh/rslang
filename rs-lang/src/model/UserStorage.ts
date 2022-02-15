@@ -21,7 +21,7 @@ class UserStorage {
       userId: '',
     };
     this.getAuthFromLocaleStorage();
-    this.getPageGroupFromLocaleStorage()
+    this.getPageGroupFromLocaleStorage();
     console.log(JSON.stringify(this._auth));
   }
 
