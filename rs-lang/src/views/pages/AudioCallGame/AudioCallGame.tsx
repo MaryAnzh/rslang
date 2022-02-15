@@ -24,12 +24,12 @@ class AudioCallGame extends React.Component {
   constructor(props: {}) {
     super(props);
     this.state = {
-      heardFill_1: '#000000',
-      heardFill_2: 'none',
-      heardFill_3: 'none',
-      heardFill_4: 'none',
-      heardFill_5: 'none',
-      heardStroke: '#000000',
+      heardFill_1: 'none',
+      heardFill_2: '#A66200',
+      heardFill_3: '#A66200',
+      heardFill_4: '#A66200',
+      heardFill_5: '#A66200',
+      heardStroke: '#A66200',
       currentLevel: 'Уровень сложности 1',
       currentLevelColor: { background: '#FFB140' },
 
@@ -64,7 +64,7 @@ class AudioCallGame extends React.Component {
                 <section className='games-page-wrap__game-wrap__audio-call__top-settings'>
                   <div className='games-page-wrap__game-wrap__audio-call__top-settings__left'>
                     <BellSVG
-                      bellFill='#000000'
+                      bellFill='#006DD9'
                       hellStroke='none'
                       bellWidth='30px' />
                     <div
@@ -86,12 +86,9 @@ class AudioCallGame extends React.Component {
                       <CrossUpDate crossId='audio-game-cross' />
                     </div>
                   </div>
-
-
                 </section>
-
-
-
+                <section></section>
+                <section></section>
               </section>
             </div>
           </div>
