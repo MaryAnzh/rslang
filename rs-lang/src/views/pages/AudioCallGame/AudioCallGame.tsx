@@ -5,6 +5,7 @@ import { audioCallPageModel } from '../../../model/AudioCallPageModel';
 import { SettingPanel } from '../../elements/settingPanel/settingPanel';
 import { CrossUpDate } from '../../elements/crossUpDate/crossUpDate';
 import { HeardsError } from '../../audioCallElements/heardsErrior/heardsError';
+import { BellSVG } from '../../audioCallElements/bell/bell';
 
 type AudioCallGameType = {
   heardFill_1: string,
@@ -13,6 +14,8 @@ type AudioCallGameType = {
   heardFill_4: string,
   heardFill_5: string,
   heardStroke: string,
+  currentLevel: string,
+  currentLevelColor: { background: string },
 }
 
 class AudioCallGame extends React.Component {
@@ -27,6 +30,9 @@ class AudioCallGame extends React.Component {
       heardFill_4: 'none',
       heardFill_5: 'none',
       heardStroke: '#000000',
+      currentLevel: 'Уровень сложности 1',
+      currentLevelColor: { background: '#FFB140' },
+
     }
   }
 
@@ -38,12 +44,12 @@ class AudioCallGame extends React.Component {
             <h1>А У Д И О  В Ы З О В</h1>
             <div className='games-page-wrap__settings-wrap'>
               <SettingPanel />
-              <div className='games-page-wrap__settings-wrap__audio-call'>
+              <section className='games-page-wrap__settings-wrap__audio-call'>
                 <h2>Аудиовызов</h2>
-                <div
+                <button
                   className='games-page-wrap__settings-wrap__audio-call__game-start'
-                  onClick={(e) => { this.startGameOnClick(e) }} >Играть</div>
-              </div>
+                  onClick={(e) => { this.startGameOnClick(e) }} >Играть</button>
+              </section>
             </div>
           </div>
         </main >
@@ -54,10 +60,17 @@ class AudioCallGame extends React.Component {
           <div className='games-page-wrap'>
             <h1>А У Д И О  В Ы З О В</h1>
             <div className='games-page-wrap__game-wrap'>
-              <div className='games-page-wrap__game-wrap__audio-call'>
-                <div className='games-page-wrap__game-wrap__audio-call__top-settings'>
+              <section className='games-page-wrap__game-wrap__audio-call'>
+                <section className='games-page-wrap__game-wrap__audio-call__top-settings'>
                   <div className='games-page-wrap__game-wrap__audio-call__top-settings__left'>
-
+                    <BellSVG
+                      bellFill='#000000'
+                      hellStroke='none'
+                      bellWidth='30px' />
+                    <div
+                      className='games-page-wrap__game-wrap__audio-call__top-settings__left__level'
+                      style={this.state.currentLevelColor}
+                    >{this.state.currentLevel}</div>
                   </div>
                   <div className='games-page-wrap__game-wrap__audio-call__top-settings__right'>
                     <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__heards-error'>
@@ -69,17 +82,17 @@ class AudioCallGame extends React.Component {
                     </div>
                     <div
                       className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'
-                    onClick={(e) => { this.closeGameOnClick(e) }}>
-                    <CrossUpDate crossId='audio-game-cross' />
+                      onClick={(e) => { this.closeGameOnClick(e) }}>
+                      <CrossUpDate crossId='audio-game-cross' />
+                    </div>
                   </div>
-                  </div>
-
-                  
-                </div>
 
 
+                </section>
 
-              </div>
+
+
+              </section>
             </div>
           </div>
         </main >

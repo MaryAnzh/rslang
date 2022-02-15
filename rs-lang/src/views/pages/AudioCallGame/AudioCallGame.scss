@@ -44,14 +44,16 @@
       border: 1px solid black;
 
       &__game-start {
-        width: 6rem;
-        height: 2rem;
+        width: 8rem;
+        height: 3rem;
         margin-top: 2rem;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 10px;
         background: #006DD9;
+        color: white;
+        font-size: 1.5rem;
       }
 
       @media (max-width: 950px) {
@@ -106,7 +108,7 @@
       height: 34rem;
       padding: 1rem;
       align-self: center;
-      background: #fcd395;
+      background: #f8ecdb;
       margin-bottom: 1rem;
       border-radius: 10px;
 
@@ -116,9 +118,21 @@
         justify-content: space-between;
 
         &__left {
-          width: 100px;
-          height: 10px;
-          border: 1px solid black;
+          width: 15rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          &__level {
+            width: 12rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed white;
+            border-radius: 5px;
+
+          }
         }
 
         &__right {
