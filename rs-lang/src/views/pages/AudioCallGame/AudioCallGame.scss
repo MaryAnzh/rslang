@@ -107,11 +107,12 @@
       width: 65rem;
       height: 34rem;
       padding: 1rem;
+      display: flex;
+      flex-direction: column;
       align-self: center;
       background: #f8ecdb;
       margin-bottom: 1rem;
       border-radius: 10px;
-
 
       &__top-settings {
         display: flex;
@@ -153,6 +154,17 @@
             transform: scale(150%, 150%);
           }
         }
+      }
+
+       &__game {
+        height: 20rem;
+      }
+
+      &__game-button {
+        padding: 2rem 1rem;
+        display: flex;
+        justify-content: center;
+
       }
       
     }

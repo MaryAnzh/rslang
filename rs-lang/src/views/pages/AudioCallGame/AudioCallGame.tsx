@@ -6,6 +6,7 @@ import { SettingPanel } from '../../elements/settingPanel/settingPanel';
 import { CrossUpDate } from '../../elements/crossUpDate/crossUpDate';
 import { HeardsError } from '../../audioCallElements/heardsErrior/heardsError';
 import { BellSVG } from '../../audioCallElements/bell/bell';
+import { GameButton } from '../../audioCallElements/gameButton/gameButton';
 
 type AudioCallGameType = {
   heardFill_1: string,
@@ -16,6 +17,11 @@ type AudioCallGameType = {
   heardStroke: string,
   currentLevel: string,
   currentLevelColor: { background: string },
+  currentButtonText_1: string,
+  currentButtonText_2: string,
+  currentButtonText_3: string,
+  currentButtonText_4: string,
+
 }
 
 class AudioCallGame extends React.Component {
@@ -32,6 +38,10 @@ class AudioCallGame extends React.Component {
       heardStroke: '#A66200',
       currentLevel: 'Уровень сложности 1',
       currentLevelColor: { background: '#FFB140' },
+      currentButtonText_1: 'слово 1',
+      currentButtonText_2: 'слово 2',
+      currentButtonText_3: 'слово 3',
+      currentButtonText_4: 'слово 4',
 
     }
   }
@@ -87,8 +97,17 @@ class AudioCallGame extends React.Component {
                     </div>
                   </div>
                 </section>
-                <section></section>
-                <section></section>
+                <section className='games-page-wrap__game-wrap__audio-call__game'>
+
+                </section>
+                <section className='games-page-wrap__game-wrap__audio-call__game-button'>
+                  <GameButton>
+                    <button>{this.state.currentButtonText_1}</button>
+                    <button>{this.state.currentButtonText_1}</button>
+                    <button>{this.state.currentButtonText_1}</button>
+                    <button>{this.state.currentButtonText_1}</button>
+                  </GameButton>                
+                </section>
               </section>
             </div>
           </div>
