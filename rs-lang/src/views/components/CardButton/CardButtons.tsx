@@ -6,7 +6,7 @@ import addPic from '../../../img/svg/add.svg';
 import applyPic from '../../../img/svg/check.svg';
 import { ButtonsGlobState, CardButtonsProps, CardButtonsState } from '../../../interfaces/types';
 import { soundModel } from '../../../model/SoundModel';
-import { connect, ConnectedProps } from 'react-redux';
+import { connect } from 'react-redux';
 
 
 

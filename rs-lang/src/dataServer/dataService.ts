@@ -8,7 +8,7 @@ class DataService {
 
   private signin: string;
 
-  public myStorage: Storage;
+  // public myStorage: Storage;
 
   private words: string;
 
@@ -16,7 +16,7 @@ class DataService {
     this.baseURL = baseURL;
     this.user = `${this.baseURL}/users`;
     this.signin = `${this.baseURL}/signin`;
-    this.myStorage = window.localStorage;
+    // this.myStorage = window.localStorage;
     this.words = `${this.baseURL}/words`;
   }
 
@@ -54,7 +54,7 @@ class DataService {
       throw new Error(status.toString());
     } else {
       const responseJson: ISignInResponse = await response.json();
-      this.myStorage.setItem('token', responseJson.token);
+      // this.myStorage.setItem('token', responseJson.token);
       //console.log(this.myStorage.getItem('token'));
       return responseJson;
     }
