@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import arrowForward from '../../../img/svg/arrow_forward.svg';
 import './GameLinks.scss';
 
@@ -19,8 +20,12 @@ class GamesLinks extends React.Component {
     if (this.state.open) {
       links = (
         <div className='game-links__links'>
-          <li className='game-links__link-wrapper'><a className='game-links__link' href="/">Аудиовызов</a></li>
-          <li className='game-links__link-wrapper'><a className='game-links__link' href="/">Спринт</a></li>
+          <li className='game-links__link-wrapper'>
+            <Link to="/audiocall" className="game-links__link">Аудиовызов</Link>
+          </li>
+          <li className='game-links__link-wrapper'>
+            <Link to="/games" className="game-links__link">Спринт</Link>
+          </li>
         </div>
       );
     } else {
