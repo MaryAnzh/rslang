@@ -1,4 +1,7 @@
+@import '../../../css/variables';
+
 .game-links {
+  position: relative;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -25,15 +28,47 @@
     cursor: pointer;
     transition: 0.2s;
     border-right: 1px dashed white;
-
-
+    
+    
     &:hover img {
       transform: rotateZ(90deg) scale(1.1);
       // transform: scale(1.1);
     }
-
+    
     &:hover {
       box-shadow: inset 0 0 6px rgba(10, 10, 10, 0.5), 0 0 6px rgba(65, 65, 65, 0.2);
     }
+  }
+  
+  &__links {
+    box-shadow: 0 0 0.15rem 0 #004;
+    z-index: 100;
+    width: 100%;
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    background: $main-color-dark;
+  }
+  
+  &__link-wrapper {
+    width: 100%;
+    text-decoration: none;
+    list-style: none;
+    height: 3rem;
+
+    &:first-child {
+      background: #2777C2;
+    }
+    &:last-child {
+      background: #5D86A1;
+    }
+  }
+  &__link {
+    line-height: 3rem;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
   }
 }
