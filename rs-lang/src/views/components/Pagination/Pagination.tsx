@@ -2,6 +2,7 @@ import React from 'react';
 import arrowBack from '../../../img/svg/arrow_back.svg';
 import arrowForward from '../../../img/svg/arrow_forward.svg';
 import { PaginationProps } from '../../../interfaces/types';
+import GameLinks from '../GameLinks/GameLinks';
 import './Pagination.scss';
 
 class Pagination extends React.Component<PaginationProps> {
@@ -15,6 +16,7 @@ class Pagination extends React.Component<PaginationProps> {
         <button onClick={this.props.upHandler} className='pagination__btn'>
           <img src={arrowForward} alt="back" />
         </button>
+        <GameLinks />
       </div>
     );
   }
