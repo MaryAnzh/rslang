@@ -3,10 +3,12 @@ import { GroupPaginationProps } from '../../../interfaces/types';
 import './GroupPagination.scss';
 
 class GroupPagination extends React.Component<GroupPaginationProps> {
+
+
   render() {
     return (
       <div className='group-pagination'>
-        <p className='group-pagination__text'>Раздел</p>
+        <p className='group-pagination__text'>Раздел &nbsp;&nbsp;{this.props.group}</p>
         <button key="0" onClick={() => {this.props.groupHandler(0)}} className='group-pagination__btn'>
           1
         </button>

@@ -4,6 +4,7 @@ import { IUser, IUserRegisterResponse, ISignInUserInfo } from '../interfaces/use
 import { authorizationAppModel } from './AuthorizationAppModel';
 import { ErrorText } from '../views/elements/errorText/errorText';
 import { JsxFlags } from 'typescript';
+import { userStorage } from './UserStorage';
 
 
 class ApplicationModel {
@@ -62,6 +63,9 @@ class ApplicationModel {
     }
     try {
       const response = await this.dataServ.signInUser(signInInfo);
+
+      userStorage.auth = response; // save user info in storage
+
       this.isAuthorization = true;
       this.currentUserName = response.name;
       console.log(`Добро пожаловать на сайт ${this.currentUserName}`);
