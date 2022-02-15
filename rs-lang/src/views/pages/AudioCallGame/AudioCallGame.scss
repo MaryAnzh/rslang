@@ -14,23 +14,9 @@
 	    font-size: 3rem;
 	  }
 
-    button {
-      transition: .3s;
-      cursor: pointer;
-
-      &:hover {
-        background: #d8e2ec;
-        border-color: white;
-      }
-
-      &:active {
-        background: #6AACEC;
-      }
-    }
-
     &__settings-wrap {
     width: 100%;
-    height: 39rem;
+    min-height: 39rem;
 		display: flex;
 		justify-content: space-around;
 		align-content: center;
@@ -39,13 +25,13 @@
 		margin-top: 3rem;
 		background: white;
 
-    @media (max-width: 1300px) {
-    flex-wrap: wrap;
-  }
-
     h2 {
       color: black;
     }
+
+      @media (max-width: 1300px) {
+       flex-wrap: wrap;
+      }
 
     &__audio-call {
       max-width: 400px;
@@ -70,39 +56,12 @@
         font-size: 1.5rem;
       }
 
-      @media (max-width: 950px) {
-      height: 200px;
-      padding-bottom: 2rem;
+      @media (max-width: 1020px) {
+     width: 100%;
     }
   }
+}
 
-    &__sprint {
-      max-width: 400px;
-      width: 100%;
-      height: 450px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid black;
-
-      &__game-start {
-        width: 6rem;
-        height: 2rem;
-        margin-top: 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-        background: #006DD9;
-      }
-
-      @media (max-width: 1300px) {
-      height: 200px;
-      padding-top: 2rem;
-    }
-    }
-  }
 
   &__game-wrap {
     width: 100%;
@@ -113,16 +72,28 @@
 		margin-top: 3rem;
 		background: white;
 
-    &__cross {
-      align-self: end;
+    button {
+      transition: .3s;
+      cursor: pointer;
+
+      &:hover {
+        background: #d8e2ec;
+        border-color: white;
+      }
+
+      &:active {
+        background: #6AACEC;
+      }
     }
 
     &__audio-call {
-      width: 65rem;
-      height: 34rem;
+      max-width: 65rem;
+      width: 100%;
+      min-height: 34rem;
       padding: 1rem;
       display: flex;
       flex-direction: column;
+      align-items: center;
       align-self: center;
       background: #f8ecdb;
       margin-bottom: 1rem;
@@ -131,12 +102,22 @@
       &__top-settings {
         display: flex;
         justify-content: space-between;
+        
+        @media (max-width: 700px) {
+         justify-content: center;
+         flex-wrap: wrap-reverse;
+         gap: 5px;
+        }
 
         &__left {
           width: 15rem;
           display: flex;
           align-items: center;
           justify-content: space-between;
+
+          @media (max-width: 700px) {
+           width: 100%;
+          }
 
           &__level {
             width: 12rem;
@@ -156,16 +137,30 @@
           justify-content: space-around;
           align-items: center;
 
+          @media (max-width: 700px) {
+           width: 100%;
+           justify-content: end;
+          }
+
           &__heards-error {
             width: 200px;
             height: 35px;
             display: flex;
             justify-content: space-between;
             gap: 5px;
+
+            @media (max-width: 700px) {
+             margin-right: calc(50% - 100px);
+            }
           }
 
           &__cross {
-            transform: scale(150%, 150%);
+            transform: scale(150%, 150%) translate(-10%, 0);
+            
+
+            // @media (max-width: 700px) {
+            //  justify-self: flex-end;
+            // }
           }
         }
       }
@@ -201,6 +196,7 @@
       &__game-button {
         padding: 2rem 1rem;
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
 
       }

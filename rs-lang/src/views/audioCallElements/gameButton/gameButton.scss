@@ -5,6 +5,10 @@
   gap: 10px;
   justify-content: space-between;
 
+  @media (max-width: 890px) {
+    justify-content: center;
+  }
+
   button {
     width: 300px;
     height: 3rem;
