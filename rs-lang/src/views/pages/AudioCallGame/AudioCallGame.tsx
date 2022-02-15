@@ -98,6 +98,10 @@ class AudioCallGame extends React.Component {
                   </div>
                 </section>
                 <section className='games-page-wrap__game-wrap__audio-call__game'>
+                  <div className='games-page-wrap__game-wrap__audio-call__game__audio'>
+
+                  </div>
+                  <button className='games-page-wrap__game-wrap__audio-call__game__repeat' >Повторить</button>
 
                 </section>
                 <section className='games-page-wrap__game-wrap__audio-call__game-button'>
