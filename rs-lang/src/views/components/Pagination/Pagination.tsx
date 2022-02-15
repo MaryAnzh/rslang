@@ -1,12 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import arrowBack from '../../../img/svg/arrow_back.svg';
 import arrowForward from '../../../img/svg/arrow_forward.svg';
-import { PaginationProps } from '../../../interfaces/types';
+import { ButtonsGlobState, PaginationProps } from '../../../interfaces/types';
 import GameLinks from '../GameLinks/GameLinks';
 import './Pagination.scss';
 
+const mapStateToProps = (state: ButtonsGlobState, ownProps: PaginationProps ) => {
+  return {
+    ...ownProps,
+    isAutorize: state.buttons.isAutorize,
+  }
+};
+
+const connector = connect(mapStateToProps, null);
+
 class Pagination extends React.Component<PaginationProps> {
   render() {
+    // console.log('pagination render: ' + this.props.isAutorize);
     return (
       <div className='pagination'>
         <button onClick={this.props.downHandler} className='pagination__btn'>
@@ -16,10 +27,12 @@ class Pagination extends React.Component<PaginationProps> {
         <button onClick={this.props.upHandler} className='pagination__btn'>
           <img src={arrowForward} alt="back" />
         </button>
-        <GameLinks />
+        {this.props.isAutorize && <GameLinks />}
       </div>
     );
   }
 }
 
-export { Pagination };
+
+export default connector(Pagination);
+// export { Pagination };
