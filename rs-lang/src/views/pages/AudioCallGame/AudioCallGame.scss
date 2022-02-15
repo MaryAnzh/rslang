@@ -14,11 +14,27 @@
 	    font-size: 3rem;
 	  }
 
+    button {
+      transition: .3s;
+      cursor: pointer;
+
+      &:hover {
+        background: #d8e2ec;
+        border-color: white;
+      }
+
+      &:active {
+        background: #6AACEC;
+      }
+    }
+
     &__settings-wrap {
     width: 100%;
+    height: 39rem;
 		display: flex;
 		justify-content: space-around;
 		align-content: center;
+    align-items: center;
 		padding: 2rem 4rem 2rem;
 		margin-top: 3rem;
 		background: white;
@@ -42,14 +58,16 @@
       border: 1px solid black;
 
       &__game-start {
-        width: 6rem;
-        height: 2rem;
+        width: 8rem;
+        height: 3rem;
         margin-top: 2rem;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 10px;
         background: #006DD9;
+        color: white;
+        font-size: 1.5rem;
       }
 
       @media (max-width: 950px) {
@@ -103,20 +121,33 @@
       width: 65rem;
       height: 34rem;
       padding: 1rem;
+      display: flex;
+      flex-direction: column;
       align-self: center;
-      background: #fcd395;
+      background: #f8ecdb;
       margin-bottom: 1rem;
       border-radius: 10px;
-
 
       &__top-settings {
         display: flex;
         justify-content: space-between;
 
         &__left {
-          width: 100px;
-          height: 10px;
-          border: 1px solid black;
+          width: 15rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          &__level {
+            width: 12rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed white;
+            border-radius: 5px;
+
+          }
         }
 
         &__right {
@@ -137,6 +168,41 @@
             transform: scale(150%, 150%);
           }
         }
+      }
+
+       &__game {
+        height: 20rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        &__audio {
+          width: 250px;
+          height: 250px;
+          background: white;
+          margin-bottom: 15px;
+        }
+
+        &__repeat {
+          width: 80px;
+          height: 80px;
+          background: white;
+          color: #006DD9;
+          border: 1px solid #6AACEC;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      &__game-button {
+        padding: 2rem 1rem;
+        display: flex;
+        justify-content: center;
+
       }
       
     }
