@@ -7,6 +7,9 @@ import { CrossUpDate } from '../../elements/crossUpDate/crossUpDate';
 import { HeardsError } from '../../audioCallElements/heardsErrior/heardsError';
 import { BellSVG } from '../../audioCallElements/bell/bell';
 import { GameButton } from '../../audioCallElements/gameButton/gameButton';
+import { AudioCallGameModel } from '../../../model/audioCallGameModel';
+import { wordsArray } from '../../../model/gamaTesting';
+import { IAudioCallWords } from '../../../interfaces/wordsInterface';
 
 type AudioCallGameType = {
   heardFill_1: string,
@@ -27,8 +30,14 @@ type AudioCallGameType = {
 class AudioCallGame extends React.Component {
   state: AudioCallGameType;
 
+  gameModel: AudioCallGameModel;
+
+  wordsArray: IAudioCallWords[];
+
   constructor(props: {}) {
     super(props);
+    this.wordsArray = wordsArray;
+    this.gameModel = new AudioCallGameModel(this.wordsArray);
     this.state = {
       heardFill_1: 'none',
       heardFill_2: '#A66200',
@@ -38,10 +47,10 @@ class AudioCallGame extends React.Component {
       heardStroke: '#A66200',
       currentLevel: 'Уровень сложности 1',
       currentLevelColor: { background: '#FFB140' },
-      currentButtonText_1: 'слово 1',
-      currentButtonText_2: 'слово 2',
-      currentButtonText_3: 'слово 3',
-      currentButtonText_4: 'слово 4',
+      currentButtonText_1: this.wordsArray[0].word,
+      currentButtonText_2: this.wordsArray[1].word,
+      currentButtonText_3: this.wordsArray[2].word,
+      currentButtonText_4: this.wordsArray[3].word,
 
     }
   }
@@ -107,10 +116,10 @@ class AudioCallGame extends React.Component {
                 <section className='games-page-wrap__game-wrap__audio-call__game-button'>
                   <GameButton>
                     <button>{this.state.currentButtonText_1}</button>
-                    <button>{this.state.currentButtonText_1}</button>
-                    <button>{this.state.currentButtonText_1}</button>
-                    <button>{this.state.currentButtonText_1}</button>
-                  </GameButton>                
+                    <button>{this.state.currentButtonText_2}</button>
+                    <button>{this.state.currentButtonText_3}</button>
+                    <button>{this.state.currentButtonText_4}</button>
+                  </GameButton>
                 </section>
               </section>
             </div>
@@ -128,6 +137,12 @@ class AudioCallGame extends React.Component {
   closeGameOnClick(e: React.MouseEvent<HTMLElement>) {
     audioCallPageModel.isSetting = true;
     this.forceUpdate();
+  }
+
+  gameWords() {
+    const gameModel = new AudioCallGameModel(wordsArray);
+    console.log(gameModel);
+
   }
 }
 
