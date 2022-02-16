@@ -1,12 +1,25 @@
 import React from 'react';
-import { GroupPaginationProps } from '../../../interfaces/types';
+import { ButtonsGlobState, GroupPaginationProps } from '../../../interfaces/types';
 import './GroupPagination.scss';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state: ButtonsGlobState, ownProps: GroupPaginationProps ) => {
+  return {
+    ...ownProps,
+    isAutorize: state.buttons.isAutorize,
+  }
+};
+
+const connector = connect(mapStateToProps, null);
 
 class GroupPagination extends React.Component<GroupPaginationProps> {
+
+
   render() {
+    // console.log('group pagination render: ' + this.props.isAutorize);
     return (
       <div className='group-pagination'>
-        <p className='group-pagination__text'>Раздел</p>
+        <p className='group-pagination__text'>Раздел &nbsp;&nbsp;{this.props.group}</p>
         <button key="0" onClick={() => {this.props.groupHandler(0)}} className='group-pagination__btn'>
           1
         </button>
@@ -25,12 +38,19 @@ class GroupPagination extends React.Component<GroupPaginationProps> {
         <button key="5" onClick={() => {this.props.groupHandler(5)}} className='group-pagination__btn'>
           6
         </button>
-        <button key="6" onClick={() => {this.props.groupHandler(6)}} className='group-pagination__btn group-pagination__tooltip'>
-          7
-        </button>
+        {this.props.isAutorize &&
+          <button key="6" onClick={() => {this.props.groupHandler(6)}} className='group-pagination__btn group-pagination__tooltip'>
+            7
+          </button>
+        }
       </div>
     );
   }
 }
 
-export { GroupPagination };
+
+// const GROUP_PAGINATION_W = connector(GroupPagination);
+// export default GROUP_PAGINATION_W;
+
+export default connector(GroupPagination);
+// export { GroupPagination };

@@ -15,6 +15,7 @@ import { Burger } from '../Burger/Burger';
 import { connect } from 'react-redux';
 import { updateAction } from '../../../store/actionCreators/actionCreators';
 import { Arrow } from '../../elements/arrow/arrow';
+import { userStorage } from '../../../model/UserStorage';
 
 
 type HeaderState = {
@@ -250,6 +251,9 @@ class Header extends React.Component<HeaderProps> {
 
   authorizationOut(e: React.MouseEvent<HTMLLIElement>) {
     applicationModel.isAuthorization = false;
+
+    userStorage.clearAuth(); // delete user info from local storage and userStorage object
+
     this.upDateUserState('none', 'block', 'blocked', '');
   }
 

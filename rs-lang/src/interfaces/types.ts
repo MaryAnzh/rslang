@@ -47,10 +47,13 @@ export type PaginationProps = {
   page: number;
   downHandler: MouseEventHandler<HTMLButtonElement>;
   upHandler: MouseEventHandler<HTMLButtonElement>;
+  isAutorize?: boolean; 
 }
 
 export type GroupPaginationProps = {
   groupHandler: Function;
+  group: number;
+  isAutorize?: boolean;
 }
 
 export type ButtonsGlobState = { 
