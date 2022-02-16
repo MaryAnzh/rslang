@@ -12,13 +12,13 @@ class AudioCallGameModel {
   currentRound: number;
 
   //массив слоа раунда
-  roundWordsArray: IAudioCallWords[];
+  roundWordsArray: IAnxwer[];
 
   currentShuffleWords: string[];
 
   constructor(currentWordsArray: IAudioCallWords[]) {
     this.currentWordsArray = currentWordsArray;
-    this.isSetting = false;
+    this.isSetting = true;
     this.currentWordsArrayLangth = this.currentWordsArray.length;
     this.currentRound = 1;
     this.roundWordsArray = [];
@@ -56,6 +56,7 @@ class AudioCallGameModel {
     }
 
     this.shuffle(roundArray);
+    this.roundWordsArray = roundArray;
     return roundArray;
   }
 

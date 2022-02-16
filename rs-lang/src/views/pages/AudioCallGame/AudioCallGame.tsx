@@ -9,7 +9,7 @@ import { BellSVG } from '../../audioCallElements/bell/bell';
 import { GameButton } from '../../audioCallElements/gameButton/gameButton';
 import { AudioCallGameModel } from '../../../model/audioCallGameModel';
 import { wordsArray } from '../../../model/gamaTesting';
-import { IAudioCallWords } from '../../../interfaces/wordsInterface';
+import { IAnxwer, IAudioCallWords } from '../../../interfaces/wordsInterface';
 
 type AudioCallGameType = {
   heardFill_1: string,
@@ -27,6 +27,7 @@ type AudioCallGameType = {
   currentRound: string,
   currentRoundNumber: string,
 
+
 }
 
 class AudioCallGame extends React.Component {
@@ -36,12 +37,14 @@ class AudioCallGame extends React.Component {
 
   wordsArray: IAudioCallWords[];
 
+  roundWordsArray: IAnxwer[];
+
   constructor(props: {}) {
     super(props);
 
     this.wordsArray = wordsArray;
     this.gameModel = new AudioCallGameModel(this.wordsArray);
-
+    this.roundWordsArray = this.gameModel.roundWords();
     this.state = {
       heardFill_1: 'none',
       heardFill_2: '#A66200',
@@ -51,10 +54,10 @@ class AudioCallGame extends React.Component {
       heardStroke: '#A66200',
       currentLevel: 'Уровень сложности 1',
       currentLevelColor: { background: '#FFB140' },
-      currentButtonText_1: this.wordsArray[0].word,
-      currentButtonText_2: this.wordsArray[1].word,
-      currentButtonText_3: this.wordsArray[2].word,
-      currentButtonText_4: this.wordsArray[3].word,
+      currentButtonText_1: this.roundWordsArray[0].word,
+      currentButtonText_2: this.roundWordsArray[1].word,
+      currentButtonText_3: this.roundWordsArray[2].word,
+      currentButtonText_4: this.roundWordsArray[3].word,
       currentRound: this.gameModel.currentRound.toString(),
       currentRoundNumber: this.gameModel.currentWordsArrayLangth.toString(),
     }
@@ -68,12 +71,6 @@ class AudioCallGame extends React.Component {
   closeGameOnClick(e: React.MouseEvent<HTMLElement>) {
     audioCallPageModel.isSetting = true;
     this.forceUpdate();
-  }
-
-  gameWords() {
-    const gameModel = new AudioCallGameModel(wordsArray);
-    console.log(gameModel);
-
   }
 
   render() {
