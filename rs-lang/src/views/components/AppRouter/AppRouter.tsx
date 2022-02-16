@@ -6,6 +6,7 @@ import Header from '../header/header';
 import { TextBook } from '../../pages/TextBook/TextBook';
 import { Games } from '../../pages/Games/Games';
 import { AudioCallGame } from '../../pages/AudioCallGame/AudioCallGame';
+import { AudioCallGameSettings } from '../../pages/AudioCallGame.Settings/AudioCallGameSettings';
 
 export default function AppRouter() {
   return (
@@ -15,7 +16,8 @@ export default function AppRouter() {
         <Route index element={<StartPage />} />
         <Route path="textbook" element={<TextBook />} />
         <Route path="games" element={<Games />} />
-        <Route path="audiocall" element={<AudioCallGame />} />
+        <Route path="audiocall" element={<AudioCallGameSettings />} />
+        <Route path="audiocallgame" element={<AudioCallGame />} />
         <Route path="statistics" element={<Statistics />} />
       </Routes>
       <Footer />

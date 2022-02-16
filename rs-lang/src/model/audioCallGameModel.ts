@@ -1,8 +1,9 @@
 import { IAudioCallWords, IAnxwer } from '../interfaces/wordsInterface';
-import { wordsArray } from './gamaTesting';
+import { applicationModel } from './ApplicationModel';
+import { WordCardType } from '../interfaces/types';
 
 class AudioCallGameModel {
-  currentWordsArray: IAudioCallWords[];
+  currentWordsArray: WordCardType[];
 
   isSetting: boolean;
 
@@ -16,13 +17,20 @@ class AudioCallGameModel {
 
   currentShuffleWords: string[];
 
-  constructor(currentWordsArray: IAudioCallWords[]) {
+  //roundAUdio: string;
+
+  currentLevel = 0;
+
+  currrntPageNumber = 0;
+
+  constructor(currentWordsArray: WordCardType[]) {
     this.currentWordsArray = currentWordsArray;
     this.isSetting = true;
     this.currentWordsArrayLangth = this.currentWordsArray.length;
     this.currentRound = 1;
     this.roundWordsArray = [];
     this.currentShuffleWords = this.createCurrentShuffleWords();
+    //this.roundAUdio = this.currentWordsArray[this.currentRound - 1].audio;
   }
 
   createCurrentShuffleWords() {
@@ -45,13 +53,13 @@ class AudioCallGameModel {
     const falseWords = [...this.currentShuffleWords];
     falseWords.splice(trueWordIndex, 1);
     this.shuffle(falseWords);
-    
+
     const falseWordsNumber = 3;
     for (let i = 0; i < falseWordsNumber; i++) {
       const falseWord: IAnxwer = {
         word: falseWords[i],
         trueAnxwer: false,
-      } 
+      }
       roundArray.push(falseWord);
     }
 
@@ -77,8 +85,17 @@ class AudioCallGameModel {
   }
 
 }
-const a = wordsArray;
-const test = new AudioCallGameModel(a);
-console.log('Тестирование');
-console.log(test.roundWords());
+
+async function word() {
+  const a = await applicationModel.getWords(0, 0);
+  if (a != undefined) {
+    const w = new AudioCallGameModel(a);
+    const c = w.roundWords();
+
+    // console.log('w.currentLevel');
+    // console.log(c);
+  }
+}
+word();
+
 export { AudioCallGameModel };
