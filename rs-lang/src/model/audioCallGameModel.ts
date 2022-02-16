@@ -1,7 +1,8 @@
 import { IAudioCallWords, IAnxwer } from '../interfaces/wordsInterface';
+import { wordsArray } from './gamaTesting';
 
 class AudioCallGameModel {
-  wordsArray: IAudioCallWords[];
+  currenwordsArray: IAudioCallWords[];
 
   isSetting: boolean;
 
@@ -13,10 +14,10 @@ class AudioCallGameModel {
   //массив слоа раунда
   roundWordsArray: IAudioCallWords[];
 
-  constructor(wordsArray: IAudioCallWords[]) {
-    this.wordsArray = wordsArray;
+  constructor(currenwordsArray: IAudioCallWords[]) {
+    this.currenwordsArray = currenwordsArray;
     this.isSetting = true;
-    this.currentWordsArrayLangth = this.wordsArray.length;
+    this.currentWordsArrayLangth = this.currenwordsArray.length;
     this.currentRound = 1;
     this.roundWordsArray = [];
   }
@@ -24,13 +25,21 @@ class AudioCallGameModel {
   roundWords() {
     const roundArray: IAnxwer[] = [];
     const trueWord: IAnxwer = {
-      word: this.wordsArray[this.currentRound - 1].word,
+      word: this.currenwordsArray[this.currentRound - 1].word,
       trueAnxwer: true,
     };
     const falseWordsNumber = 3;
-    // for (let index = 0; index < falseWordsNumber; index += 1) {
-
-    // }
+    for (let index = 0; index < falseWordsNumber; index += 1) {
+      let randomIndex = this.rendomNumber(this.currentWordsArrayLangth);
+      let falseWord = this.currenwordsArray[randomIndex].word;
+      let check = this.currenwordsArray.findIndex((elem, i) => {
+        if (elem.word == falseWord) {
+          return i;
+        }
+        return -1;
+      });
+      
+    }
   }
 
   shuffle(array: Array<number>) {
@@ -42,11 +51,14 @@ class AudioCallGameModel {
     for (let i = 0; i < digitRange; i = + 1) {
       randomArr.push(i);
     }
-    
+
     this.shuffle(randomArr);
     return randomArr[1];
   }
 
 }
-
+const a = wordsArray;
+const test = new AudioCallGameModel(a);
+console.log('Тестирование');
+console.log(test.currentWordsArrayLangth);
 export { AudioCallGameModel };
