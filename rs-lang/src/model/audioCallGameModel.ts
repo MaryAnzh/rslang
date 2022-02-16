@@ -29,19 +29,21 @@ class AudioCallGameModel {
     };
     const falseWordsNumber = 3;
     // for (let index = 0; index < falseWordsNumber; index += 1) {
-      
+
     // }
   }
 
+  shuffle(array: Array<number>) {
+    array.sort(() => Math.random() - 0.5);
+  }
+
   rendomNumber(digitRange: number) {
-    function shuffle(array: Array<number>) {
-      array.sort(() => Math.random() - 0.5);
-    }
     const randomArr = [];
-    for (let i = 1; i <= digitRange; i =+ 1) {
+    for (let i = 0; i < digitRange; i = + 1) {
       randomArr.push(i);
     }
-    shuffle(randomArr);
+    
+    this.shuffle(randomArr);
     return randomArr[1];
   }
 
