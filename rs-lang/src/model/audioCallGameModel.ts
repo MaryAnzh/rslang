@@ -5,7 +5,9 @@ import { WordCardType } from '../interfaces/types';
 class AudioCallGameModel {
   currentWordsArray: WordCardType[];
 
-  isSetting: boolean;
+  serverURL: string;
+
+  itemIndex: number;
 
   currentWordsArrayLangth: number;
 
@@ -17,7 +19,9 @@ class AudioCallGameModel {
 
   currentShuffleWords: string[];
 
-  //roundAUdio: string;
+  roundAUdio: string;
+
+  roundImg: string;
 
   currentLevel = 0;
 
@@ -25,12 +29,14 @@ class AudioCallGameModel {
 
   constructor(currentWordsArray: WordCardType[]) {
     this.currentWordsArray = currentWordsArray;
-    this.isSetting = true;
+    this.serverURL = 'https://react-rslang-team-mary.herokuapp.com';
+    this.itemIndex = 0;
     this.currentWordsArrayLangth = this.currentWordsArray.length;
     this.currentRound = 1;
     this.roundWordsArray = [];
     this.currentShuffleWords = this.createCurrentShuffleWords();
-    //this.roundAUdio = this.currentWordsArray[this.currentRound - 1].audio;
+    this.roundAUdio = '';
+    this.roundImg = '';
   }
 
   createCurrentShuffleWords() {
@@ -43,11 +49,15 @@ class AudioCallGameModel {
 
   roundWords() {
     const roundArray: IAnxwer[] = [];
-    const trueWordIndex = this.currentRound - 1;
+    const trueWordIndex = this.itemIndex;
     const trueWord: IAnxwer = {
       word: this.currentWordsArray[trueWordIndex].word,
       trueAnxwer: true,
     };
+    const audio = this.currentWordsArray[trueWordIndex].audio;
+    const img = this.currentWordsArray[trueWordIndex].image;
+    this.roundAUdio = `${this.serverURL}/${audio}`;
+    this.roundImg = `${this.serverURL}/${img}`;
     roundArray.push(trueWord);
 
     const falseWords = [...this.currentShuffleWords];

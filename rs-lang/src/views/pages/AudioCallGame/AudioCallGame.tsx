@@ -10,6 +10,7 @@ import { AudioCallGameModel } from '../../../model/audioCallGameModel';
 import { IAnxwer } from '../../../interfaces/wordsInterface';
 import { WordCardType } from '../../../interfaces/types';
 import { applicationModel } from '../../../model/ApplicationModel';
+import { type } from 'os';
 
 type AudioCallGameType = {
   isLoading: boolean,
@@ -27,7 +28,8 @@ type AudioCallGameType = {
   currentButtonText_4: string,
   currentRound: string,
   currentRoundNumber: string,
-  //roundAudio: string,
+  roundAudio: string,
+  roundImg: string,
 }
 
 class AudioCallGame extends React.Component {
@@ -60,7 +62,8 @@ class AudioCallGame extends React.Component {
       currentButtonText_4: '3',
       currentRound: '0',
       currentRoundNumber: '0',
-      //roundAudio: this.gameModel.roundAUdio,
+      roundAudio: '',
+      roundImg: '',
     }
   }
 
@@ -86,13 +89,15 @@ class AudioCallGame extends React.Component {
     this.state.currentButtonText_2 = this.roundWordsArray[1].word;
     this.state.currentButtonText_3 = this.roundWordsArray[2].word;
     this.state.currentButtonText_4 = this.roundWordsArray[3].word;
-    
+    this.state.roundAudio = this.gameModel.roundAUdio;
+    this.state.roundImg = this.gameModel.roundImg;
+
     this.forceUpdate();
   }
 
   render() {
     const { isLoading } = this.state;
-
+    const audio = new Audio(this.state.roundAudio);
     if (isLoading) {
       return (
         <main className="main">
@@ -105,8 +110,9 @@ class AudioCallGame extends React.Component {
         </main>
       )
     }
-
+    
     return (
+
       <main className="main">
         <div className='games-page-wrap'>
           <h1>А У Д И О  В Ы З О В</h1>
@@ -141,10 +147,10 @@ class AudioCallGame extends React.Component {
               </section>
               <section className='games-page-wrap__game-wrap__audio-call__game'>
                 <div className='games-page-wrap__game-wrap__audio-call__game__audio'>
-
+                  <audio id='game-audio' src={this.state.roundAudio}></audio>
                 </div>
                 <button className='games-page-wrap__game-wrap__audio-call__game__repeat' >Повторить</button>
-
+                
               </section>
               <section className='games-page-wrap__game-wrap__audio-call__game-button'>
                 <GameButton>
