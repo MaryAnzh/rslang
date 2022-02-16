@@ -24,6 +24,8 @@ type AudioCallGameType = {
   currentButtonText_2: string,
   currentButtonText_3: string,
   currentButtonText_4: string,
+  currentRound: string,
+  currentRoundNumber: string,
 
 }
 
@@ -36,8 +38,10 @@ class AudioCallGame extends React.Component {
 
   constructor(props: {}) {
     super(props);
+
     this.wordsArray = wordsArray;
     this.gameModel = new AudioCallGameModel(this.wordsArray);
+
     this.state = {
       heardFill_1: 'none',
       heardFill_2: '#A66200',
@@ -51,8 +55,25 @@ class AudioCallGame extends React.Component {
       currentButtonText_2: this.wordsArray[1].word,
       currentButtonText_3: this.wordsArray[2].word,
       currentButtonText_4: this.wordsArray[3].word,
-
+      currentRound: this.gameModel.currentRound.toString(),
+      currentRoundNumber: this.gameModel.currentWordsArrayLangth.toString(),
     }
+  }
+
+  startGameOnClick(e: React.MouseEvent<HTMLElement>) {
+    audioCallPageModel.isSetting = false;
+    this.forceUpdate();
+  }
+
+  closeGameOnClick(e: React.MouseEvent<HTMLElement>) {
+    audioCallPageModel.isSetting = true;
+    this.forceUpdate();
+  }
+
+  gameWords() {
+    const gameModel = new AudioCallGameModel(wordsArray);
+    console.log(gameModel);
+
   }
 
   render() {
@@ -92,6 +113,7 @@ class AudioCallGame extends React.Component {
                     >{this.state.currentLevel}</div>
                   </div>
                   <div className='games-page-wrap__game-wrap__audio-call__top-settings__right'>
+                    <p className='games-page-wrap__game-wrap__audio-call__top-settings__right__round-number'>{this.state.currentRound}/{this.state.currentRoundNumber}</p>
                     <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__heards-error'>
                       <HeardsError heardFill={this.state.heardFill_1} heardStroke={this.state.heardStroke} />
                       <HeardsError heardFill={this.state.heardFill_2} heardStroke={this.state.heardStroke} />
@@ -127,22 +149,6 @@ class AudioCallGame extends React.Component {
         </main >
       );
     }
-  }
-
-  startGameOnClick(e: React.MouseEvent<HTMLElement>) {
-    audioCallPageModel.isSetting = false;
-    this.forceUpdate();
-  }
-
-  closeGameOnClick(e: React.MouseEvent<HTMLElement>) {
-    audioCallPageModel.isSetting = true;
-    this.forceUpdate();
-  }
-
-  gameWords() {
-    const gameModel = new AudioCallGameModel(wordsArray);
-    console.log(gameModel);
-
   }
 }
 

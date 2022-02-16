@@ -133,7 +133,7 @@
         }
 
         &__right {
-          width: 300px;
+          width: 340px;
           display: flex;
           justify-content: space-around;
           align-items: center;
@@ -141,6 +141,11 @@
           @media (max-width: 700px) {
            width: 100%;
            justify-content: end;
+          }
+
+          &__round-number {
+            color: #006DD9;
+            font-size: 1.6rem;
           }
 
           &__heards-error {
