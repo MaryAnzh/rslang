@@ -3,3 +3,8 @@ export interface IAudioCallWords {
   iconURL: string;
   soundURL: string,
 }
+
+export interface IAnxwer {
+  word: string;
+  trueAnxwer: boolean,
+}
