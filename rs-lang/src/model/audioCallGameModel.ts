@@ -14,50 +14,52 @@ class AudioCallGameModel {
   //массив слоа раунда
   roundWordsArray: IAudioCallWords[];
 
+  currentShuffleWords: string[];
+
   constructor(currentWordsArray: IAudioCallWords[]) {
     this.currentWordsArray = currentWordsArray;
     this.isSetting = false;
     this.currentWordsArrayLangth = this.currentWordsArray.length;
     this.currentRound = 1;
     this.roundWordsArray = [];
+    this.currentShuffleWords = this.createCurrentShuffleWords();
+  }
+
+  createCurrentShuffleWords() {
+    const array: string[] = [];
+    this.currentWordsArray.forEach((elem) => {
+      array.push(elem.word);
+    })
+    return array;
   }
 
   roundWords() {
     const roundArray: IAnxwer[] = [];
+    const trueWordIndex = this.currentRound - 1;
     const trueWord: IAnxwer = {
-      word: this.currentWordsArray[this.currentRound - 1].word,
+      word: this.currentWordsArray[trueWordIndex].word,
       trueAnxwer: true,
     };
+    roundArray.push(trueWord);
+
+    const falseWords = [...this.currentShuffleWords];
+    falseWords.splice(trueWordIndex, 1);
+    this.shuffle(falseWords);
+    
     const falseWordsNumber = 3;
     for (let i = 0; i < falseWordsNumber; i++) {
-      //let randomIndex = this.rendomNumber(this.currentWordsArrayLangth);
-      
-      console.log(i);
-    //   console.log('randomIndex');
-    //   console.log(randomIndex);
+      const falseWord: IAnxwer = {
+        word: falseWords[i],
+        trueAnxwer: false,
+      } 
+      roundArray.push(falseWord);
     }
-    
-    return '1111';
-    
-    // for (let index = 0; index < falseWordsNumber; index += 1) {
-    //   let randomIndex = this.rendomNumber(this.currentWordsArrayLangth);
-    //   console.log('randomIndex');
-    //   console.log(randomIndex);
-    //   let falseWord = this.currentWordsArray[randomIndex].word;
-    //   console.log('falseWord');
-    //   console.log(falseWord);
-    //   let check = this.currentWordsArray.findIndex((elem, i) => {
-    //     if (elem.word == falseWord) {
-    //       return i;
-    //     }
-    //     return -1;
-    //   });
-    //   console.log('check');
-    //   console.log(check);
-    // }
+
+    this.shuffle(roundArray);
+    return roundArray;
   }
 
-  shuffle(array: Array<number>) {
+  shuffle(array: Array<number | string | object>) {
     return array.sort(() => Math.random() - 0.5);
   }
 
@@ -67,6 +69,7 @@ class AudioCallGameModel {
     for (let i = 0; i < digitRange; i += 1) {
       randomArr.push(i);
     }
+
     this.shuffle(randomArr);
 
     return randomArr[1];
@@ -76,5 +79,5 @@ class AudioCallGameModel {
 const a = wordsArray;
 const test = new AudioCallGameModel(a);
 console.log('Тестирование');
-console.log(test.rendomNumber(5));
+console.log(test.roundWords());
 export { AudioCallGameModel };
