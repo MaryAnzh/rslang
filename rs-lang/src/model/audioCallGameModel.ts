@@ -1,18 +1,14 @@
-
-interface IAudioCallWords {
-  word: string;
-  iconURL: string;
-  soundURL: string,
-}
+import { IAudioCallWords } from '../interfaces/wordsInterface';
 
 class AudioCallGameModel {
-  words: IAudioCallWords[];
+  wordsArray: IAudioCallWords[];
 
   isSetting = true;
 
-  constructor(words: IAudioCallWords[]) {
-    this.words = words;
+  constructor(wordsArray: IAudioCallWords[]) {
+    this.wordsArray = wordsArray;
   }
+
 }
 
 export { AudioCallGameModel };

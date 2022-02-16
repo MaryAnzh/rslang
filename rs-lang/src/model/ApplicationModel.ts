@@ -2,6 +2,7 @@ import { newDataService } from '../dataServer/dataService';
 import { DataService } from '../dataServer/dataService';
 import { IUser, IUserRegisterResponse, ISignInUserInfo } from '../interfaces/userInterface';
 import { authorizationAppModel } from './AuthorizationAppModel';
+import { IAudioCallWords } from '../interfaces/wordsInterface';
 import { ErrorText } from '../views/elements/errorText/errorText';
 import { JsxFlags } from 'typescript';
 import { userStorage } from './UserStorage';
@@ -25,6 +26,7 @@ class ApplicationModel {
 
   currentTextError: string;
 
+  currentWordArray: IAudioCallWords[];
 
   constructor(dataServ: DataService) {
     this.dataServ = dataServ;
@@ -35,6 +37,7 @@ class ApplicationModel {
     this.currentUserId = '';
     this.isServerError = true;
     this.currentTextError = 'Тестирование';
+    this.currentWordArray = [];
   }
 
   async registerUser() {
