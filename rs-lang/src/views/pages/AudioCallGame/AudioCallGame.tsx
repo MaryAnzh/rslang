@@ -55,6 +55,22 @@ class AudioCallGame extends React.Component {
     }
   }
 
+  startGameOnClick(e: React.MouseEvent<HTMLElement>) {
+    audioCallPageModel.isSetting = false;
+    this.forceUpdate();
+  }
+
+  closeGameOnClick(e: React.MouseEvent<HTMLElement>) {
+    audioCallPageModel.isSetting = true;
+    this.forceUpdate();
+  }
+
+  gameWords() {
+    const gameModel = new AudioCallGameModel(wordsArray);
+    console.log(gameModel);
+
+  }
+
   render() {
     if (audioCallPageModel.isSetting) {
       return (
@@ -127,22 +143,6 @@ class AudioCallGame extends React.Component {
         </main >
       );
     }
-  }
-
-  startGameOnClick(e: React.MouseEvent<HTMLElement>) {
-    audioCallPageModel.isSetting = false;
-    this.forceUpdate();
-  }
-
-  closeGameOnClick(e: React.MouseEvent<HTMLElement>) {
-    audioCallPageModel.isSetting = true;
-    this.forceUpdate();
-  }
-
-  gameWords() {
-    const gameModel = new AudioCallGameModel(wordsArray);
-    console.log(gameModel);
-
   }
 }
 
