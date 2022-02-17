@@ -234,19 +234,8 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          }
+          }       
           
-          &__sound-button {
-            background: white;
-            color: #006DD9;
-            border: 1px solid #6AACEC;
-          }
-
-          &__nav-button {
-            background: #006DD9;
-            color: white;
-            border: 1px solid #6AACEC;
-          }
         }
       }
 
@@ -261,3 +250,14 @@
     }
   }
 }
+ .sound-button {
+            background: white;
+            color: #006DD9;
+            border: 1px solid #6AACEC;
+          }
+
+          .nav-button {
+            background: #006DD9;
+            color: white;
+            border: 1px solid #6AACEC;
+          }

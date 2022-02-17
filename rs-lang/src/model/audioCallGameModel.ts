@@ -31,6 +31,8 @@ class AudioCallGameModel {
 
   trueRoundWord = '';
 
+  errorAnxwerCount = 0;
+
   constructor(currentWordsArray: WordCardType[]) {
     this.currentWordsArray = currentWordsArray;
     this.serverURL = 'https://react-rslang-team-mary.herokuapp.com';
