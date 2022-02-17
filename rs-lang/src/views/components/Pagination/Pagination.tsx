@@ -27,7 +27,7 @@ class Pagination extends React.Component<PaginationProps> {
         <button onClick={this.props.upHandler} className='pagination__btn'>
           <img src={arrowForward} alt="back" />
         </button>
-        {this.props.isAutorize && <GameLinks />}
+        <GameLinks />
       </div>
     );
   }
@@ -35,4 +35,3 @@ class Pagination extends React.Component<PaginationProps> {
 
 
 export default connector(Pagination);
-// export { Pagination };
