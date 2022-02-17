@@ -13,6 +13,7 @@ import { applicationModel } from '../../../model/ApplicationModel';
 import { type } from 'os';
 import { Music } from '../../components/music/music';
 import { GameInfo } from '../../audioCallElements/gameInfo/gameInfo';
+import { Soundview } from '../../audioCallElements/soundView/soundview';
 
 type AudioCallGameType = {
   isLoading: boolean,
@@ -144,6 +145,8 @@ class AudioCallGame extends React.Component {
       this.setState({ correct: this.state.currentButClassName = 'blocked' });
       this.currentActiveButton(elemNumber);
 
+
+
       const isTrueAnswer = this.gameModel.isAnswerTrue(+elemNumber);
     }
   }
@@ -233,7 +236,9 @@ class AudioCallGame extends React.Component {
                 </div>
               </section>
               <section className='games-page-wrap__game-wrap__audio-call__game'>
-                <div className='games-page-wrap__game-wrap__audio-call__game__audio'></div>
+                <div className='games-page-wrap__game-wrap__audio-call__game__audio-img'>
+                  <Soundview />
+                </div>
 
                 <Music
                   className='games-page-wrap__game-wrap__audio-call__game__repeat'
