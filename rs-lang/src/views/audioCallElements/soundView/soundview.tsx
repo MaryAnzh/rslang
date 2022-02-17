@@ -1,6 +1,10 @@
 import React from 'react';
 import './soundview.scss';
 
+type SoundviewProps = {
+  style: { display: string },
+}
+
 class Soundview extends React.Component {
   render() {
     return (

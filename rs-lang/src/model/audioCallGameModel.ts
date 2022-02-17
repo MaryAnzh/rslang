@@ -29,6 +29,8 @@ class AudioCallGameModel {
 
   roundOnClickButtonNumber = 0;
 
+  trueRoundWord = '';
+
   constructor(currentWordsArray: WordCardType[]) {
     this.currentWordsArray = currentWordsArray;
     this.serverURL = 'https://react-rslang-team-mary.herokuapp.com';
@@ -52,8 +54,10 @@ class AudioCallGameModel {
   roundWords() {
     const roundArray: IAnxwer[] = [];
     const trueWordIndex = this.itemIndex;
+    const currentRoundWord = this.currentWordsArray[trueWordIndex].word;
+    this.trueRoundWord = currentRoundWord;
     const trueWord: IAnxwer = {
-      word: this.currentWordsArray[trueWordIndex].word,
+      word: currentRoundWord,
       isTrueAnxwer: true,
     };
     const audio = this.currentWordsArray[trueWordIndex].audio;
