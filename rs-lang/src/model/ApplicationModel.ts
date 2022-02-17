@@ -6,6 +6,7 @@ import { IAudioCallWords } from '../interfaces/wordsInterface';
 import { ErrorText } from '../views/elements/errorText/errorText';
 import { JsxFlags } from 'typescript';
 import { userStorage } from './UserStorage';
+import { WordCardType } from '../interfaces/types';
 
 
 class ApplicationModel {
@@ -26,7 +27,7 @@ class ApplicationModel {
 
   currentTextError: string;
 
-  currentWordArray: IAudioCallWords[];
+  currentWordArray: WordCardType[];
 
   constructor(dataServ: DataService) {
     this.dataServ = dataServ;
@@ -109,6 +110,16 @@ class ApplicationModel {
     this.currentUserName = '';
     this.currentMail = '';
     this.currentPassword = '';
+  }
+
+  async getWords(level: number, page: number) {
+    try {
+      const response = await this.dataServ.getWords(level, page);
+      this.currentWordArray = response;
+      return response;
+    } catch (error) {
+      console.log('Слова не получены');
+    }
   }
 }
 

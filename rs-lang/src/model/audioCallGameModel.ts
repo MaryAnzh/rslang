@@ -1,10 +1,13 @@
 import { IAudioCallWords, IAnxwer } from '../interfaces/wordsInterface';
-import { wordsArray } from './gamaTesting';
+import { applicationModel } from './ApplicationModel';
+import { WordCardType } from '../interfaces/types';
 
 class AudioCallGameModel {
-  currentWordsArray: IAudioCallWords[];
+  currentWordsArray: WordCardType[];
 
-  isSetting: boolean;
+  serverURL: string;
+
+  itemIndex: number;
 
   currentWordsArrayLangth: number;
 
@@ -12,52 +15,70 @@ class AudioCallGameModel {
   currentRound: number;
 
   //массив слоа раунда
-  roundWordsArray: IAudioCallWords[];
+  roundWordsArray: IAnxwer[];
 
-  constructor(currentWordsArray: IAudioCallWords[]) {
+  currentShuffleWords: string[];
+
+  roundAUdio: string;
+
+  roundImg: string;
+
+  currentLevel = 0;
+
+  currrntPageNumber = 0;
+
+  constructor(currentWordsArray: WordCardType[]) {
     this.currentWordsArray = currentWordsArray;
-    this.isSetting = false;
+    this.serverURL = 'https://react-rslang-team-mary.herokuapp.com';
+    this.itemIndex = 0;
     this.currentWordsArrayLangth = this.currentWordsArray.length;
     this.currentRound = 1;
     this.roundWordsArray = [];
+    this.currentShuffleWords = this.createCurrentShuffleWords();
+    this.roundAUdio = '';
+    this.roundImg = '';
+  }
+
+  createCurrentShuffleWords() {
+    const array: string[] = [];
+    this.currentWordsArray.forEach((elem) => {
+      array.push(elem.word);
+    })
+    return array;
   }
 
   roundWords() {
     const roundArray: IAnxwer[] = [];
+    const trueWordIndex = this.itemIndex;
     const trueWord: IAnxwer = {
-      word: this.currentWordsArray[this.currentRound - 1].word,
+      word: this.currentWordsArray[trueWordIndex].word,
       trueAnxwer: true,
     };
+    const audio = this.currentWordsArray[trueWordIndex].audio;
+    const img = this.currentWordsArray[trueWordIndex].image;
+    this.roundAUdio = `${this.serverURL}/${audio}`;
+    this.roundImg = `${this.serverURL}/${img}`;
+    roundArray.push(trueWord);
+
+    const falseWords = [...this.currentShuffleWords];
+    falseWords.splice(trueWordIndex, 1);
+    this.shuffle(falseWords);
+
     const falseWordsNumber = 3;
     for (let i = 0; i < falseWordsNumber; i++) {
-      //let randomIndex = this.rendomNumber(this.currentWordsArrayLangth);
-      
-      console.log(i);
-    //   console.log('randomIndex');
-    //   console.log(randomIndex);
+      const falseWord: IAnxwer = {
+        word: falseWords[i],
+        trueAnxwer: false,
+      }
+      roundArray.push(falseWord);
     }
-    
-    return '1111';
-    
-    // for (let index = 0; index < falseWordsNumber; index += 1) {
-    //   let randomIndex = this.rendomNumber(this.currentWordsArrayLangth);
-    //   console.log('randomIndex');
-    //   console.log(randomIndex);
-    //   let falseWord = this.currentWordsArray[randomIndex].word;
-    //   console.log('falseWord');
-    //   console.log(falseWord);
-    //   let check = this.currentWordsArray.findIndex((elem, i) => {
-    //     if (elem.word == falseWord) {
-    //       return i;
-    //     }
-    //     return -1;
-    //   });
-    //   console.log('check');
-    //   console.log(check);
-    // }
+
+    this.shuffle(roundArray);
+    this.roundWordsArray = roundArray;
+    return roundArray;
   }
 
-  shuffle(array: Array<number>) {
+  shuffle<T>(array: Array<T>) {
     return array.sort(() => Math.random() - 0.5);
   }
 
@@ -67,14 +88,24 @@ class AudioCallGameModel {
     for (let i = 0; i < digitRange; i += 1) {
       randomArr.push(i);
     }
+
     this.shuffle(randomArr);
 
     return randomArr[1];
   }
 
 }
-const a = wordsArray;
-const test = new AudioCallGameModel(a);
-console.log('Тестирование');
-console.log(test.rendomNumber(5));
+
+async function word() {
+  const a = await applicationModel.getWords(0, 0);
+  if (a != undefined) {
+    const w = new AudioCallGameModel(a);
+    const c = w.roundWords();
+
+    // console.log('w.currentLevel');
+    // console.log(c);
+  }
+}
+word();
+
 export { AudioCallGameModel };
