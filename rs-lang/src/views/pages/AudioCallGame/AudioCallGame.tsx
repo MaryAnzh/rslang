@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import './AudioCallGame.scss';
 import '../../elements/settingPanel/settingPanel';
 import { audioCallPageModel } from '../../../model/AudioCallPageModel';
@@ -28,11 +28,24 @@ type AudioCallGameType = {
   currentButtonText_2: string,
   currentButtonText_3: string,
   currentButtonText_4: string,
+  currentButtonActive_0: { background: string },
+  currentButtonActive_1: { background: string },
+  currentButtonActive_2: { background: string },
+  currentButtonActive_3: { background: string },
+  currentButClassName: string,
   currentRound: string,
   currentRoundNumber: string,
   roundAudio: string,
   roundImg: string,
   gameInfoStyle: { display: string },
+  audioButtonText: string,
+  audioButtonClassName: string,
+}
+
+
+
+type ButtonType = {
+  datatype: string,
 }
 
 class AudioCallGame extends React.Component {
@@ -46,11 +59,14 @@ class AudioCallGame extends React.Component {
 
   roundAudio: HTMLAudioElement;
 
+  audioButtonClass: string;
+
   constructor(props: {}) {
     super(props);
     this.wordsArray = [];
     this.gameModel = new AudioCallGameModel(this.wordsArray);
     this.roundWordsArray = [];
+    this.audioButtonClass = 'games-page-wrap__game-wrap__audio-call__game__repeat__button games-page-wrap__game-wrap__audio-call__game__repeat';
     this.state = {
       isLoading: true,
       heardFill_1: '#C48026',
@@ -65,11 +81,19 @@ class AudioCallGame extends React.Component {
       currentButtonText_2: '1',
       currentButtonText_3: '2',
       currentButtonText_4: '3',
-      currentRound: '0',
-      currentRoundNumber: '0',
+      //currentButtonActive_0: { background: '#d3e0ee', color: '#006DD9' },
+      currentButtonActive_0: { background: 'auto' },
+      currentButtonActive_1: { background: 'auto' },
+      currentButtonActive_2: { background: 'auto' },
+      currentButtonActive_3: { background: 'auto' },
+      currentButClassName: 'visible',
+      currentRound: '',
+      currentRoundNumber: '',
       roundAudio: '',
       roundImg: '',
-      gameInfoStyle: { display: 'flex' },
+      gameInfoStyle: { display: 'none' },
+      audioButtonText: 'Повторить',
+      audioButtonClassName: this.audioButtonClass + '__sound-button',
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -98,6 +122,8 @@ class AudioCallGame extends React.Component {
     this.state.currentButtonText_4 = this.roundWordsArray[3].word;
     this.state.roundAudio = this.gameModel.roundAUdio;
     this.state.roundImg = this.gameModel.roundImg;
+    this.state.currentRound = this.gameModel.currentRound.toString();
+    this.state.currentRoundNumber = this.gameModel.currentWordsArrayLangth.toString();
 
     this.forceUpdate();
   }
@@ -106,6 +132,44 @@ class AudioCallGame extends React.Component {
     this.setState(
       this.state.gameInfoStyle = { display: 'none' },
     );
+  }
+
+  getButtonDatatypeOnClick(e: React.MouseEvent<HTMLElement>) {
+    const elem = e.target as HTMLElement;
+    const elemNumber = elem.getAttribute('data-index');
+
+    if (elemNumber != null) {
+      this.setState({ correct: this.state.audioButtonText = 'Далее' });
+      this.setState({ correct: this.state.audioButtonClassName = this.audioButtonClass + '__nav-button' });
+      this.setState({ correct: this.state.currentButClassName = 'blocked' });
+      this.currentActiveButton(elemNumber);
+
+      const isTrueAnswer = this.gameModel.isAnswerTrue(+elemNumber);
+    }
+  }
+
+  currentActiveButton(buttonNumber: string) {
+    switch (buttonNumber) {
+      case '0':
+        this.setState(this.state.currentButtonActive_0 = { background: '#d3e0ee' })
+        break;
+      case '1':
+        this.setState(this.state.currentButtonActive_1 = { background: '#d3e0ee' })
+        break;
+      case '2':
+        this.setState(this.state.currentButtonActive_2 = { background: '#d3e0ee' })
+        break;
+      case '3':
+        this.setState(this.state.currentButtonActive_3 = { background: '#d3e0ee' })
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  truAnsewrModel() {
+
   }
 
   render() {
@@ -136,7 +200,7 @@ class AudioCallGame extends React.Component {
                 <Music
                   className='games-page-wrap__game-wrap__audio-call__game__repeat'
                   url={this.state.roundAudio}>
-                <button className='games-page-wrap__game-wrap__audio-call__game__repeat__button'>Начать</button>
+                  <button className='games-page-wrap__game-wrap__audio-call__game__repeat__button'>Начать</button>
                 </Music>
               </div>
             </GameInfo>
@@ -174,15 +238,34 @@ class AudioCallGame extends React.Component {
                 <Music
                   className='games-page-wrap__game-wrap__audio-call__game__repeat'
                   url={this.state.roundAudio}>
-                  <button className='games-page-wrap__game-wrap__audio-call__game__repeat__button'>Повторить</button>
+                  <button className={this.state.audioButtonClassName}>
+                    {this.state.audioButtonText}
+                  </button>
                 </Music>
               </section>
               <section className='games-page-wrap__game-wrap__audio-call__game-button'>
                 <GameButton>
-                  <button>{this.state.currentButtonText_1}</button>
-                  <button>{this.state.currentButtonText_2}</button>
-                  <button>{this.state.currentButtonText_3}</button>
-                  <button>{this.state.currentButtonText_4}</button>
+                  <button
+                    className={this.state.currentButClassName}
+                    style={this.state.currentButtonActive_0}
+                    data-index='0'
+                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}
+                  >{this.state.currentButtonText_1}</button>
+                  <button
+                    className={this.state.currentButClassName}
+                    style={this.state.currentButtonActive_1}
+                    data-index='1'
+                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}>{this.state.currentButtonText_2}</button>
+                  <button
+                    className={this.state.currentButClassName}
+                    style={this.state.currentButtonActive_2}
+                    data-index='2'
+                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}>{this.state.currentButtonText_3}</button>
+                  <button
+                    className={this.state.currentButClassName}
+                    style={this.state.currentButtonActive_3}
+                    data-index='3'
+                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}>{this.state.currentButtonText_4}</button>
                 </GameButton>
               </section>
             </section>

@@ -6,5 +6,5 @@ export interface IAudioCallWords {
 
 export interface IAnxwer {
   word: string;
-  trueAnxwer: boolean,
+  isTrueAnxwer: boolean,
 }
