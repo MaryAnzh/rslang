@@ -12,6 +12,7 @@ import { WordCardType } from '../../../interfaces/types';
 import { applicationModel } from '../../../model/ApplicationModel';
 import { type } from 'os';
 import { Music } from '../../components/music/music';
+import { GameInfo } from '../../audioCallElements/gameInfo/gameInfo';
 
 type AudioCallGameType = {
   isLoading: boolean,
@@ -30,7 +31,8 @@ type AudioCallGameType = {
   currentRound: string,
   currentRoundNumber: string,
   roundAudio: string,
-  roundImg: string
+  roundImg: string,
+  gameInfoStyle: { display: string },
 }
 
 class AudioCallGame extends React.Component {
@@ -51,11 +53,11 @@ class AudioCallGame extends React.Component {
     this.roundWordsArray = [];
     this.state = {
       isLoading: true,
-      heardFill_1: 'none',
-      heardFill_2: '#A66200',
-      heardFill_3: '#A66200',
-      heardFill_4: '#A66200',
-      heardFill_5: '#A66200',
+      heardFill_1: '#C48026',
+      heardFill_2: '#C48026',
+      heardFill_3: '#C48026',
+      heardFill_4: '#C48026',
+      heardFill_5: '#C48026',
       heardStroke: '#A66200',
       currentLevel: 'Уровень сложности 1',
       currentLevelColor: { background: '#FFB140' },
@@ -67,6 +69,7 @@ class AudioCallGame extends React.Component {
       currentRoundNumber: '0',
       roundAudio: '',
       roundImg: '',
+      gameInfoStyle: { display: 'flex' },
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -99,8 +102,14 @@ class AudioCallGame extends React.Component {
     this.forceUpdate();
   }
 
-  render() {
+  hiddenInfoOnClick(e: React.MouseEvent<HTMLElement>) {
+    this.setState(
+      this.state.gameInfoStyle = { display: 'none' },
+    );
+  }
 
+  render() {
+    //console.log('Рендер вызвался');
     const { isLoading } = this.state;
 
     if (isLoading) {
@@ -121,6 +130,16 @@ class AudioCallGame extends React.Component {
         <div className='games-page-wrap'>
           <h1>А У Д И О  В Ы З О В</h1>
           <div className='games-page-wrap__game-wrap'>
+            <GameInfo gameInfoStyle={this.state.gameInfoStyle}>
+              <p>Добро пожаловать в игру Аудио вызов</p>
+              <div onClick={(e) => { this.hiddenInfoOnClick(e) }}>
+                <Music
+                  className='games-page-wrap__game-wrap__audio-call__game__repeat'
+                  url={this.state.roundAudio}>
+                <button className='games-page-wrap__game-wrap__audio-call__game__repeat__button'>Начать</button>
+                </Music>
+              </div>
+            </GameInfo>
             <section className='games-page-wrap__game-wrap__audio-call'>
               <section className='games-page-wrap__game-wrap__audio-call__top-settings'>
                 <div className='games-page-wrap__game-wrap__audio-call__top-settings__left'>
