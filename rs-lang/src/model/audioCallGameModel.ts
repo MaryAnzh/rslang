@@ -5,15 +5,8 @@ import { WordCardType } from '../interfaces/types';
 class AudioCallGameModel {
   currentWordsArray: WordCardType[];
 
-  serverURL: string;
-
-  itemIndex: number;
-
   currentWordsArrayLangth: number;
-
-  //номер текущего раунда
-  currentRound: number;
-
+  
   //массив слоа раунда
   roundWordsArray: IAnxwer[];
 
@@ -23,11 +16,19 @@ class AudioCallGameModel {
 
   roundImg: string;
 
-  currentLevel = 0;
+  roundOnClickButtonNumber = 0;
+
+  serverURL = 'https://react-rslang-team-mary.herokuapp.com';
+
+  currentLevelNumber = 0;
 
   currrntPageNumber = 0;
 
-  roundOnClickButtonNumber = 0;
+  //омер индекса слова раунда
+  itemIndex = 0;
+  
+  //номер текущего раунда
+  currentRound = 1;
 
   trueRoundWord = '';
 
@@ -35,10 +36,7 @@ class AudioCallGameModel {
 
   constructor(currentWordsArray: WordCardType[]) {
     this.currentWordsArray = currentWordsArray;
-    this.serverURL = 'https://react-rslang-team-mary.herokuapp.com';
-    this.itemIndex = 0;
     this.currentWordsArrayLangth = this.currentWordsArray.length;
-    this.currentRound = 1;
     this.roundWordsArray = [];
     this.currentShuffleWords = this.createCurrentShuffleWords();
     this.roundAUdio = '';
