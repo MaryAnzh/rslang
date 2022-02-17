@@ -61,15 +61,27 @@ class TextBook extends React.Component {
         break;
     }
     if (this.state.group !== group) {
-      newDataService.getWords(group, page).then(response => {
-        this.setState((prev: TextBookState) => {
-          if (prev.words !== response) {
-            return {
-              words: response,
-            };
-          }
+      if (group === 6) {
+        newDataService.getAgrHardWords().then(response => {
+          this.setState((prev: TextBookState) => {
+            if (prev.words !== response) {
+              return {
+                words: response,
+              };
+            }
+          });
         });
-      });
+      } else {
+        newDataService.getWords(group, page).then(response => {
+          this.setState((prev: TextBookState) => {
+            if (prev.words !== response) {
+              return {
+                words: response,
+              };
+            }
+          });
+        });
+      }
       this.setState(() => ({
         group: group,
         page: page,
@@ -78,38 +90,42 @@ class TextBook extends React.Component {
   }
 
   PageDownHandler() {
-    if (this.state.page !== 0) {
-      userStorage.setPageGroupToLocalStorage(this.state.group, this.state.page - 1);
-      newDataService.getWords(this.state.group, this.state.page - 1).then(response => {
-        this.setState((prev: TextBookState) => {
-          if (prev.words !== response) {
-            return {
-              words: response,
-            };
-          }
+    if (this.state.group !== 6) {
+      if (this.state.page !== 0) {
+        userStorage.setPageGroupToLocalStorage(this.state.group, this.state.page - 1);
+        newDataService.getWords(this.state.group, this.state.page - 1).then(response => {
+          this.setState((prev: TextBookState) => {
+            if (prev.words !== response) {
+              return {
+                words: response,
+              };
+            }
+          });
         });
-      });
-      this.setState((prev: TextBookState) => ({
-        page: prev.page - 1,
-      }));
+        this.setState((prev: TextBookState) => ({
+          page: prev.page - 1,
+        }));
+      }
     }
   }
 
   PageUpHandler() {
-    if (this.state.page !== 29) {
-      userStorage.setPageGroupToLocalStorage(this.state.group, this.state.page + 1);
-      newDataService.getWords(this.state.group, this.state.page + 1).then(response => {
-        this.setState((prev: TextBookState) => {
-          if (prev.words !== response) {
-            return {
-              words: response,
-            };
-          }
+    if (this.state.group !== 6) {
+      if (this.state.page !== 29) {
+        userStorage.setPageGroupToLocalStorage(this.state.group, this.state.page + 1);
+        newDataService.getWords(this.state.group, this.state.page + 1).then(response => {
+          this.setState((prev: TextBookState) => {
+            if (prev.words !== response) {
+              return {
+                words: response,
+              };
+            }
+          });
         });
-      });
-      this.setState((prev: TextBookState) => ({
-        page: prev.page + 1,
-      }));
+        this.setState((prev: TextBookState) => ({
+          page: prev.page + 1,
+        }));
+      }
     }
   }
 

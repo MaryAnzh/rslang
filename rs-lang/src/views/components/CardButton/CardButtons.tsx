@@ -7,9 +7,10 @@ import applyPic from '../../../img/svg/check.svg';
 import { ButtonsGlobState, CardButtonsProps, CardButtonsState } from '../../../interfaces/types';
 import { soundModel } from '../../../model/SoundModel';
 import { connect } from 'react-redux';
+import { newDataService } from '../../../dataServer/dataService';
 
 
-
+const wordEx = { difficulty: 'hard', optional: {} };
 
 const mapStateToProps = (state: ButtonsGlobState, ownProps: CardButtonsProps ) => {
   return {
@@ -19,11 +20,6 @@ const mapStateToProps = (state: ButtonsGlobState, ownProps: CardButtonsProps ) =
 };
 
 const connector = connect(mapStateToProps, null);
-// const connector = connect(null, null);
-
-// type PropsFromRedux = ConnectedProps<typeof connector>;
-
-// type Props = PropsFromRedux & CardButtonsProps;
 
 class CardButtons extends React.Component<CardButtonsProps> {
   state: CardButtonsState;
@@ -62,7 +58,7 @@ class CardButtons extends React.Component<CardButtonsProps> {
         <button onClick={this.handleClick} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-fix'}>
           <img  src={this.state.isPlay ? pausePic : playPic} alt="sound" className="card-buttons__pic"/>
         </button>
-        <button className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
+        <button onClick={() => newDataService.addHardWord(this.props.wordId, wordEx)} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
           <img src={addPic} alt="add" className="card-buttons__pic"/>
         </button>
         <button className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
