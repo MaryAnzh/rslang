@@ -35,8 +35,8 @@ class Music extends React.Component<MusicProps> {
       play: true,
       pause: false,
     });
-    console.log(this.audio);
-    this.audio.play();
+    setTimeout(() => this.audio.play(), 500);
+    
   }
 
   pause() {
@@ -45,7 +45,7 @@ class Music extends React.Component<MusicProps> {
   }
 
   render() {
-
+    
     return (
       <div>
         <div onClick={() => this.play()}>{ this.props.children}</div>
