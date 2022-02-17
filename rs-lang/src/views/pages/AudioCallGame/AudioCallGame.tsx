@@ -155,12 +155,14 @@ class AudioCallGame extends React.Component {
       this.setState({ correct: this.state.currentButClassName = 'blocked' });
       this.currentActiveButton(elemNumber);
       const isTrueAnswer = this.gameModel.isAnswerTrue(+elemNumber);
+      this.setState(this.state.soundImg = { display: 'none' });
+      this.setState({ correct: this.state.wordSoundImg = { display: 'flex', background: 'url(' + this.gameModel.roundImg + ')' } })
+      this.setState({ correct: this.state.trueRoundWord = this.gameModel.trueRoundWord });
       if (isTrueAnswer) {
-        this.truAnsewrModel();
+        this.setState({ cirrect: this.state.answerIndicator = { background: 'url(' + trueCheck + ')' } });
+      } else {
+        this.setState({ cirrect: this.state.answerIndicator = { background: 'url(' + cross + ')' } });
       }
-
-
-
     }
   }
 
@@ -185,10 +187,7 @@ class AudioCallGame extends React.Component {
   }
 
   truAnsewrModel() {
-    this.setState(this.state.soundImg = { display: 'none' });
-    this.setState({ correct: this.state.wordSoundImg = { display: 'flex', background: 'url(' + this.gameModel.roundImg + ')' } })
-    this.setState({ correct: this.state.trueRoundWord = this.gameModel.trueRoundWord });
-    this.setState({ cirrect: this.state.answerIndicator = { background: 'url(' + trueCheck + ')' } });
+    
   }
 
   render() {

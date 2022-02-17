@@ -46,7 +46,7 @@ class AudioCallGameModel {
   createCurrentShuffleWords() {
     const array: string[] = [];
     this.currentWordsArray.forEach((elem) => {
-      array.push(elem.word);
+      array.push(elem.wordTranslate);
     })
     return array;
   }
@@ -54,7 +54,7 @@ class AudioCallGameModel {
   roundWords() {
     const roundArray: IAnxwer[] = [];
     const trueWordIndex = this.itemIndex;
-    const currentRoundWord = this.currentWordsArray[trueWordIndex].word;
+    const currentRoundWord = this.currentWordsArray[trueWordIndex].wordTranslate;
     this.trueRoundWord = currentRoundWord;
     const trueWord: IAnxwer = {
       word: currentRoundWord,
