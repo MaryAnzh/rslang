@@ -78,7 +78,7 @@ class AudioCallGameModel {
     return roundArray;
   }
 
-  shuffle(array: Array<number | string | object>) {
+  shuffle<T>(array: Array<T>) {
     return array.sort(() => Math.random() - 0.5);
   }
 
