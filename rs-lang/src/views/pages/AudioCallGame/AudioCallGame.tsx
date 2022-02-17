@@ -53,11 +53,11 @@ class AudioCallGame extends React.Component {
     this.roundWordsArray = [];
     this.state = {
       isLoading: true,
-      heardFill_1: 'none',
-      heardFill_2: '#A66200',
-      heardFill_3: '#A66200',
-      heardFill_4: '#A66200',
-      heardFill_5: '#A66200',
+      heardFill_1: '#C48026',
+      heardFill_2: '#C48026',
+      heardFill_3: '#C48026',
+      heardFill_4: '#C48026',
+      heardFill_5: '#C48026',
       heardStroke: '#A66200',
       currentLevel: 'Уровень сложности 1',
       currentLevelColor: { background: '#FFB140' },
@@ -109,7 +109,7 @@ class AudioCallGame extends React.Component {
   }
 
   render() {
-    console.log('Рендер вызвался');
+    //console.log('Рендер вызвался');
     const { isLoading } = this.state;
 
     if (isLoading) {
