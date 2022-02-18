@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import './AudioCallGame.scss';
 import '../../elements/settingPanel/settingPanel';
 import { audioCallPageModel } from '../../../model/AudioCallPageModel';
@@ -13,6 +13,9 @@ import { applicationModel } from '../../../model/ApplicationModel';
 import { type } from 'os';
 import { Music } from '../../components/music/music';
 import { GameInfo } from '../../audioCallElements/gameInfo/gameInfo';
+import { Soundview } from '../../audioCallElements/soundView/soundview';
+import trueCheck from '../../../img/png/true.png';
+import cross from '../../../img/png/cross.png';
 
 type AudioCallGameType = {
   isLoading: boolean,
@@ -28,11 +31,28 @@ type AudioCallGameType = {
   currentButtonText_2: string,
   currentButtonText_3: string,
   currentButtonText_4: string,
+  currentButtonActive_0: { background: string },
+  currentButtonActive_1: { background: string },
+  currentButtonActive_2: { background: string },
+  currentButtonActive_3: { background: string },
+  currentButClassName: string,
   currentRound: string,
   currentRoundNumber: string,
   roundAudio: string,
   roundImg: string,
   gameInfoStyle: { display: string },
+  audioButtonText: string,
+  soundImg: { display: string },
+  wordSoundImg: { display: string, background: string },
+  trueRoundWord: string,
+  answerIndicator: { background: string },
+  soundButton: string,
+  nextRoundBUtton: string,
+  nextRoundBUttonText: string,
+}
+
+type ButtonType = {
+  datatype: string,
 }
 
 class AudioCallGame extends React.Component {
@@ -42,15 +62,14 @@ class AudioCallGame extends React.Component {
 
   wordsArray: WordCardType[] | undefined;
 
-  roundWordsArray: IAnxwer[];
-
   roundAudio: HTMLAudioElement;
+
+  currentRoundNumber = 0;
 
   constructor(props: {}) {
     super(props);
     this.wordsArray = [];
     this.gameModel = new AudioCallGameModel(this.wordsArray);
-    this.roundWordsArray = [];
     this.state = {
       isLoading: true,
       heardFill_1: '#C48026',
@@ -65,47 +84,167 @@ class AudioCallGame extends React.Component {
       currentButtonText_2: '1',
       currentButtonText_3: '2',
       currentButtonText_4: '3',
-      currentRound: '0',
-      currentRoundNumber: '0',
+      //currentButtonActive_0: { background: '#d3e0ee', color: '#006DD9' },
+      currentButtonActive_0: { background: 'auto' },
+      currentButtonActive_1: { background: 'auto' },
+      currentButtonActive_2: { background: 'auto' },
+      currentButtonActive_3: { background: 'auto' },
+      currentButClassName: 'visible',
+      currentRound: '',
+      currentRoundNumber: '',
       roundAudio: '',
       roundImg: '',
       gameInfoStyle: { display: 'flex' },
+      audioButtonText: 'Повторить',
+      soundImg: { display: 'flex' },
+      wordSoundImg: { display: 'none', background: 'white' },
+      trueRoundWord: '',
+      answerIndicator: { background: '' },
+      soundButton: 'displayFlex',
+      nextRoundBUtton: 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone',
+      nextRoundBUttonText: 'Далее',
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
 
-  startGameOnClick(e: React.MouseEvent<HTMLElement>) {
-    audioCallPageModel.isSetting = false;
-    this.forceUpdate();
-  }
-
   closeGameOnClick(e: React.MouseEvent<HTMLElement>) {
-    audioCallPageModel.isSetting = true;
-    this.forceUpdate();
+
   }
 
   async componentDidMount() {
-    const data = await applicationModel.getWords(0, 0);
-    this.state.isLoading = false;
+    //берем категорию и страницу, и  запрашиваем слова
+    const level = applicationModel.gameLevel;
+    const page = applicationModel.gamePage;
+    const data = await applicationModel.getWords(level, page);
+
+    //если массив получен, запускаем gameNodel
     this.wordsArray = data;
     if (this.wordsArray != undefined) {
       this.gameModel = new AudioCallGameModel(this.wordsArray);
+      this.gameModel.roundWords();
+      this.updatePageInfo();
     }
-    this.roundWordsArray = this.gameModel.roundWords();
-    this.state.currentButtonText_1 = this.roundWordsArray[0].word;
-    this.state.currentButtonText_2 = this.roundWordsArray[1].word;
-    this.state.currentButtonText_3 = this.roundWordsArray[2].word;
-    this.state.currentButtonText_4 = this.roundWordsArray[3].word;
-    this.state.roundAudio = this.gameModel.roundAUdio;
-    this.state.roundImg = this.gameModel.roundImg;
 
-    this.forceUpdate();
+    this.setState({ correct: this.state.isLoading = false });
+    //this.forceUpdate();
   }
 
   hiddenInfoOnClick(e: React.MouseEvent<HTMLElement>) {
     this.setState(
       this.state.gameInfoStyle = { display: 'none' },
     );
+  }
+
+  getButtonDatatypeOnClick(e: React.MouseEvent<HTMLElement>) {
+    const elem = e.target as HTMLElement;
+    const elemNumber = elem.getAttribute('data-index');
+
+    if (elemNumber != null) {
+      this.currentActiveButton(elemNumber);
+      const isTrueAnswer = this.gameModel.isAnswerTrue(+elemNumber);
+      this.setState({
+        currentButClassName: 'blocked',
+        soundImg: { display: 'none' },
+        wordSoundImg: { display: 'flex', background: 'url(' + this.gameModel.roundImg + ')' },
+        trueRoundWord: this.gameModel.trueRoundWord,
+        soundButton: 'displayNone',
+        nextRoundBUtton: 'games-page-wrap__game-wrap__audio-call__game__repeat displayFkex',
+      });
+      //this.setState({ correct: this.state.currentButClassName = 'blocked' });
+      
+      //this.setState(this.state.soundImg = { display: 'none' });
+      //this.setState({ correct: this.state.wordSoundImg = { display: 'flex', background: 'url(' + this.gameModel.roundImg + ')' } })
+      //this.setState({ correct: this.state.trueRoundWord = this.gameModel.trueRoundWord });
+      //this.setState({ correct: this.state.soundButton = 'displayNone' });
+      this.setState({ correct: this.state.nextRoundBUtton = 'games-page-wrap__game-wrap__audio-call__game__repeat displayFkex' });
+
+      if (isTrueAnswer) {
+        this.setState({ cirrect: this.state.answerIndicator = { background: 'url(' + trueCheck + ')' } });
+      } else {
+        this.setState({ correct: this.state.answerIndicator = { background: 'url(' + cross + ')' } });
+        this.gameModel.errorAnxwerCount += 1;
+        this.currentError(this.gameModel.errorAnxwerCount);
+        if (this.gameModel.errorAnxwerCount > 4) {
+          this.setState({ correct: this.state.nextRoundBUttonText = 'Раунд окончен' });
+        }
+      }
+    }
+  }
+
+  async nextRoundOnClick(e: React.MouseEvent<HTMLElement>) {
+    this.gameModel.itemIndex += 1;
+    this.gameModel.currentRound += 1;
+    this.gameModel.roundWordsArray = [];
+    this.gameModel.roundWords();
+    console.log('обновленное аудио');
+    console.log(this.gameModel.roundAUdio);
+
+    this.setState({
+      currentButClassName: 'visible',
+      soundImg: { display: 'flex' },
+      wordSoundImg: { display: 'none', background: 'none' },
+      soundButton: 'displayFLex',
+      roundAudio: this.gameModel.roundAUdio,
+      nextRoundBUtton: 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone',
+    })
+
+    this.updatePageInfo();
+  }
+
+  updatePageInfo() {
+    this.setState({
+      currentButtonText_1: this.gameModel.roundWordsArray[0].word,
+      currentButtonText_2: this.gameModel.roundWordsArray[1].word,
+      currentButtonText_3: this.gameModel.roundWordsArray[2].word,
+      currentButtonText_4: this.gameModel.roundWordsArray[3].word,
+      roundAudio: this.gameModel.roundAUdio,
+      roundImg: this.gameModel.roundImg,
+      currentRound: this.gameModel.currentRound.toString(),
+      currentRoundNumber: this.gameModel.currentWordsArrayLangth.toString(),
+    });
+  }
+
+  currentActiveButton(buttonNumber: string) {
+    switch (buttonNumber) {
+      case '0':
+        this.setState(this.state.currentButtonActive_0 = { background: '#d3e0ee' })
+        break;
+      case '1':
+        this.setState(this.state.currentButtonActive_1 = { background: '#d3e0ee' })
+        break;
+      case '2':
+        this.setState(this.state.currentButtonActive_2 = { background: '#d3e0ee' })
+        break;
+      case '3':
+        this.setState(this.state.currentButtonActive_3 = { background: '#d3e0ee' })
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  currentError(errorNumber: number) {
+    switch (errorNumber) {
+      case 1:
+        this.setState({ correct: this.state.heardFill_1 = 'none' })
+        break;
+      case 2:
+        this.setState({ correct: this.state.heardFill_2 = 'none' })
+        break;
+      case 3:
+        this.setState({ correct: this.state.heardFill_3 = 'none' })
+        break;
+      case 4:
+        this.setState({ correct: this.state.heardFill_4 = 'none' })
+        break;
+      case 5:
+        this.setState({ correct: this.state.heardFill_5 = 'none' })
+        break;
+
+      default:
+        break;
+    }
   }
 
   render() {
@@ -136,7 +275,7 @@ class AudioCallGame extends React.Component {
                 <Music
                   className='games-page-wrap__game-wrap__audio-call__game__repeat'
                   url={this.state.roundAudio}>
-                <button className='games-page-wrap__game-wrap__audio-call__game__repeat__button'>Начать</button>
+                  <button className='games-page-wrap__game-wrap__audio-call__game__repeat__button'>Начать</button>
                 </Music>
               </div>
             </GameInfo>
@@ -169,20 +308,64 @@ class AudioCallGame extends React.Component {
                 </div>
               </section>
               <section className='games-page-wrap__game-wrap__audio-call__game'>
-                <div className='games-page-wrap__game-wrap__audio-call__game__audio'></div>
-
-                <Music
-                  className='games-page-wrap__game-wrap__audio-call__game__repeat'
-                  url={this.state.roundAudio}>
-                  <button className='games-page-wrap__game-wrap__audio-call__game__repeat__button'>Повторить</button>
-                </Music>
+                <div className='games-page-wrap__game-wrap__audio-call__game__audio-img'>
+                  <div style={this.state.soundImg}>
+                    <Soundview />
+                  </div>
+                  <div
+                    className='games-page-wrap__game-wrap__audio-call__game__audio-img__word'
+                    style={this.state.wordSoundImg}>
+                    <div className='games-page-wrap__game-wrap__audio-call__game__audio-img__word__indicator'
+                      style={this.state.answerIndicator}
+                    ></div>
+                    <div className='games-page-wrap__game-wrap__audio-call__game__audio-img__word__true-answer'>
+                      <p>{this.state.trueRoundWord}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className={this.state.soundButton}>
+                  <Music
+                    className='games-page-wrap__game-wrap__audio-call__game__repeat '
+                    url={this.state.roundAudio}>
+                    <button className='games-page-wrap__game-wrap__audio-call__game__repeat__button sound-button'>
+                      Повторить
+                    </button>
+                  </Music>
+                </div>
+                <div className={this.state.nextRoundBUtton}>
+                  <Music
+                    className=''
+                    url={this.state.roundAudio}>
+                    <button className='games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button'
+                      onClick={(e) => { this.nextRoundOnClick(e) }}>
+                      Далее
+                    </button>
+                  </Music>
+                </div>
               </section>
               <section className='games-page-wrap__game-wrap__audio-call__game-button'>
                 <GameButton>
-                  <button>{this.state.currentButtonText_1}</button>
-                  <button>{this.state.currentButtonText_2}</button>
-                  <button>{this.state.currentButtonText_3}</button>
-                  <button>{this.state.currentButtonText_4}</button>
+                  <button
+                    className={this.state.currentButClassName}
+                    style={this.state.currentButtonActive_0}
+                    data-index='0'
+                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}
+                  >{this.state.currentButtonText_1}</button>
+                  <button
+                    className={this.state.currentButClassName}
+                    style={this.state.currentButtonActive_1}
+                    data-index='1'
+                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}>{this.state.currentButtonText_2}</button>
+                  <button
+                    className={this.state.currentButClassName}
+                    style={this.state.currentButtonActive_2}
+                    data-index='2'
+                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}>{this.state.currentButtonText_3}</button>
+                  <button
+                    className={this.state.currentButClassName}
+                    style={this.state.currentButtonActive_3}
+                    data-index='3'
+                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}>{this.state.currentButtonText_4}</button>
                 </GameButton>
               </section>
             </section>
