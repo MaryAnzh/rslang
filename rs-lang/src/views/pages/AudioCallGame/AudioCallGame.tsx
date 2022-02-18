@@ -163,6 +163,12 @@ class AudioCallGame extends React.Component {
             nextRoundBUttonText: 'Раунд окончен',
             nextRoundButtonCLass: 'games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button round-end-anim',
           });
+          setTimeout(() => {
+            this.setState({
+              statisticsRoundInfo: this.gameModel.roundTrueAnswer + '/' + this.gameModel.currentWordsArrayLangth,
+              statisticsDosplay: { display: 'flex' },
+            })
+          }, 3000);
         }
         this.setState({ answerIndicator: { background: 'url(' + trueCheck + ')' } });
         this.gameModel.roundTrueAnswer += 1;
@@ -321,10 +327,7 @@ class AudioCallGame extends React.Component {
                     <HeardsError heardFill={this.state.heardFill_3} heardStroke={this.state.heardStroke} />
                     <HeardsError heardFill={this.state.heardFill_4} heardStroke={this.state.heardStroke} />
                     <HeardsError heardFill={this.state.heardFill_5} heardStroke={this.state.heardStroke} />
-                  </div>
-                  {/* <Link to='/audiocall'>
-                    <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>
-                  </Link> */}
+                  </div>                  
                 </div>
               </section>
               <section className='games-page-wrap__game-wrap__audio-call__game'>
@@ -335,7 +338,10 @@ class AudioCallGame extends React.Component {
                   <p>{this.state.statisticsRoundInfo}</p>
                   <button className='round-statistics__button'>Играть этот раунд</button>
                   <button className='round-statistics__button'>Следующий раунд</button>
-                  <button className='round-statistics__button'>Настройки</button>
+                  <Link to='/audiocall'>
+                    <p>Настройки</p>
+                    <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>
+                  </Link>
 
                 </div>
                 <div className='games-page-wrap__game-wrap__audio-call__game__audio-img'>
