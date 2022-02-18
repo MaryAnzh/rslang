@@ -62,6 +62,8 @@ class AudioCallGameModel {
     const audio = this.currentWordsArray[this.itemIndex].audio;
     const img = this.currentWordsArray[this.itemIndex].image;
     this.roundAUdio = `${this.serverURL}/${audio}`;
+    console.log(this.roundAUdio);
+    console.log('roundAUdio');
     this.roundImg = `${this.serverURL}/${img}`;
     roundArray.push(trueWord);
 

@@ -108,7 +108,7 @@ class AudioCallGame extends React.Component {
   }
 
   closeGameOnClick(e: React.MouseEvent<HTMLElement>) {
-    
+
   }
 
   async componentDidMount() {
@@ -124,7 +124,7 @@ class AudioCallGame extends React.Component {
       this.gameModel.roundWords();
       this.updatePageInfo();
     }
-    
+
     this.setState({ correct: this.state.isLoading = false });
     //this.forceUpdate();
   }
@@ -151,7 +151,7 @@ class AudioCallGame extends React.Component {
       this.setState({ correct: this.state.nextRoundBUtton = 'games-page-wrap__game-wrap__audio-call__game__repeat displayFkex' });
 
       if (isTrueAnswer) {
-        this.setState({ cirrect: this.state.answerIndicator = { background: 'url(' + trueCheck + ')' } });        
+        this.setState({ cirrect: this.state.answerIndicator = { background: 'url(' + trueCheck + ')' } });
       } else {
         this.setState({ correct: this.state.answerIndicator = { background: 'url(' + cross + ')' } });
         this.gameModel.errorAnxwerCount += 1;
@@ -168,26 +168,32 @@ class AudioCallGame extends React.Component {
     this.gameModel.currentRound += 1;
     this.gameModel.roundWordsArray = [];
     this.gameModel.roundWords();
+    console.log('обновленное аудио');
+    console.log(this.gameModel.roundAUdio);
 
-    this.setState({ correct: this.state.currentButClassName = 'visible' });
-    this.setState(this.state.soundImg = { display: 'flex' });
-    this.setState({ correct: this.state.wordSoundImg = { display: 'none', background: 'none' } })
-    this.setState({ correct: this.state.soundButton = 'displayFLex' });
-    this.setState({ correct: this.state.nextRoundBUtton = 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone' });
-    await this.updatePageInfo();
+    this.setState({
+      currentButClassName: 'visible',
+      soundImg: { display: 'flex' },
+      wordSoundImg: { display: 'none', background: 'none' },
+      soundButton: 'displayFLex',
+      roundAudio: this.gameModel.roundAUdio,
+      nextRoundBUtton: 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone',
+    })
+
+    this.updatePageInfo();
   }
 
-  async updatePageInfo() {
-    console.log('this.roundWordsArray');
-    console.log(this.gameModel.roundWordsArray);
-    this.setState({ correct: this.state.currentButtonText_1 = this.gameModel.roundWordsArray[0].word });
-    this.setState({ correct: this.state.currentButtonText_2 = this.gameModel.roundWordsArray[1].word });
-    this.setState({ correct: this.state.currentButtonText_3 = this.gameModel.roundWordsArray[2].word });
-    this.setState({ correct: this.state.currentButtonText_4 = this.gameModel.roundWordsArray[3].word });
-    this.setState({ correct: this.state.roundAudio = this.gameModel.roundAUdio });
-    this.setState({ correct: this.state.roundImg = this.gameModel.roundImg });
-    this.setState({ correct: this.state.currentRound = this.gameModel.currentRound.toString() });
-    this.setState({ correct: this.state.currentRoundNumber = this.gameModel.currentWordsArrayLangth.toString() });
+  updatePageInfo() {
+    this.setState({
+      currentButtonText_1: this.gameModel.roundWordsArray[0].word,
+      currentButtonText_2: this.gameModel.roundWordsArray[1].word,
+      currentButtonText_3: this.gameModel.roundWordsArray[2].word,
+      currentButtonText_4: this.gameModel.roundWordsArray[3].word,
+      roundAudio: this.gameModel.roundAUdio,
+      roundImg: this.gameModel.roundImg,
+      currentRound: this.gameModel.currentRound.toString(),
+      currentRoundNumber: this.gameModel.currentWordsArrayLangth.toString(),
+    });
   }
 
   currentActiveButton(buttonNumber: string) {

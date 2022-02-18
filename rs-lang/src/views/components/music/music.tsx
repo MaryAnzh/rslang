@@ -1,3 +1,4 @@
+import { Console } from 'console';
 import React, { Component } from 'react'
 
 type MusicState = {
@@ -28,6 +29,7 @@ class Music extends React.Component<MusicProps> {
     this.url = this.props.url;
     this.audio = new Audio(this.url);
 
+    console.log('Music.ctor()');
   }
 
   play() {
@@ -35,6 +37,8 @@ class Music extends React.Component<MusicProps> {
       play: true,
       pause: false,
     });
+    console.log('Music.play()');
+    console.log(this.audio);
     setTimeout(() => this.audio.play(), 500);
     
   }
@@ -45,7 +49,7 @@ class Music extends React.Component<MusicProps> {
   }
 
   render() {
-    
+    this.audio.src = this.props.url;
     return (
       <div>
         <div onClick={() => this.play()}>{ this.props.children}</div>
