@@ -28,10 +28,10 @@ type AudioCallGameType = {
   currentButtonText_2: string,
   currentButtonText_3: string,
   currentButtonText_4: string,
-  currentButtonActive_0: { background: string },
-  currentButtonActive_1: { background: string },
-  currentButtonActive_2: { background: string },
-  currentButtonActive_3: { background: string },
+  currentButtonActive_0: { filter: string },
+  currentButtonActive_1: { filter: string },
+  currentButtonActive_2: { filter: string },
+  currentButtonActive_3: { filter: string },
   currentButClassName: string,
   currentRound: string,
   currentRoundNumber: string,
@@ -83,10 +83,10 @@ class AudioCallGame extends React.Component {
       currentButtonText_3: '2',
       currentButtonText_4: '3',
       //currentButtonActive_0: { background: '#d3e0ee', color: '#006DD9' },
-      currentButtonActive_0: { background: 'auto' },
-      currentButtonActive_1: { background: 'auto' },
-      currentButtonActive_2: { background: 'auto' },
-      currentButtonActive_3: { background: 'auto' },
+      currentButtonActive_0: { filter: 'none' },
+      currentButtonActive_1: { filter: 'none' },
+      currentButtonActive_2: { filter: 'none' },
+      currentButtonActive_3: { filter: 'none' },
       currentButClassName: 'visible',
       currentRound: '',
       currentRoundNumber: '',
@@ -176,8 +176,6 @@ class AudioCallGame extends React.Component {
     this.gameModel.currentRound += 1;
     this.gameModel.roundWordsArray = [];
     this.gameModel.roundWords();
-    console.log('обновленное аудио');
-    console.log(this.gameModel.roundAUdio);
 
     this.setState({
       currentButClassName: 'visible',
@@ -186,6 +184,10 @@ class AudioCallGame extends React.Component {
       soundButton: 'displayFLex',
       roundAudio: this.gameModel.roundAUdio,
       nextRoundBUttonWrapClass: 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone',
+      currentButtonActive_0: { filter: 'none' },
+      currentButtonActive_1: { filter: 'none' },
+      currentButtonActive_2: { filter: 'none' },
+      currentButtonActive_3: { filter: 'none' },
     })
 
     this.updatePageInfo();
@@ -207,16 +209,16 @@ class AudioCallGame extends React.Component {
   currentActiveButton(buttonNumber: string) {
     switch (buttonNumber) {
       case '0':
-        this.setState(this.state.currentButtonActive_0 = { background: '#d3e0ee' })
+        this.setState(this.state.currentButtonActive_0 = { filter: 'invert(5%) sepia(60%) saturate(2074%) hue-rotate(307deg) brightness(96%) contrast(95%)' })
         break;
       case '1':
-        this.setState(this.state.currentButtonActive_1 = { background: '#d3e0ee' })
+        this.setState(this.state.currentButtonActive_1 = { filter: 'invert(5%) sepia(60%) saturate(2074%) hue-rotate(307deg) brightness(96%) contrast(95%)' })
         break;
       case '2':
-        this.setState(this.state.currentButtonActive_2 = { background: '#d3e0ee' })
+        this.setState(this.state.currentButtonActive_2 = { filter: 'invert(5%) sepia(60%) saturate(2074%) hue-rotate(307deg) brightness(96%) contrast(95%)' })
         break;
       case '3':
-        this.setState(this.state.currentButtonActive_3 = { background: '#d3e0ee' })
+        this.setState(this.state.currentButtonActive_3 = { filter: 'invert(5%) sepia(60%) saturate(2074%) hue-rotate(307deg) brightness(96%) contrast(95%)' })
         break;
 
       default:
@@ -246,10 +248,6 @@ class AudioCallGame extends React.Component {
         break;
     }
   }
-
-  // animation(e: AnimationEvent<HTMLButtonElement>) {
-  //   this.animation.
-  // }
 
   render() {
     //console.log('Рендер вызвался');
