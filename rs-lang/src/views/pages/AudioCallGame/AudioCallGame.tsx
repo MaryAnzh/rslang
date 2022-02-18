@@ -154,6 +154,12 @@ class AudioCallGame extends React.Component {
       });
 
       if (isTrueAnswer) {
+        if (this.gameModel.currentRound === this.gameModel.currentWordsArrayLangth) {
+          this.setState({
+            nextRoundBUttonText: 'Раунд окончен',
+            nextRoundButtonCLass: 'games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button round-end-anim',
+          });
+        }
         this.setState({ answerIndicator: { background: 'url(' + trueCheck + ')' } });
       } else {
         this.setState({
@@ -161,7 +167,9 @@ class AudioCallGame extends React.Component {
         });
         this.gameModel.errorAnxwerCount += 1;
         this.currentError(this.gameModel.errorAnxwerCount);
-        if (this.gameModel.errorAnxwerCount > 4) {
+
+        const maxErrorCornt = 5;
+        if (this.gameModel.errorAnxwerCount === 5) {
           this.setState({
             nextRoundBUttonText: 'Раунд окончен',
             nextRoundButtonCLass: 'games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button round-end-anim',
