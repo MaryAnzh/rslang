@@ -37,10 +37,9 @@ class Music extends React.Component<MusicProps> {
       play: true,
       pause: false,
     });
-    console.log('Music.play()');
-    console.log(this.audio);
+    // console.log('Music.play()');
+    // console.log(this.audio);
     setTimeout(() => this.audio.play(), 500);
-    
   }
 
   pause() {

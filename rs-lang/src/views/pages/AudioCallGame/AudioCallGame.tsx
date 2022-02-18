@@ -140,14 +140,22 @@ class AudioCallGame extends React.Component {
     const elemNumber = elem.getAttribute('data-index');
 
     if (elemNumber != null) {
-
-      this.setState({ correct: this.state.currentButClassName = 'blocked' });
       this.currentActiveButton(elemNumber);
       const isTrueAnswer = this.gameModel.isAnswerTrue(+elemNumber);
-      this.setState(this.state.soundImg = { display: 'none' });
-      this.setState({ correct: this.state.wordSoundImg = { display: 'flex', background: 'url(' + this.gameModel.roundImg + ')' } })
-      this.setState({ correct: this.state.trueRoundWord = this.gameModel.trueRoundWord });
-      this.setState({ correct: this.state.soundButton = 'displayNone' });
+      this.setState({
+        currentButClassName: 'blocked',
+        soundImg: { display: 'none' },
+        wordSoundImg: { display: 'flex', background: 'url(' + this.gameModel.roundImg + ')' },
+        trueRoundWord: this.gameModel.trueRoundWord,
+        soundButton: 'displayNone',
+        nextRoundBUtton: 'games-page-wrap__game-wrap__audio-call__game__repeat displayFkex',
+      });
+      //this.setState({ correct: this.state.currentButClassName = 'blocked' });
+      
+      //this.setState(this.state.soundImg = { display: 'none' });
+      //this.setState({ correct: this.state.wordSoundImg = { display: 'flex', background: 'url(' + this.gameModel.roundImg + ')' } })
+      //this.setState({ correct: this.state.trueRoundWord = this.gameModel.trueRoundWord });
+      //this.setState({ correct: this.state.soundButton = 'displayNone' });
       this.setState({ correct: this.state.nextRoundBUtton = 'games-page-wrap__game-wrap__audio-call__game__repeat displayFkex' });
 
       if (isTrueAnswer) {
@@ -324,12 +332,15 @@ class AudioCallGame extends React.Component {
                     </button>
                   </Music>
                 </div>
-
                 <div className={this.state.nextRoundBUtton}>
-                  <button className='games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button'
-                    onClick={(e) => { this.nextRoundOnClick(e) }}>
-                    Далее
-                  </button>
+                  <Music
+                    className=''
+                    url={this.state.roundAudio}>
+                    <button className='games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button'
+                      onClick={(e) => { this.nextRoundOnClick(e) }}>
+                      Далее
+                    </button>
+                  </Music>
                 </div>
               </section>
               <section className='games-page-wrap__game-wrap__audio-call__game-button'>
