@@ -1,5 +1,4 @@
 import { IAudioCallWords, IAnxwer } from '../interfaces/wordsInterface';
-import { applicationModel } from './ApplicationModel';
 import { WordCardType } from '../interfaces/types';
 
 class AudioCallGameModel {
@@ -33,6 +32,8 @@ class AudioCallGameModel {
   trueRoundWord = '';
 
   errorAnxwerCount = 0;
+
+  roundTrueAnswer = 0;
 
   constructor(currentWordsArray: WordCardType[]) {
     this.currentWordsArray = currentWordsArray;

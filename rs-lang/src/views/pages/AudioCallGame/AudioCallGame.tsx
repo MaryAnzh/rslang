@@ -47,6 +47,8 @@ type AudioCallGameType = {
   nextRoundBUttonWrapClass: string,
   nextRoundBUttonText: string,
   nextRoundButtonCLass: string,
+  statisticsRoundInfo: string,
+  statisticsDosplay: { display: string },
 }
 
 type ButtonType = {
@@ -102,6 +104,8 @@ class AudioCallGame extends React.Component {
       nextRoundBUttonWrapClass: 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone',
       nextRoundBUttonText: 'Далее',
       nextRoundButtonCLass: 'games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button',
+      statisticsRoundInfo: '',
+      statisticsDosplay: { display: 'none' },
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -161,6 +165,7 @@ class AudioCallGame extends React.Component {
           });
         }
         this.setState({ answerIndicator: { background: 'url(' + trueCheck + ')' } });
+        this.gameModel.roundTrueAnswer += 1;
       } else {
         this.setState({
           answerIndicator: { background: 'url(' + cross + ')' },
@@ -174,6 +179,12 @@ class AudioCallGame extends React.Component {
             nextRoundBUttonText: 'Раунд окончен',
             nextRoundButtonCLass: 'games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button round-end-anim',
           });
+          setTimeout(() => {
+            this.setState({
+              statisticsRoundInfo: this.gameModel.roundTrueAnswer + '/' + this.gameModel.currentWordsArrayLangth,
+              statisticsDosplay: { display: 'flex' },
+            })
+          }, 3000);
         }
       }
     }
@@ -279,6 +290,7 @@ class AudioCallGame extends React.Component {
         <div className='games-page-wrap'>
           <h1>А У Д И О  В Ы З О В</h1>
           <div className='games-page-wrap__game-wrap'>
+
             <GameInfo gameInfoStyle={this.state.gameInfoStyle}>
               <p>Добро пожаловать в игру Аудио вызов</p>
               <div onClick={(e) => { this.hiddenInfoOnClick(e) }}>
@@ -316,6 +328,16 @@ class AudioCallGame extends React.Component {
                 </div>
               </section>
               <section className='games-page-wrap__game-wrap__audio-call__game'>
+                <div className='round-statistics'
+                  style={this.state.statisticsDosplay}>
+                  <h2>Статистика раунда</h2>
+                  <p>Прввильные слова</p>
+                  <p>{this.state.statisticsRoundInfo}</p>
+                  <button className='round-statistics__button'>Играть этот раунд</button>
+                  <button className='round-statistics__button'>Следующий раунд</button>
+                  <button className='round-statistics__button'>Настройки</button>
+
+                </div>
                 <div className='games-page-wrap__game-wrap__audio-call__game__audio-img'>
                   <div style={this.state.soundImg}>
                     <Soundview />
