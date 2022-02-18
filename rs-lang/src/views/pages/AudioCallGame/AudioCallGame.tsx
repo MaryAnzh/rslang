@@ -1,16 +1,13 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React, { AnimationEvent } from 'react';
+import { Link } from 'react-router-dom';
 import './AudioCallGame.scss';
 import '../../elements/settingPanel/settingPanel';
-import { audioCallPageModel } from '../../../model/AudioCallPageModel';
-import { CrossUpDate } from '../../elements/crossUpDate/crossUpDate';
 import { HeardsError } from '../../audioCallElements/heardsErrior/heardsError';
 import { BellSVG } from '../../audioCallElements/bell/bell';
 import { GameButton } from '../../audioCallElements/gameButton/gameButton';
 import { AudioCallGameModel } from '../../../model/audioCallGameModel';
-import { IAnxwer } from '../../../interfaces/wordsInterface';
 import { WordCardType } from '../../../interfaces/types';
 import { applicationModel } from '../../../model/ApplicationModel';
-import { type } from 'os';
 import { Music } from '../../components/music/music';
 import { GameInfo } from '../../audioCallElements/gameInfo/gameInfo';
 import { Soundview } from '../../audioCallElements/soundView/soundview';
@@ -47,8 +44,9 @@ type AudioCallGameType = {
   trueRoundWord: string,
   answerIndicator: { background: string },
   soundButton: string,
-  nextRoundBUtton: string,
+  nextRoundBUttonWrapClass: string,
   nextRoundBUttonText: string,
+  nextRoundButtonCLass: string,
 }
 
 type ButtonType = {
@@ -101,8 +99,9 @@ class AudioCallGame extends React.Component {
       trueRoundWord: '',
       answerIndicator: { background: '' },
       soundButton: 'displayFlex',
-      nextRoundBUtton: 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone',
+      nextRoundBUttonWrapClass: 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone',
       nextRoundBUttonText: 'Далее',
+      nextRoundButtonCLass: 'games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button',
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -133,6 +132,9 @@ class AudioCallGame extends React.Component {
     this.setState(
       this.state.gameInfoStyle = { display: 'none' },
     );
+    this.setState({
+      gameInfoStyle: { display: 'none' },
+    });
   }
 
   getButtonDatatypeOnClick(e: React.MouseEvent<HTMLElement>) {
@@ -148,24 +150,22 @@ class AudioCallGame extends React.Component {
         wordSoundImg: { display: 'flex', background: 'url(' + this.gameModel.roundImg + ')' },
         trueRoundWord: this.gameModel.trueRoundWord,
         soundButton: 'displayNone',
-        nextRoundBUtton: 'games-page-wrap__game-wrap__audio-call__game__repeat displayFkex',
+        nextRoundBUttonWrapClass: 'games-page-wrap__game-wrap__audio-call__game__repeat displayFkex',
       });
-      //this.setState({ correct: this.state.currentButClassName = 'blocked' });
-      
-      //this.setState(this.state.soundImg = { display: 'none' });
-      //this.setState({ correct: this.state.wordSoundImg = { display: 'flex', background: 'url(' + this.gameModel.roundImg + ')' } })
-      //this.setState({ correct: this.state.trueRoundWord = this.gameModel.trueRoundWord });
-      //this.setState({ correct: this.state.soundButton = 'displayNone' });
-      this.setState({ correct: this.state.nextRoundBUtton = 'games-page-wrap__game-wrap__audio-call__game__repeat displayFkex' });
 
       if (isTrueAnswer) {
-        this.setState({ cirrect: this.state.answerIndicator = { background: 'url(' + trueCheck + ')' } });
+        this.setState({ answerIndicator: { background: 'url(' + trueCheck + ')' } });
       } else {
-        this.setState({ correct: this.state.answerIndicator = { background: 'url(' + cross + ')' } });
+        this.setState({
+          answerIndicator: { background: 'url(' + cross + ')' },
+        });
         this.gameModel.errorAnxwerCount += 1;
         this.currentError(this.gameModel.errorAnxwerCount);
         if (this.gameModel.errorAnxwerCount > 4) {
-          this.setState({ correct: this.state.nextRoundBUttonText = 'Раунд окончен' });
+          this.setState({
+            nextRoundBUttonText: 'Раунд окончен',
+            nextRoundButtonCLass: 'games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button round-end-anim',
+          });
         }
       }
     }
@@ -185,7 +185,7 @@ class AudioCallGame extends React.Component {
       wordSoundImg: { display: 'none', background: 'none' },
       soundButton: 'displayFLex',
       roundAudio: this.gameModel.roundAUdio,
-      nextRoundBUtton: 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone',
+      nextRoundBUttonWrapClass: 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone',
     })
 
     this.updatePageInfo();
@@ -247,6 +247,10 @@ class AudioCallGame extends React.Component {
     }
   }
 
+  // animation(e: AnimationEvent<HTMLButtonElement>) {
+  //   this.animation.
+  // }
+
   render() {
     //console.log('Рендер вызвался');
     const { isLoading } = this.state;
@@ -300,11 +304,9 @@ class AudioCallGame extends React.Component {
                     <HeardsError heardFill={this.state.heardFill_4} heardStroke={this.state.heardStroke} />
                     <HeardsError heardFill={this.state.heardFill_5} heardStroke={this.state.heardStroke} />
                   </div>
-                  <div
-                    className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'
-                    onClick={(e) => { this.closeGameOnClick(e) }}>
-                    <CrossUpDate crossId='audio-game-cross' />
-                  </div>
+                  {/* <Link to='/audiocall'>
+                    <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>
+                  </Link> */}
                 </div>
               </section>
               <section className='games-page-wrap__game-wrap__audio-call__game'>
@@ -332,13 +334,13 @@ class AudioCallGame extends React.Component {
                     </button>
                   </Music>
                 </div>
-                <div className={this.state.nextRoundBUtton}>
+                <div className={this.state.nextRoundBUttonWrapClass}>
                   <Music
                     className=''
                     url={this.state.roundAudio}>
-                    <button className='games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button'
+                    <button className={this.state.nextRoundButtonCLass}
                       onClick={(e) => { this.nextRoundOnClick(e) }}>
-                      Далее
+                      {this.state.nextRoundBUttonText}
                     </button>
                   </Music>
                 </div>

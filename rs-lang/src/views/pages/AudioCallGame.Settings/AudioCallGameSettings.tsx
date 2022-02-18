@@ -21,7 +21,8 @@ class AudioCallGameSettings extends React.Component {
             <SettingPanel />
             <section className='games-page-wrap__settings-wrap__audio-call'>
               <h2>Аудиовызов</h2>
-              <Link to="/audiocallgame"><button
+              <Link to="/audiocallgame">
+                <button
                 className='games-page-wrap__settings-wrap__audio-call__game-start'>
                 Играть</button> </Link>
               

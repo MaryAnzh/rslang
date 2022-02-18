@@ -161,7 +161,19 @@
           }
 
           &__cross {
-            transform: scale(150%, 150%) translate(-10%, 0);
+            width: 30px;
+            height: 30px;
+            background: url(../../../img/svg/settings.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            cursor: pointer;
+            transition: 0.5s;
+
+            &:hover {
+              background: url(../../../img/svg/settings_hover.svg);
+              transform: rotate(180deg);
+            }
             
 
             // @media (max-width: 700px) {
@@ -250,14 +262,26 @@
     }
   }
 }
- .sound-button {
-            background: white;
-            color: #006DD9;
-            border: 1px solid #6AACEC;
-          }
+.sound-button {
+    background: white;
+    color: #006DD9;
+    border: 1px solid #6AACEC;
+}
 
-          .nav-button {
-            background: #006DD9;
-            color: white;
-            border: 1px solid #6AACEC;
-          }
+.nav-button {
+  background: #006DD9;
+  color: white;
+   border: 1px solid #6AACEC;
+}
+
+.round-end-anim {
+  position: absolute;
+  pointer-events: none;
+  animation: round-and 1s forwards;
+  z-index: 14;
+}
+
+@keyframes round-and {
+  from {transform: scale(1, 1) translate(0, 0)}
+  to {transform: scale(2, 2) translate(0, -130%)}
+}
