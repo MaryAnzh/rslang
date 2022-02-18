@@ -62,8 +62,6 @@ class AudioCallGame extends React.Component {
 
   wordsArray: WordCardType[] | undefined;
 
-  roundWordsArray: IAnxwer[];
-
   roundAudio: HTMLAudioElement;
 
   currentRoundNumber = 0;
@@ -72,7 +70,6 @@ class AudioCallGame extends React.Component {
     super(props);
     this.wordsArray = [];
     this.gameModel = new AudioCallGameModel(this.wordsArray);
-    this.roundWordsArray = [];
     this.state = {
       isLoading: true,
       heardFill_1: '#C48026',
@@ -124,7 +121,7 @@ class AudioCallGame extends React.Component {
     this.wordsArray = data;
     if (this.wordsArray != undefined) {
       this.gameModel = new AudioCallGameModel(this.wordsArray);
-      this.roundWordsArray = this.gameModel.roundWords();
+      this.gameModel.roundWords();
       this.updatePageInfo();
     }
     
@@ -171,9 +168,6 @@ class AudioCallGame extends React.Component {
     this.gameModel.currentRound += 1;
     this.gameModel.roundWordsArray = [];
     this.gameModel.roundWords();
-    console.log('this.gameModel.itemInde');
-    console.log(this.gameModel.itemIndex);
-
 
     this.setState({ correct: this.state.currentButClassName = 'visible' });
     this.setState(this.state.soundImg = { display: 'flex' });
@@ -185,11 +179,11 @@ class AudioCallGame extends React.Component {
 
   async updatePageInfo() {
     console.log('this.roundWordsArray');
-    console.log(this.roundWordsArray);
-    this.setState({ correct: this.state.currentButtonText_1 = this.roundWordsArray[0].word });
-    this.setState({ correct: this.state.currentButtonText_2 = this.roundWordsArray[1].word });
-    this.setState({ correct: this.state.currentButtonText_3 = this.roundWordsArray[2].word });
-    this.setState({ correct: this.state.currentButtonText_4 = this.roundWordsArray[3].word });
+    console.log(this.gameModel.roundWordsArray);
+    this.setState({ correct: this.state.currentButtonText_1 = this.gameModel.roundWordsArray[0].word });
+    this.setState({ correct: this.state.currentButtonText_2 = this.gameModel.roundWordsArray[1].word });
+    this.setState({ correct: this.state.currentButtonText_3 = this.gameModel.roundWordsArray[2].word });
+    this.setState({ correct: this.state.currentButtonText_4 = this.gameModel.roundWordsArray[3].word });
     this.setState({ correct: this.state.roundAudio = this.gameModel.roundAUdio });
     this.setState({ correct: this.state.roundImg = this.gameModel.roundImg });
     this.setState({ correct: this.state.currentRound = this.gameModel.currentRound.toString() });

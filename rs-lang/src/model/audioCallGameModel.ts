@@ -103,19 +103,6 @@ class AudioCallGameModel {
     this.roundOnClickButtonNumber = answerNumber;
     return this.roundWordsArray[answerNumber].isTrueAnxwer;
   }
-
 }
-
-async function word() {
-  const a = await applicationModel.getWords(0, 0);
-  if (a != undefined) {
-    const w = new AudioCallGameModel(a);
-    const c = w.roundWords();
-
-    // console.log('w.currentLevel');
-    // console.log(c);
-  }
-}
-word();
 
 export { AudioCallGameModel };
