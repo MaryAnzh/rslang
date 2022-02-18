@@ -97,7 +97,7 @@ class AudioCallGame extends React.Component {
       currentRoundNumber: '',
       roundAudio: '',
       roundImg: '',
-      gameInfoStyle: { display: 'none' },
+      gameInfoStyle: { display: 'flex' },
       audioButtonText: 'Повторить',
       soundImg: { display: 'flex' },
       wordSoundImg: { display: 'none', background: 'white' },
@@ -110,25 +110,25 @@ class AudioCallGame extends React.Component {
     this.roundAudio = new Audio(this.state.roundAudio);
   }
 
-  startGameOnClick(e: React.MouseEvent<HTMLElement>) {
-    audioCallPageModel.isSetting = false;
-    this.forceUpdate();
-  }
-
   closeGameOnClick(e: React.MouseEvent<HTMLElement>) {
-    audioCallPageModel.isSetting = true;
-    this.forceUpdate();
+    
   }
 
   async componentDidMount() {
-    const data = await applicationModel.getWords(0, 0);
-    this.setState({ correct: this.state.isLoading = false });
+    //берем категорию и страницу, и  запрашиваем слова
+    const level = applicationModel.gameLevel;
+    const page = applicationModel.gamePage;
+    const data = await applicationModel.getWords(level, page);
+
+    //если массив получен, запускаем gameNodel
     this.wordsArray = data;
     if (this.wordsArray != undefined) {
       this.gameModel = new AudioCallGameModel(this.wordsArray);
+      this.roundWordsArray = this.gameModel.roundWords();
+      this.updatePageInfo();
     }
-    this.roundWordsArray = this.gameModel.roundWords();
-    this.updatePageInfo();
+    
+    this.setState({ correct: this.state.isLoading = false });
     //this.forceUpdate();
   }
 
@@ -159,28 +159,33 @@ class AudioCallGame extends React.Component {
         this.setState({ correct: this.state.answerIndicator = { background: 'url(' + cross + ')' } });
         this.gameModel.errorAnxwerCount += 1;
         this.currentError(this.gameModel.errorAnxwerCount);
-        if (this.gameModel.errorAnxwerCount === 5) {
+        if (this.gameModel.errorAnxwerCount > 4) {
           this.setState({ correct: this.state.nextRoundBUttonText = 'Раунд окончен' });
         }
       }
     }
   }
 
-  nextRoundOnClick(e: React.MouseEvent<HTMLElement>) {
+  async nextRoundOnClick(e: React.MouseEvent<HTMLElement>) {
     this.gameModel.itemIndex += 1;
     this.gameModel.currentRound += 1;
     this.gameModel.roundWordsArray = [];
-    this.gameModel.currentShuffleWords = [];
+    this.gameModel.roundWords();
+    console.log('this.gameModel.itemInde');
+    console.log(this.gameModel.itemIndex);
+
 
     this.setState({ correct: this.state.currentButClassName = 'visible' });
     this.setState(this.state.soundImg = { display: 'flex' });
     this.setState({ correct: this.state.wordSoundImg = { display: 'none', background: 'none' } })
     this.setState({ correct: this.state.soundButton = 'displayFLex' });
     this.setState({ correct: this.state.nextRoundBUtton = 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone' });
-    this.updatePageInfo();
+    await this.updatePageInfo();
   }
 
-  updatePageInfo() {
+  async updatePageInfo() {
+    console.log('this.roundWordsArray');
+    console.log(this.roundWordsArray);
     this.setState({ correct: this.state.currentButtonText_1 = this.roundWordsArray[0].word });
     this.setState({ correct: this.state.currentButtonText_2 = this.roundWordsArray[1].word });
     this.setState({ correct: this.state.currentButtonText_3 = this.roundWordsArray[2].word });

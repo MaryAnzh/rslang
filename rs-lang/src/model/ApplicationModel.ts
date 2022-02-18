@@ -29,6 +29,10 @@ class ApplicationModel {
 
   currentWordArray: WordCardType[];
 
+  gameLevel = 0;
+
+  gamePage = 0;
+
   constructor(dataServ: DataService) {
     this.dataServ = dataServ;
     this.currentMail = '';

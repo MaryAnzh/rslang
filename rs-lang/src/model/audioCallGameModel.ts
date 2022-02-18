@@ -53,21 +53,20 @@ class AudioCallGameModel {
 
   roundWords() {
     const roundArray: IAnxwer[] = [];
-    const trueWordIndex = this.itemIndex;
-    const currentRoundWord = this.currentWordsArray[trueWordIndex].wordTranslate;
+    const currentRoundWord = this.currentWordsArray[this.itemIndex].wordTranslate;
     this.trueRoundWord = currentRoundWord;
     const trueWord: IAnxwer = {
       word: currentRoundWord,
       isTrueAnxwer: true,
     };
-    const audio = this.currentWordsArray[trueWordIndex].audio;
-    const img = this.currentWordsArray[trueWordIndex].image;
+    const audio = this.currentWordsArray[this.itemIndex].audio;
+    const img = this.currentWordsArray[this.itemIndex].image;
     this.roundAUdio = `${this.serverURL}/${audio}`;
     this.roundImg = `${this.serverURL}/${img}`;
     roundArray.push(trueWord);
 
     const falseWords = [...this.currentShuffleWords];
-    falseWords.splice(trueWordIndex, 1);
+    falseWords.splice(this.itemIndex, 1);
     this.shuffle(falseWords);
 
     const falseWordsNumber = 3;
