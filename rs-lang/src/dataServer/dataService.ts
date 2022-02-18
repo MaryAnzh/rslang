@@ -104,6 +104,12 @@ class DataService {
     return <RequestWord[]>(await response.json());
   }
 
+  async getHardWordsAsList() {
+    const result = await this.getHardWords();
+    const list = result.map(item => item.wordId);
+    return list;
+  }
+
   async getAgrHardWords(): Promise<WordCardType[]> {
     const requestOptions = {
       method: 'GET',

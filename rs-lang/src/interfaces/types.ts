@@ -9,6 +9,7 @@ export type CardType = {
 
 export type WordCardType = {
   id: string;
+  _id: string;
   group: number;
   page: number;
   word: string;
@@ -59,12 +60,15 @@ export type GroupPaginationProps = {
 }
 
 export type ButtonsGlobState = { 
-  buttons: { isAutorize: boolean }
+  glob: { 
+    isAutorize: boolean,
+    hardsArray: string[],
+  }
 }
 
 export type ActionType = { 
   type: string,
-  value: boolean
+  value: boolean | string[],
 } 
 
 export type RequestWordBody = {

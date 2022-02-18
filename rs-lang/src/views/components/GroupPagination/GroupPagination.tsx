@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const mapStateToProps = (state: ButtonsGlobState, ownProps: GroupPaginationProps ) => {
   return {
     ...ownProps,
-    isAutorize: state.buttons.isAutorize,
+    isAutorize: state.glob.isAutorize,
   }
 };
 

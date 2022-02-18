@@ -1,6 +1,8 @@
 import { newDataService } from '../dataServer/dataService';
 import { RequestWord } from '../interfaces/types';
 import { ISignInResponse } from '../interfaces/userInterface';
+import { changeHardsAction } from '../store/actionCreators/actionCreators';
+import store from '../store/store';
 
 class UserStorage {
   isAuthorize: boolean;
@@ -27,7 +29,6 @@ class UserStorage {
     };
     this.getAuthFromLocaleStorage();
     this.getPageGroupFromLocaleStorage();
-    // console.log(JSON.stringify(this._auth));
   }
 
   
@@ -84,6 +85,7 @@ class UserStorage {
     if (this.isAuthorize) {
       try {
         this.hardWords = (await newDataService.getHardWords());
+        store.dispatch(changeHardsAction(this.hardWords.map(item => item.wordId)));
       } catch (error) {
         this.hardWords = [];
       }

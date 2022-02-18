@@ -8,6 +8,7 @@ import { ButtonsGlobState, CardButtonsProps, CardButtonsState } from '../../../i
 import { soundModel } from '../../../model/SoundModel';
 import { connect } from 'react-redux';
 import { newDataService } from '../../../dataServer/dataService';
+import { changeHardsAction } from '../../../store/actionCreators/actionCreators';
 
 
 const wordEx = { difficulty: 'hard', optional: {} };
@@ -15,21 +16,32 @@ const wordEx = { difficulty: 'hard', optional: {} };
 const mapStateToProps = (state: ButtonsGlobState, ownProps: CardButtonsProps ) => {
   return {
     soundUrls: ownProps.soundUrls,
-    isAutorize: state.buttons.isAutorize,
+    isAutorize: state.glob.isAutorize,
+    hardsArray: state.glob.hardsArray,
   }
 };
 
-const connector = connect(mapStateToProps, null);
+const mapDispatchToProps = {
+  changeHardsAction,
+};
 
-class CardButtons extends React.Component<CardButtonsProps> {
+type ArrayActionProps = {
+  changeHardsAction: Function,
+  hardsArray: string[],
+}
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
   state: CardButtonsState;
 
-  constructor(props: CardButtonsProps) {
+  constructor(props: CardButtonsProps & ArrayActionProps) {
     super(props);
     this.state = {
       isPlay: false,
     };
     this.handleClick = this.handleClick.bind(this);
+    this.addWordHandler = this.addWordHandler.bind(this);
   }
 
   async handleClick() {
@@ -51,16 +63,31 @@ class CardButtons extends React.Component<CardButtonsProps> {
     }
   }
 
+  async addWordHandler() {
+    await newDataService.addHardWord(this.props.wordId, wordEx);
+    console.log('addWordHandler');
+    const list = await newDataService.getHardWordsAsList();
+    await this.props.changeHardsAction(list);
+  }
+
   render() {
     // console.log('PROPS ' + JSON.stringify(this.props));
+    let addBtn: JSX.Element | null;
+    if (!this.props.hardsArray.includes(this.props.wordId)) {
+      addBtn = (
+          <button onClick={this.addWordHandler} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
+            <img src={addPic} alt="add" className="card-buttons__pic"/>
+          </button>
+      );
+    } else {
+      addBtn = null;
+    }
     return (
       <div className="card-buttons">
         <button onClick={this.handleClick} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-fix'}>
           <img  src={this.state.isPlay ? pausePic : playPic} alt="sound" className="card-buttons__pic"/>
         </button>
-        <button onClick={() => newDataService.addHardWord(this.props.wordId, wordEx)} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
-          <img src={addPic} alt="add" className="card-buttons__pic"/>
-        </button>
+        {addBtn}
         <button className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
           <img src={applyPic} alt="apply" className="card-buttons__pic"/>
         </button>
@@ -73,5 +100,3 @@ class CardButtons extends React.Component<CardButtonsProps> {
 
 const CARD_BUTTONS_W = connector(CardButtons);
 export default CARD_BUTTONS_W;
-
-// export { CardButtons };
