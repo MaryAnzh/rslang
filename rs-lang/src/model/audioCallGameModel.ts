@@ -23,7 +23,7 @@ class AudioCallGameModel {
 
   currrntPageNumber = 0;
 
-  //омер индекса слова раунда
+  //номер индекса слова раунда
   itemIndex = 0;
   
   //номер текущего раунда
