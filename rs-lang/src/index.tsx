@@ -10,8 +10,11 @@ import reportWebVitals from './reportWebVitals';
 import AppRouter from './views/components/AppRouter/AppRouter';
 import { BrowserRouter } from 'react-router-dom';
 import store from './store/store';
+import { userStorage } from './model/UserStorage';
 
 function isUser() {
+  console.log(userStorage.auth);
+  
   ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
