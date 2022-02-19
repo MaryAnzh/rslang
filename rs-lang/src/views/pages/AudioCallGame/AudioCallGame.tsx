@@ -15,6 +15,7 @@ import trueCheck from '../../../img/png/true.png';
 import cross from '../../../img/png/cross.png';
 import true_answer from '../../../sound/true_answer.mp3';
 import false_answer from '../../../sound/false_answer.mp3';
+import { captureRejectionSymbol } from 'stream';
 
 type AudioCallGameType = {
   isLoading: boolean,
@@ -130,7 +131,7 @@ class AudioCallGame extends React.Component {
     }
   }
 
-  async componentDidMount() {
+  async loadGame() {
     //берем категорию и страницу, и  запрашиваем слова
     const level = applicationModel.gameLevel;
     const page = applicationModel.gamePage;
@@ -143,6 +144,10 @@ class AudioCallGame extends React.Component {
       this.gameModel.roundWords();
       this.updatePageInfo();
     }
+  }
+
+  async componentDidMount() {
+    this.loadGame();
 
     this.setState({ correct: this.state.isLoading = false });
     //this.forceUpdate();
@@ -206,7 +211,7 @@ class AudioCallGame extends React.Component {
         this.currentError(this.gameModel.errorAnxwerCount);
 
         const maxErrorCornt = 5;
-        if (this.gameModel.errorAnxwerCount === 5) {
+        if (this.gameModel.errorAnxwerCount === maxErrorCornt) {
           this.setState({
             nextRoundBUttonText: 'Раунд окончен',
             nextRoundButtonCLass: 'games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button round-end-anim',
@@ -227,7 +232,11 @@ class AudioCallGame extends React.Component {
     this.gameModel.currentRound += 1;
     this.gameModel.roundWordsArray = [];
     this.gameModel.roundWords();
+    this.nwxtRoundUpdateState();
+    this.updatePageInfo();
+  }
 
+  nwxtRoundUpdateState() {
     this.setState({
       currentButClassName: 'visible',
       soundImg: { display: 'flex' },
@@ -240,8 +249,6 @@ class AudioCallGame extends React.Component {
       currentButtonActive_2: { filter: 'none' },
       currentButtonActive_3: { filter: 'none' },
     })
-
-    this.updatePageInfo();
   }
 
   updatePageInfo() {
@@ -331,6 +338,43 @@ class AudioCallGame extends React.Component {
     }
   }
 
+  playAgaineOnClick(e: React.MouseEvent<HTMLElement>) {
+    this.gameAgainUpdate();
+  }
+
+  async playNextRoundOnClick(e: React.MouseEvent<HTMLElement>) {
+    const maxPaheNumber = 29;
+    if (applicationModel.gamePage < maxPaheNumber) {
+      applicationModel.gamePage += 1;
+      await this.loadGame();
+    }
+    this.gameAgainUpdate();
+    this.forceUpdate();
+  }
+
+  gameAgainUpdate() {
+    this.gameModel.itemIndex = 0;
+    this.gameModel.currentRound = 1;
+    this.gameModel.errorAnxwerCount = 0;
+    this.currentRoundNumber = 1;
+    this.gameModel.roundWords();
+    this.updatePageInfo();
+    this.forceUpdate();
+    this.setState({
+      heardFill_1: '#C48026',
+      heardFill_2: '#C48026',
+      heardFill_3: '#C48026',
+      heardFill_4: '#C48026',
+      heardFill_5: '#C48026',
+      nextRoundBUttonText: 'Далее',
+      nextRoundButtonCLass: 'games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button',
+      statisticsDosplay: { display: 'none' },
+    });
+    this.nwxtRoundUpdateState();
+    const audip = new Audio(this.gameModel.roundAUdio);
+    audip.play();
+  }
+
   render() {
     //console.log('Рендер вызвался');
     const { isLoading } = this.state;
@@ -368,7 +412,7 @@ class AudioCallGame extends React.Component {
               <section className='games-page-wrap__game-wrap__audio-call__top-settings'>
                 <div className='games-page-wrap__game-wrap__audio-call__top-settings__left'>
                   <div
-                    onClick={(e) => { this.onOfAudioOnClick(e)}}
+                    onClick={(e) => { this.onOfAudioOnClick(e) }}
                     className={this.state.soundClass}></div>
                   <div
                     className='games-page-wrap__game-wrap__audio-call__top-settings__left__level'
@@ -401,8 +445,12 @@ class AudioCallGame extends React.Component {
                   <h2>Статистика раунда</h2>
                   <p>Прввильные слова</p>
                   <p>{this.state.statisticsRoundInfo}</p>
-                  <button className='round-statistics__button'>Играть этот раунд</button>
-                  <button className='round-statistics__button'>Следующий раунд</button>
+                  <button
+                    onClick={(e) => { this.playAgaineOnClick(e) }}
+                    className='round-statistics__button'>Играть этот раунд</button>
+                  <button
+                    onClick={(e) => { this.playNextRoundOnClick(e) }}
+                    className='round-statistics__button'>Следующий раунд</button>
                   <Link to='/audiocall'>
                     <p>Настройки</p>
                     <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>
