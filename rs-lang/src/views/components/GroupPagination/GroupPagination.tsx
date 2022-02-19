@@ -39,7 +39,7 @@ class GroupPagination extends React.Component<GroupPaginationProps> {
           6
         </button>
         {this.props.isAutorize &&
-          <button key="6" onClick={() => {this.props.groupHandler(6)}} className='group-pagination__btn group-pagination__tooltip'>
+          <button key="6" onClick={() => {this.props.groupHandler(6)}} className='group-pagination__btn tooltip'>
             7
           </button>
         }

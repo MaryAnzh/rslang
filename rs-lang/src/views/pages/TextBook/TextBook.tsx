@@ -172,13 +172,11 @@ class TextBook extends React.Component<{ hardsArray?: string[] }> {
     this.updateBackground();
     console.log(`Page: ${this.state.page}; Group: ${this.state.group}`);
     let words: JSX.Element[] | '' = [];
-    console.log('Textbook hardWords from Redux' + this.props.hardsArray);
     if (this.state.words.length) {
       words = this.state.words.map((word, index) => <WordCard key={index} word={word}/>);
     } else {
       words = '';
     }
-    console.log('Textbook hardWords from state' + words);
     return (
       <main className="main">
         <div className='book-page-wrap'>

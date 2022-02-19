@@ -74,26 +74,39 @@
       display: none;
     }
   }
-  &__tooltip {
-    position: relative;
+}
+.tooltip {
+  position: relative;
 
-    &:hover:after {
-      display: block;
-    }
+  &:hover:after {
+    display: inline-block;
+  }
 
-    &::after {
-      z-index: 200;
-      display: none;
-      content: "Сложные слова";
-      font-size: 0.9rem;
-      border-radius: 0.2rem;
-      padding: 0.5rem;
-      position: absolute;
-      background: #555;
-      color: #fff;
-      bottom: -3.5rem;
-      left: 1.5rem;
-      transform: translate(-50%);
-    }
+  &::after {
+    z-index: 200;
+    display: none;
+    content: "Сложные слова";
+    font-size: 0.9rem;
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    position: absolute;
+    background: #555;
+    color: #fff;
+    bottom: -3.5rem;
+    left: 1.5rem;
+    transform: translate(-50%);
+  }
+  &__del::after {
+    width: 5rem;
+    content: "Удалить из сложных";
+  }
+  &__add::after {
+    width: 5rem;
+    content: "Добавить в сложные";
+  }
+  &__apply::after {
+    left:  -0.5rem;
+    width: 5rem;
+    content: "Добавить в изученные";
   }
 }

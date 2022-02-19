@@ -84,13 +84,13 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
     let addBtn: JSX.Element | null;
     if (!this.props.hardsArray.includes(this.props.wordId)) {
       addBtn = (
-          <button onClick={this.addWordHandler} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
+          <button onClick={this.addWordHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__add' : 'card-buttons__btn card-buttons__btn-disable'}>
             <img src={addPic} alt="add" className="card-buttons__pic"/>
           </button>
       );
     } else {
       addBtn = (
-          <button onClick={this.delWordHandler} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
+          <button onClick={this.delWordHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__del' : 'card-buttons__btn card-buttons__btn-disable'}>
             <img src={delPic} alt="del" className="card-buttons__pic"/>
           </button>
       );
@@ -101,7 +101,7 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
           <img  src={this.state.isPlay ? pausePic : playPic} alt="sound" className="card-buttons__pic"/>
         </button>
         {addBtn}
-        <button className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
+        <button className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__apply' : 'card-buttons__btn card-buttons__btn-disable'}>
           <img src={applyPic} alt="apply" className="card-buttons__pic"/>
         </button>
       </div>
