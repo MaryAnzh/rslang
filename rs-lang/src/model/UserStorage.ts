@@ -11,7 +11,7 @@ class UserStorage {
 
   page: number;
 
-  hardWords: RequestWord[];
+  hardWordsSimple: RequestWord[];
 
   private _auth: ISignInResponse;
 
@@ -19,7 +19,7 @@ class UserStorage {
     this.isAuthorize = false;
     this.page = 0;
     this.group = 0;
-    this.hardWords = [];
+    this.hardWordsSimple = [];
     this._auth = {
       message: '',
       name: '',
@@ -41,7 +41,7 @@ class UserStorage {
       this._auth = v;
       this.isAuthorize = true;
       this.setAuthToLocalStorage();
-      this.getHardWords(); // when user has authorized
+      this.gethardWordsSimple(); // when user has authorized
     } else {
       throw Error('Ошибка авторизации!');
     }
@@ -53,7 +53,7 @@ class UserStorage {
     if (auth) {
       this.isAuthorize = true;
       this._auth = await JSON.parse(auth);
-      await this.getHardWords();
+      await this.gethardWordsSimple();
       store.dispatch(updateAction(true));
     }
   }
@@ -81,17 +81,17 @@ class UserStorage {
     localStorage.setItem('page', String(page));
   }
 
-  async getHardWords() {
+  async gethardWordsSimple() {
     if (this.isAuthorize) {
       try {
-        // console.log('Before hards words =' + this.hardWords);
-        this.hardWords = await newDataService.getHardWords();
-        store.dispatch(changeHardsAction(this.hardWords.map(item => item.wordId)));
+        // console.log('Before hards words =' + this.hardWordsSimple);
+        this.hardWordsSimple = await newDataService.getHardWords();
+        store.dispatch(changeHardsAction(this.hardWordsSimple.map(item => item.wordId)));
       } catch (error) {
-        this.hardWords = [];
+        this.hardWordsSimple = [];
       }
     } else {
-      this.hardWords = [];
+      this.hardWordsSimple = [];
     }
   }
 
@@ -105,7 +105,7 @@ class UserStorage {
       refreshToken: '',
       userId: '',
     };
-    this.getHardWords();
+    this.gethardWordsSimple();
   }
 }
 

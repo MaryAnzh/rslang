@@ -67,7 +67,7 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
 
   async addWordHandler() {
     await newDataService.addHardWord(this.props.wordId, wordEx);
-    console.log('addWordHandler');
+    // console.log('addWordHandler');
     const list = await newDataService.getHardWordsAsList();
     await this.props.changeHardsAction(list);
   }
@@ -80,7 +80,7 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
   }
 
   render() {
-    console.log('PROPS ' + JSON.stringify(this.props));
+    // console.log('PROPS ' + JSON.stringify(this.props));
     let addBtn: JSX.Element | null;
     if (!this.props.hardsArray.includes(this.props.wordId)) {
       addBtn = (
