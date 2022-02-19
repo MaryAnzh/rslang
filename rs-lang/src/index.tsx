@@ -10,17 +10,32 @@ import reportWebVitals from './reportWebVitals';
 import AppRouter from './views/components/AppRouter/AppRouter';
 import { BrowserRouter } from 'react-router-dom';
 import store from './store/store';
+import { userStorage } from './model/UserStorage';
+import { applicationModel } from './model/ApplicationModel';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-    <Provider store={store}>
-      <AppRouter />
-    </Provider>, 
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root'),
-);
+
+async function isUser() {
+  await userStorage.getAuthFromLocaleStorage();
+  const a = userStorage.auth;
+  if (a.token !== '' && a.token !== undefined) {
+    applicationModel.isAuthorization = true;
+  }
+  console.log('is Authorize = ' + applicationModel.isAuthorization);
+
+  //прописываем флаги завязанные на автаризацию на саммх страницаж
+  ReactDOM.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <Provider store={store}>
+          <AppRouter />
+        </Provider>,
+      </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root'),
+  );
+}
+isUser()
+export { isUser }
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
