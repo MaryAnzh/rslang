@@ -9,7 +9,7 @@ type BellProps = {
 class BellSVG extends React.Component<BellProps> {
   render() {
     return (
-      <svg version="1.1" baseProfile="tiny" id="bell" xmlns="http://www.w3.org/2000/svg"
+      <svg version="1.1" baseProfile="tiny" xlinkTitle='Звуковые эффекты' xmlns="http://www.w3.org/2000/svg"
         x="0px" y="0px" viewBox="0 0 19.38 25.26" width={this.props.bellWidth} >
         <path fill={this.props.bellFill} stroke={this.props.hellStroke} d="M18.75,18.32c-0.57-0.96-1.06-1.96-1.38-3.04c-0.71-2.37-0.16-4.78-0.62-7.18
 	c-0.32-1.66-0.92-3.23-2.18-4.41c-0.56-0.53-1.21-0.86-1.87-1.23c-0.54-0.31-0.47-0.32-0.71-0.87c-0.32-0.71-0.97-1.27-1.73-1.47

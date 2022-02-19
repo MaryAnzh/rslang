@@ -318,6 +318,10 @@ class AudioCallGame extends React.Component {
                     className='games-page-wrap__game-wrap__audio-call__top-settings__left__level'
                     style={this.state.currentLevelColor}
                   >{this.state.currentLevel}</div>
+                  <Link to='/audiocall'>
+                    
+                    <div title='Страница настроек' className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>
+                  </Link>
                 </div>
                 <div className='games-page-wrap__game-wrap__audio-call__top-settings__right'>
                   <p className='games-page-wrap__game-wrap__audio-call__top-settings__right__round-number'>{this.state.currentRound}/{this.state.currentRoundNumber}</p>
