@@ -4,6 +4,7 @@ import playPic from '../../../img/svg/play.svg';
 import pausePic from '../../../img/svg/pause.svg';
 import addPic from '../../../img/svg/add.svg';
 import applyPic from '../../../img/svg/check.svg';
+import delPic from '../../../img/svg/delete.svg';
 import { ButtonsGlobState, CardButtonsProps, CardButtonsState } from '../../../interfaces/types';
 import { soundModel } from '../../../model/SoundModel';
 import { connect } from 'react-redux';
@@ -42,6 +43,7 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
     };
     this.handleClick = this.handleClick.bind(this);
     this.addWordHandler = this.addWordHandler.bind(this);
+    this.delWordHandler = this.delWordHandler.bind(this);
   }
 
   async handleClick() {
@@ -70,8 +72,15 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
     await this.props.changeHardsAction(list);
   }
 
+  async delWordHandler() {
+    await newDataService.deleteHardWord(this.props.wordId);
+    console.log('deleteWordHandler');
+    const list = await newDataService.getHardWordsAsList();
+    await this.props.changeHardsAction(list);
+  }
+
   render() {
-    // console.log('PROPS ' + JSON.stringify(this.props));
+    console.log('PROPS ' + JSON.stringify(this.props));
     let addBtn: JSX.Element | null;
     if (!this.props.hardsArray.includes(this.props.wordId)) {
       addBtn = (
@@ -80,7 +89,11 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
           </button>
       );
     } else {
-      addBtn = null;
+      addBtn = (
+          <button onClick={this.delWordHandler} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
+            <img src={delPic} alt="del" className="card-buttons__pic"/>
+          </button>
+      );
     }
     return (
       <div className="card-buttons">

@@ -1,7 +1,7 @@
 import { newDataService } from '../dataServer/dataService';
 import { RequestWord } from '../interfaces/types';
 import { ISignInResponse } from '../interfaces/userInterface';
-import { changeHardsAction } from '../store/actionCreators/actionCreators';
+import { changeHardsAction, updateAction } from '../store/actionCreators/actionCreators';
 import store from '../store/store';
 
 class UserStorage {
@@ -53,8 +53,8 @@ class UserStorage {
     if (auth) {
       this.isAuthorize = true;
       this._auth = await JSON.parse(auth);
-
       await this.getHardWords();
+      store.dispatch(updateAction(true));
     }
   }
 
@@ -84,7 +84,8 @@ class UserStorage {
   async getHardWords() {
     if (this.isAuthorize) {
       try {
-        this.hardWords = (await newDataService.getHardWords());
+        // console.log('Before hards words =' + this.hardWords);
+        this.hardWords = await newDataService.getHardWords();
         store.dispatch(changeHardsAction(this.hardWords.map(item => item.wordId)));
       } catch (error) {
         this.hardWords = [];

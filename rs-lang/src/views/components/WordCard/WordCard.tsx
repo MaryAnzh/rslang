@@ -14,7 +14,7 @@ class WordCard extends React.Component<WordCardProps> {
   }
 
   render() {
-    console.log('PROPS ' + JSON.stringify(this.props));
+    // console.log('PROPS ' + JSON.stringify(this.props));
     const arrUrls = [this.props.word.audio, this.props.word.audioMeaning, this.props.word.audioExample];
     return (
       <div className="word-card">

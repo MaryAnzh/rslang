@@ -123,6 +123,24 @@ class DataService {
     const results = <PaginatedResults[]>(await response.json());
     return results[0].paginatedResults;
   }
+
+  async deleteHardWord(wordId: string): Promise<boolean> {
+    if (userStorage.isAuthorize) {
+      try {
+        const response = await fetch(`${this.user}/${userStorage.auth.userId}/words/${wordId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${userStorage.auth.token}`,
+          },
+        });
+  
+        return response.status === 204;
+      } catch (error) {
+        return false; // if token is ended
+      }
+    } else 
+      return false;
+  }
 }
 
 const dataUrl = 'https://react-rslang-team-mary.herokuapp.com';
