@@ -100,7 +100,7 @@ class SettingPanel extends React.Component {
   }
 
   render(): React.ReactNode {
-    let userClass = applicationModel.isAuthorization ? this.state.activeClass__6 : this.state.activeClass__6 + 'blocked';
+    let userClass = applicationModel.isAuthorization ? this.state.activeClass__6 : this.state.activeClass__6 + ' blocked';
     return (
       <div className='setting'>
         <div className='setting__sections'>
