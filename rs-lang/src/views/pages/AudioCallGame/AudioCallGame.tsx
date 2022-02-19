@@ -13,6 +13,8 @@ import { GameInfo } from '../../audioCallElements/gameInfo/gameInfo';
 import { Soundview } from '../../audioCallElements/soundView/soundview';
 import trueCheck from '../../../img/png/true.png';
 import cross from '../../../img/png/cross.png';
+import true_answer from '../../../sound/true_answer.mp3';
+import false_answer from '../../../sound/false_answer.mp3';
 
 type AudioCallGameType = {
   isLoading: boolean,
@@ -49,6 +51,7 @@ type AudioCallGameType = {
   nextRoundButtonCLass: string,
   statisticsRoundInfo: string,
   statisticsDosplay: { display: string },
+  soundClass: string,
 }
 
 type ButtonType = {
@@ -65,6 +68,8 @@ class AudioCallGame extends React.Component {
   roundAudio: HTMLAudioElement;
 
   currentRoundNumber = 0;
+
+  isSound = true;
 
   constructor(props: {}) {
     super(props);
@@ -106,12 +111,23 @@ class AudioCallGame extends React.Component {
       nextRoundButtonCLass: 'games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button',
       statisticsRoundInfo: '',
       statisticsDosplay: { display: 'none' },
+      soundClass: 'games-page-wrap__game-wrap__audio-call__top-settings__left__bell',
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
 
-  closeGameOnClick(e: React.MouseEvent<HTMLElement>) {
-
+  onOfAudioOnClick(e: React.MouseEvent<HTMLElement>) {
+    if (this.isSound) {
+      this.isSound = false;
+      this.setState({
+        soundClass: 'games-page-wrap__game-wrap__audio-call__top-settings__left__bell-of',
+      });
+    } else {
+      this.isSound = true;
+      this.setState({
+        soundClass: 'games-page-wrap__game-wrap__audio-call__top-settings__left__bell',
+      });
+    }
   }
 
   async componentDidMount() {
@@ -170,9 +186,19 @@ class AudioCallGame extends React.Component {
             })
           }, 3000);
         }
+        if (this.isSound) {
+          const audio = new Audio(true_answer);
+          audio.play();
+        }
+
         this.setState({ answerIndicator: { background: 'url(' + trueCheck + ')' } });
         this.gameModel.roundTrueAnswer += 1;
       } else {
+        if (this.isSound) {
+          const audio = new Audio(false_answer);
+          audio.play();
+        }
+
         this.setState({
           answerIndicator: { background: 'url(' + cross + ')' },
         });
@@ -341,10 +367,9 @@ class AudioCallGame extends React.Component {
             <section className='games-page-wrap__game-wrap__audio-call'>
               <section className='games-page-wrap__game-wrap__audio-call__top-settings'>
                 <div className='games-page-wrap__game-wrap__audio-call__top-settings__left'>
-                  <BellSVG
-                    bellFill='#006DD9'
-                    hellStroke='none'
-                    bellWidth='30px' />
+                  <div
+                    onClick={(e) => { this.onOfAudioOnClick(e)}}
+                    className={this.state.soundClass}></div>
                   <div
                     className='games-page-wrap__game-wrap__audio-call__top-settings__left__level'
                     style={this.state.currentLevelColor}
@@ -359,7 +384,7 @@ class AudioCallGame extends React.Component {
                   <p className='games-page-wrap__game-wrap__audio-call__top-settings__center__question-number'>
                     Вопрос {this.state.currentRound}/{this.state.currentRoundNumber}</p>
                 </div>
-                
+
                 <div className='games-page-wrap__game-wrap__audio-call__top-settings__right'>
                   <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__heards-error'>
                     <HeardsError heardFill={this.state.heardFill_1} heardStroke={this.state.heardStroke} />
@@ -420,6 +445,7 @@ class AudioCallGame extends React.Component {
                 </div>
               </section>
               <section className='games-page-wrap__game-wrap__audio-call__game-button'>
+
                 <GameButton>
                   <button
                     className={this.state.currentButClassName}
@@ -431,17 +457,23 @@ class AudioCallGame extends React.Component {
                     className={this.state.currentButClassName}
                     style={this.state.currentButtonActive_1}
                     data-index='1'
-                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}>{this.state.currentButtonText_2}</button>
+                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}>{this.state.currentButtonText_2}
+                  </button>
+
                   <button
                     className={this.state.currentButClassName}
                     style={this.state.currentButtonActive_2}
                     data-index='2'
-                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}>{this.state.currentButtonText_3}</button>
+                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}>{this.state.currentButtonText_3}
+                  </button>
+
                   <button
                     className={this.state.currentButClassName}
                     style={this.state.currentButtonActive_3}
                     data-index='3'
-                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}>{this.state.currentButtonText_4}</button>
+                    onClick={(e) => { this.getButtonDatatypeOnClick(e) }}>{this.state.currentButtonText_4}
+                  </button>
+
                 </GameButton>
               </section>
             </section>
