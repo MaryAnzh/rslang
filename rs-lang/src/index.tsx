@@ -11,16 +11,20 @@ import AppRouter from './views/components/AppRouter/AppRouter';
 import { BrowserRouter } from 'react-router-dom';
 import store from './store/store';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-    <Provider store={store}>
-      <AppRouter />
-    </Provider>, 
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root'),
-);
+function isUser() {
+  ReactDOM.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <Provider store={store}>
+          <AppRouter />
+        </Provider>,
+      </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root'),
+  );
+}
+
+isUser();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
