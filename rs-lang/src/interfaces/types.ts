@@ -9,6 +9,7 @@ export type CardType = {
 
 export type WordCardType = {
   id: string;
+  _id: string;
   group: number;
   page: number;
   word: string;
@@ -22,6 +23,7 @@ export type WordCardType = {
   textExampleTranslate: string;
   textMeaningTranslate: string;
   wordTranslate: string;
+  userWord?: { difficulty: string }
 }
 
 export type WordCardProps = {
@@ -40,6 +42,7 @@ export type CardButtonsState = {
 
 export type CardButtonsProps = {
   soundUrls: string[];
+  wordId: string;
   isAutorize?: boolean;
 }
 
@@ -57,10 +60,28 @@ export type GroupPaginationProps = {
 }
 
 export type ButtonsGlobState = { 
-  buttons: { isAutorize: boolean }
+  glob: { 
+    isAutorize: boolean,
+    hardsArray: string[],
+  }
 }
 
 export type ActionType = { 
   type: string,
-  value: boolean
+  value: boolean | string[],
 } 
+
+export type RequestWordBody = {
+  difficulty: string, 
+  optional?: {}, 
+}
+
+export type RequestWord = RequestWordBody & {
+  id: string,
+  wordId: string,
+}
+
+export type PaginatedResults = {
+  paginatedResults: WordCardType[],
+  totalCount: { count: string, }[],
+}

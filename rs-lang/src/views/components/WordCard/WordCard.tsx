@@ -14,6 +14,7 @@ class WordCard extends React.Component<WordCardProps> {
   }
 
   render() {
+    // console.log('PROPS ' + JSON.stringify(this.props));
     const arrUrls = [this.props.word.audio, this.props.word.audioMeaning, this.props.word.audioExample];
     return (
       <div className="word-card">
@@ -32,7 +33,7 @@ class WordCard extends React.Component<WordCardProps> {
             <p className='word-card__text word-card__second-text'>{this.props.word.textExampleTranslate}</p>
           </div>
         </div>
-        <CARD_BUTTONS_W soundUrls={arrUrls} isAutorize={false}/>
+        <CARD_BUTTONS_W soundUrls={arrUrls} isAutorize={false} wordId={this.props.word.id || this.props.word._id}/>
       </div>
     );
   }    

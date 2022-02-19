@@ -1,5 +1,6 @@
-import { WordCardType } from '../interfaces/types';
+import { PaginatedResults, RequestWord, RequestWordBody, WordCardType } from '../interfaces/types';
 import { IUser, IUserLogInResponse, IUserRegisterResponse, ISignInResponse, ISignInUserInfo } from '../interfaces/userInterface';
+import { userStorage } from '../model/UserStorage';
 
 class DataService {
   baseURL: string;
@@ -66,6 +67,79 @@ class DataService {
     };
     const response = await fetch(`${this.words}?group=${group}&page=${page}`, requestOptions);
     return <WordCardType[]>(await response.json());
+  }
+
+  async addHardWord(wordId: string, word: RequestWordBody): Promise<boolean | RequestWord> {
+    if (userStorage.isAuthorize) {
+      try {
+        const response = await fetch(`${this.user}/${userStorage.auth.userId}/words/${wordId}`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${userStorage.auth.token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(word),
+        });
+  
+        const responseJson: RequestWord = await response.json();
+        return responseJson;
+      } catch (error) {
+        return false; // if token is ended
+      }
+    } else 
+      return false;
+  }
+
+  async getHardWords() {
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${userStorage.auth.token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    };
+    const response = await fetch(`${this.user}/${userStorage.auth.userId}/words`, requestOptions);
+    return <RequestWord[]>(await response.json());
+  }
+
+  async getHardWordsAsList() {
+    const result = await this.getHardWords();
+    const list = result.map(item => item.wordId);
+    return list;
+  }
+
+  async getAgrHardWords(): Promise<WordCardType[]> {
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${userStorage.auth.token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    };
+    const response = await fetch(`${this.user}/${userStorage.auth.userId}/aggregatedWords?page=0&wordsPerPage=1000&filter=%7B%22userWord.difficulty%22%3A%22hard%22%7D`, requestOptions);
+    const results = <PaginatedResults[]>(await response.json());
+    return results[0].paginatedResults;
+  }
+
+  async deleteHardWord(wordId: string): Promise<boolean> {
+    if (userStorage.isAuthorize) {
+      try {
+        const response = await fetch(`${this.user}/${userStorage.auth.userId}/words/${wordId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${userStorage.auth.token}`,
+          },
+        });
+  
+        return response.status === 204;
+      } catch (error) {
+        return false; // if token is ended
+      }
+    } else 
+      return false;
   }
 }
 

@@ -1,18 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { newDataService } from '../../../dataServer/dataService';
-import { TextBookState } from '../../../interfaces/types';
+import { ButtonsGlobState, TextBookState } from '../../../interfaces/types';
 import { userStorage } from '../../../model/UserStorage';
 import  GroupPagination from '../../components/GroupPagination/GroupPagination';
 import  Pagination from '../../components/Pagination/Pagination';
 import { WordCard } from '../../components/WordCard/WordCard';
 import './TextBook.scss';
 
-class TextBook extends React.Component {
+const mapStateToProps = (state: ButtonsGlobState) => {
+  return {
+    isAutorize: state.glob.isAutorize,
+  }
+};
+
+const connector = connect(mapStateToProps, null);
+
+
+class TextBook extends React.Component<{ isAuthorize?: boolean }> {
   bg: string;
 
   state: TextBookState;
 
-  constructor(props: {}) {
+  constructor(props: { isAuthorize?: boolean }) {
     super(props);
     this.bg = '#fcddb1';
     this.state = {
@@ -35,7 +45,100 @@ class TextBook extends React.Component {
 
   GroupHandler(group: number, page: number = 0) {
     userStorage.setPageGroupToLocalStorage(group, page);
-    switch (group) {
+    if (this.state.group !== group) {
+      if (group === 6) {
+        newDataService.getAgrHardWords().then(response => {
+          this.setState((prev: TextBookState) => {
+            if (prev.words !== response) {
+              return {
+                words: response,
+              };
+            }
+          });
+        });
+      } else {
+        newDataService.getWords(group, page).then(response => {
+          this.setState((prev: TextBookState) => {
+            if (prev.words !== response) {
+              return {
+                words: response,
+              };
+            }
+          });
+        });
+      }
+      this.setState(() => ({
+        group: group,
+        page: page,
+      }));
+    }
+  }
+
+  PageDownHandler() {
+    if (this.state.group !== 6) {
+      if (this.state.page !== 0) {
+        userStorage.setPageGroupToLocalStorage(this.state.group, this.state.page - 1);
+        newDataService.getWords(this.state.group, this.state.page - 1).then(response => {
+          this.setState((prev: TextBookState) => {
+            if (prev.words !== response) {
+              return {
+                words: response,
+              };
+            }
+          });
+        });
+        this.setState((prev: TextBookState) => ({
+          page: prev.page - 1,
+        }));
+      }
+    }
+  }
+
+  PageUpHandler() {
+    if (this.state.group !== 6) {
+      if (this.state.page !== 29) {
+        userStorage.setPageGroupToLocalStorage(this.state.group, this.state.page + 1);
+        newDataService.getWords(this.state.group, this.state.page + 1).then(response => {
+          this.setState((prev: TextBookState) => {
+            if (prev.words !== response) {
+              return {
+                words: response,
+              };
+            }
+          });
+        });
+        this.setState((prev: TextBookState) => ({
+          page: prev.page + 1,
+        }));
+      }
+    }
+  }
+
+  async componentDidMount() {
+    if (this.state.group === 6) {
+      if (userStorage.auth.userId) {
+        // вот здесь не выполняется так как userstorage что не выполнил, parse
+        newDataService.getAgrHardWords().then(response => {
+          console.log(response);
+          this.setState({
+            words: response,
+          });
+        });
+      } else {
+        console.log('force');
+        this.forceUpdate();
+      }
+    } else {
+      newDataService.getWords(this.state.group, this.state.page).then(response => {
+        this.setState({
+          words: response,
+        });
+      });
+    }
+  }
+
+  updateBackground() {
+    switch (this.state.group) {
       case 0:
         this.bg = '#fcddb1';
         break;
@@ -60,70 +163,25 @@ class TextBook extends React.Component {
       default:
         break;
     }
-    if (this.state.group !== group) {
-      newDataService.getWords(group, page).then(response => {
-        this.setState((prev: TextBookState) => {
-          if (prev.words !== response) {
-            return {
-              words: response,
-            };
-          }
-        });
-      });
-      this.setState(() => ({
-        group: group,
-        page: page,
-      }));
-    }
-  }
-
-  PageDownHandler() {
-    if (this.state.page !== 0) {
-      userStorage.setPageGroupToLocalStorage(this.state.group, this.state.page - 1);
-      newDataService.getWords(this.state.group, this.state.page - 1).then(response => {
-        this.setState((prev: TextBookState) => {
-          if (prev.words !== response) {
-            return {
-              words: response,
-            };
-          }
-        });
-      });
-      this.setState((prev: TextBookState) => ({
-        page: prev.page - 1,
-      }));
-    }
-  }
-
-  PageUpHandler() {
-    if (this.state.page !== 29) {
-      userStorage.setPageGroupToLocalStorage(this.state.group, this.state.page + 1);
-      newDataService.getWords(this.state.group, this.state.page + 1).then(response => {
-        this.setState((prev: TextBookState) => {
-          if (prev.words !== response) {
-            return {
-              words: response,
-            };
-          }
-        });
-      });
-      this.setState((prev: TextBookState) => ({
-        page: prev.page + 1,
-      }));
-    }
-  }
-
-  componentDidMount() {
-    newDataService.getWords(this.state.group, this.state.page).then(response => {
-      this.setState({
-        words: response,
-      });
-    });
   }
 
   render() {
+    console.log('render + auth' + this.props.isAuthorize);
+    this.updateBackground();
     console.log(`Page: ${this.state.page}; Group: ${this.state.group}`);
     let words: JSX.Element[] | '' = [];
+    if (this.props.isAuthorize) {
+      if (this.state.group === 6) {
+        if (userStorage.auth.userId) {
+          newDataService.getAgrHardWords().then(response => {
+            console.log(response);
+            this.setState({
+              words: response,
+            });
+          });
+        }
+      }
+    }
     if (this.state.words.length) {
       words = this.state.words.map((word, index) => <WordCard key={index} word={word}/>)
     } else {
@@ -150,4 +208,5 @@ class TextBook extends React.Component {
   }
 }
 
-export { TextBook };
+// export { TextBook };
+export default connector(TextBook);

@@ -3,7 +3,7 @@ import { Statistics } from '../../pages/Statistics/Statistics';
 import { StartPage } from '../../pages/startPage/StartPage';
 import { Footer } from '../Footer/Footer';
 import Header from '../header/header';
-import { TextBook } from '../../pages/TextBook/TextBook';
+import  TextBook  from '../../pages/TextBook/TextBook';
 import { Games } from '../../pages/Games/Games';
 import { AudioCallGame } from '../../pages/AudioCallGame/AudioCallGame';
 import { AudioCallGameSettings } from '../../pages/AudioCallGame.Settings/AudioCallGameSettings';

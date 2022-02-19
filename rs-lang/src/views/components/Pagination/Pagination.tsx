@@ -9,7 +9,7 @@ import './Pagination.scss';
 const mapStateToProps = (state: ButtonsGlobState, ownProps: PaginationProps ) => {
   return {
     ...ownProps,
-    isAutorize: state.buttons.isAutorize,
+    isAutorize: state.glob.isAutorize,
   }
 };
 

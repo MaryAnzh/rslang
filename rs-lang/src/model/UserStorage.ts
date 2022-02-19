@@ -1,4 +1,8 @@
+import { newDataService } from '../dataServer/dataService';
+import { RequestWord } from '../interfaces/types';
 import { ISignInResponse } from '../interfaces/userInterface';
+import { changeHardsAction, updateAction } from '../store/actionCreators/actionCreators';
+import store from '../store/store';
 
 class UserStorage {
   isAuthorize: boolean;
@@ -7,12 +11,15 @@ class UserStorage {
 
   page: number;
 
+  hardWords: RequestWord[];
+
   private _auth: ISignInResponse;
 
   constructor() {
     this.isAuthorize = false;
     this.page = 0;
     this.group = 0;
+    this.hardWords = [];
     this._auth = {
       message: '',
       name: '',
@@ -22,7 +29,6 @@ class UserStorage {
     };
     this.getAuthFromLocaleStorage();
     this.getPageGroupFromLocaleStorage();
-    console.log(JSON.stringify(this._auth));
   }
 
   
@@ -32,19 +38,23 @@ class UserStorage {
   
   public set auth(v : ISignInResponse) {
     if (v.message === 'Authenticated') {
-      this.isAuthorize = true;
       this._auth = v;
+      this.isAuthorize = true;
       this.setAuthToLocalStorage();
+      this.getHardWords(); // when user has authorized
     } else {
       throw Error('Ошибка авторизации!');
     }
   }
   
-  getAuthFromLocaleStorage() {
+  async getAuthFromLocaleStorage() {
     const auth: string | null = localStorage.getItem('userAuth');
 
     if (auth) {
-      this._auth = JSON.parse(auth);
+      this.isAuthorize = true;
+      this._auth = await JSON.parse(auth);
+      await this.getHardWords();
+      store.dispatch(updateAction(true));
     }
   }
 
@@ -71,6 +81,20 @@ class UserStorage {
     localStorage.setItem('page', String(page));
   }
 
+  async getHardWords() {
+    if (this.isAuthorize) {
+      try {
+        // console.log('Before hards words =' + this.hardWords);
+        this.hardWords = await newDataService.getHardWords();
+        store.dispatch(changeHardsAction(this.hardWords.map(item => item.wordId)));
+      } catch (error) {
+        this.hardWords = [];
+      }
+    } else {
+      this.hardWords = [];
+    }
+  }
+
   clearAuth() {
     localStorage.removeItem('userAuth');
     this.isAuthorize = false;
@@ -81,6 +105,7 @@ class UserStorage {
       refreshToken: '',
       userId: '',
     };
+    this.getHardWords();
   }
 }
 
