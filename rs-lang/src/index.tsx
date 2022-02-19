@@ -11,20 +11,38 @@ import AppRouter from './views/components/AppRouter/AppRouter';
 import { BrowserRouter } from 'react-router-dom';
 import store from './store/store';
 import { userStorage } from './model/UserStorage';
+import { applicationModel } from './model/ApplicationModel';
+
 
 function isUser() {
   console.log(userStorage.auth);
-  
-  ReactDOM.render(
-    <React.StrictMode>
-      <BrowserRouter>
-        <Provider store={store}>
-          <AppRouter />
-        </Provider>,
-      </BrowserRouter>
-    </React.StrictMode>,
-    document.getElementById('root'),
-  );
+  const a = userStorage.auth;
+  if (a.token !== '' && a.token !== undefined) {
+    applicationModel.isAuthorization = true;
+
+    //прописываем флаги завязанные на автаризацию 
+    ReactDOM.render(
+      <React.StrictMode>
+        <BrowserRouter>
+          <Provider store={store}>
+            <AppRouter />
+          </Provider>,
+        </BrowserRouter>
+      </React.StrictMode>,
+      document.getElementById('root'),
+    );
+  } else {
+    ReactDOM.render(
+      <React.StrictMode>
+        <BrowserRouter>
+          <Provider store={store}>
+            <AppRouter />
+          </Provider>,
+        </BrowserRouter>
+      </React.StrictMode>,
+      document.getElementById('root'),
+    );
+  }
 }
 
 isUser();
