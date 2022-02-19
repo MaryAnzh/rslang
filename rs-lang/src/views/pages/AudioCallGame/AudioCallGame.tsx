@@ -78,8 +78,8 @@ class AudioCallGame extends React.Component {
       heardFill_4: '#C48026',
       heardFill_5: '#C48026',
       heardStroke: '#A66200',
-      currentLevel: 'Уровень сложности 1',
-      currentLevelColor: { background: '#FFB140' },
+      currentLevel: 'Уровень сложности ' + (applicationModel.gameLevel + 1),
+      currentLevelColor: { background: this.gameLevelColor(applicationModel.gameLevel) },
       currentButtonText_1: '0',
       currentButtonText_2: '1',
       currentButtonText_3: '2',
@@ -251,6 +251,37 @@ class AudioCallGame extends React.Component {
     }
   }
 
+  gameLevelColor(levelNumber: number) {
+    let color = '';
+    switch (levelNumber) {
+      case 0:
+        color = '#FFB140';
+        break;
+      case 1:
+        color = '#D39F4D';
+        break;
+      case 2:
+        color = '#AC8F59';
+        break;
+      case 3:
+        color = '#7E7C67';
+        break;
+      case 4:
+        color = '#506975';
+        break;
+      case 5:
+        color = '#285981';
+        break;
+      case 6:
+        color = '#022d58';
+        break;
+
+      default:
+        break;
+    }
+    return color;
+  }
+
   currentError(errorNumber: number) {
     switch (errorNumber) {
       case 1:
@@ -318,6 +349,10 @@ class AudioCallGame extends React.Component {
                     className='games-page-wrap__game-wrap__audio-call__top-settings__left__level'
                     style={this.state.currentLevelColor}
                   >{this.state.currentLevel}</div>
+                  <Link to='/audiocall'>
+
+                    <div title='Страница настроек' className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>
+                  </Link>
                 </div>
                 <div className='games-page-wrap__game-wrap__audio-call__top-settings__right'>
                   <p className='games-page-wrap__game-wrap__audio-call__top-settings__right__round-number'>{this.state.currentRound}/{this.state.currentRoundNumber}</p>
@@ -327,7 +362,7 @@ class AudioCallGame extends React.Component {
                     <HeardsError heardFill={this.state.heardFill_3} heardStroke={this.state.heardStroke} />
                     <HeardsError heardFill={this.state.heardFill_4} heardStroke={this.state.heardStroke} />
                     <HeardsError heardFill={this.state.heardFill_5} heardStroke={this.state.heardStroke} />
-                  </div>                  
+                  </div>
                 </div>
               </section>
               <section className='games-page-wrap__game-wrap__audio-call__game'>
