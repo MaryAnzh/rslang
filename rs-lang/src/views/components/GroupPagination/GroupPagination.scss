@@ -109,4 +109,9 @@
     width: 5rem;
     content: "Добавить в изученные";
   }
+  &__sound::after {
+    left:  1.5rem;
+    width: 6.5rem;
+    content: "Воспроизвести пример";
+  }
 }

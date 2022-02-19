@@ -97,7 +97,7 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
     }
     return (
       <div className="card-buttons">
-        <button onClick={this.handleClick} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-fix'}>
+        <button onClick={this.handleClick} className={this.props.isAutorize ? 'card-buttons__btn  tooltip tooltip__sound' : 'card-buttons__btn tooltip tooltip__sound card-buttons__btn-fix'}>
           <img  src={this.state.isPlay ? pausePic : playPic} alt="sound" className="card-buttons__pic"/>
         </button>
         {addBtn}
