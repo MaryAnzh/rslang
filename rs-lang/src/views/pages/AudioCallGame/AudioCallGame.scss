@@ -103,16 +103,17 @@
       &__top-settings {
         width: 100%;
         display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
         justify-content: space-between;
         
         @media (max-width: 700px) {
          justify-content: center;
          flex-wrap: wrap-reverse;
-         gap: 5px;
         }
 
         &__left {
-          width: 15rem;
+          width: 240px;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -133,20 +134,25 @@
           }
         }
 
-        &__right {
-          width: 340px;
+        &__center {
           display: flex;
-          justify-content: space-around;
+          width: 190px;
+          justify-content: space-between;
+          align-items: center;
+          color: #006DD9;
+          font-size: 1rem;
+
+        }
+
+        &__right {
+          width: 240px;
+          display: flex;
+          justify-content: flex-end;
           align-items: center;
 
           @media (max-width: 700px) {
            width: 100%;
            justify-content: end;
-          }
-
-          &__round-number {
-            color: #006DD9;
-            font-size: 1.6rem;
           }
 
           &__heards-error {
