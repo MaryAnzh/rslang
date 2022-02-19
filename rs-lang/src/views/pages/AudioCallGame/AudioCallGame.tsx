@@ -53,6 +53,8 @@ type AudioCallGameType = {
   statisticsRoundInfo: string,
   statisticsDosplay: { display: string },
   soundClass: string,
+  levelEnd: { display: string },
+  levelEndText: { display: string },
 }
 
 type ButtonType = {
@@ -113,6 +115,8 @@ class AudioCallGame extends React.Component {
       statisticsRoundInfo: '',
       statisticsDosplay: { display: 'none' },
       soundClass: 'games-page-wrap__game-wrap__audio-call__top-settings__left__bell',
+      levelEnd: { display: 'block' },
+      levelEndText: { display: 'none' },
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -344,12 +348,20 @@ class AudioCallGame extends React.Component {
 
   async playNextRoundOnClick(e: React.MouseEvent<HTMLElement>) {
     const maxPaheNumber = 29;
+
     if (applicationModel.gamePage < maxPaheNumber) {
       applicationModel.gamePage += 1;
       await this.loadGame();
+      this.gameAgainUpdate();
+      this.forceUpdate();
+    } else {
+      applicationModel.gamePage = 0;
+      this.setState({
+        levelEnd: { display: 'none' },
+        levelEndText: { display: 'block' },
+      });
     }
-    this.gameAgainUpdate();
-    this.forceUpdate();
+    
   }
 
   gameAgainUpdate() {
@@ -449,8 +461,12 @@ class AudioCallGame extends React.Component {
                     onClick={(e) => { this.playAgaineOnClick(e) }}
                     className='round-statistics__button'>Играть этот раунд</button>
                   <button
+                    style={this.state.levelEnd}
                     onClick={(e) => { this.playNextRoundOnClick(e) }}
-                    className='round-statistics__button'>Следующий раунд</button>
+                    className='round-statistics__button'>
+                    Следующий раунд
+                  </button>
+                  <p style={this.state.levelEndText }>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
                   <Link to='/audiocall'>
                     <p>Настройки</p>
                     <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>
