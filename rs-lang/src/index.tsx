@@ -14,38 +14,28 @@ import { userStorage } from './model/UserStorage';
 import { applicationModel } from './model/ApplicationModel';
 
 
-function isUser() {
+async function isUser() {
   console.log(userStorage.auth);
-  const a = userStorage.auth;
+  const a = await userStorage.auth;
+  console.log(a.token);
   if (a.token !== '' && a.token !== undefined) {
     applicationModel.isAuthorization = true;
-
-    //прописываем флаги завязанные на автаризацию 
-    ReactDOM.render(
-      <React.StrictMode>
-        <BrowserRouter>
-          <Provider store={store}>
-            <AppRouter />
-          </Provider>,
-        </BrowserRouter>
-      </React.StrictMode>,
-      document.getElementById('root'),
-    );
-  } else {
-    ReactDOM.render(
-      <React.StrictMode>
-        <BrowserRouter>
-          <Provider store={store}>
-            <AppRouter />
-          </Provider>,
-        </BrowserRouter>
-      </React.StrictMode>,
-      document.getElementById('root'),
-    );
   }
-}
 
-isUser();
+  //прописываем флаги завязанные на автаризацию на саммх страницаж
+  ReactDOM.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <Provider store={store}>
+          <AppRouter />
+        </Provider>,
+      </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root'),
+  );
+}
+isUser()
+export { isUser }
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
