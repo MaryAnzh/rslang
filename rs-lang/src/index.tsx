@@ -15,12 +15,12 @@ import { applicationModel } from './model/ApplicationModel';
 
 
 async function isUser() {
-  console.log(userStorage.auth);
-  const a = await userStorage.auth;
-  console.log(a.token);
+  await userStorage.getAuthFromLocaleStorage();
+  const a = userStorage.auth;
   if (a.token !== '' && a.token !== undefined) {
     applicationModel.isAuthorization = true;
   }
+  console.log('is Authorize = ' + applicationModel.isAuthorization);
 
   //прописываем флаги завязанные на автаризацию на саммх страницаж
   ReactDOM.render(
