@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { newDataService } from '../../../dataServer/dataService';
 import { ButtonsGlobState, TextBookState } from '../../../interfaces/types';
+import { applicationModel } from '../../../model/ApplicationModel';
 import { userStorage } from '../../../model/UserStorage';
 import  GroupPagination from '../../components/GroupPagination/GroupPagination';
 import  Pagination from '../../components/Pagination/Pagination';
@@ -127,9 +128,6 @@ class TextBook extends React.Component<{ hardsArray?: string[] }> {
             words: response,
           });
         });
-      } else {
-        console.log('force');
-        this.forceUpdate();
       }
     } else {
       newDataService.getWords(this.state.group, this.state.page).then(response => {
@@ -170,13 +168,18 @@ class TextBook extends React.Component<{ hardsArray?: string[] }> {
 
   render() {
     this.updateBackground();
+    
+    applicationModel.currentWordArray = this.state.words;
+
     console.log(`Page: ${this.state.page}; Group: ${this.state.group}`);
-    let words: JSX.Element[] | '' = [];
+
+    let words: JSX.Element[] | null;
     if (this.state.words.length) {
       words = this.state.words.map((word, index) => <WordCard key={index} word={word}/>);
     } else {
-      words = '';
+      words = null;
     }
+
     return (
       <main className="main">
         <div className='book-page-wrap'>
