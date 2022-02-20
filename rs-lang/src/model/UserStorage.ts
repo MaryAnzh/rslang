@@ -4,6 +4,10 @@ import { ISignInResponse } from '../interfaces/userInterface';
 import { changeHardsAction, updateAction } from '../store/actionCreators/actionCreators';
 import store from '../store/store';
 
+
+const wordHard = { difficulty: 'hard', optional: {} };
+const wordEasy = { difficulty: 'easy', optional: {} };
+
 class UserStorage {
   isAuthorize: boolean;
 
@@ -13,6 +17,8 @@ class UserStorage {
 
   hardWordsSimple: RequestWord[];
 
+  easyWordsSimple: RequestWord[];
+
   private _auth: ISignInResponse;
 
   constructor() {
@@ -20,6 +26,7 @@ class UserStorage {
     this.page = 0;
     this.group = 0;
     this.hardWordsSimple = [];
+    this.easyWordsSimple = [];
     this._auth = {
       message: '',
       name: '',
@@ -84,13 +91,16 @@ class UserStorage {
   async gethardWordsSimple() {
     if (this.isAuthorize) {
       try {
-        // console.log('Before hards words =' + this.hardWordsSimple);
-        this.hardWordsSimple = await newDataService.getHardWords();
+        const allWords = await newDataService.getUserWords();
+        this.hardWordsSimple = allWords.filter(word => word.difficulty === 'hard');
+        this.easyWordsSimple = allWords.filter(word => word.difficulty === 'easy');
         store.dispatch(changeHardsAction(this.hardWordsSimple.map(item => item.wordId)));
       } catch (error) {
         this.hardWordsSimple = [];
+        this.easyWordsSimple = [];
       }
     } else {
+      this.easyWordsSimple = [];
       this.hardWordsSimple = [];
     }
   }
@@ -106,6 +116,29 @@ class UserStorage {
       userId: '',
     };
     this.gethardWordsSimple();
+  }
+
+  async addHardWord(wordId: string) {
+    await newDataService.addHardWord(wordId, wordHard);
+    await this.gethardWordsSimple();
+  }
+
+  async delHardWord(wordId: string) {
+    await newDataService.deleteHardWord(wordId);
+    await this.gethardWordsSimple();
+  }
+
+  async addEasyWord(wordId: string) {
+    if (this.hardWordsSimple.some(word => word.wordId === wordId)) {
+      this.delHardWord(wordId);
+    }
+    await newDataService.addHardWord(wordId, wordEasy);
+    await this.gethardWordsSimple();
+  }
+
+  async delEasyWord(wordId: string) {
+    await newDataService.deleteHardWord(wordId);
+    await this.gethardWordsSimple();
   }
 }
 

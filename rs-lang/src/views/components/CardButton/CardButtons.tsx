@@ -10,9 +10,8 @@ import { soundModel } from '../../../model/SoundModel';
 import { connect } from 'react-redux';
 import { newDataService } from '../../../dataServer/dataService';
 import { changeHardsAction } from '../../../store/actionCreators/actionCreators';
+import { userStorage } from '../../../model/UserStorage';
 
-
-const wordEx = { difficulty: 'hard', optional: {} };
 
 const mapStateToProps = (state: ButtonsGlobState, ownProps: CardButtonsProps ) => {
   return {
@@ -66,17 +65,11 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
   }
 
   async addWordHandler() {
-    await newDataService.addHardWord(this.props.wordId, wordEx);
-    // console.log('addWordHandler');
-    const list = await newDataService.getHardWordsAsList();
-    await this.props.changeHardsAction(list);
+    userStorage.addHardWord(this.props.wordId);
   }
 
   async delWordHandler() {
-    await newDataService.deleteHardWord(this.props.wordId);
-    console.log('deleteWordHandler');
-    const list = await newDataService.getHardWordsAsList();
-    await this.props.changeHardsAction(list);
+    userStorage.delHardWord(this.props.wordId);
   }
 
   render() {
