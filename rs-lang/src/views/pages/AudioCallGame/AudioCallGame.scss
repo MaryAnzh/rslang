@@ -251,12 +251,11 @@
             }
 
             &__true-answer {
-             
-              width: 300px;
-              height: 3rem;
-              margin-left: -25px;
+             width: 140%;
+              padding: 0.3rem;
+             align-self: center;
               background: white;
-              font-size: 2rem;
+              font-size: 1.8rem;
               color: #0e5194;
               border: 3px solid #6AACEC;
               border-radius: 5px;
@@ -264,6 +263,14 @@
               align-items: center;
               justify-content: center;
               z-index: 13;
+
+              &__text {
+                 width: 100%;
+                 display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              }
             }
           }
         }

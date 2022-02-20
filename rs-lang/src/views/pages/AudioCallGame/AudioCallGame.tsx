@@ -484,7 +484,7 @@ class AudioCallGame extends React.Component {
                       style={this.state.answerIndicator}
                     ></div>
                     <div className='games-page-wrap__game-wrap__audio-call__game__audio-img__word__true-answer'>
-                      <p>{this.state.trueRoundWord}</p>
+                      <p className='games-page-wrap__game-wrap__audio-call__game__audio-img__word__true-answer__text'>{this.state.trueRoundWord}</p>
                     </div>
                   </div>
                 </div>
