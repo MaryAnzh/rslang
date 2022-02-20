@@ -1,5 +1,5 @@
 import React from 'react';
-import './SprintGameSettings.scss';
+import './Games.scss';
 import '../../elements/settingPanel/settingPanel';
 import { audioCallPageModel } from '../../../model/AudioCallPageModel';
 import { SettingPanel } from '../../elements/settingPanel/settingPanel';
