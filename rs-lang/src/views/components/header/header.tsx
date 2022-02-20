@@ -91,15 +91,6 @@ class Header extends React.Component<HeaderProps> {
     }
   }
 
-  navToGame(e: React.MouseEvent<HTMLElement>) {
-    const elem = e.target as HTMLElement;
-    const level = elem.dataset.index;
-
-    alert(level);
-    // useCallback(() => navigate('/audiocall', { replace: true }), [navigate]);
-    //this.props.history.push('/audiocall')
-  }
-
   navToTextBook(e: React.MouseEvent<HTMLElement>) {
     const text = (e.target as HTMLElement).textContent;
     this.setState({
@@ -108,6 +99,24 @@ class Header extends React.Component<HeaderProps> {
     if (text !== null) {
       this.navToLevelBook(text);
     }
+  }
+
+  navToGame(e: React.MouseEvent<HTMLElement>) {
+    const text = (e.target as HTMLElement).textContent;
+    this.setState({
+      gameNavSection: { display: 'none' },
+    })
+  }
+
+  burgerNavToGame(e: React.MouseEvent<HTMLElement>) {
+    const text = (e.target as HTMLElement).textContent;
+    this.setState({
+      burger: { display: 'none' },
+      bookListAnimation: { animation: 'none' },
+      gameListtAnimation: { animation: 'none' },
+      bookSection: { display: 'none' },
+      gameSection: { display: 'none' },
+    })
   }
 
   burgerNavToTextBook(e: React.MouseEvent<HTMLElement>) {
@@ -211,8 +220,15 @@ class Header extends React.Component<HeaderProps> {
             <div
               className='wrap-game-lists'
               style={this.state.gameSection}>
-              <Link to="/audiocall" className="wrap-game-lists__link">Аудиовызов</Link>
-              <Link to="/sprintsettings" className="wrap-game-lists__link">Спринт</Link>
+              <Link to="/audiocall"
+                className="wrap-game-lists__link"
+                onClick={(e) => { this.burgerNavToGame(e)}}
+              >Аудиовызов</Link>
+              <Link
+                to="/sprintsettings"
+                className="wrap-game-lists__link"
+                onClick={(e) => { this.burgerNavToGame(e) }}
+              >Спринт</Link>
             </div>
           </li>
           <li className='header__hidden-burger-menu__list'>
@@ -269,9 +285,8 @@ class Header extends React.Component<HeaderProps> {
           <li className='header__nav__li'>
             <div className='header__nav__li__enclosed'
               onClick={(e) => { this.openNavGameSectionOnClick(e) }}>
-
               <div className='header__nav__li__enclosed__name'>
-                <Link to="/games" className="header__nav__li__link">Игры</Link>
+                <a className="header__nav__li__link">Игры</a>
                 <div className='header__nav__li__enclosed__name__arrow'>
                   <Arrow arrowClass={arrowNav} />
                 </div>
@@ -280,9 +295,9 @@ class Header extends React.Component<HeaderProps> {
             <div
               className='wrap-game-lists'
               style={this.state.gameNavSection}>
-              <a
+              <Link to="/audiocall"
                 onClick={(e) => { this.navToGame(e) }}
-                className="wrap-game-lists__link">Аудиовызов</a>
+                className="wrap-game-lists__link">Аудиовызов</Link>
               <Link to="/sprintsettings" className="wrap-game-lists__link">Спринт</Link>
             </div>
           </li>
