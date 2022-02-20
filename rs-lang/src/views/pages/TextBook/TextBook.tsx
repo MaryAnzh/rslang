@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { newDataService } from '../../../dataServer/dataService';
 import { ButtonsGlobState, TextBookState } from '../../../interfaces/types';
+import { applicationModel } from '../../../model/ApplicationModel';
 import { userStorage } from '../../../model/UserStorage';
 import  GroupPagination from '../../components/GroupPagination/GroupPagination';
 import  Pagination from '../../components/Pagination/Pagination';
@@ -10,19 +11,19 @@ import './TextBook.scss';
 
 const mapStateToProps = (state: ButtonsGlobState) => {
   return {
-    isAutorize: state.glob.isAutorize,
+    hardsArray: state.glob.hardsArray,
   }
 };
 
 const connector = connect(mapStateToProps, null);
 
 
-class TextBook extends React.Component<{ isAuthorize?: boolean }> {
+class TextBook extends React.Component<{ hardsArray?: string[] }> {
   bg: string;
 
   state: TextBookState;
 
-  constructor(props: { isAuthorize?: boolean }) {
+  constructor(props: { hardsArray?: string[] }) {
     super(props);
     this.bg = '#fcddb1';
     this.state = {
@@ -35,7 +36,10 @@ class TextBook extends React.Component<{ isAuthorize?: boolean }> {
     this.GroupHandler = this.GroupHandler.bind(this);
   }
 
-  shouldComponentUpdate(nextProps: {}, nextState: TextBookState) {
+  shouldComponentUpdate(nextProps: { hardsArray?: string[] }, nextState: TextBookState) {
+    if (nextProps.hardsArray !== this.props.hardsArray && this.state.group === 6) {
+      this.GroupHandler(this.state.group, this.state.page);
+    }
     if (nextState.words !== this.state.words) {
       return true;
     } else {
@@ -45,7 +49,7 @@ class TextBook extends React.Component<{ isAuthorize?: boolean }> {
 
   GroupHandler(group: number, page: number = 0) {
     userStorage.setPageGroupToLocalStorage(group, page);
-    if (this.state.group !== group) {
+    if (this.state.group !== group || group === 6) {
       if (group === 6) {
         newDataService.getAgrHardWords().then(response => {
           this.setState((prev: TextBookState) => {
@@ -124,9 +128,6 @@ class TextBook extends React.Component<{ isAuthorize?: boolean }> {
             words: response,
           });
         });
-      } else {
-        console.log('force');
-        this.forceUpdate();
       }
     } else {
       newDataService.getWords(this.state.group, this.state.page).then(response => {
@@ -166,27 +167,19 @@ class TextBook extends React.Component<{ isAuthorize?: boolean }> {
   }
 
   render() {
-    console.log('render + auth' + this.props.isAuthorize);
     this.updateBackground();
+    
+    applicationModel.currentWordArray = this.state.words;
+
     console.log(`Page: ${this.state.page}; Group: ${this.state.group}`);
-    let words: JSX.Element[] | '' = [];
-    if (this.props.isAuthorize) {
-      if (this.state.group === 6) {
-        if (userStorage.auth.userId) {
-          newDataService.getAgrHardWords().then(response => {
-            console.log(response);
-            this.setState({
-              words: response,
-            });
-          });
-        }
-      }
-    }
+
+    let words: JSX.Element[] | null;
     if (this.state.words.length) {
-      words = this.state.words.map((word, index) => <WordCard key={index} word={word}/>)
+      words = this.state.words.map((word, index) => <WordCard key={index} word={word}/>);
     } else {
-      words = '';
+      words = null;
     }
+
     return (
       <main className="main">
         <div className='book-page-wrap'>

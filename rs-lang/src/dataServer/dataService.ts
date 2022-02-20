@@ -105,7 +105,7 @@ class DataService {
       return false;
   }
 
-  async getHardWords() {
+  async getUserWords() {
     const requestOptions = {
       method: 'GET',
       headers: {
@@ -119,8 +119,14 @@ class DataService {
   }
 
   async getHardWordsAsList() {
-    const result = await this.getHardWords();
-    const list = result.map(item => item.wordId);
+    const result = await this.getUserWords();
+    const list = result.filter(word => word.difficulty === 'hard').map(item => item.wordId);
+    return list;
+  }
+
+  async getEasyWordsAsList() {
+    const result = await this.getUserWords();
+    const list = result.filter(word => word.difficulty === 'easy').map(item => item.wordId);
     return list;
   }
 

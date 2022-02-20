@@ -63,6 +63,7 @@ export type ButtonsGlobState = {
   glob: { 
     isAutorize: boolean,
     hardsArray: string[],
+    easyArray: string[],
   }
 }
 

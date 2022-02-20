@@ -4,21 +4,21 @@ import playPic from '../../../img/svg/play.svg';
 import pausePic from '../../../img/svg/pause.svg';
 import addPic from '../../../img/svg/add.svg';
 import applyPic from '../../../img/svg/check.svg';
+import applyPicGreen from '../../../img/svg/check_green.svg';
 import delPic from '../../../img/svg/delete.svg';
 import { ButtonsGlobState, CardButtonsProps, CardButtonsState } from '../../../interfaces/types';
 import { soundModel } from '../../../model/SoundModel';
 import { connect } from 'react-redux';
-import { newDataService } from '../../../dataServer/dataService';
 import { changeHardsAction } from '../../../store/actionCreators/actionCreators';
+import { userStorage } from '../../../model/UserStorage';
 
-
-const wordEx = { difficulty: 'hard', optional: {} };
 
 const mapStateToProps = (state: ButtonsGlobState, ownProps: CardButtonsProps ) => {
   return {
     soundUrls: ownProps.soundUrls,
     isAutorize: state.glob.isAutorize,
     hardsArray: state.glob.hardsArray,
+    easyArray: state.glob.easyArray,
   }
 };
 
@@ -29,6 +29,7 @@ const mapDispatchToProps = {
 type ArrayActionProps = {
   changeHardsAction: Function,
   hardsArray: string[],
+  easyArray: string[],
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -44,6 +45,7 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
     this.handleClick = this.handleClick.bind(this);
     this.addWordHandler = this.addWordHandler.bind(this);
     this.delWordHandler = this.delWordHandler.bind(this);
+    this.addEasyHandler = this.addEasyHandler.bind(this);
   }
 
   async handleClick() {
@@ -66,44 +68,55 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
   }
 
   async addWordHandler() {
-    await newDataService.addHardWord(this.props.wordId, wordEx);
-    console.log('addWordHandler');
-    const list = await newDataService.getHardWordsAsList();
-    await this.props.changeHardsAction(list);
+    userStorage.addHardWord(this.props.wordId);
+  }
+
+  async addEasyHandler() {
+    userStorage.addEasyWord(this.props.wordId);
   }
 
   async delWordHandler() {
-    await newDataService.deleteHardWord(this.props.wordId);
-    console.log('deleteWordHandler');
-    const list = await newDataService.getHardWordsAsList();
-    await this.props.changeHardsAction(list);
+    userStorage.delHardWord(this.props.wordId);
   }
 
   render() {
-    console.log('PROPS ' + JSON.stringify(this.props));
-    let addBtn: JSX.Element | null;
+    let hardBtn: JSX.Element | null;
+    let easyBtn: JSX.Element | null;
+    console.log('hard ' + this.props.hardsArray);
+    console.log('easy ' + this.props.easyArray);
     if (!this.props.hardsArray.includes(this.props.wordId)) {
-      addBtn = (
-          <button onClick={this.addWordHandler} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
+      hardBtn = (
+          <button onClick={this.addWordHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__add' : 'card-buttons__btn card-buttons__btn-disable'}>
             <img src={addPic} alt="add" className="card-buttons__pic"/>
           </button>
       );
     } else {
-      addBtn = (
-          <button onClick={this.delWordHandler} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
+      hardBtn = (
+          <button onClick={this.delWordHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__del' : 'card-buttons__btn card-buttons__btn-disable'}>
             <img src={delPic} alt="del" className="card-buttons__pic"/>
           </button>
       );
     }
-    return (
-      <div className="card-buttons">
-        <button onClick={this.handleClick} className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-fix'}>
-          <img  src={this.state.isPlay ? pausePic : playPic} alt="sound" className="card-buttons__pic"/>
-        </button>
-        {addBtn}
-        <button className={this.props.isAutorize ? 'card-buttons__btn' : 'card-buttons__btn card-buttons__btn-disable'}>
+    if (!this.props.easyArray.includes(this.props.wordId)) {
+      easyBtn = (
+        <button onClick={this.addEasyHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__apply' : 'card-buttons__btn card-buttons__btn-disable'}>
           <img src={applyPic} alt="apply" className="card-buttons__pic"/>
         </button>
+      );
+    } else {
+      easyBtn = (
+        <button onClick={this.addEasyHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__apply' : 'card-buttons__btn card-buttons__btn-disable'}>
+          <img src={applyPicGreen} alt="apply" className="card-buttons__pic"/>
+        </button>
+      );
+    }
+    return (
+      <div className="card-buttons">
+        <button onClick={this.handleClick} className={this.props.isAutorize ? 'card-buttons__btn  tooltip tooltip__sound' : 'card-buttons__btn tooltip tooltip__sound card-buttons__btn-fix'}>
+          <img  src={this.state.isPlay ? pausePic : playPic} alt="sound" className="card-buttons__pic"/>
+        </button>
+        {hardBtn}
+        {easyBtn}
       </div>
     );
   }
