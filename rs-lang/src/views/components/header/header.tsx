@@ -45,7 +45,7 @@ class Header extends React.Component<HeaderProps> {
   isBooKSectionOpen = false;
 
   isGameSectionOpen = false;
-  
+
   isNavBooKSectionOpen = false;
 
   isNavGameSectionOpen = false;
@@ -162,7 +162,7 @@ class Header extends React.Component<HeaderProps> {
               <div className='header__nav__li__enclosed__name'>
                 <Link to="/textbook">Учебник</Link>
                 <div className='header__nav__li__enclosed__name__arrow'
-                  onClick={(e) => { this.openNavBookSectionOnClick(e)}}>
+                  onClick={(e) => { this.openNavBookSectionOnClick(e) }}>
                   <Arrow arrowClass={arrowNav} />
                 </div>
               </div>
@@ -228,20 +228,25 @@ class Header extends React.Component<HeaderProps> {
 
   upDateUserState(a: string, b: string, c: string, alertGreating: string) {
     this.props.updateAction(applicationModel.isAuthorization); // Emit dispatch for card list update
-    
-    this.setState(this.state.alertStyle = { display: a });
-    this.setState({ correct: this.state.alertGreating = alertGreating })
-    this.setState(this.state.signBlockClass = { display: b });
-    this.setState({ correct: this.state.signIconClass = 'header__sign-icon ' + c });
-    this.setState({ correct: this.state.statisticsBurgerLinkClass = 'header__nav__lin ' + c });
-    this.setState(this.state.outStyle = { display: a });
+
+    this.setState({
+      alertStyle: { display: a },
+      alertGreating: alertGreating,
+      signBlockClass: { display: b },
+      signIconClass: 'header__sign-icon ' + c,
+      statisticsBurgerLinkClass: 'header__nav__lin ' + c,
+      outStyle: { display: a },
+    });
+
+   
   }
-  
+
   alertHidden() {
     this.setState(this.state.alertStyle = { display: 'none' });
   }
-  
+
   async authorizationUpDate(alertGreating: string) {
+    console.log('Хедер обновлен');
     this.upDateUserState('flex', 'none', 'visible', alertGreating);
   }
 
