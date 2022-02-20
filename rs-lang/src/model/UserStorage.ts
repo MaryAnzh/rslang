@@ -1,7 +1,7 @@
 import { newDataService } from '../dataServer/dataService';
 import { RequestWord } from '../interfaces/types';
 import { ISignInResponse } from '../interfaces/userInterface';
-import { changeHardsAction, updateAction } from '../store/actionCreators/actionCreators';
+import { changeEasyAction, changeHardsAction, updateAction } from '../store/actionCreators/actionCreators';
 import store from '../store/store';
 
 
@@ -48,7 +48,7 @@ class UserStorage {
       this._auth = v;
       this.isAuthorize = true;
       this.setAuthToLocalStorage();
-      this.gethardWordsSimple(); // when user has authorized
+      this.getUserWordsSimple(); // when user has authorized
     } else {
       throw Error('Ошибка авторизации!');
     }
@@ -60,7 +60,7 @@ class UserStorage {
     if (auth) {
       this.isAuthorize = true;
       this._auth = await JSON.parse(auth);
-      await this.gethardWordsSimple();
+      await this.getUserWordsSimple();
       store.dispatch(updateAction(true));
     }
   }
@@ -88,13 +88,16 @@ class UserStorage {
     localStorage.setItem('page', String(page));
   }
 
-  async gethardWordsSimple() {
+  async getUserWordsSimple() {
     if (this.isAuthorize) {
       try {
         const allWords = await newDataService.getUserWords();
         this.hardWordsSimple = allWords.filter(word => word.difficulty === 'hard');
         this.easyWordsSimple = allWords.filter(word => word.difficulty === 'easy');
+        // console.log('userStorage getUserWordsSimple ' + this.hardWordsSimple);
+        // console.log('userStorage getUserWordsSimple ' + this.easyWordsSimple);
         store.dispatch(changeHardsAction(this.hardWordsSimple.map(item => item.wordId)));
+        store.dispatch(changeEasyAction(this.easyWordsSimple.map(item => item.wordId)));
       } catch (error) {
         this.hardWordsSimple = [];
         this.easyWordsSimple = [];
@@ -115,17 +118,17 @@ class UserStorage {
       refreshToken: '',
       userId: '',
     };
-    this.gethardWordsSimple();
+    this.getUserWordsSimple();
   }
 
   async addHardWord(wordId: string) {
     await newDataService.addHardWord(wordId, wordHard);
-    await this.gethardWordsSimple();
+    await this.getUserWordsSimple();
   }
 
   async delHardWord(wordId: string) {
     await newDataService.deleteHardWord(wordId);
-    await this.gethardWordsSimple();
+    await this.getUserWordsSimple();
   }
 
   async addEasyWord(wordId: string) {
@@ -133,12 +136,12 @@ class UserStorage {
       this.delHardWord(wordId);
     }
     await newDataService.addHardWord(wordId, wordEasy);
-    await this.gethardWordsSimple();
+    await this.getUserWordsSimple();
   }
 
   async delEasyWord(wordId: string) {
     await newDataService.deleteHardWord(wordId);
-    await this.gethardWordsSimple();
+    await this.getUserWordsSimple();
   }
 }
 
