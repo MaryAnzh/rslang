@@ -50,7 +50,6 @@ class Header extends React.Component<HeaderProps> {
 
   isNavGameSectionOpen = false;
 
-
   constructor(props: HeaderProps) {
     super(props);
     this.state = {
@@ -74,7 +73,22 @@ class Header extends React.Component<HeaderProps> {
     this.burgerUp = this.burgerUp.bind(this);
   }
 
+  isAuthorizationState(isAuthorization: boolean) {
+    if (isAuthorization) {
+      this.state.signBlockClass = { display: 'none' };
+      this.state.signIconClass = 'header__sign-icon ' + 'visible';
+      this.state.statisticsBurgerLinkClass = 'header__nav__link ' + 'visible';
+      this.state.outStyle = { display: 'flex' };
+    } else {
+      this.state.signBlockClass = { display: 'flex' };
+      this.state.signIconClass = 'header__sign-icon ' + 'blocked';
+      this.state.statisticsBurgerLinkClass = 'header__nav__link ' + 'blocked';
+      this.state.outStyle = { display: 'none' };
+    }
+  }
+
   render() {
+    this.isAuthorizationState(applicationModel.isAuthorization);
     const arrow = 'enclosed-burger__wrap__arrow left-arrow';
     const arrowNav = 'left-arrow';
     return (
@@ -238,7 +252,7 @@ class Header extends React.Component<HeaderProps> {
       outStyle: { display: a },
     });
 
-   
+
   }
 
   alertHidden() {
@@ -246,7 +260,6 @@ class Header extends React.Component<HeaderProps> {
   }
 
   async authorizationUpDate(alertGreating: string) {
-    console.log('Хедер обновлен');
     this.upDateUserState('flex', 'none', 'visible', alertGreating);
   }
 
@@ -256,9 +269,9 @@ class Header extends React.Component<HeaderProps> {
 
   authorizationOut(e: React.MouseEvent<HTMLLIElement>) {
     applicationModel.isAuthorization = false;
-
     userStorage.clearAuth(); // delete user info from local storage and userStorage object
-
+    console.log('userStorage.auth');
+    console.log(userStorage.auth);
     this.upDateUserState('none', 'block', 'blocked', '');
   }
 

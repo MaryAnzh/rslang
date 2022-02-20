@@ -25,7 +25,7 @@ async function isUser() {
       applicationModel.isAuthorization = true;
     }
   } else {
-    applicationModel.isAuthorization = true;
+    applicationModel.isAuthorization = false;
   }
   console.log('is Authorize = ' + applicationModel.isAuthorization);
 

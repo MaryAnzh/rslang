@@ -1,10 +1,7 @@
 import { newDataService } from '../dataServer/dataService';
 import { DataService } from '../dataServer/dataService';
-import { IUser, IUserRegisterResponse, ISignInUserInfo } from '../interfaces/userInterface';
+import { IUser, IUserRegisterResponse, ISignInUserInfo, IGetUser } from '../interfaces/userInterface';
 import { authorizationAppModel } from './AuthorizationAppModel';
-import { IAudioCallWords } from '../interfaces/wordsInterface';
-import { ErrorText } from '../views/elements/errorText/errorText';
-import { JsxFlags } from 'typescript';
 import { userStorage } from './UserStorage';
 import { WordCardType } from '../interfaces/types';
 
@@ -89,9 +86,11 @@ class ApplicationModel {
 
   async getUser() {
     try {
-      const response = await this.dataServ.getUser();
+      const response: IGetUser = await this.dataServ.getUser();
       console.log('Ответ от getUser');
       console.log(response);
+      this.currentMail = response.email;
+      this.currentUserName = response.name;
       return true;
     } catch (error) {
       const serverError = error as Error;
