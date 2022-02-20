@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './header.scss';
 import '../../../css/animation.scss';
 import { Logo } from '../Logo/Logo';
@@ -16,7 +17,7 @@ import { connect } from 'react-redux';
 import { updateAction } from '../../../store/actionCreators/actionCreators';
 import { Arrow } from '../../elements/arrow/arrow';
 import { userStorage } from '../../../model/UserStorage';
-
+import path from 'path/posix';
 
 type HeaderState = {
   alertStyle: { display: string },
@@ -49,6 +50,9 @@ class Header extends React.Component<HeaderProps> {
   isNavBooKSectionOpen = false;
 
   isNavGameSectionOpen = false;
+
+  linkTo = <Link to="/audiocall" />;
+
 
   constructor(props: HeaderProps) {
     super(props);
@@ -87,6 +91,74 @@ class Header extends React.Component<HeaderProps> {
     }
   }
 
+  navToGame(e: React.MouseEvent<HTMLElement>) {
+    const elem = e.target as HTMLElement;
+    const level = elem.dataset.index;
+
+    alert(level);
+    // useCallback(() => navigate('/audiocall', { replace: true }), [navigate]);
+    //this.props.history.push('/audiocall')
+  }
+
+  navToTextBook(e: React.MouseEvent<HTMLElement>) {
+    const text = (e.target as HTMLElement).textContent;
+    this.setState({
+      bookNavSection: { display: 'none' },
+    })
+    if (text !== null) {
+      this.navToLevelBook(text);
+    }
+  }
+
+  burgerNavToTextBook(e: React.MouseEvent<HTMLElement>) {
+    const text = (e.target as HTMLElement).textContent;
+    this.setState({
+      burger: { display: 'none' },
+      bookListAnimation: { animation: 'none' },
+      gameListtAnimation: { animation: 'none' },
+      bookSection: { display: 'none' },
+      gameSection: { display: 'none' },
+    })
+    if (text !== null) {
+      this.navToLevelBook(text);
+    }
+  }
+
+  navToLevelBook(levelName: string) {
+    switch (levelName) {
+      case 'Уровень 1':
+        userStorage.page = 0;
+        userStorage.group = 0;
+        break;
+      case 'Уровень 2':
+        userStorage.page = 0;
+        userStorage.group = 1;
+        break;
+      case 'Уровень 3':
+        userStorage.page = 0;
+        userStorage.group = 2;
+        break;
+      case 'Уровень 4':
+        userStorage.page = 0;
+        userStorage.group = 3;
+        break;
+      case 'Уровень 5':
+        userStorage.page = 0;
+        userStorage.group = 4;
+        break;
+      case 'Уровень 6':
+        userStorage.page = 0;
+        userStorage.group = 5;
+        break;
+      case 'Сложные слова':
+        userStorage.page = 0;
+        userStorage.group = 0;
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     this.isAuthorizationState(applicationModel.isAuthorization);
     const arrow = 'enclosed-burger__wrap__arrow left-arrow';
@@ -117,13 +189,13 @@ class Header extends React.Component<HeaderProps> {
               className='wrap-book-lists'
               style={this.state.bookSection}>
 
-              <Link to="/textbook" className="wrap-book-lists__link">Уровень 1</Link>
-              <Link to="/textbook" className="wrap-book-lists__link">Уровень 2</Link>
-              <Link to="/textbook" className="wrap-book-lists__link">Уровень 3</Link>
-              <Link to="/textbook" className="wrap-book-lists__link">Уровень 4</Link>
-              <Link to="/textbook" className="wrap-book-lists__link">Уровень 5</Link>
-              <Link to="/textbook" className="wrap-book-lists__link">Уровень 6</Link>
-              <Link to="/textbook" className="wrap-book-lists__link">Сложные слова</Link>
+              <Link to="/textbook" title="0" state={{ page: 1 }} className="wrap-book-lists__link" onClick={e => this.burgerNavToTextBook(e)}>Уровень 1</Link>
+              <Link to="/textbook" data-index="1" state={{ page: 2 }} className="wrap-book-lists__link" onClick={e => this.burgerNavToTextBook(e)}>Уровень 2</Link>
+              <Link to="/textbook" data-index="2" state={{ page: 3 }} className="wrap-book-lists__link" onClick={e => this.burgerNavToTextBook(e)}>Уровень 3</Link>
+              <Link to="/textbook" data-index="3" state={{ page: 4 }} className="wrap-book-lists__link" onClick={e => this.burgerNavToTextBook(e)}>Уровень 4</Link>
+              <Link to="/textbook" data-index="4" state={{ page: 5 }} className="wrap-book-lists__link" onClick={e => this.burgerNavToTextBook(e)}>Уровень 5</Link>
+              <Link to="/textbook" data-index="5" state={{ page: 6 }} className="wrap-book-lists__link" onClick={e => this.burgerNavToTextBook(e)}>Уровень 6</Link>
+              <Link to="/textbook" data-index="6" state={{ page: 7 }} className="wrap-book-lists__link" onClick={e => this.burgerNavToTextBook(e)}>Сложные слова</Link>
             </div>
           </li>
           <li
@@ -173,10 +245,11 @@ class Header extends React.Component<HeaderProps> {
           </li>
           <li className='header__nav__li'>
             <div className='header__nav__li__enclosed'>
-              <div className='header__nav__li__enclosed__name'>
-                <Link to="/textbook">Учебник</Link>
+              <div className='header__nav__li__enclosed__name'
+                onClick={(e) => { this.openNavBookSectionOnClick(e) }}>
+                <a>Учебник</a>
                 <div className='header__nav__li__enclosed__name__arrow'
-                  onClick={(e) => { this.openNavBookSectionOnClick(e) }}>
+                >
                   <Arrow arrowClass={arrowNav} />
                 </div>
               </div>
@@ -184,13 +257,13 @@ class Header extends React.Component<HeaderProps> {
             <div
               className='wrap-book-lists'
               style={this.state.bookNavSection}>
-              <Link to="/textbook" className="wrap-book-lists__link">Уровень 1</Link>
-              <Link to="/textbook" className="wrap-book-lists__link">Уровень 2</Link>
-              <Link to="/textbook" className="wrap-book-lists__link">Уровень 3</Link>
-              <Link to="/textbook" className="wrap-book-lists__link">Уровень 4</Link>
-              <Link to="/textbook" className="wrap-book-lists__link">Уровень 5</Link>
-              <Link to="/textbook" className="wrap-book-lists__link">Уровень 6</Link>
-              <Link to="/textbook" className="wrap-book-lists__link">Сложные слова</Link>
+              <Link to="/textbook" state={{ page: 1 }} className="wrap-book-lists__link" onClick={e => this.navToTextBook(e)}>Уровень 1</Link>
+              <Link to="/textbook" state={{ page: 2 }} className="wrap-book-lists__link" onClick={e => this.navToTextBook(e)}>Уровень 2</Link>
+              <Link to="/textbook" state={{ page: 3 }} className="wrap-book-lists__link" onClick={e => this.navToTextBook(e)}>Уровень 3</Link>
+              <Link to="/textbook" state={{ page: 4 }} className="wrap-book-lists__link" onClick={e => this.navToTextBook(e)}>Уровень 4</Link>
+              <Link to="/textbook" state={{ page: 5 }} className="wrap-book-lists__link" onClick={e => this.navToTextBook(e)}>Уровень 5</Link>
+              <Link to="/textbook" state={{ page: 6 }} className="wrap-book-lists__link" onClick={e => this.navToTextBook(e)}>Уровень 6</Link>
+              <Link to="/textbook" state={{ page: 7 }} className="wrap-book-lists__link" onClick={e => this.navToTextBook(e)}>Сложные слова</Link>
             </div>
           </li>
           <li className='header__nav__li'>
@@ -207,7 +280,9 @@ class Header extends React.Component<HeaderProps> {
             <div
               className='wrap-game-lists'
               style={this.state.gameNavSection}>
-              <Link to="/audiocall" className="wrap-game-lists__link">Аудиовызов</Link>
+              <a
+                onClick={(e) => { this.navToGame(e) }}
+                className="wrap-game-lists__link">Аудиовызов</a>
               <Link to="/sprintsettings" className="wrap-game-lists__link">Спринт</Link>
             </div>
           </li>
