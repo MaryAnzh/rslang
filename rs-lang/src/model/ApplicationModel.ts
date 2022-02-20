@@ -87,10 +87,22 @@ class ApplicationModel {
     }
   }
 
+  async getUser() {
+    try {
+      const response = await this.dataServ.getUser();
+      console.log('Ответ от getUser');
+      console.log(response);
+      return true;
+    } catch (error) {
+      const serverError = error as Error;
+      this.catchError(serverError);
+      return false;
+    }
+
+  }
+
   catchError(error: Error) {
     const message = error.message;
-    console.log('message');
-    console.log(message);
     switch (message) {
       case '417':
         this.currentTextError = 'Такой e-mail уже существует.';
@@ -103,6 +115,9 @@ class ApplicationModel {
       case '403':
         this.currentTextError = 'Вы ввели неверный e-mail или пароль';
         console.log('Ошибка 403, я тебя поймал');
+        break;
+      case '401':
+        console.log('Срок действия токена истек');
         break;
 
       default:

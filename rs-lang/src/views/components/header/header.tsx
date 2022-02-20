@@ -126,7 +126,7 @@ class Header extends React.Component<HeaderProps> {
               className='wrap-game-lists'
               style={this.state.gameSection}>
               <Link to="/audiocall" className="wrap-game-lists__link">Аудиовызов</Link>
-              <Link to="/games" className="wrap-game-lists__link">Спринт</Link>
+              <Link to="/sprintsettings" className="wrap-game-lists__link">Спринт</Link>
             </div>
           </li>
           <li className='header__hidden-burger-menu__list'>
@@ -194,7 +194,7 @@ class Header extends React.Component<HeaderProps> {
               className='wrap-game-lists'
               style={this.state.gameNavSection}>
               <Link to="/audiocall" className="wrap-game-lists__link">Аудиовызов</Link>
-              <Link to="/games" className="wrap-game-lists__link">Спринт</Link>
+              <Link to="/sprintsettings" className="wrap-game-lists__link">Спринт</Link>
             </div>
           </li>
           <li className='header__nav__li'>
