@@ -16,8 +16,15 @@ import { applicationModel } from './model/ApplicationModel';
 
 async function isUser() {
   await userStorage.getAuthFromLocaleStorage();
-  const a = userStorage.auth;
-  if (a.token !== '' && a.token !== undefined) {
+  const local = userStorage.auth;
+  const userId = local.userId; 
+  console.log(local);
+  if (userId !== '' && userId !== undefined) {
+    const isTokenTrue = await applicationModel.getUser();
+    if (isTokenTrue) {
+      applicationModel.isAuthorization = true;
+    }
+  } else {
     applicationModel.isAuthorization = true;
   }
   console.log('is Authorize = ' + applicationModel.isAuthorization);

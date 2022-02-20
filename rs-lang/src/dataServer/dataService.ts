@@ -1,5 +1,5 @@
 import { PaginatedResults, RequestWord, RequestWordBody, WordCardType } from '../interfaces/types';
-import { IUser, IUserLogInResponse, IUserRegisterResponse, ISignInResponse, ISignInUserInfo } from '../interfaces/userInterface';
+import { IUser, IUserLogInResponse, IUserRegisterResponse, ISignInResponse, ISignInUserInfo, IGetUser } from '../interfaces/userInterface';
 import { userStorage } from '../model/UserStorage';
 
 class DataService {
@@ -21,6 +21,21 @@ class DataService {
     this.words = `${this.baseURL}/words`;
   }
 
+  async getUser() {
+    const response = await fetch(`${this.user}/${userStorage.auth.userId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${userStorage.auth.token}`,
+      },
+    });
+    const status = response.status;
+    if (status !== 200) {
+      throw new Error(status.toString());
+    } else {
+      return response.json();
+    }
+  }
+
   async registereUser(newUser: IUser) {
     const response = await fetch(`${this.user}`, {
       method: 'POST',
@@ -30,12 +45,11 @@ class DataService {
       },
       body: JSON.stringify(newUser),
     });
-    const status = await response.status;
+    const status = response.status;
     if (status !== 200) {
       throw new Error(status.toString());
     } else {
-
-      return response.json();
+      return <IGetUser>(await response.json());
     }
   }
 
@@ -49,7 +63,7 @@ class DataService {
       body: JSON.stringify(user),
     });
 
-    const status = await response.status;
+    const status = response.status;
 
     if (status !== 200) {
       throw new Error(status.toString());
@@ -81,13 +95,13 @@ class DataService {
           },
           body: JSON.stringify(word),
         });
-  
+
         const responseJson: RequestWord = await response.json();
         return responseJson;
       } catch (error) {
         return false; // if token is ended
       }
-    } else 
+    } else
       return false;
   }
 
@@ -133,12 +147,12 @@ class DataService {
             'Authorization': `Bearer ${userStorage.auth.token}`,
           },
         });
-  
+
         return response.status === 204;
       } catch (error) {
         return false; // if token is ended
       }
-    } else 
+    } else
       return false;
   }
 }

@@ -4,9 +4,10 @@ import { StartPage } from '../../pages/startPage/StartPage';
 import { Footer } from '../Footer/Footer';
 import Header from '../header/header';
 import  TextBook  from '../../pages/TextBook/TextBook';
-import { Games } from '../../pages/Games/Games';
+import { SprintGameSettings } from '../../pages/SprintGameSettings/SprintGameSettings';
 import { AudioCallGame } from '../../pages/AudioCallGame/AudioCallGame';
-import { AudioCallGameSettings } from '../../pages/AudioCallGame.Settings/AudioCallGameSettings';
+import { AudioCallGameSettings } from '../../pages/AudioCallGameSettings/AudioCallGameSettings';
+import { SprintGame } from '../../pages/sprintGame/sprintGame';
 
 export default function AppRouter() {
   return (
@@ -15,9 +16,10 @@ export default function AppRouter() {
       <Routes>
         <Route index element={<StartPage />} />
         <Route path="textbook" element={<TextBook />} />
-        <Route path="games" element={<Games />} />
+        <Route path="sprintsettings" element={<SprintGameSettings />} />
         <Route path="audiocall" element={<AudioCallGameSettings />} />
         <Route path="audiocallgame" element={<AudioCallGame />} />
+        <Route path='srintgame' element={<SprintGame />} />
         <Route path="statistics" element={<Statistics />} />
       </Routes>
       <Footer />

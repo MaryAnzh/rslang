@@ -1,10 +1,10 @@
 import React from 'react';
-import './Games.scss';
+import './SprintGameSettings.scss';
 import '../../elements/settingPanel/settingPanel';
 import { audioCallPageModel } from '../../../model/AudioCallPageModel';
 import { SettingPanel } from '../../elements/settingPanel/settingPanel';
 
-class Games extends React.Component {
+class SprintGameSettings extends React.Component {
   render() {
     return (
       <main className="main">
@@ -23,4 +23,4 @@ class Games extends React.Component {
   }
 }
 
-export { Games };
+export { SprintGameSettings };

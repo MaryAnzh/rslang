@@ -27,3 +27,9 @@ export interface ISignInUserInfo {
   email: string;
   password: string;
 }
+
+export interface IGetUser {
+  id: string;
+  name: string;
+  email: string;
+}
