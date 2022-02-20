@@ -1,7 +1,6 @@
 import React from 'react';
 import '../RegisterForm/registerForm.scss';
 import './SignInForm.scss';
-import { startPageModel } from '../../../model/StartPageModel';
 import { applicationModel } from '../../../model/ApplicationModel';
 import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
 import { FormErrors } from '../../elements/FormErrors/FormErrors';
@@ -78,25 +77,34 @@ class SignInForm extends React.Component<SignInFormProps> {
   }
 
   removeInputValue() {
-    this.setState({ correct: this.state.email = '' });
-    this.setState({ correct: this.state.password = '' });
+    this.setState({
+      email: '',
+      password: '',
+    })
   }
 
   upDateValue() {
-    this.setState({ correct: this.state.email });
-    this.setState({ correct: this.state.password });
+    const mail = document.getElementById('sugn-in-email') as HTMLInputElement;
+    const password = document.getElementById('sign-in password') as HTMLInputElement;
+    const mailValue = mail.value;
+    const passwordValue = password.value;
+    this.setState({
+      email: mailValue,
+      password: passwordValue,
+    });
   }
 
   async getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
     this.upDateValue();
     if (this.state.email === '' || this.state.password === '') {
-      this.state.classError = 'form-error-on-click';
-      this.state.errorText = 'Заполните все поля';
-      this.setState({ correct: (this.state.errorText) });
-
+      this.setState({
+        classError: 'form-error-on-click',
+        errorText: 'Заполните все поля',
+      });
     } else if (!authorizationAppModel.isMailValid || !authorizationAppModel.isPasswordValid) {
-      this.state.errorText = 'Одно из полей заполнено неверно';
-      this.setState({ correct: (this.state.errorText) });
+      this.setState({
+        errorText: 'Одно из полей заполнено неверно',
+      });
     } else {
       applicationModel.currentMail = this.state.email;
       applicationModel.currentPassword = this.state.password;
