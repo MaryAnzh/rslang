@@ -119,6 +119,7 @@ class UserStorage {
       userId: '',
     };
     this.getUserWordsSimple();
+    store.dispatch(updateAction(false));
   }
 
   async addHardWord(wordId: string) {

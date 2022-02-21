@@ -27,6 +27,7 @@ async function isUser() {
     }
   } else {
     applicationModel.isAuthorization = false;
+    userStorage.clearAuth();
   }
 
   //прописываем флаги завязанные на автаризацию на саммх страницаж
