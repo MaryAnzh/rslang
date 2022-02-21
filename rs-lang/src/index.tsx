@@ -8,7 +8,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/700.css';
 import reportWebVitals from './reportWebVitals';
 import AppRouter from './views/components/AppRouter/AppRouter';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import store from './store/store';
 import { userStorage } from './model/UserStorage';
 import { applicationModel } from './model/ApplicationModel';
@@ -30,11 +30,13 @@ async function isUser() {
   //прописываем флаги завязанные на автаризацию на саммх страницаж
   ReactDOM.render(
     <React.StrictMode>
-      <BrowserRouter>
+      {/* <BrowserRouter> */}
+      <HashRouter basename={process.env.PUBLIC_URL}>
         <Provider store={store}>
           <AppRouter />
         </Provider>,
-      </BrowserRouter>
+      </HashRouter>
+      {/* </BrowserRouter> */}
     </React.StrictMode>,
     document.getElementById('root'),
   )
