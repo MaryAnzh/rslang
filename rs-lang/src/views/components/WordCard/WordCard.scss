@@ -70,4 +70,34 @@
   &__second-text {
     color: #668;
   }
+
+  &_hard {
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: '';
+      bottom: -3rem;
+      right: -3rem;
+      width: 5rem;
+      height: 5rem;
+      transform: rotateZ(45deg);
+      background-color: $main-color-light;
+    }
+  }
+
+  &_easy {
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: '';
+      bottom: -3rem;
+      right: -3rem;
+      width: 5rem;
+      height: 5rem;
+      transform: rotateZ(45deg);
+      background-color: rgb(64, 197, 98);
+    }
+  }
 }

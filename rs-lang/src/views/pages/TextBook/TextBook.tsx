@@ -6,7 +6,7 @@ import { applicationModel } from '../../../model/ApplicationModel';
 import { userStorage } from '../../../model/UserStorage';
 import  GroupPagination from '../../components/GroupPagination/GroupPagination';
 import  Pagination from '../../components/Pagination/Pagination';
-import { WordCard } from '../../components/WordCard/WordCard';
+import WordCard from '../../components/WordCard/WordCard';
 import './TextBook.scss';
 
 const mapStateToProps = (state: ButtonsGlobState) => {

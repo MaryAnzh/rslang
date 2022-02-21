@@ -1,23 +1,49 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { newDataService } from '../../../dataServer/dataService';
-import { WordCardProps } from '../../../interfaces/types';
+import { ButtonsGlobState, WordCardProps } from '../../../interfaces/types';
 import CARD_BUTTONS_W from '../CardButton/CardButtons';
-// import { CardButtons } from '../CardButton/CardButtons'; 
 import './WordCard.scss';
 
-class WordCard extends React.Component<WordCardProps> {
+const mapStateToProps = (state: ButtonsGlobState, ownProps: WordCardProps ) => {
+  return {
+    ...ownProps,
+    hardsArray: state.glob.hardsArray,
+    easyArray: state.glob.easyArray,
+  }
+};
+
+type ArrayActionProps = {
+  hardsArray?: string[],
+  easyArray?: string[],
+}
+
+const connector = connect(mapStateToProps, null);
+
+
+class WordCard extends React.Component<WordCardProps & ArrayActionProps> {
   baseURL: string;
 
-  constructor(props: WordCardProps) {
+  constructor(props: WordCardProps & ArrayActionProps) {
     super(props);
     this.baseURL = newDataService.baseURL + '/';
   }
 
   render() {
-    // console.log('PROPS ' + JSON.stringify(this.props));
+    let cardClassName: string;
+    if (this.props.easyArray?.includes(this.props.word.id || this.props.word._id)) {
+      cardClassName = 'word-card word-card_easy';
+    } else {
+      if (this.props.hardsArray?.includes(this.props.word.id || this.props.word._id)) {
+        cardClassName = 'word-card word-card_hard';
+      } else {
+        cardClassName = 'word-card';
+      }
+    }
+    
     const arrUrls = [this.props.word.audio, this.props.word.audioMeaning, this.props.word.audioExample];
     return (
-      <div className="word-card">
+      <div className={cardClassName}>
         <img className="word-card__picture" src={this.baseURL + this.props.word.image} alt="pic" />
         <div className="word-card__wrapper">
           <div className="word-card__word-container">
@@ -39,4 +65,5 @@ class WordCard extends React.Component<WordCardProps> {
   }    
 }
 
-export { WordCard };
+// export { WordCard };
+export default connector(WordCard);
