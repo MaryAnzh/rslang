@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { newDataService } from '../../../dataServer/dataService';
-import { ArrayActionProps, ButtonsGlobState, TextBookState } from '../../../interfaces/types';
+import { ArrayActionProps, ButtonsGlobState, TextBookState, WordCardType } from '../../../interfaces/types';
 import { applicationModel } from '../../../model/ApplicationModel';
 import { userStorage } from '../../../model/UserStorage';
 import  GroupPagination from '../../components/GroupPagination/GroupPagination';
@@ -35,6 +35,7 @@ class TextBook extends React.Component< ArrayActionProps > {
     this.PageDownHandler = this.PageDownHandler.bind(this);
     this.PageUpHandler = this.PageUpHandler.bind(this);
     this.GroupHandler = this.GroupHandler.bind(this);
+    this.createWordList = this.createWordList.bind(this);
   }
 
   shouldComponentUpdate(nextProps: { hardsArray?: string[] }, nextState: TextBookState) {
@@ -42,11 +43,6 @@ class TextBook extends React.Component< ArrayActionProps > {
       this.GroupHandler(this.state.group, this.state.page);
     }
     return true;
-    // if (nextState.words !== this.state.words) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
   }
 
   GroupHandler(group: number, page: number = 0) {
@@ -167,11 +163,41 @@ class TextBook extends React.Component< ArrayActionProps > {
     }
   }
 
+  async createWordList() {
+    if (userStorage.isAuthorize) {
+      // console.log('auth');
+      if (!this.state.words.every(word => this.props.easyArray?.includes(word.id))) {
+        if (this.state.words.some(word => this.props.easyArray?.includes(word.id))) {
+          
+          let currentWordsS = this.state.words.map(word => word.id);
+          let passWordsS = currentWordsS.filter(wordId => !this.props.easyArray?.includes(wordId));
+          let passWords: WordCardType[] = this.state.words.filter(word => passWordsS.includes(word.id));
+          let prevPassWords: WordCardType[] = [];
+          
+          if (this.state.page === 0) {
+            applicationModel.currentWordArray = passWords;
+          } else {
+            const prevWords: WordCardType[] = await newDataService.getWords(this.state.group, this.state.page - 1);
+            
+            currentWordsS = prevWords.map(word => word.id);
+            passWordsS = currentWordsS.filter(wordId => !this.props.easyArray?.includes(wordId));
+            prevPassWords = prevWords.filter(word => passWordsS.includes(word.id));
+            
+            const countToAdd = 20 - passWords.length;
+            applicationModel.currentWordArray = [...passWords, ...prevPassWords.splice(0, countToAdd)];
+          }
+        } else {
+          applicationModel.currentWordArray = this.state.words;
+        }
+      }
+    }
+  }
+
   render() {
     this.updateBackground();
     
-    applicationModel.currentWordArray = this.state.words;
-
+    this.createWordList();
+    
     console.log(`Page: ${this.state.page}; Group: ${this.state.group}`);
 
 
