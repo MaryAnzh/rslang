@@ -86,29 +86,29 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
   }
 
   render() {
-    let hardBtn: JSX.Element | null;
-    let easyBtn: JSX.Element | null;
+    let hardBtn: JSX.Element | null = null;
+    let easyBtn: JSX.Element | null = null;
     console.log('hard ' + this.props.hardsArray);
     console.log('easy ' + this.props.easyArray);
-    if (!this.props.hardsArray.includes(this.props.wordId)) {
-      hardBtn = (
-          <button onClick={this.addWordHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__add' : 'card-buttons__btn card-buttons__btn-disable'}>
-            <img src={addPic} alt="add" className="card-buttons__pic"/>
-          </button>
-      );
-    } else {
-      hardBtn = (
-          <button onClick={this.delWordHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__del' : 'card-buttons__btn card-buttons__btn-disable'}>
-            <img src={delPic} alt="del" className="card-buttons__pic"/>
-          </button>
-      );
-    }
     if (!this.props.easyArray.includes(this.props.wordId)) {
       easyBtn = (
         <button onClick={this.addEasyHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__apply' : 'card-buttons__btn card-buttons__btn-disable'}>
           <img src={applyPic} alt="apply" className="card-buttons__pic"/>
         </button>
       );
+      if (!this.props.hardsArray.includes(this.props.wordId)) {
+        hardBtn = (
+            <button onClick={this.addWordHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__add' : 'card-buttons__btn card-buttons__btn-disable'}>
+              <img src={addPic} alt="add" className="card-buttons__pic"/>
+            </button>
+        );
+      } else {
+        hardBtn = (
+            <button onClick={this.delWordHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__del' : 'card-buttons__btn card-buttons__btn-disable'}>
+              <img src={delPic} alt="del" className="card-buttons__pic"/>
+            </button>
+        );
+      }
     } else {
       easyBtn = (
         <button onClick={this.delEasyHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__del-easy' : 'card-buttons__btn card-buttons__btn-disable'}>
