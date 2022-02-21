@@ -109,6 +109,11 @@
     width: 5rem;
     content: "Добавить в изученные";
   }
+  &__del-easy::after {
+    left:  -0.5rem;
+    width: 5rem;
+    content: "Удалить из изученных";
+  }
   &__sound::after {
     left:  1.5rem;
     width: 6.5rem;

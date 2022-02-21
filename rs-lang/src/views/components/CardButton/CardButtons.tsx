@@ -46,6 +46,7 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
     this.addWordHandler = this.addWordHandler.bind(this);
     this.delWordHandler = this.delWordHandler.bind(this);
     this.addEasyHandler = this.addEasyHandler.bind(this);
+    this.delEasyHandler = this.delEasyHandler.bind(this);
   }
 
   async handleClick() {
@@ -71,12 +72,17 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
     userStorage.addHardWord(this.props.wordId);
   }
 
+  
+  async delWordHandler() {
+    userStorage.delHardWord(this.props.wordId);
+  }
+  
   async addEasyHandler() {
     userStorage.addEasyWord(this.props.wordId);
   }
 
-  async delWordHandler() {
-    userStorage.delHardWord(this.props.wordId);
+  async delEasyHandler() {
+    userStorage.delEasyWord(this.props.wordId);
   }
 
   render() {
@@ -105,7 +111,7 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
       );
     } else {
       easyBtn = (
-        <button onClick={this.addEasyHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__apply' : 'card-buttons__btn card-buttons__btn-disable'}>
+        <button onClick={this.delEasyHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__del-easy' : 'card-buttons__btn card-buttons__btn-disable'}>
           <img src={applyPicGreen} alt="apply" className="card-buttons__pic"/>
         </button>
       );
