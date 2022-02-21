@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './AudioCallGame.scss';
 import '../../elements/settingPanel/settingPanel';
 import { HeardsError } from '../../audioCallElements/heardsErrior/heardsError';
-import { BellSVG } from '../../audioCallElements/bell/bell';
 import { GameButton } from '../../audioCallElements/gameButton/gameButton';
 import { AudioCallGameModel } from '../../../model/audioCallGameModel';
 import { WordCardType } from '../../../interfaces/types';
@@ -15,7 +14,6 @@ import trueCheck from '../../../img/png/true.png';
 import cross from '../../../img/png/cross.png';
 import true_answer from '../../../sound/true_answer.mp3';
 import false_answer from '../../../sound/false_answer.mp3';
-import { captureRejectionSymbol } from 'stream';
 
 type AudioCallGameType = {
   isLoading: boolean,
@@ -152,7 +150,6 @@ class AudioCallGame extends React.Component {
 
   async componentDidMount() {
     this.loadGame();
-
     this.setState({ correct: this.state.isLoading = false });
     //this.forceUpdate();
   }
