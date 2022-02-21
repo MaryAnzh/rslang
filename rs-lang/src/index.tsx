@@ -31,7 +31,7 @@ async function isUser() {
   ReactDOM.render(
     <React.StrictMode>
       {/* <BrowserRouter> */}
-      <HashRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter>
         <Provider store={store}>
           <AppRouter />
         </Provider>,
