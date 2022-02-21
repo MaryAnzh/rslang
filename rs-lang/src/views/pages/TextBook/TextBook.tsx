@@ -123,7 +123,6 @@ class TextBook extends React.Component< ArrayActionProps > {
   async componentDidMount() {
     if (this.state.group === 6) {
       if (userStorage.auth.userId) {
-        // вот здесь не выполняется так как userstorage что не выполнил, parse
         newDataService.getAgrHardWords().then(response => {
           console.log(response);
           this.setState({
@@ -177,11 +176,13 @@ class TextBook extends React.Component< ArrayActionProps > {
 
 
     let words: JSX.Element[] | null;
+    let links: boolean = false;
     if (this.state.words.length) {
       words = this.state.words.map((word, index) => <WordCard key={index} word={word}/>);
       if (this.state.words.every(word => this.props.easyArray?.includes(word.id))) {
-        console.log('green');
+        // console.log('green');
         this.bg = '#b4f1c4';
+        links = true;
       }
     } else {
       words = null;
@@ -193,7 +194,7 @@ class TextBook extends React.Component< ArrayActionProps > {
           <h1>У ч е б н и к</h1>
           <div className='book-page-wrap__book-wrap'>
             <div className='book-page-wrap__controls'>
-              <Pagination downHandler={this.PageDownHandler} upHandler={this.PageUpHandler} page={this.state.page + 1}/>
+              <Pagination downHandler={this.PageDownHandler} links={links} upHandler={this.PageUpHandler} page={this.state.page + 1}/>
               <GroupPagination group={this.state.group + 1} groupHandler={this.GroupHandler}/>
             </div>
             <div className='book-page-wrap__book-wrap__book' style={ { backgroundColor: this.bg } }>

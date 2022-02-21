@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import arrowForward from '../../../img/svg/arrow_forward.svg';
+import { applicationModel } from '../../../model/ApplicationModel';
 import './GameLinks.scss';
 
 class GamesLinks extends React.Component {
@@ -21,10 +22,10 @@ class GamesLinks extends React.Component {
       links = (
         <div className='game-links__links'>
           <li className='game-links__link-wrapper'>
-            <Link to="/audiocall" className="game-links__link">Аудиовызов</Link>
+            <Link onClick={() => applicationModel.gameFromBook = true} to="/audiocall-game" className="game-links__link">Аудиовызов</Link>
           </li>
           <li className='game-links__link-wrapper'>
-            <Link to="/games" className="game-links__link">Спринт</Link>
+            <Link onClick={() => applicationModel.gameFromBook = true} to="/sprint-game" className="game-links__link">Спринт</Link>
           </li>
         </div>
       );

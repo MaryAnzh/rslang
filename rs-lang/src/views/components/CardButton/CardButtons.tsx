@@ -88,8 +88,8 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
   render() {
     let hardBtn: JSX.Element | null = null;
     let easyBtn: JSX.Element | null = null;
-    console.log('hard ' + this.props.hardsArray);
-    console.log('easy ' + this.props.easyArray);
+    // console.log('hard ' + this.props.hardsArray);
+    // console.log('easy ' + this.props.easyArray);
     if (!this.props.easyArray.includes(this.props.wordId)) {
       easyBtn = (
         <button onClick={this.addEasyHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__apply' : 'card-buttons__btn card-buttons__btn-disable'}>
