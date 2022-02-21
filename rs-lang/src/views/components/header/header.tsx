@@ -19,6 +19,10 @@ import { Arrow } from '../../elements/arrow/arrow';
 import { userStorage } from '../../../model/UserStorage';
 import { idText } from 'typescript';
 
+const pathname = document.location.pathname;
+console.log('Имя странички');
+console.log(pathname);
+
 type HeaderState = {
   alertStyle: { display: string },
   signIconClass: string,
@@ -109,24 +113,22 @@ class Header extends React.Component<HeaderProps> {
   }
 
   headerActiveLink() {
-    const pathname = document.location.pathname;
-    // console.log('Имя странички');
-    // console.log(pathname);
+    
     this.defaulteHeaderState();
-    if (pathname === '/') {
+    if (pathname === '/' || pathname === '/#/') {
       this.state.navManePage = 'header__nav__li__link active-page';
       this.state.burgerManePage = 'header__hidden-burger-menu__list__link active-page';
     }
-    if (pathname === '/textbook') {
+    if (pathname === '/textbook' || pathname === '/#/textbook') {
       this.state.burgerBookPage = 'header__hidden-burger-menu__list__link active-page';
       this.state.burgerBookPageArrow = { display: 'none' };
       this.state.navBookPage = 'header__nav__li__link active-page';
       this.state.navBookPageArrow = { display: 'none' };
     }
-    if (pathname === '/sprint-settings'
-      || pathname === '/audiocall-settings'
-      || pathname === '/audiocall-game'
-      || pathname === '/sprint-game'
+    if (pathname === '/sprint-settings' || pathname === '/#/sprint-settings'
+      || pathname === '/audiocall-settings' || pathname === '/#/audiocall-settings'
+      || pathname === '/audiocall-game' || pathname === '/#/audiocall-game'
+      || pathname === '/sprint-game' || pathname === '/#/sprint-game'
     ) {
       this.state.navGamePage = 'header__nav__li__link active-page';
       this.state.burgerGamePage = 'header__hidden-burger-menu__list__link active-page';
@@ -264,7 +266,7 @@ class Header extends React.Component<HeaderProps> {
   }
 
   render() {
-    this.headerActiveLink();
+    //this.headerActiveLink();
     this.isAuthorizationState(applicationModel.isAuthorization);
     const arrow = 'enclosed-burger__wrap__arrow left-arrow';
     return (
