@@ -92,8 +92,8 @@ class ApplicationModel {
   async getUser() {
     try {
       const response: IGetUser = await this.dataServ.getUser();
-      console.log('Ответ от getUser');
-      console.log(response);
+      // console.log('Ответ от getUser');
+      // console.log(response);
       this.currentMail = response.email;
       this.currentUserName = response.name;
       return true;
