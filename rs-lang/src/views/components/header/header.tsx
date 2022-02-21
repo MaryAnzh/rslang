@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Mylocation } from '../../../model/lacation';
 import './header.scss';
 import '../../../css/animation.scss';
 import { Logo } from '../Logo/Logo';
@@ -17,12 +17,10 @@ import { connect } from 'react-redux';
 import { updateAction } from '../../../store/actionCreators/actionCreators';
 import { Arrow } from '../../elements/arrow/arrow';
 import { userStorage } from '../../../model/UserStorage';
-import path from 'path/posix';
+import { idText } from 'typescript';
 
 type HeaderState = {
   alertStyle: { display: string },
-  statisticsBurgerLinkClass: string,
-  statisticsNavLinkClass: string,
   signIconClass: string,
   signBlockClass: { display: string },
   outStyle: { display: string },
@@ -34,6 +32,16 @@ type HeaderState = {
   gameSection: { display: string, },
   bookNavSection: { display: string, },
   gameNavSection: { display: string, },
+  burgerManePage: string,
+  burgerBookPage: string,
+  burgerBookPageArrow: { display: string },
+  burgerGamePage: string,
+  burgerStatPage: string,
+  navManePage: string,
+  navBookPage: string,
+  navBookPageArrow: { display: string },
+  navGamePage: string,
+  navStatPage: string,
 }
 
 type HeaderProps = {
@@ -53,13 +61,10 @@ class Header extends React.Component<HeaderProps> {
 
   linkTo = <Link to="/audiocall" />;
 
-
   constructor(props: HeaderProps) {
     super(props);
     this.state = {
       alertStyle: { display: 'none' },
-      statisticsBurgerLinkClass: 'header__hidden-burger-menu__list__link blocked',
-      statisticsNavLinkClass: 'header__nav__li__link blocked',
       signIconClass: 'header__sign-icon blocked',
       signBlockClass: { display: 'block' },
       outStyle: { display: 'none' },
@@ -71,6 +76,16 @@ class Header extends React.Component<HeaderProps> {
       gameSection: { display: 'none' },
       bookNavSection: { display: 'none' },
       gameNavSection: { display: 'none' },
+      burgerManePage: 'header__hidden-burger-menu__list__link',
+      burgerBookPage: 'header__hidden-burger-menu__list__link',
+      burgerBookPageArrow: { display: 'flex' },
+      burgerGamePage: 'header__hidden-burger-menu__list__link',
+      burgerStatPage: 'header__nav__li__link blocked',
+      navManePage: 'header__nav__li__link',
+      navBookPage: 'header__nav__li__link',
+      navBookPageArrow: { display: 'flex' },
+      navGamePage: 'header__nav__li__link',
+      navStatPage: 'header__nav__li__link blocked',
     }
     this.authorizationUpDate = this.authorizationUpDate.bind(this);
     this.alertHiddenWrap = this.alertHiddenWrap.bind(this);
@@ -80,42 +95,71 @@ class Header extends React.Component<HeaderProps> {
   isAuthorizationState(isAuthorization: boolean) {
     if (isAuthorization) {
       this.state.signBlockClass = { display: 'none' };
-      this.state.signIconClass = 'header__sign-icon ' + 'visible';
-      this.state.statisticsBurgerLinkClass = 'header__nav__link ' + 'visible';
+      this.state.signIconClass = 'header__sign-icon visible';
+      this.state.burgerStatPage = 'header__nav__link visible';
+      this.state.navStatPage = 'header__nav__li__link visible';
       this.state.outStyle = { display: 'flex' };
     } else {
       this.state.signBlockClass = { display: 'flex' };
-      this.state.signIconClass = 'header__sign-icon ' + 'blocked';
-      this.state.statisticsBurgerLinkClass = 'header__nav__link ' + 'blocked';
+      this.state.signIconClass = 'header__sign-icon blocked';
+      this.state.burgerStatPage = 'header__nav__link blocked';
+      this.state.navStatPage = 'header__nav__li__link blocked';
       this.state.outStyle = { display: 'none' };
     }
   }
 
-  navToTextBook(e: React.MouseEvent<HTMLElement>) {
-    const text = (e.target as HTMLElement).textContent;
-    this.setState({
-      bookNavSection: { display: 'none' },
-    })
-    if (text !== null) {
-      this.navToLevelBook(text);
+  headerActiveLink() {
+    const pathname = document.location.pathname;
+    // console.log('Имя странички');
+    // console.log(pathname);
+    this.defaulteHeaderState();
+    if (pathname === '/') {
+      this.state.navManePage = 'header__nav__li__link active-page';
+    }
+    if (pathname === '/textbook') {
+      this.state.burgerBookPage = 'header__hidden-burger-menu__list__link active-page';
+      this.state.burgerBookPageArrow = { display: 'none' };
+      this.state.navBookPage = 'header__nav__li__link active-page';
+      this.state.navBookPageArrow = { display: 'none' };
+    }
+    if (pathname === '/sprint-settings'
+      || pathname === '/audiocall-settings'
+      || pathname === '/audiocall-game'
+      || pathname === '/sprint-game'
+    ) {
+      this.state.navGamePage = 'header__nav__li__link active-page';
+      this.state.burgerGamePage = 'header__hidden-burger-menu__list__link active-page';
+    }
+    if (pathname === '/statistics') {
+      this.state.navStatPage = 'header__nav__li__link active-page';
+      this.state.burgerStatPage = 'header__hidden-burger-menu__list__link active-page';
     }
   }
 
-  navToGame(e: React.MouseEvent<HTMLElement>) {
+  navToTextBook(e: React.MouseEvent<HTMLElement>) {
+    this.defaulteHeaderSatstate();
     const text = (e.target as HTMLElement).textContent;
+    if (text !== null) {
+      this.navToLevelBook(text);
+    }
+    this.setState(this.state.navBookPageArrow = { display: 'none' });
     this.setState({
-      gameNavSection: { display: 'none' },
+      navBookPage: 'header__nav__li__link active-page',
+      navBookPageArrow: { display: 'none' },
+      burgerBookPage: 'header__hidden-burger-menu__list__link active-page',
+      burgerBookPageArrow: { display: 'none' },
     })
   }
 
-  burgerNavToGame(e: React.MouseEvent<HTMLElement>) {
+  navToGame(e: React.MouseEvent<HTMLElement>) {
+    this.defaulteHeaderSatstate();
     const text = (e.target as HTMLElement).textContent;
     this.setState({
-      burger: { display: 'none' },
-      bookListAnimation: { animation: 'none' },
-      gameListtAnimation: { animation: 'none' },
-      bookSection: { display: 'none' },
-      gameSection: { display: 'none' },
+      gameNavSection: { display: 'none' },
+      navGamePage: 'header__nav__li__link active-page',
+      burgerGamePage: 'header__hidden-burger-menu__list__link active-page',
+
+
     })
   }
 
@@ -168,10 +212,40 @@ class Header extends React.Component<HeaderProps> {
     }
   }
 
+  defaulteHeaderState() {
+    this.state.burgerManePage = 'header__hidden-burger-menu__list__link';
+    this.state.burgerBookPage = 'header__hidden-burger-menu__list__link';
+    this.state.burgerBookPageArrow = { display: 'flex' };
+    this.state.burgerGamePage = 'header__hidden-burger-menu__list__link';
+    this.state.navManePage = 'header__nav__li__link';
+    this.state.navBookPage = 'header__nav__li__link';
+    this.state.navBookPageArrow = { display: 'flex' };
+    this.state.navGamePage = 'header__nav__li__link';
+  }
+
+  defaulteHeaderSatstate() {
+    this.setState({
+      bookListAnimation: { animation: 'none' },
+      gameListtAnimation: { animation: 'none' },
+      bookSection: { display: 'none' },
+      gameSection: { display: 'none' },
+      bookNavSection: { display: 'none' },
+      gameNavSection: { display: 'none' },
+      burgerManePage: 'header__hidden-burger-menu__list__link',
+      burgerBookPage: 'header__hidden-burger-menu__list__link',
+      burgerGamePage: 'header__hidden-burger-menu__list__link',
+      burgerStatPage: 'header__nav__li__link blocked',
+      navManePage: 'header__nav__li__link',
+      navBookPage: 'header__nav__li__link',
+      navGamePage: 'header__nav__li__link',
+      navStatPage: 'header__nav__li__link blocked',
+    });
+  }
+
   render() {
+    this.headerActiveLink();
     this.isAuthorizationState(applicationModel.isAuthorization);
     const arrow = 'enclosed-burger__wrap__arrow left-arrow';
-    const arrowNav = 'left-arrow';
     return (
       <header className="header">
         <Logo />
@@ -183,14 +257,18 @@ class Header extends React.Component<HeaderProps> {
           style={this.state.burger}>
           <li className="header__hidden-burger-menu__list"></li>
           <li className='header__hidden-burger-menu__list'>
-            <Link to="/" className="header__hidden-burger-menu__list__link">Главная</Link>
+            <Link to="/" className={this.state.burgerManePage}>Главная</Link>
           </li>
           <li
             className='header__hidden-burger-menu__list enclosed-burger'
             style={this.state.bookListAnimation}>
             <div className='enclosed-burger__wrap'>
-              <Link to="/textbook" className="header__hidden-burger-menu__list__link">Учебник</Link>
-              <div onClick={(e) => { this.openGameSectionOnClick(e) }}>
+              <a
+                onClick={(e) => { this.navToTextBook(e) }}
+                className={this.state.burgerBookPage}>Учебник</a>
+              <div
+                onClick={(e) => { this.openGameSectionOnClick(e) }}
+                style={this.state.burgerBookPageArrow}>
                 <Arrow arrowClass={arrow} />
               </div>
             </div>
@@ -212,7 +290,7 @@ class Header extends React.Component<HeaderProps> {
             style={this.state.gameListtAnimation}>
             <div className='enclosed-burger__wrap'
               onClick={(e) => { this.openBookSectionOnClick(e) }}>
-              <a className="header__hidden-burger-menu__list__link">Игры</a>
+              <a className={this.state.burgerGamePage}>Игры</a>
               <div>
                 <Arrow arrowClass={arrow} />
               </div>
@@ -220,19 +298,20 @@ class Header extends React.Component<HeaderProps> {
             <div
               className='wrap-game-lists'
               style={this.state.gameSection}>
-              <Link to="/audiocall"
+              <Link
+                to="/audiocall-settings"
                 className="wrap-game-lists__link"
-                onClick={(e) => { this.burgerNavToGame(e)}}
+                onClick={(e) => { this.navToGame(e) }}
               >Аудиовызов</Link>
               <Link
-                to="/sprintsettings"
+                to="/sprint-settings"
                 className="wrap-game-lists__link"
-                onClick={(e) => { this.burgerNavToGame(e) }}
+                onClick={(e) => { this.navToGame(e) }}
               >Спринт</Link>
             </div>
           </li>
           <li className='header__hidden-burger-menu__list'>
-            <Link to="/statistics" className={this.state.statisticsBurgerLinkClass} >Статистика</Link>
+            <Link to="/statistics" className={this.state.burgerStatPage} >Статистика</Link>
           </li>
         </div >
 
@@ -257,16 +336,18 @@ class Header extends React.Component<HeaderProps> {
         </div>
         <ul className="header__nav">
           <li className='header__nav__li'>
-            <Link to="/" className="header__nav__li__link">Главная</Link>
+            <Link to="/" className={this.state.navManePage}>Главная</Link>
           </li>
           <li className='header__nav__li'>
             <div className='header__nav__li__enclosed'>
-              <div className='header__nav__li__enclosed__name'
-                onClick={(e) => { this.openNavBookSectionOnClick(e) }}>
-                <a>Учебник</a>
+              <div className='header__nav__li__enclosed__name'>
+                <a
+                  onClick={(e) => { this.openNavBookSectionOnClick(e) }}
+                  className={this.state.navBookPage}>Учебник</a>
                 <div className='header__nav__li__enclosed__name__arrow'
-                >
-                  <Arrow arrowClass={arrowNav} />
+                  style={this.state.navBookPageArrow}
+                  onClick={(e) => { this.openNavBookSectionOnClick(e) }}>
+                  <Arrow arrowClass={arrow} />
                 </div>
               </div>
             </div>
@@ -286,23 +367,26 @@ class Header extends React.Component<HeaderProps> {
             <div className='header__nav__li__enclosed'
               onClick={(e) => { this.openNavGameSectionOnClick(e) }}>
               <div className='header__nav__li__enclosed__name'>
-                <a className="header__nav__li__link">Игры</a>
+                <a className={this.state.navGamePage}>Игры</a>
                 <div className='header__nav__li__enclosed__name__arrow'>
-                  <Arrow arrowClass={arrowNav} />
+                  <Arrow arrowClass={arrow} />
                 </div>
               </div>
             </div>
             <div
               className='wrap-game-lists'
               style={this.state.gameNavSection}>
-              <Link to="/audiocall"
+              <Link to="/audiocall-settings"
                 onClick={(e) => { this.navToGame(e) }}
                 className="wrap-game-lists__link">Аудиовызов</Link>
-              <Link to="/sprintsettings" className="wrap-game-lists__link">Спринт</Link>
+              <Link to="/sprint-settings"
+                onClick={(e) => { this.navToGame(e) }}
+                className="wrap-game-lists__link"
+              >Спринт</Link>
             </div>
           </li>
           <li className='header__nav__li'>
-            <Link to="/statistics" className={this.state.statisticsNavLinkClass} >Статистика</Link>
+            <Link to="/statistics" className={this.state.navStatPage} >Статистика</Link>
           </li>
         </ul>
         <ul className="header__sign">

@@ -16,10 +16,10 @@ export default function AppRouter() {
       <Routes>
         <Route index element={<StartPage />} />
         <Route path="textbook" element={<TextBook />} />
-        <Route path="sprintsettings" element={<SprintGameSettings />} />
-        <Route path="audiocall" element={<AudioCallGameSettings />} />
-        <Route path="audiocallgame" element={<AudioCallGame />} />
-        <Route path='srintgame' element={<SprintGame />} />
+        <Route path="sprint-settings" element={<SprintGameSettings />} />
+        <Route path="audiocall-settings" element={<AudioCallGameSettings />} />
+        <Route path="audiocall-game" element={<AudioCallGame />} />
+        <Route path='sprint-game' element={<SprintGame />} />
         <Route path="statistics" element={<Statistics />} />
       </Routes>
       <Footer />

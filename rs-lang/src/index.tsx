@@ -18,7 +18,6 @@ async function isUser() {
   await userStorage.getAuthFromLocaleStorage();
   const local = userStorage.auth;
   const userId = local.userId; 
-  console.log(local);
   if (userId !== '' && userId !== undefined) {
     const isTokenTrue = await applicationModel.getUser();
     if (isTokenTrue) {
@@ -27,7 +26,6 @@ async function isUser() {
   } else {
     applicationModel.isAuthorization = false;
   }
-  console.log('is Authorize = ' + applicationModel.isAuthorization);
 
   //прописываем флаги завязанные на автаризацию на саммх страницаж
   ReactDOM.render(
@@ -39,9 +37,9 @@ async function isUser() {
       </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root'),
-  );
+  )
 }
-isUser()
+isUser();
 export { isUser }
 
 // If you want to start measuring performance in your app, pass a function
