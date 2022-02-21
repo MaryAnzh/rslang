@@ -4,9 +4,14 @@ import { BenefitCard } from '../../components/BenefitCard/BenefitCard';
 import { PersonCard } from '../../components/PersonCard/PersonCard';
 
 const cardTexts = [
-  'Более 3000 слов разбиты на разделы по уровню твоей подготовки>',
-  'Какой-то текст, пробуем передать под другим индексом',
-  'Какой-то текст, пробуем передать под другим индексом',
+  '3600 слов разбиты на разделы по уровню твоей подготовки.',
+  'Тренируясь в игровой форме, обучение становится более эффективным',
+  'Ведение статистики - это отличный стимул для регулярных занятий',
+];
+
+const cardTeamTexts = [
+  'Создала хедер, реализовала регистрацию и авторизацию. Сделала 2 игры (Аудиовызов и Спринт), а также работа с API.',
+  'Создал главную, учебник и список слов. Сделал деплой бекенда, реализовал управление состоянием с помощью Redux. Работа с API.',
 ];
 
 const urls = {
@@ -31,8 +36,8 @@ class StartPage extends React.Component {
           <section className='start-page__team-wrapper team'>
             <h2 className="start-page__title team__title">Наша команда</h2>
             <div className="start-page__list">
-            <PersonCard title='Мария Ващаева' text={cardTexts[0]} url={process.env.PUBLIC_URL + '/avatars/mary.jfif'} github="https://github.com/MaryAnzh"/>
-            <PersonCard title='Сергей Масюк' text={cardTexts[0]} url={process.env.PUBLIC_URL + '/avatars/sergey.jpg'} github="https://github.com/mayerror"/>
+            <PersonCard title='Мария Ващаева' text={cardTeamTexts[0]} url={process.env.PUBLIC_URL + '/avatars/mary.jfif'} github="https://github.com/MaryAnzh"/>
+            <PersonCard title='Сергей Масюк' text={cardTeamTexts[1]} url={process.env.PUBLIC_URL + '/avatars/sergey.jpg'} github="https://github.com/mayerror"/>
             </div>
           </section>
         </div>

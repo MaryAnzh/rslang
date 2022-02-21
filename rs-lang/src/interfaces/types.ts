@@ -86,3 +86,8 @@ export type PaginatedResults = {
   paginatedResults: WordCardType[],
   totalCount: { count: string, }[],
 }
+
+export type ArrayActionProps = {
+  hardsArray?: string[],
+  easyArray?: string[],
+}
