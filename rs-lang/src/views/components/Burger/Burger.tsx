@@ -1,12 +1,12 @@
 import React from 'react';
 import './Burger.scss';
+import { applicationModel } from '../../../model/ApplicationModel';
 
 type BurgerType = {
   burgerUp: Function;
 }
 
 class Burger extends React.Component<BurgerType> {
-  isBergerOpen = false;
 
   render() {
     return (
@@ -27,13 +27,13 @@ class Burger extends React.Component<BurgerType> {
     );
   }
 
-  async burgerOnClick(e: React.MouseEvent<HTMLElement>) {
-    if (this.isBergerOpen) {
-      await this.props.burgerUp('none');
-      this.isBergerOpen = false;
+  burgerOnClick(e: React.MouseEvent<HTMLElement>) {
+    if (applicationModel.isBergerOpen) {
+      this.props.burgerUp('none');
+      applicationModel.isBergerOpen = false;
     } else {
-      await this.props.burgerUp('flex');
-      this.isBergerOpen = true;
+      this.props.burgerUp('flex');
+      applicationModel.isBergerOpen = true;
 
     }
 

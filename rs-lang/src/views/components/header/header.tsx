@@ -80,7 +80,7 @@ class Header extends React.Component<HeaderProps> {
       burgerBookPage: 'header__hidden-burger-menu__list__link',
       burgerBookPageArrow: { display: 'flex' },
       burgerGamePage: 'header__hidden-burger-menu__list__link',
-      burgerStatPage: 'header__nav__li__link blocked',
+      burgerStatPage: 'header__hidden-burger-menu__list__link blocked',
       navManePage: 'header__nav__li__link',
       navBookPage: 'header__nav__li__link',
       navBookPageArrow: { display: 'flex' },
@@ -96,13 +96,13 @@ class Header extends React.Component<HeaderProps> {
     if (isAuthorization) {
       this.state.signBlockClass = { display: 'none' };
       this.state.signIconClass = 'header__sign-icon visible';
-      this.state.burgerStatPage = 'header__nav__link visible';
+      this.state.burgerStatPage = 'header__hidden-burger-menu__list__link visible';
       this.state.navStatPage = 'header__nav__li__link visible';
       this.state.outStyle = { display: 'flex' };
     } else {
       this.state.signBlockClass = { display: 'flex' };
       this.state.signIconClass = 'header__sign-icon blocked';
-      this.state.burgerStatPage = 'header__nav__link blocked';
+      this.state.burgerStatPage = 'header__hidden-burger-menu__list__link blocked';
       this.state.navStatPage = 'header__nav__li__link blocked';
       this.state.outStyle = { display: 'none' };
     }
@@ -115,6 +115,7 @@ class Header extends React.Component<HeaderProps> {
     this.defaulteHeaderState();
     if (pathname === '/') {
       this.state.navManePage = 'header__nav__li__link active-page';
+      this.state.burgerManePage = 'header__hidden-burger-menu__list__link active-page';
     }
     if (pathname === '/textbook') {
       this.state.burgerBookPage = 'header__hidden-burger-menu__list__link active-page';
@@ -136,6 +137,15 @@ class Header extends React.Component<HeaderProps> {
     }
   }
 
+  navToMain(e: React.MouseEvent<HTMLElement>) {
+    this.defaulteHeaderSatstate();
+    applicationModel.isBergerOpen = false;
+    this.setState({
+      navManePage: 'header__nav__li__link active-page',
+      burgerManePage: 'header__hidden-burger-menu__list__link active-page',
+    })
+  }
+
   navToTextBook(e: React.MouseEvent<HTMLElement>) {
     this.defaulteHeaderSatstate();
     const text = (e.target as HTMLElement).textContent;
@@ -153,13 +163,22 @@ class Header extends React.Component<HeaderProps> {
 
   navToGame(e: React.MouseEvent<HTMLElement>) {
     this.defaulteHeaderSatstate();
+    applicationModel.isBergerOpen = false;
     const text = (e.target as HTMLElement).textContent;
     this.setState({
       gameNavSection: { display: 'none' },
+      
       navGamePage: 'header__nav__li__link active-page',
       burgerGamePage: 'header__hidden-burger-menu__list__link active-page',
+    })
+  }
 
-
+  navToStat(e: React.MouseEvent<HTMLElement>) {
+    this.defaulteHeaderSatstate();
+    applicationModel.isBergerOpen = false;
+    this.setState({
+      navStatPage: 'header__nav__li__link active-page',
+      burgerStatPage: 'header__hidden-burger-menu__list__link active-page',
     })
   }
 
@@ -224,7 +243,9 @@ class Header extends React.Component<HeaderProps> {
   }
 
   defaulteHeaderSatstate() {
+    applicationModel.isBergerOpen = false;
     this.setState({
+      burger: { display: 'none' },
       bookListAnimation: { animation: 'none' },
       gameListtAnimation: { animation: 'none' },
       bookSection: { display: 'none' },
@@ -234,7 +255,7 @@ class Header extends React.Component<HeaderProps> {
       burgerManePage: 'header__hidden-burger-menu__list__link',
       burgerBookPage: 'header__hidden-burger-menu__list__link',
       burgerGamePage: 'header__hidden-burger-menu__list__link',
-      burgerStatPage: 'header__nav__li__link blocked',
+      burgerStatPage: 'hheader__hidden-burger-menu__list__link blocked',
       navManePage: 'header__nav__li__link',
       navBookPage: 'header__nav__li__link',
       navGamePage: 'header__nav__li__link',
@@ -257,14 +278,16 @@ class Header extends React.Component<HeaderProps> {
           style={this.state.burger}>
           <li className="header__hidden-burger-menu__list"></li>
           <li className='header__hidden-burger-menu__list'>
-            <Link to="/" className={this.state.burgerManePage}>Главная</Link>
+            <Link to="/"
+              onClick={(e) => { this.navToMain(e) }}
+              className={this.state.burgerManePage}>Главная</Link>
           </li>
           <li
             className='header__hidden-burger-menu__list enclosed-burger'
             style={this.state.bookListAnimation}>
             <div className='enclosed-burger__wrap'>
               <a
-                onClick={(e) => { this.navToTextBook(e) }}
+                onClick={(e) => { this.openGameSectionOnClick(e) }}
                 className={this.state.burgerBookPage}>Учебник</a>
               <div
                 onClick={(e) => { this.openGameSectionOnClick(e) }}
@@ -311,7 +334,9 @@ class Header extends React.Component<HeaderProps> {
             </div>
           </li>
           <li className='header__hidden-burger-menu__list'>
-            <Link to="/statistics" className={this.state.burgerStatPage} >Статистика</Link>
+            <Link to="/statistics" 
+              onClick={(e) => { this.navToStat(e)}}
+              className={this.state.burgerStatPage} >Статистика</Link>
           </li>
         </div >
 
@@ -336,7 +361,9 @@ class Header extends React.Component<HeaderProps> {
         </div>
         <ul className="header__nav">
           <li className='header__nav__li'>
-            <Link to="/" className={this.state.navManePage}>Главная</Link>
+            <Link to="/"
+              onClick={(e) => { this.navToMain(e)}}
+              className={this.state.navManePage}>Главная</Link>
           </li>
           <li className='header__nav__li'>
             <div className='header__nav__li__enclosed'>
@@ -386,7 +413,9 @@ class Header extends React.Component<HeaderProps> {
             </div>
           </li>
           <li className='header__nav__li'>
-            <Link to="/statistics" className={this.state.navStatPage} >Статистика</Link>
+            <Link to="/statistics"
+              onClick={(e) => { this.navToStat(e) }}
+              className={this.state.navStatPage} >Статистика</Link>
           </li>
         </ul>
         <ul className="header__sign">

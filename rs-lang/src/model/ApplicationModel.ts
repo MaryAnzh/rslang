@@ -30,6 +30,8 @@ class ApplicationModel {
 
   gamePage = 0;
 
+  isBergerOpen = false;
+
   constructor(dataServ: DataService) {
     this.dataServ = dataServ;
     this.currentMail = '';
