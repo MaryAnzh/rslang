@@ -32,7 +32,7 @@ class ApplicationModel {
 
   gameFromBook: boolean;
 
-  isBergerOpen = false;
+  isBurgerOpen = false;
 
   constructor(dataServ: DataService) {
     this.dataServ = dataServ;

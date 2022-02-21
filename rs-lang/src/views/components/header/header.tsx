@@ -141,7 +141,7 @@ class Header extends React.Component<HeaderProps> {
 
   navToMain(e: React.MouseEvent<HTMLElement>) {
     this.defaulteHeaderSatstate();
-    applicationModel.isBergerOpen = false;
+    applicationModel.isBurgerOpen = false;
     this.setState({
       navManePage: 'header__nav__li__link active-page',
       burgerManePage: 'header__hidden-burger-menu__list__link active-page',
@@ -165,7 +165,7 @@ class Header extends React.Component<HeaderProps> {
 
   navToGame(e: React.MouseEvent<HTMLElement>) {
     this.defaulteHeaderSatstate();
-    applicationModel.isBergerOpen = false;
+    applicationModel.isBurgerOpen = false;
     const text = (e.target as HTMLElement).textContent;
     this.setState({
       gameNavSection: { display: 'none' },
@@ -177,7 +177,7 @@ class Header extends React.Component<HeaderProps> {
 
   navToStat(e: React.MouseEvent<HTMLElement>) {
     this.defaulteHeaderSatstate();
-    applicationModel.isBergerOpen = false;
+    applicationModel.isBurgerOpen = false;
     this.setState({
       navStatPage: 'header__nav__li__link active-page',
       burgerStatPage: 'header__hidden-burger-menu__list__link active-page',
@@ -245,7 +245,7 @@ class Header extends React.Component<HeaderProps> {
   }
 
   defaulteHeaderSatstate() {
-    applicationModel.isBergerOpen = false;
+    applicationModel.isBurgerOpen = false;
     this.setState({
       burger: { display: 'none' },
       bookListAnimation: { animation: 'none' },

@@ -134,18 +134,26 @@ class AudioCallGame extends React.Component {
   }
 
   async loadGame() {
-    //берем категорию и страницу, и  запрашиваем слова
-    const level = applicationModel.gameLevel;
-    const page = applicationModel.gamePage;
-    const data = await applicationModel.getWords(level, page);
 
-    //если массив получен, запускаем gameNodel
-    this.wordsArray = data;
-    if (this.wordsArray != undefined) {
+    if (applicationModel.gameFromBook && applicationModel.currentWordArray.length !== 0) {
+      this.wordsArray = applicationModel.currentWordArray;
       this.gameModel = new AudioCallGameModel(this.wordsArray);
-      this.gameModel.roundWords();
-      this.updatePageInfo();
+    } else {
+      //берем категорию и страницу, и  запрашиваем слова
+      const level = applicationModel.gameLevel;
+      const page = applicationModel.gamePage;
+      const data = await applicationModel.getWords(level, page);
+
+      //если массив получен, запускаем gameModel
+      this.wordsArray = data;
+      if (this.wordsArray != undefined) {
+        this.gameModel = new AudioCallGameModel(this.wordsArray);
+      }
     }
+
+    this.gameModel.roundWords();
+    this.updatePageInfo();
+
   }
 
   async componentDidMount() {
@@ -358,7 +366,7 @@ class AudioCallGame extends React.Component {
         levelEndText: { display: 'block' },
       });
     }
-    
+
   }
 
   gameAgainUpdate() {
@@ -463,7 +471,7 @@ class AudioCallGame extends React.Component {
                     className='round-statistics__button'>
                     Следующий раунд
                   </button>
-                  <p style={this.state.levelEndText }>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
+                  <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
                   <Link to='/audiocall-settings'>
                     <p>Выйти</p>
                     <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>

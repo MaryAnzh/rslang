@@ -28,12 +28,12 @@ class Burger extends React.Component<BurgerType> {
   }
 
   burgerOnClick(e: React.MouseEvent<HTMLElement>) {
-    if (applicationModel.isBergerOpen) {
+    if (applicationModel.isBurgerOpen) {
       this.props.burgerUp('none');
-      applicationModel.isBergerOpen = false;
+      applicationModel.isBurgerOpen = false;
     } else {
       this.props.burgerUp('flex');
-      applicationModel.isBergerOpen = true;
+      applicationModel.isBurgerOpen = true;
 
     }
 
