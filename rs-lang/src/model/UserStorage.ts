@@ -133,7 +133,7 @@ class UserStorage {
 
   async addEasyWord(wordId: string) {
     if (this.hardWordsSimple.some(word => word.wordId === wordId)) {
-      this.delHardWord(wordId);
+      await this.delHardWord(wordId);
     }
     await newDataService.addHardWord(wordId, wordEasy);
     await this.getUserWordsSimple();

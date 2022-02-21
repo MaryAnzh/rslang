@@ -10,6 +10,7 @@ const mapStateToProps = (state: ButtonsGlobState, ownProps: PaginationProps ) =>
   return {
     ...ownProps,
     isAutorize: state.glob.isAutorize,
+    easyArray: state.glob.easyArray,
   }
 };
 
@@ -27,7 +28,7 @@ class Pagination extends React.Component<PaginationProps> {
         <button onClick={this.props.upHandler} className='pagination__btn'>
           <img src={arrowForward} alt="back" />
         </button>
-        <GameLinks />
+        {!this.props.links && <GameLinks />}
       </div>
     );
   }

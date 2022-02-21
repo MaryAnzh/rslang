@@ -22,6 +22,8 @@ async function isUser() {
     const isTokenTrue = await applicationModel.getUser();
     if (isTokenTrue) {
       applicationModel.isAuthorization = true;
+    } else {
+      userStorage.clearAuth();
     }
   } else {
     applicationModel.isAuthorization = false;

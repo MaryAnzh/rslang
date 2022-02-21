@@ -47,10 +47,12 @@ export type CardButtonsProps = {
 }
 
 export type PaginationProps = {
+  links: boolean;
   page: number;
   downHandler: MouseEventHandler<HTMLButtonElement>;
   upHandler: MouseEventHandler<HTMLButtonElement>;
   isAutorize?: boolean; 
+  easyArray?: string[];
 }
 
 export type GroupPaginationProps = {

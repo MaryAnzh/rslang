@@ -30,6 +30,8 @@ class ApplicationModel {
 
   gamePage = 0;
 
+  gameFromBook: boolean;
+
   isBergerOpen = false;
 
   constructor(dataServ: DataService) {
@@ -37,6 +39,7 @@ class ApplicationModel {
     this.currentMail = '';
     this.currentPassword = '';
     this.isAuthorization = false;
+    this.gameFromBook = false;
     this.currentUserName = '';
     this.currentUserId = '';
     this.isServerError = true;
