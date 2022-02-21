@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { Mylocation } from '../../../model/lacation';
 import './header.scss';
 import '../../../css/animation.scss';
 import { Logo } from '../Logo/Logo';
@@ -17,11 +16,12 @@ import { connect } from 'react-redux';
 import { updateAction } from '../../../store/actionCreators/actionCreators';
 import { Arrow } from '../../elements/arrow/arrow';
 import { userStorage } from '../../../model/UserStorage';
-import { idText } from 'typescript';
+// import { HeaderView } from '../AppRouter/AppRouter';  
 
-const pathname = document.location.pathname;
-console.log('Имя странички');
-console.log(pathname);
+
+// const pathname = 'HeaderView();'
+// console.log('Имя странички');
+// console.log(pathname);
 
 type HeaderState = {
   alertStyle: { display: string },
@@ -112,32 +112,32 @@ class Header extends React.Component<HeaderProps> {
     }
   }
 
-  headerActiveLink() {
+  // headerActiveLink() {
     
-    this.defaulteHeaderState();
-    if (pathname === '/' || pathname === '/#/') {
-      this.state.navManePage = 'header__nav__li__link active-page';
-      this.state.burgerManePage = 'header__hidden-burger-menu__list__link active-page';
-    }
-    if (pathname === '/textbook' || pathname === '/#/textbook') {
-      this.state.burgerBookPage = 'header__hidden-burger-menu__list__link active-page';
-      this.state.burgerBookPageArrow = { display: 'none' };
-      this.state.navBookPage = 'header__nav__li__link active-page';
-      this.state.navBookPageArrow = { display: 'none' };
-    }
-    if (pathname === '/sprint-settings' || pathname === '/#/sprint-settings'
-      || pathname === '/audiocall-settings' || pathname === '/#/audiocall-settings'
-      || pathname === '/audiocall-game' || pathname === '/#/audiocall-game'
-      || pathname === '/sprint-game' || pathname === '/#/sprint-game'
-    ) {
-      this.state.navGamePage = 'header__nav__li__link active-page';
-      this.state.burgerGamePage = 'header__hidden-burger-menu__list__link active-page';
-    }
-    if (pathname === '/statistics') {
-      this.state.navStatPage = 'header__nav__li__link active-page';
-      this.state.burgerStatPage = 'header__hidden-burger-menu__list__link active-page';
-    }
-  }
+  //   this.defaulteHeaderState();
+  //   if (pathname === '/' || pathname === '/#/') {
+  //     this.state.navManePage = 'header__nav__li__link active-page';
+  //     this.state.burgerManePage = 'header__hidden-burger-menu__list__link active-page';
+  //   }
+  //   if (pathname === '/textbook' || pathname === '/#/textbook') {
+  //     this.state.burgerBookPage = 'header__hidden-burger-menu__list__link active-page';
+  //     this.state.burgerBookPageArrow = { display: 'none' };
+  //     this.state.navBookPage = 'header__nav__li__link active-page';
+  //     this.state.navBookPageArrow = { display: 'none' };
+  //   }
+  //   if (pathname === '/sprint-settings' || pathname === '/#/sprint-settings'
+  //     || pathname === '/audiocall-settings' || pathname === '/#/audiocall-settings'
+  //     || pathname === '/audiocall-game' || pathname === '/#/audiocall-game'
+  //     || pathname === '/sprint-game' || pathname === '/#/sprint-game'
+  //   ) {
+  //     this.state.navGamePage = 'header__nav__li__link active-page';
+  //     this.state.burgerGamePage = 'header__hidden-burger-menu__list__link active-page';
+  //   }
+  //   if (pathname === '/statistics') {
+  //     this.state.navStatPage = 'header__nav__li__link active-page';
+  //     this.state.burgerStatPage = 'header__hidden-burger-menu__list__link active-page';
+  //   }
+  // }
 
   navToMain(e: React.MouseEvent<HTMLElement>) {
     this.defaulteHeaderSatstate();

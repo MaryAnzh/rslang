@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Statistics } from '../../pages/Statistics/Statistics';
 import { StartPage } from '../../pages/startPage/StartPage';
 import { Footer } from '../Footer/Footer';
@@ -26,3 +27,10 @@ export default function AppRouter() {
     </div>
   );
 }
+
+// function HeaderView() {
+//   const location = useLocation();
+//   console.log(location.pathname);
+//   return location.pathname;
+// }
+// const a = HeaderView();

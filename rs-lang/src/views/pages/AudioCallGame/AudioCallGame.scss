@@ -337,6 +337,28 @@
     gap: 15px;
     justify-content: end;
   }
+
+  &__button {
+    width: 150px;
+    height: 2.5rem;
+    color: white;
+    background: #006DD9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    transition: .3s;
+
+    &:hover {
+    background: #04396e;
+    }
+
+    &__avtive {
+      background: #7691ac;
+    }
+  }
+
+  
 }
 
 .round-end-anim {
