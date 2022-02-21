@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { newDataService } from '../../../dataServer/dataService';
-import { ButtonsGlobState, TextBookState } from '../../../interfaces/types';
+import { ArrayActionProps, ButtonsGlobState, TextBookState } from '../../../interfaces/types';
 import { applicationModel } from '../../../model/ApplicationModel';
 import { userStorage } from '../../../model/UserStorage';
 import  GroupPagination from '../../components/GroupPagination/GroupPagination';
@@ -12,18 +12,19 @@ import './TextBook.scss';
 const mapStateToProps = (state: ButtonsGlobState) => {
   return {
     hardsArray: state.glob.hardsArray,
+    easyArray: state.glob.easyArray,
   }
 };
 
 const connector = connect(mapStateToProps, null);
 
 
-class TextBook extends React.Component<{ hardsArray?: string[] }> {
+class TextBook extends React.Component< ArrayActionProps > {
   bg: string;
 
   state: TextBookState;
 
-  constructor(props: { hardsArray?: string[] }) {
+  constructor(props: ArrayActionProps) {
     super(props);
     this.bg = '#fcddb1';
     this.state = {
@@ -40,11 +41,12 @@ class TextBook extends React.Component<{ hardsArray?: string[] }> {
     if (nextProps.hardsArray !== this.props.hardsArray && this.state.group === 6) {
       this.GroupHandler(this.state.group, this.state.page);
     }
-    if (nextState.words !== this.state.words) {
-      return true;
-    } else {
-      return false;
-    }
+    return true;
+    // if (nextState.words !== this.state.words) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   GroupHandler(group: number, page: number = 0) {
@@ -173,9 +175,14 @@ class TextBook extends React.Component<{ hardsArray?: string[] }> {
 
     console.log(`Page: ${this.state.page}; Group: ${this.state.group}`);
 
+
     let words: JSX.Element[] | null;
     if (this.state.words.length) {
       words = this.state.words.map((word, index) => <WordCard key={index} word={word}/>);
+      if (this.state.words.every(word => this.props.easyArray?.includes(word.id))) {
+        console.log('green');
+        this.bg = '#b4f1c4';
+      }
     } else {
       words = null;
     }

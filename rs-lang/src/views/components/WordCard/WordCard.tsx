@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { newDataService } from '../../../dataServer/dataService';
-import { ButtonsGlobState, WordCardProps } from '../../../interfaces/types';
+import { ArrayActionProps, ButtonsGlobState, WordCardProps } from '../../../interfaces/types';
 import CARD_BUTTONS_W from '../CardButton/CardButtons';
 import './WordCard.scss';
 
@@ -12,11 +12,6 @@ const mapStateToProps = (state: ButtonsGlobState, ownProps: WordCardProps ) => {
     easyArray: state.glob.easyArray,
   }
 };
-
-type ArrayActionProps = {
-  hardsArray?: string[],
-  easyArray?: string[],
-}
 
 const connector = connect(mapStateToProps, null);
 
