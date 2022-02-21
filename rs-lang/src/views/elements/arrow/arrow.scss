@@ -1,0 +1,32 @@
+.left-arrow {
+	width: 38px;
+	height: 38px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	cursor: pointer;
+  
+		& div{
+			width: 18px;
+			height: 3px;
+			background: white;
+			border-top-right-radius: 1px;
+			border-bottom-right-radius: 1px;
+			transition: .3s;		
+		}
+
+		&__top {
+			transform: translateY(3px) translateX(5px) rotate(-48deg);
+		}
+
+		&__bottom {
+			transform: translateY(-3px) translateX(5px) rotate(48deg);
+		}
+
+		// &:hover div {
+		// 	background: #FF9700;
+		// }
+		// &:active div {
+		// 	background: #fac679;
+		// }
+	}

@@ -1,0 +1,53 @@
+.sound-view {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__line {
+    width: 8px;
+    background: #C48026;
+    border-radius: 3px;
+  }
+
+  &__line:nth-child(1) {
+    height: 30%;
+  }
+  &__line:nth-child(2) {
+    height: 40%;
+  }
+  &__line:nth-child(3) {
+    height: 60%;
+  }
+  &__line:nth-child(4) {
+    height: 90%;
+  }
+  &__line:nth-child(5) {
+    height: 60%;
+  }
+  &__line:nth-child(6) {
+    height: 40%;
+  }
+  &__line:nth-child(7) {
+    height: 30%;
+  }
+  &__line:nth-child(8) {
+    height: 6%;
+  }
+  &__line:nth-child(9) {
+    height: 15%;
+  }
+  &__line:nth-child(10) {
+    height: 35%;
+  }
+  &__line:nth-child(11) {
+    height: 55%;
+  }
+  &__line:nth-child(12) {
+    height: 35%;
+  }
+  &__line:nth-child(13) {
+    height: 15%;
+  }
+}

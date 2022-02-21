@@ -1,11 +1,13 @@
-import React from 'react';
-import { Routes, Route, Outlet, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Statistics } from '../../pages/Statistics/Statistics';
 import { StartPage } from '../../pages/startPage/StartPage';
 import { Footer } from '../Footer/Footer';
-import { Header } from '../header/header';
-import { TextBook } from '../../pages/TextBook/TextBook';
-import { Games } from '../../pages/Games/Games';
+import Header from '../header/header';
+import  TextBook  from '../../pages/TextBook/TextBook';
+import { SprintGameSettings } from '../../pages/SprintGameSettings/SprintGameSettings';
+import { AudioCallGame } from '../../pages/AudioCallGame/AudioCallGame';
+import { AudioCallGameSettings } from '../../pages/AudioCallGameSettings/AudioCallGameSettings';
+import { SprintGame } from '../../pages/sprintGame/sprintGame';
 
 export default function AppRouter() {
   return (
@@ -14,9 +16,11 @@ export default function AppRouter() {
       <Routes>
         <Route index element={<StartPage />} />
         <Route path="textbook" element={<TextBook />} />
-        <Route path="games" element={<Games />} />
+        <Route path="sprint-settings" element={<SprintGameSettings />} />
+        <Route path="audiocall-settings" element={<AudioCallGameSettings />} />
+        <Route path="audiocall-game" element={<AudioCallGame />} />
+        <Route path='sprint-game' element={<SprintGame />} />
         <Route path="statistics" element={<Statistics />} />
-        {/* <Route path="about" element={<About />} /> */}
       </Routes>
       <Footer />
     </div>
