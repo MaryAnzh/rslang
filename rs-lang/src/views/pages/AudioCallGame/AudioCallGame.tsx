@@ -134,12 +134,10 @@ class AudioCallGame extends React.Component {
   }
 
   async loadGame() {
-
     if (applicationModel.gameFromBook && applicationModel.currentWordArray.length !== 0) {
       this.wordsArray = applicationModel.currentWordArray;
       this.gameModel = new AudioCallGameModel(this.wordsArray);
     } else {
-      //берем категорию и страницу, и  запрашиваем слова
       const level = applicationModel.gameLevel;
       const page = applicationModel.gamePage;
       const data = await applicationModel.getWords(level, page);

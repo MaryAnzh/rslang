@@ -194,7 +194,11 @@ class TextBook extends React.Component< ArrayActionProps > {
     } else {
       applicationModel.currentWordArray = this.state.words;
     }
-    console.log('applicationModel.currentWordArray: ', applicationModel.currentWordArray);
+    applicationModel.gameLevel = this.state.group;
+    applicationModel.gamePage = this.state.page;
+    // console.log('applicationModel.currentWordArray: ', applicationModel.currentWordArray);
+    // console.log('applicationModel.page: ', applicationModel.gamePage);
+    // console.log('applicationModel.level: ', applicationModel.gameLevel);
   }
 
   render() {
