@@ -125,18 +125,28 @@ class SprintGame extends React.Component {
   }
 
   async loadGame() {
-    //берем категорию и страницу, и  запрашиваем слова
-    const level = applicationModel.gameLevel;
-    const page = applicationModel.gamePage;
-    const data = await applicationModel.getWords(level, page);
+    let data: WordCardType[] | undefined = [];
+    if (applicationModel.gameFromBook) {
+      data = applicationModel.currentWordArray;
+    } else {
+      const level = applicationModel.gameLevel;
+      const page = applicationModel.gamePage;
+      data = await applicationModel.getWords(level, page);
+    }
 
-    //если массив получен, запускаем gameNodel
     this.wordsArray = data;
     if (this.wordsArray != undefined) {
       this.gameModel = new AudioCallGameModel(this.wordsArray);
-      this.gameModel.roundWords();
-      //this.updatePageInfo();
     }
+
+    this.gameModel.sprintRoundWords();
+    console.log(this.gameModel.sprintRoundWordsArray);
+    const question = this.gameModel.sprintRoundWordsArray[0];
+    const questionText = question.word + ' - ' + question.translate;
+    this.setState({
+      currentQuestion: questionText,
+    });
+    //this.updatePageInfo();
   }
 
   async componentDidMount() {
@@ -280,8 +290,8 @@ class SprintGame extends React.Component {
 
                     </div>
                     <div className='games-page-wrap__sprint__wrap__game__body__question__text'>
-                      
-                      <p>слово - перевод</p>
+
+                      <p>{this.state.currentQuestion}</p>
                     </div>
 
                   </div>

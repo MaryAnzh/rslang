@@ -1,15 +1,17 @@
-import { IAudioCallWords, IAnxwer } from '../interfaces/wordsInterface';
+import { IAudioCallWords, IAnxwer, ISprintRoundWords } from '../interfaces/wordsInterface';
 import { WordCardType } from '../interfaces/types';
 
 class AudioCallGameModel {
   currentWordsArray: WordCardType[];
 
   currentWordsArrayLangth: number;
-  
+
   //массив слоа раунда
   roundWordsArray: IAnxwer[];
 
   currentShuffleWords: string[];
+
+  sprintRoundWordsArray: ISprintRoundWords[];
 
   roundAUdio: string;
 
@@ -25,7 +27,7 @@ class AudioCallGameModel {
 
   //номер индекса слова раунда
   itemIndex = 0;
-  
+
   //номер текущего раунда
   currentRound = 1;
 
@@ -39,6 +41,7 @@ class AudioCallGameModel {
     this.currentWordsArray = currentWordsArray;
     this.currentWordsArrayLangth = this.currentWordsArray.length;
     this.roundWordsArray = [];
+    this.sprintRoundWordsArray = [];
     this.currentShuffleWords = this.createCurrentShuffleWords();
     this.roundAUdio = '';
     this.roundImg = '';
@@ -82,6 +85,40 @@ class AudioCallGameModel {
 
     this.shuffle(roundArray);
     this.roundWordsArray = roundArray;
+    return roundArray;
+  }
+
+  sprintRoundWords() {
+    const roundArray: ISprintRoundWords[] = [];
+    const wordEng = this.currentWordsArray[this.itemIndex].word;
+    const wordRus = this.currentWordsArray[this.itemIndex].wordTranslate;
+
+    const trueWord: ISprintRoundWords = {
+      word: wordEng,
+      translate: wordRus,
+      isTrueAnxwer: true,
+    };
+
+    const audio = this.currentWordsArray[this.itemIndex].audio;
+    const img = this.currentWordsArray[this.itemIndex].image;
+    this.roundAUdio = `${this.serverURL}/${audio}`;
+    this.roundImg = `${this.serverURL}/${img}`;
+    roundArray.push(trueWord);
+
+    const falseWords = [...this.currentShuffleWords];
+    falseWords.splice(this.itemIndex, 1);
+    this.shuffle(falseWords);
+
+    const falseWord: ISprintRoundWords = {
+      word: wordEng,
+      translate: falseWords[0],
+      isTrueAnxwer: false,
+    }
+    roundArray.push(falseWord);
+
+
+    this.shuffle(roundArray);
+    this.sprintRoundWordsArray = roundArray;
     return roundArray;
   }
 
