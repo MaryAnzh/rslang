@@ -147,5 +147,7 @@ class ApplicationModel {
 }
 
 const applicationModel = new ApplicationModel(newDataService);
-
+console.log('Модель');
+console.log(`Страница ${applicationModel.gamePage},   Уровень${applicationModel.gameLevel}`);
+console.log(applicationModel.currentWordArray);
 export { applicationModel };

@@ -135,13 +135,31 @@ class AudioCallGame extends React.Component {
 
   async loadGame() {
 
-    if (applicationModel.gameFromBook && applicationModel.currentWordArray.length !== 0) {
-      this.wordsArray = applicationModel.currentWordArray;
-      this.gameModel = new AudioCallGameModel(this.wordsArray);
+    if (applicationModel.gameFromBook) {
+      if (applicationModel.isAuthorization) {
+        
+      } else {
+        //берем категорию и страницу, и  запрашиваем слова
+        // const level = applicationModel.gameLevel;
+        // const page = applicationModel.gamePage;
+        const data = applicationModel.currentWordArray;
+        console.log('data');
+        console.log(data);
+
+        //если массив получен, запускаем gameModel
+        this.wordsArray = data;
+        if (this.wordsArray != undefined) {
+          this.gameModel = new AudioCallGameModel(this.wordsArray);
+        }
+      }
     } else {
       //берем категорию и страницу, и  запрашиваем слова
       const level = applicationModel.gameLevel;
       const page = applicationModel.gamePage;
+      console.log('Слова из учебника');
+      console.log(`Страница ${applicationModel.gamePage},   Уровень${applicationModel.gameLevel}`);
+
+      
       const data = await applicationModel.getWords(level, page);
 
       //если массив получен, запускаем gameModel
