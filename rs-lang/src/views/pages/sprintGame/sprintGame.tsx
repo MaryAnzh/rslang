@@ -157,8 +157,10 @@ class SprintGame extends React.Component {
 
               </section>
               <section className='games-page-wrap__sprint__wrap__timer'>
-                <div className='games-page-wrap__sprint__wrap__timer__wrap'></div>
-
+                <div className='games-page-wrap__sprint__wrap__timer__clock'>
+                  <p className='games-page-wrap__sprint__wrap__timer__clock__time'>60</p>
+                </div>
+                <button className='games-page-wrap__sprint__wrap__timer__start'>Начать</button>
               </section>
             </section>
           </div>
