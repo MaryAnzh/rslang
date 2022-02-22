@@ -29,6 +29,7 @@ type SprintGameType = {
   heardFill_9: string,
   heardFill_10: string,
   heardStroke: string,
+  heardStroke2: string,
   currentLevel: string,
   currentLevelColor: { background: string },
   currentQuestion: string,
@@ -73,6 +74,7 @@ class SprintGame extends React.Component {
       heardFill_9: 'none',
       heardFill_10: 'none',
       heardStroke: 'white',
+      heardStroke2: '#006DD9',
       currentLevel: 'Уровень сложности ' + (applicationModel.gameLevel + 1),
       currentLevelColor: { background: this.gameLevelColor(applicationModel.gameLevel) },
       currentRound: '',
@@ -256,12 +258,37 @@ class SprintGame extends React.Component {
                   </div>
 
                   <div className='games-page-wrap__sprint__wrap__game__settings__right'>
-                    <div className='games-page-wrap__sprint__wrap__game__settings__right__point'>0</div>
-
+                    <div className='games-page-wrap__sprint__wrap__game__settings__right__point'>
+                      0
+                    </div>
                   </div>
 
                 </section>
                 <section className='games-page-wrap__sprint__wrap__game__body'>
+                  <div className='games-page-wrap__sprint__wrap__game__body__question'>
+                    <div className='games-page-wrap__sprint__wrap__game__body__question__heard-point'>
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_1} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_2} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_3} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_4} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_5} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_6} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_7} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_8} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_9} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_10} />
+
+                    </div>
+                    <div className='games-page-wrap__sprint__wrap__game__body__question__text'>
+                      
+                      <p>слово - перевод</p>
+                    </div>
+
+                  </div>
+                  <div className='games-page-wrap__sprint__wrap__game__body__buttons'>
+                    <button className='games-page-wrap__sprint__wrap__game__body__buttons__answer'>Верно</button>
+                    <button className='games-page-wrap__sprint__wrap__game__body__buttons__answer'>Не верно</button>
+                  </div>
 
                 </section>
 
