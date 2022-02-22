@@ -8,6 +8,7 @@ import { GameButton } from '../../audioCallElements/gameButton/gameButton';
 import { AudioCallGameModel } from '../../../model/audioCallGameModel';
 import { WordCardType } from '../../../interfaces/types';
 import { applicationModel } from '../../../model/ApplicationModel';
+import { ISprintRoundWords } from '../../../interfaces/wordsInterface';
 import { Music } from '../../components/music/music';
 import { GameInfo } from '../../audioCallElements/gameInfo/gameInfo';
 import { Soundview } from '../../audioCallElements/soundView/soundview';
@@ -53,6 +54,8 @@ class SprintGame extends React.Component {
 
   wordsArray: WordCardType[] | undefined;
 
+  sprintRoundWordsArray: ISprintRoundWords[];
+
   roundAudio: HTMLAudioElement;
 
   isSoundOn = true;
@@ -61,6 +64,7 @@ class SprintGame extends React.Component {
     super(props);
     this.wordsArray = [];
     this.gameModel = new AudioCallGameModel(this.wordsArray);
+    this.sprintRoundWordsArray = [];
     this.state = {
       isLoading: true,
       heardFill_1: '#FFB140',
@@ -138,15 +142,18 @@ class SprintGame extends React.Component {
     if (this.wordsArray != undefined) {
       this.gameModel = new AudioCallGameModel(this.wordsArray);
     }
+    this.upDateRound();
+    //this.updatePageInfo();
+  }
 
-    this.gameModel.sprintRoundWords();
+  upDateRound() {
+    this.sprintRoundWordsArray = this.gameModel.sprintRoundWords();
     console.log(this.gameModel.sprintRoundWordsArray);
     const question = this.gameModel.sprintRoundWordsArray[0];
     const questionText = question.word + ' - ' + question.translate;
     this.setState({
       currentQuestion: questionText,
     });
-    //this.updatePageInfo();
   }
 
   async componentDidMount() {
@@ -155,6 +162,7 @@ class SprintGame extends React.Component {
   }
 
   soundOnOf(e: React.MouseEvent<HTMLElement>) {
+
     if (this.isSoundOn) {
       this.setState({
         soundClass: 'games-page-wrap__sprint__wrap__game__settings__left__bell-of',
@@ -166,6 +174,22 @@ class SprintGame extends React.Component {
       });
       this.isSoundOn = true;
     }
+  }
+
+  getButtonDatatypeOnClick(e: React.MouseEvent<HTMLElement>) {
+    const elem = e.target as HTMLElement;
+    const elemType = elem.getAttribute('data-index');
+    const isAnswerTrue = this.sprintRoundWordsArray[0].isTrueAnxwer;
+
+    if (elemType != null) {
+      if ((elemType === 'true' && isAnswerTrue) || (elemType === 'false' && !isAnswerTrue)) {
+        alert('Угадал');
+      } else {
+        alert('Ошибка');
+      }
+    }
+    this.gameModel.itemIndex += 1;
+    this.upDateRound();
   }
 
   render() {
@@ -296,8 +320,16 @@ class SprintGame extends React.Component {
 
                   </div>
                   <div className='games-page-wrap__sprint__wrap__game__body__buttons'>
-                    <button className='games-page-wrap__sprint__wrap__game__body__buttons__answer'>Верно</button>
-                    <button className='games-page-wrap__sprint__wrap__game__body__buttons__answer'>Не верно</button>
+                    <button
+                      className='games-page-wrap__sprint__wrap__game__body__buttons__answer'
+                      onClick={(e) => { this.getButtonDatatypeOnClick(e) }}
+                      data-index='true'
+                    >Верно</button>
+                    <button
+                      className='games-page-wrap__sprint__wrap__game__body__buttons__answer'
+                      onClick={(e) => { this.getButtonDatatypeOnClick(e) }}
+                      data-index='false'
+                    >Не верно</button>
                   </div>
 
                 </section>
