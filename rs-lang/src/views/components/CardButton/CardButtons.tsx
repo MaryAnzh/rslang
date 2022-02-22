@@ -6,11 +6,13 @@ import addPic from '../../../img/svg/add.svg';
 import applyPic from '../../../img/svg/check.svg';
 import applyPicGreen from '../../../img/svg/check_green.svg';
 import delPic from '../../../img/svg/delete.svg';
+import trending from '../../../img/svg/trending.svg';
 import { ButtonsGlobState, CardButtonsProps, CardButtonsState } from '../../../interfaces/types';
 import { soundModel } from '../../../model/SoundModel';
 import { connect } from 'react-redux';
 import { changeHardsAction } from '../../../store/actionCreators/actionCreators';
 import { userStorage } from '../../../model/UserStorage';
+import { ProgressPopup } from '../ProgressPopup/ProgressPopup';
 
 
 const mapStateToProps = (state: ButtonsGlobState, ownProps: CardButtonsProps ) => {
@@ -41,6 +43,7 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
     super(props);
     this.state = {
       isPlay: false,
+      isShowPopup: false,
     };
     this.handleClick = this.handleClick.bind(this);
     this.addWordHandler = this.addWordHandler.bind(this);
@@ -85,11 +88,16 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
     userStorage.delEasyWord(this.props.wordId);
   }
 
+  togglePopup() {
+    this.setState((prev: CardButtonsState) => ({
+      isShowPopup: !prev.isShowPopup,
+    }));
+  }
+
   render() {
     let hardBtn: JSX.Element | null = null;
     let easyBtn: JSX.Element | null = null;
-    // console.log('hard ' + this.props.hardsArray);
-    // console.log('easy ' + this.props.easyArray);
+
     if (!this.props.easyArray.includes(this.props.wordId)) {
       easyBtn = (
         <button onClick={this.addEasyHandler} className={this.props.isAutorize ? 'card-buttons__btn tooltip tooltip__apply' : 'card-buttons__btn card-buttons__btn-disable'}>
@@ -121,7 +129,11 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
         <button onClick={this.handleClick} className={this.props.isAutorize ? 'card-buttons__btn  tooltip tooltip__sound' : 'card-buttons__btn tooltip tooltip__sound card-buttons__btn-fix'}>
           <img  src={this.state.isPlay ? pausePic : playPic} alt="sound" className="card-buttons__pic"/>
         </button>
+        <button onClick={this.togglePopup.bind(this)} className={this.props.isAutorize ? 'card-buttons__btn  tooltip tooltip__statistics' : 'card-buttons__btn card-buttons__btn-disable'}>
+          <img  src={trending} alt="sound" className="card-buttons__pic"/>
+        </button>
         {hardBtn}
+        {this.state.isShowPopup && <ProgressPopup />}
         {easyBtn}
       </div>
     );

@@ -38,6 +38,7 @@ export type TextBookState = {
 
 export type CardButtonsState = {
   isPlay: boolean;
+  isShowPopup: boolean,
 }
 
 export type CardButtonsProps = {
