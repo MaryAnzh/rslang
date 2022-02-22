@@ -69,50 +69,69 @@
           align-items: center;
           background: white;
           border-radius: 20px;
+          padding: 0 20px;
 
           &__left {
-            width: 200px;
+            width: 220px;
             height: 100%;
             display: flex;
+           
           justify-content: space-between;
           align-items: center;
-            border: 1px solid blue;
 
-            &__bell-on {
+              &__bell-on {
+                width: 30px;
+              height: 30px;
+              background-image: url(../../../img/svg/bell.svg);
+              background-position: center;
+              background-repeat: no-repeat;
+              cursor: pointer;
+              transition: .5s;
+
+              &:hover {
+                opacity: 0.5;
+              }
+            }
+
+            &__bell-of {
               width: 30px;
-            height: 30px;
-            background-image: url(../../../img/svg/bell.svg);
-            background-position: center;
-            background-repeat: no-repeat;
-            cursor: pointer;
-            transition: .5s;
+              height: 30px;
+              background-image: url(../../../img/svg/bell_none.svg);
+              background-position: center;
+              background-repeat: no-repeat;
+              cursor: pointer;
+              transition: .5s;
 
-            &:hover {
-              opacity: 0.5;
+              &:hover {
+                opacity: .5;
+              }
             }
-          }
 
-          &__bell-of {
-            width: 30px;
-            height: 30px;
-            background-image: url(../../../img/svg/bell_none.svg);
-            background-position: center;
-            background-repeat: no-repeat;
-            cursor: pointer;
-            transition: .5s;
-
-            &:hover {
-              opacity: .5;
+            &__level {
+              width: 180px;
+              height: 1.8rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 8px;
+              
             }
-          }
-
           }
 
            &__right {
             width: 200px;
             height: 100%;
-            border: 1px solid blue;
+           display: flex;
+           align-items: center;
+           justify-content: end;
+         
+
+           &__point {
+            color: #006DD9;
+            font-size: 2rem;
           }
+          }
+
         }
 
         &__body {

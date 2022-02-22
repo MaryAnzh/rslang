@@ -247,9 +247,16 @@ class SprintGame extends React.Component {
                   <div className='games-page-wrap__sprint__wrap__game__settings__left'>
                     <div
                       onClick={(e) => { this.soundOnOf(e) }}
-                      className={this.state.soundClass}></div>
+                      className={this.state.soundClass}>
+                    </div>
+                    <div
+                      className='games-page-wrap__sprint__wrap__game__settings__left__level'
+                      style={this.state.currentLevelColor}
+                    >{this.state.currentLevel}</div>
                   </div>
+
                   <div className='games-page-wrap__sprint__wrap__game__settings__right'>
+                    <div className='games-page-wrap__sprint__wrap__game__settings__right__point'>0</div>
 
                   </div>
 
