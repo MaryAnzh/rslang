@@ -23,7 +23,13 @@ type SprintGameType = {
   heardFill_3: string,
   heardFill_4: string,
   heardFill_5: string,
+  heardFill_6: string,
+  heardFill_7: string,
+  heardFill_8: string,
+  heardFill_9: string,
+  heardFill_10: string,
   heardStroke: string,
+  heardStroke2: string,
   currentLevel: string,
   currentLevelColor: { background: string },
   currentQuestion: string,
@@ -49,18 +55,26 @@ class SprintGame extends React.Component {
 
   roundAudio: HTMLAudioElement;
 
+  isSoundOn = true;
+
   constructor(props: {}) {
     super(props);
     this.wordsArray = [];
     this.gameModel = new AudioCallGameModel(this.wordsArray);
     this.state = {
       isLoading: true,
-      heardFill_1: 'none',
+      heardFill_1: '#FFB140',
       heardFill_2: 'none',
       heardFill_3: 'none',
       heardFill_4: 'none',
       heardFill_5: 'none',
-      heardStroke: '#A66200',
+      heardFill_6: 'none',
+      heardFill_7: 'none',
+      heardFill_8: 'none',
+      heardFill_9: 'none',
+      heardFill_10: 'none',
+      heardStroke: 'white',
+      heardStroke2: '#006DD9',
       currentLevel: 'Уровень сложности ' + (applicationModel.gameLevel + 1),
       currentLevelColor: { background: this.gameLevelColor(applicationModel.gameLevel) },
       currentRound: '',
@@ -70,7 +84,7 @@ class SprintGame extends React.Component {
       answerIndicator: { background: '' },
       nextRoundBUttonWrapClass: 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone',
       statisticsRoundInfo: '',
-      soundClass: 'games-page-wrap__game-wrap__audio-call__top-settings__left__bell',
+      soundClass: 'games-page-wrap__sprint__wrap__game__settings__left__bell-on',
       levelEnd: { display: 'block' },
       levelEndText: { display: 'none' },
       currentQuestion: '',
@@ -111,18 +125,28 @@ class SprintGame extends React.Component {
   }
 
   async loadGame() {
-    //берем категорию и страницу, и  запрашиваем слова
-    const level = applicationModel.gameLevel;
-    const page = applicationModel.gamePage;
-    const data = await applicationModel.getWords(level, page);
+    let data: WordCardType[] | undefined = [];
+    if (applicationModel.gameFromBook) {
+      data = applicationModel.currentWordArray;
+    } else {
+      const level = applicationModel.gameLevel;
+      const page = applicationModel.gamePage;
+      data = await applicationModel.getWords(level, page);
+    }
 
-    //если массив получен, запускаем gameNodel
     this.wordsArray = data;
     if (this.wordsArray != undefined) {
       this.gameModel = new AudioCallGameModel(this.wordsArray);
-      this.gameModel.roundWords();
-      //this.updatePageInfo();
     }
+
+    this.gameModel.sprintRoundWords();
+    console.log(this.gameModel.sprintRoundWordsArray);
+    const question = this.gameModel.sprintRoundWordsArray[0];
+    const questionText = question.word + ' - ' + question.translate;
+    this.setState({
+      currentQuestion: questionText,
+    });
+    //this.updatePageInfo();
   }
 
   async componentDidMount() {
@@ -130,9 +154,23 @@ class SprintGame extends React.Component {
     this.setState({ isLoading: false });
   }
 
+  soundOnOf(e: React.MouseEvent<HTMLElement>) {
+    if (this.isSoundOn) {
+      this.setState({
+        soundClass: 'games-page-wrap__sprint__wrap__game__settings__left__bell-of',
+      });
+      this.isSoundOn = false;
+    } else {
+      this.setState({
+        soundClass: 'games-page-wrap__sprint__wrap__game__settings__left__bell-on',
+      });
+      this.isSoundOn = true;
+    }
+  }
+
   render() {
     const { isLoading } = this.state;
-
+    const pountUp = 2;
     if (isLoading) {
       return (
         <main className="main">
@@ -152,13 +190,124 @@ class SprintGame extends React.Component {
           <div className='games-page-wrap__sprint'>
             <section className='games-page-wrap__sprint__wrap'>
               <section className='games-page-wrap__sprint__wrap__point-panel'>
+                <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
+                  <h3>Стоимость ответа в баллах</h3>
+                </div>
+                <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
+                  <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
+                    <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_1} />
+                  </div>
+                  <p>1</p>
+                </div>
+                <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
+                  <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
+                    <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_2} />
+                  </div>
+                  <p>{pountUp}</p>
+                </div>
+                <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
+                  <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
+                    <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_3} />
+                  </div>
+                  <p>{pountUp ** 2}</p>
+                </div>
+                <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
+                  <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
+                    <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_4} />
+                  </div>
+                  <p>{pountUp ** 3}</p>
+                </div>
+                <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
+                  <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
+                    <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_5} />
+                  </div>
+                  <p>{pountUp ** 4}</p>
+                </div>
+                <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
+                  <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
+                    <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_6} />
+                  </div>
+                  <p>{pountUp ** 5}</p>
+                </div>
+                <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
+                  <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
+                    <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_7} />
+                  </div>
+                  <p>{pountUp ** 6}</p>
+                </div>
+                <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
+                  <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
+                    <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_8} />
+                  </div>
+                  <p>{pountUp ** 7}</p>
+                </div>
+                <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
+                  <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
+                    <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_9} />
+                  </div>
+                  <p>{pountUp ** 8}</p>
+                </div>
+                <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
+                  <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
+                    <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_10} />
+                  </div>
+                  <p>{pountUp ** 9}</p>
+                </div>
               </section>
               <section className='games-page-wrap__sprint__wrap__game'>
+                <section className='games-page-wrap__sprint__wrap__game__settings'>
+                  <div className='games-page-wrap__sprint__wrap__game__settings__left'>
+                    <div
+                      onClick={(e) => { this.soundOnOf(e) }}
+                      className={this.state.soundClass}>
+                    </div>
+                    <div
+                      className='games-page-wrap__sprint__wrap__game__settings__left__level'
+                      style={this.state.currentLevelColor}
+                    >{this.state.currentLevel}</div>
+                  </div>
+
+                  <div className='games-page-wrap__sprint__wrap__game__settings__right'>
+                    <div className='games-page-wrap__sprint__wrap__game__settings__right__point'>
+                      0
+                    </div>
+                  </div>
+
+                </section>
+                <section className='games-page-wrap__sprint__wrap__game__body'>
+                  <div className='games-page-wrap__sprint__wrap__game__body__question true'>
+                    <div className='games-page-wrap__sprint__wrap__game__body__question__heard-point'>
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_1} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_2} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_3} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_4} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_5} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_6} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_7} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_8} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_9} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_10} />
+
+                    </div>
+                    <div className='games-page-wrap__sprint__wrap__game__body__question__text'>
+
+                      <p>{this.state.currentQuestion}</p>
+                    </div>
+
+                  </div>
+                  <div className='games-page-wrap__sprint__wrap__game__body__buttons'>
+                    <button className='games-page-wrap__sprint__wrap__game__body__buttons__answer'>Верно</button>
+                    <button className='games-page-wrap__sprint__wrap__game__body__buttons__answer'>Не верно</button>
+                  </div>
+
+                </section>
 
               </section>
               <section className='games-page-wrap__sprint__wrap__timer'>
-                <div className='games-page-wrap__sprint__wrap__timer__wrap'></div>
-
+                <div className='games-page-wrap__sprint__wrap__timer__clock'>
+                  <p className='games-page-wrap__sprint__wrap__timer__clock__time'>60</p>
+                </div>
+                <button className='games-page-wrap__sprint__wrap__timer__start'>Начать</button>
               </section>
             </section>
           </div>
