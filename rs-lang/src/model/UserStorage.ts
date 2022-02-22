@@ -144,6 +144,15 @@ class UserStorage {
     await newDataService.deleteHardWord(wordId);
     await this.getUserWordsSimple();
   }
+
+  async delEasyWordGame(wordId: string) {
+    if (this.isAuthorize) {
+      if (this.easyWordsSimple.some(word => word.id === wordId)) {
+        await newDataService.deleteHardWord(wordId);
+        await this.getUserWordsSimple();
+      }
+    }
+  }
 }
 
 const userStorage = new UserStorage();
