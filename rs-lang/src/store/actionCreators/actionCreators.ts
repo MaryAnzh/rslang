@@ -1,4 +1,4 @@
-import { CHANGE_EASY, CHANGE_HARDS, UPDATE } from '../actions/actions'
+import { CHANGE_EASY, CHANGE_HARDS, UPDATE, UPDATE_LINK } from '../actions/actions'
 
 export function updateAction(value: boolean) {
   // console.log('updateAction value: ' + value);
@@ -19,5 +19,12 @@ export function changeEasyAction(array: string[]) {
   return { 
     type: CHANGE_EASY,
     value: array,
+  };
+}
+
+export function updateLink(value: boolean) {
+  return { 
+    type: UPDATE_LINK,
+    value: value,
   };
 }

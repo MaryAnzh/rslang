@@ -1,8 +1,9 @@
 import { ActionType } from '../../interfaces/types';
-import { CHANGE_EASY, CHANGE_HARDS, UPDATE } from '../actions/actions';
+import { CHANGE_EASY, CHANGE_HARDS, UPDATE, UPDATE_LINK } from '../actions/actions';
 
 const initialState = {
   isAutorize: false,
+  isGameLink: false,
   hardsArray: [],
   easyArray: [],
 };
@@ -16,6 +17,8 @@ export const buttonsReducer = (state = initialState, action: ActionType) => {
       return { ...state, hardsArray: action.value }
     case CHANGE_EASY:
       return { ...state, easyArray: action.value }
+    case UPDATE_LINK:
+      return { ...state, isGameLink: action.value }
     default:
       return state;
   }

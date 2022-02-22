@@ -1,19 +1,35 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import arrowForward from '../../../img/svg/arrow_forward.svg';
 import { applicationModel } from '../../../model/ApplicationModel';
+import { updateLink } from '../../../store/actionCreators/actionCreators';
 import './GameLinks.scss';
 
-class GamesLinks extends React.Component {
+const mapDispatchToProps = {
+  updateLink,
+};
+
+type HeaderProps = {
+  updateLink: Function,
+}
+
+class GamesLinks extends React.Component<HeaderProps> {
   state: { 
     open: boolean, 
   };
 
-  constructor(props: {}) {
+  constructor(props: HeaderProps) {
     super(props);
     this.state = {
       open: false,
     };
+    this.linkHandler = this.linkHandler.bind(this);
+  }
+
+  linkHandler() {
+    applicationModel.gameFromBook = true;
+    this.props.updateLink(true);
   }
 
   render() {
@@ -22,10 +38,10 @@ class GamesLinks extends React.Component {
       links = (
         <div className='game-links__links'>
           <li className='game-links__link-wrapper'>
-            <Link onClick={() => applicationModel.gameFromBook = true} to="/audiocall-game" className="game-links__link">Аудиовызов</Link>
+            <Link onClick={this.linkHandler} to="/audiocall-game" className="game-links__link">Аудиовызов</Link>
           </li>
           <li className='game-links__link-wrapper'>
-            <Link onClick={() => applicationModel.gameFromBook = true} to="/sprint-game" className="game-links__link">Спринт</Link>
+            <Link onClick={this.linkHandler} to="/sprint-game" className="game-links__link">Спринт</Link>
           </li>
         </div>
       );
@@ -44,4 +60,5 @@ class GamesLinks extends React.Component {
   }
 }
 
-export default GamesLinks;
+// export default GamesLinks;
+export default connect(null, mapDispatchToProps)(GamesLinks);

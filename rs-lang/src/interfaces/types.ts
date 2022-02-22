@@ -66,6 +66,7 @@ export type ButtonsGlobState = {
     isAutorize: boolean,
     hardsArray: string[],
     easyArray: string[],
+    isGameLink: boolean;
   }
 }
 
