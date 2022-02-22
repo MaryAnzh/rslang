@@ -183,9 +183,15 @@ class SprintGame extends React.Component {
 
     if (elemType != null) {
       if ((elemType === 'true' && isAnswerTrue) || (elemType === 'false' && !isAnswerTrue)) {
-        alert('Угадал');
+        const audio = new Audio(true_answer);
+        if (this.isSoundOn) {
+          audio.play();
+        }
       } else {
-        alert('Ошибка');
+        const audio = new Audio(false_answer);
+        if (this.isSoundOn) {
+          audio.play();
+        }
       }
     }
     this.gameModel.itemIndex += 1;
