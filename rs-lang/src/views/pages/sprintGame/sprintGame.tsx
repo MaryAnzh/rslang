@@ -45,6 +45,7 @@ type SprintGameType = {
   soundClass: string,
   levelEnd: { display: string },
   levelEndText: { display: string },
+  smile: string,
 }
 
 class SprintGame extends React.Component {
@@ -93,6 +94,7 @@ class SprintGame extends React.Component {
       levelEndText: { display: 'none' },
       currentQuestion: '',
       statisticsDisplay: { display: 'none' },
+      smile: 'games-page-wrap__sprint__wrap__game__body__question question',
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -187,11 +189,18 @@ class SprintGame extends React.Component {
         if (this.isSoundOn) {
           audio.play();
         }
+        this.setState({
+          smile: 'games-page-wrap__sprint__wrap__game__body__question true',
+        });
+
       } else {
         const audio = new Audio(false_answer);
         if (this.isSoundOn) {
           audio.play();
         }
+        this.setState({
+          smile: 'games-page-wrap__sprint__wrap__game__body__question false',
+        });
       }
     }
     this.gameModel.itemIndex += 1;
@@ -305,7 +314,7 @@ class SprintGame extends React.Component {
 
                 </section>
                 <section className='games-page-wrap__sprint__wrap__game__body'>
-                  <div className='games-page-wrap__sprint__wrap__game__body__question true'>
+                  <div className={this.state.smile}>
                     <div className='games-page-wrap__sprint__wrap__game__body__question__heard-point'>
                       <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_1} />
                       <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_2} />
