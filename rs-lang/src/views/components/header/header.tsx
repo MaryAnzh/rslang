@@ -262,6 +262,8 @@ class Header extends React.Component<HeaderProps> {
       navBookPage: 'header__nav__li__link',
       navGamePage: 'header__nav__li__link',
       navStatPage: 'header__nav__li__link blocked',
+      burgerBookPageArrow: { display: 'flex' },
+      navBookPageArrow: { display: 'flex' },
     });
   }
 
