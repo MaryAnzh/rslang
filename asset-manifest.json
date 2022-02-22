@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/rslang/static/css/main.904ebf83.css",
-    "main.js": "/rslang/static/js/main.978a06c0.js",
+    "main.css": "/rslang/static/css/main.e2ab6c00.css",
+    "main.js": "/rslang/static/js/main.dda70343.js",
     "static/js/787.2dbdb0da.chunk.js": "/rslang/static/js/787.2dbdb0da.chunk.js",
     "static/media/roboto-all-700-normal.woff": "/rslang/static/media/roboto-all-700-normal.ef6d1d09b20b877fee4e.woff",
     "static/media/roboto-all-400-normal.woff": "/rslang/static/media/roboto-all-400-normal.376ea5d93f71583052f6.woff",
@@ -47,17 +47,18 @@
     "static/media/arrow_forward.svg": "/rslang/static/media/arrow_forward.be6de04273d9a21a4bc7238f4cce358e.svg",
     "static/media/delete.svg": "/rslang/static/media/delete.1129c53a10f3c716357028ea030e9d23.svg",
     "static/media/arrow_back.svg": "/rslang/static/media/arrow_back.0e820419f0266f23c7e681239856bbd3.svg",
+    "static/media/trending.svg": "/rslang/static/media/trending.f3dc5c980465bdfa7a6d25f516795b36.svg",
     "static/media/check.svg": "/rslang/static/media/check.222a1c7ef846e3979556e4c12528d041.svg",
     "static/media/check_green.svg": "/rslang/static/media/check_green.91db5e2f4c043e3980e8b12480c18765.svg",
     "static/media/add.svg": "/rslang/static/media/add.376e9b6a44e5b3142f1239a3cc8504d0.svg",
     "static/media/pause.svg": "/rslang/static/media/pause.95877413d20663b9d91a72e8bf199614.svg",
     "static/media/play.svg": "/rslang/static/media/play.76b3bb17951353771f04d69e66b3923f.svg",
-    "main.904ebf83.css.map": "/rslang/static/css/main.904ebf83.css.map",
-    "main.978a06c0.js.map": "/rslang/static/js/main.978a06c0.js.map",
+    "main.e2ab6c00.css.map": "/rslang/static/css/main.e2ab6c00.css.map",
+    "main.dda70343.js.map": "/rslang/static/js/main.dda70343.js.map",
     "787.2dbdb0da.chunk.js.map": "/rslang/static/js/787.2dbdb0da.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.904ebf83.css",
-    "static/js/main.978a06c0.js"
+    "static/css/main.e2ab6c00.css",
+    "static/js/main.dda70343.js"
   ]
 }
