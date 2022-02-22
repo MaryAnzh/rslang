@@ -61,6 +61,10 @@ class SprintGame extends React.Component {
 
   isSoundOn = true;
 
+  gamePoint = 0;
+
+  correctAnswersSeries = 0;
+
   constructor(props: {}) {
     super(props);
     this.wordsArray = [];
@@ -192,6 +196,7 @@ class SprintGame extends React.Component {
         this.setState({
           smile: 'games-page-wrap__sprint__wrap__game__body__question true',
         });
+        //this.gamePoint +=  
       } else {
         const audio = new Audio(false_answer);
         if (this.isSoundOn) {
@@ -207,6 +212,13 @@ class SprintGame extends React.Component {
       smile: 'games-page-wrap__sprint__wrap__game__body__question question',
     }), 500);
     this.upDateRound();
+  }
+
+  pointCoust(number: number) {
+    const questionCoutВouble = 4;
+    if (this.correctAnswersSeries < 4) {
+
+    }
   }
 
   render() {
