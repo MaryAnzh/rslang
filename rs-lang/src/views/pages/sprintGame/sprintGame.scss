@@ -5,31 +5,61 @@
 
   &__sprint {
     width: 100%;
-    height: 45rem;
+    min-height: 43rem;
     margin-top: 2rem;
     padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: white;
 
     &__wrap {
       width: 100%;
-      height: 100%;
       display: flex;
+      flex-wrap: wrap;
+      padding: 2rem;
       justify-content: space-around;
+      align-items: center;
       background: #93C4E5;
 
       &__point-panel {
         width: 300px;
-        height: 100%;
+        height: 35rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        &__heard-wrap {
+          width: 245px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          &__heard {
+            width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          
+          }
+
+          p {
+            color: white;
+            font-size: 1.4rem;
+          }
+        }
       }
 
       &__game {
         width: 500px;
-        height: 100%;
+        height: 35rem;
       }
 
       &__timer {
         width: 300px;
-        height: 100%;
+        height: 35rem;
         display: flex;
         flex-direction: column;
         gap: 10px;
