@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { isConstructorDeclaration } from 'typescript';
 import { newDataService } from '../../../dataServer/dataService';
 import { ArrayActionProps, ButtonsGlobState, TextBookState, WordCardType } from '../../../interfaces/types';
 import { applicationModel } from '../../../model/ApplicationModel';
@@ -190,7 +191,10 @@ class TextBook extends React.Component< ArrayActionProps > {
           applicationModel.currentWordArray = this.state.words;
         }
       }
+    } else {
+      applicationModel.currentWordArray = this.state.words;
     }
+    console.log('applicationModel.currentWordArray: ', applicationModel.currentWordArray);
   }
 
   render() {
