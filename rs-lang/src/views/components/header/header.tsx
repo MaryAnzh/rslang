@@ -115,6 +115,8 @@ class Header extends React.Component<HeaderProps> {
       this.setState({
         navBookPage: 'header__nav__li__link',
         burgerBookPage: 'header__hidden-burger-menu__list__link',
+        burgerBookPageArrow: { display: 'flex' },
+        navBookPageArrow: { display: 'flex' },
       });
     }
     this.setState({
