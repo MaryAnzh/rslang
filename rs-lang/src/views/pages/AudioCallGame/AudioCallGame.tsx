@@ -142,7 +142,7 @@ class AudioCallGame extends React.Component {
       const page = applicationModel.gamePage;
       data = await applicationModel.getWords(level, page);
     }
-    
+
     this.wordsArray = data;
     if (this.wordsArray != undefined) {
       this.gameModel = new AudioCallGameModel(this.wordsArray);
@@ -150,7 +150,6 @@ class AudioCallGame extends React.Component {
 
     this.gameModel.roundWords();
     this.updatePageInfo();
-
   }
 
   async componentDidMount() {
@@ -431,10 +430,7 @@ class AudioCallGame extends React.Component {
                   <div
                     className='games-page-wrap__game-wrap__audio-call__top-settings__left__level'
                     style={this.state.currentLevelColor}
-                  >{this.state.currentLevel}</div>
-                  {/* <Link to='/audiocall'>
-                    <div title='Страница настроек' className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>
-                  </Link> */}
+                  >{this.state.currentLevel}</div>                
                 </div>
                 <div className='games-page-wrap__game-wrap__audio-call__top-settings__center'>
                   <p className='games-page-wrap__game-wrap__audio-call__top-settings__center__page-number'>

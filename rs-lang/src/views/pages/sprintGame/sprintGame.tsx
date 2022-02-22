@@ -54,6 +54,8 @@ class SprintGame extends React.Component {
 
   roundAudio: HTMLAudioElement;
 
+  isSoundOn = true;
+
   constructor(props: {}) {
     super(props);
     this.wordsArray = [];
@@ -80,7 +82,7 @@ class SprintGame extends React.Component {
       answerIndicator: { background: '' },
       nextRoundBUttonWrapClass: 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone',
       statisticsRoundInfo: '',
-      soundClass: 'games-page-wrap__game-wrap__audio-call__top-settings__left__bell',
+      soundClass: 'games-page-wrap__sprint__wrap__game__settings__left__bell-on',
       levelEnd: { display: 'block' },
       levelEndText: { display: 'none' },
       currentQuestion: '',
@@ -140,6 +142,20 @@ class SprintGame extends React.Component {
     this.setState({ isLoading: false });
   }
 
+  soundOnOf(e: React.MouseEvent<HTMLElement>) {
+    if (this.isSoundOn) {
+      this.setState({
+        soundClass: 'games-page-wrap__sprint__wrap__game__settings__left__bell-of',
+      });
+      this.isSoundOn = false;
+    } else {
+      this.setState({
+        soundClass: 'games-page-wrap__sprint__wrap__game__settings__left__bell-on',
+      });
+      this.isSoundOn = true;
+    }
+  }
+
   render() {
     const { isLoading } = this.state;
     const pountUp = 2;
@@ -175,7 +191,7 @@ class SprintGame extends React.Component {
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_2} />
                   </div>
-                  <p>- { pountUp}</p>
+                  <p>- {pountUp}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
@@ -225,9 +241,22 @@ class SprintGame extends React.Component {
                   </div>
                   <p>- {pountUp ** 9}</p>
                 </div>
-
               </section>
               <section className='games-page-wrap__sprint__wrap__game'>
+                <section className='games-page-wrap__sprint__wrap__game__settings'>
+                  <div className='games-page-wrap__sprint__wrap__game__settings__left'>
+                    <div
+                      onClick={(e) => { this.soundOnOf(e) }}
+                      className={this.state.soundClass}></div>
+                  </div>
+                  <div className='games-page-wrap__sprint__wrap__game__settings__right'>
+
+                  </div>
+
+                </section>
+                <section className='games-page-wrap__sprint__wrap__game__body'>
+
+                </section>
 
               </section>
               <section className='games-page-wrap__sprint__wrap__timer'>
