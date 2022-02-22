@@ -187,61 +187,61 @@ class SprintGame extends React.Component {
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_1} />
                   </div>
-                  <p>- 1</p>
+                  <p>1</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_2} />
                   </div>
-                  <p>- {pountUp}</p>
+                  <p>{pountUp}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_3} />
                   </div>
-                  <p>- {pountUp ** 2}</p>
+                  <p>{pountUp ** 2}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_4} />
                   </div>
-                  <p>- {pountUp ** 3}</p>
+                  <p>{pountUp ** 3}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_5} />
                   </div>
-                  <p>- {pountUp ** 4}</p>
+                  <p>{pountUp ** 4}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_6} />
                   </div>
-                  <p>- {pountUp ** 5}</p>
+                  <p>{pountUp ** 5}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_7} />
                   </div>
-                  <p>- {pountUp ** 6}</p>
+                  <p>{pountUp ** 6}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_8} />
                   </div>
-                  <p>- {pountUp ** 7}</p>
+                  <p>{pountUp ** 7}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_9} />
                   </div>
-                  <p>- {pountUp ** 8}</p>
+                  <p>{pountUp ** 8}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_10} />
                   </div>
-                  <p>- {pountUp ** 9}</p>
+                  <p>{pountUp ** 9}</p>
                 </div>
               </section>
               <section className='games-page-wrap__sprint__wrap__game'>
