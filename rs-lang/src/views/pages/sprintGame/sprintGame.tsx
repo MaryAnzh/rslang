@@ -192,7 +192,6 @@ class SprintGame extends React.Component {
         this.setState({
           smile: 'games-page-wrap__sprint__wrap__game__body__question true',
         });
-
       } else {
         const audio = new Audio(false_answer);
         if (this.isSoundOn) {
@@ -204,6 +203,9 @@ class SprintGame extends React.Component {
       }
     }
     this.gameModel.itemIndex += 1;
+    setTimeout(() => this.setState({
+      smile: 'games-page-wrap__sprint__wrap__game__body__question question',
+    }), 500);
     this.upDateRound();
   }
 
