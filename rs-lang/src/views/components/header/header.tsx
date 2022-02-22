@@ -13,9 +13,10 @@ import { ErrorText } from '../../elements/errorText/errorText';
 import { Alert } from '../../elements/alert/alert';
 import { Burger } from '../Burger/Burger';
 import { connect } from 'react-redux';
-import { updateAction } from '../../../store/actionCreators/actionCreators';
+import { updateAction, updateLink } from '../../../store/actionCreators/actionCreators';
 import { Arrow } from '../../elements/arrow/arrow';
 import { userStorage } from '../../../model/UserStorage';
+import { ButtonsGlobState } from '../../../interfaces/types';
 // import { HeaderView } from '../AppRouter/AppRouter';  
 
 
@@ -50,7 +51,20 @@ type HeaderState = {
 
 type HeaderProps = {
   updateAction: Function,
+  updateLink: Function,
+  isGameLink?: boolean,
 }
+
+const mapDispatchToProps = {
+  updateAction,
+  updateLink,
+};
+
+const mapStateToProps = (state: ButtonsGlobState) => {
+  return {
+    isGameLink: state.glob.isGameLink,
+  }
+};
 
 class Header extends React.Component<HeaderProps> {
   state: HeaderState;
@@ -94,6 +108,19 @@ class Header extends React.Component<HeaderProps> {
     this.authorizationUpDate = this.authorizationUpDate.bind(this);
     this.alertHiddenWrap = this.alertHiddenWrap.bind(this);
     this.burgerUp = this.burgerUp.bind(this);
+  }
+
+  componentWillReceiveProps(props: HeaderProps) {
+    if (props.isGameLink) {
+      this.setState({
+        navBookPage: 'header__nav__li__link',
+        burgerBookPage: 'header__hidden-burger-menu__list__link',
+      });
+    }
+    this.setState({
+      navGamePage: props.isGameLink ? 'header__nav__li__link active-page' : 'header__nav__li__link',
+      burgerGamePage: props.isGameLink ? 'header__hidden-burger-menu__list__link active-page' : 'header__hidden-burger-menu__list__link',
+    });
   }
 
   isAuthorizationState(isAuthorization: boolean) {
@@ -246,6 +273,7 @@ class Header extends React.Component<HeaderProps> {
 
   defaulteHeaderSatstate() {
     applicationModel.isBurgerOpen = false;
+    this.props.updateLink(false);
     this.setState({
       burger: { display: 'none' },
       bookListAnimation: { animation: 'none' },
@@ -532,8 +560,4 @@ class Header extends React.Component<HeaderProps> {
   }
 }
 
-const mapDispatchToProps = {
-  updateAction,
-};
-
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
