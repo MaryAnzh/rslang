@@ -165,9 +165,23 @@
 
             p {
               color: #006DD9;
-              font-size: 2rem;
+              font-size: 2.2rem;
             }
           }
+
+           .true {
+              background-image: url(../../../img/svg/smile_true.png);
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 50%;
+            }
+
+             .false {
+              background-image: url(../../../img/svg/smile_false.png);
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 50%;
+            }
 
           &__buttons {
             width: 100%;

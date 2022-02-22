@@ -265,7 +265,7 @@ class SprintGame extends React.Component {
 
                 </section>
                 <section className='games-page-wrap__sprint__wrap__game__body'>
-                  <div className='games-page-wrap__sprint__wrap__game__body__question'>
+                  <div className='games-page-wrap__sprint__wrap__game__body__question true'>
                     <div className='games-page-wrap__sprint__wrap__game__body__question__heard-point'>
                       <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_1} />
                       <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_2} />
