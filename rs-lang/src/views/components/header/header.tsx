@@ -303,7 +303,7 @@ class Header extends React.Component<HeaderProps> {
     const arrow = 'enclosed-burger__wrap__arrow left-arrow';
     return (
       <header className="header">
-        <Logo />
+        <Logo funCall={this.defaulteHeaderSatstate.bind(this)} />
         <div className='header__burger'>
           <Burger burgerUp={this.burgerUp} />
         </div>
