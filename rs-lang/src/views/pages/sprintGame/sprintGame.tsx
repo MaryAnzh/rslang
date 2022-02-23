@@ -55,6 +55,10 @@ type SprintGameType = {
   levelEnd: { display: string },
   levelEndText: { display: string },
   smile: string,
+  currentTime: number,
+  check_15: { display: string },
+  check_30: { display: string },
+  check_60: { display: string },
 }
 
 class SprintGame extends React.Component {
@@ -75,6 +79,8 @@ class SprintGame extends React.Component {
   pointCoustCoust = this.pointCoust();
 
   correctAnswersSeries = 0;
+
+  gameTime = 15;
 
   constructor(props: {}) {
     super(props);
@@ -119,6 +125,10 @@ class SprintGame extends React.Component {
       currentQuestion: '',
       statisticsDisplay: { display: 'none' },
       smile: 'games-page-wrap__sprint__wrap__game__body__question question',
+      currentTime: this.gameTime,
+      check_15: { display: 'block' },
+      check_30: { display: 'none' },
+      check_60: { display: 'none' },
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -242,10 +252,59 @@ class SprintGame extends React.Component {
       const popntCoust = (minPointCoust * 2) ** i;
       pointCoustArray.push(popntCoust);
     }
-    console.log('pointCoustArray');
-    console.log(pointCoustArray);
     return pointCoustArray;
   }
+
+  startTimer(e: React.MouseEvent<HTMLElement>) {
+    let time = this.gameTime;
+    const timer = setInterval(() => {
+      if (time == 0) {
+        clearInterval(timer);
+        return;
+      }
+      this.setState({
+        currentTime: time - 1,
+      });
+      time -= 1;
+    }, 1000);
+  }
+
+  chackTimeOnClick(e: React.MouseEvent<HTMLElement>) {
+    this.setState({
+      check_15: { display: 'none' },
+      check_30: { display: 'none' },
+      check_60: { display: 'none' },
+    });
+    const elem = e.target as HTMLElement;
+    const time = elem.getAttribute('data-time');
+    switch (time) {
+      case '15':
+        this.gameTime = 15;
+        this.setState({
+          check_15: { display: 'block' },
+          currentTime: this.gameTime,
+        });
+        break;
+      case '30':
+        this.gameTime = 30;
+        this.setState({
+          check_30: { display: 'block' },
+          currentTime: this.gameTime,
+        });
+        break;
+      case '60':
+        this.gameTime = 60;
+        this.setState({
+          check_60: { display: 'block' },
+          currentTime: this.gameTime,
+        });
+        break;
+      default:
+        break;
+    }
+
+  }
+
 
   render() {
     const { isLoading } = this.state;
@@ -276,61 +335,61 @@ class SprintGame extends React.Component {
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_1} />
                   </div>
-                  <p>1</p>
+                  <p>{this.pointCoustCoust[0]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_2} />
                   </div>
-                  <p>{pountUp}</p>
+                  <p>{this.pointCoustCoust[1]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_3} />
                   </div>
-                  <p>{pountUp ** 2}</p>
+                  <p>{this.pointCoustCoust[2]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_4} />
                   </div>
-                  <p>{pountUp ** 3}</p>
+                  <p>{this.pointCoustCoust[3]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_5} />
                   </div>
-                  <p>{pountUp ** 4}</p>
+                  <p>{this.pointCoustCoust[4]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_6} />
                   </div>
-                  <p>{pountUp ** 5}</p>
+                  <p>{this.pointCoustCoust[5]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_7} />
                   </div>
-                  <p>{pountUp ** 6}</p>
+                  <p>{this.pointCoustCoust[6]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_8} />
                   </div>
-                  <p>{pountUp ** 7}</p>
+                  <p>{this.pointCoustCoust[7]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_9} />
                   </div>
-                  <p>{pountUp ** 8}</p>
+                  <p>{this.pointCoustCoust[8]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_10} />
                   </div>
-                  <p>{pountUp ** 9}</p>
+                  <p>{this.pointCoustCoust[9]}</p>
                 </div>
               </section>
               <section className='games-page-wrap__sprint__wrap__game'>
@@ -391,10 +450,46 @@ class SprintGame extends React.Component {
 
               </section>
               <section className='games-page-wrap__sprint__wrap__timer'>
-                <div className='games-page-wrap__sprint__wrap__timer__clock'>
-                  <p className='games-page-wrap__sprint__wrap__timer__clock__time'>60</p>
+                <div className='games-page-wrap__sprint__wrap__timer__current-time'>
+                  <p>Выбрать продолжительность игры</p>
+                  <div className='games-page-wrap__sprint__wrap__timer__current-time__sec-count'>
+                    <div className='games-page-wrap__sprint__wrap__timer__current-time__sec-count__seconds'>
+                      <p>15</p>
+                      <div className='check'
+                        onClick={(e) => { this.chackTimeOnClick(e) }}
+                        data-time="15">
+                        <div className='check-on' style={this.state.check_15}></div>
+                      </div>
+                    </div>
+                    <div className='games-page-wrap__sprint__wrap__timer__current-time__sec-count__seconds'>
+                      <p>30</p>
+                      <div className='check'
+                        onClick={(e) => { this.chackTimeOnClick(e) }}
+                        data-time="30">
+                        <div className='check-on' style={this.state.check_30}></div>
+                      </div>
+                    </div>
+                    <div className='games-page-wrap__sprint__wrap__timer__current-time__sec-count__seconds'>
+                      <p>60</p>
+                      <div className='check'
+                        onClick={(e) => { this.chackTimeOnClick(e) }}
+                        data-time="60">
+                        <div className='check-on' style={this.state.check_60}></div>
+                      </div>
+                    </div>
+
+
+                  </div>
                 </div>
-                <button className='games-page-wrap__sprint__wrap__timer__start'>Начать</button>
+                <div className='games-page-wrap__sprint__wrap__timer__clock'>
+                  <p className='games-page-wrap__sprint__wrap__timer__clock__time'>
+                    {this.state.currentTime}
+                  </p>
+                </div>
+                <button
+                  className='games-page-wrap__sprint__wrap__timer__start'
+                  onClick={(e) => { this.startTimer(e) }}
+                >Начать</button>
               </section>
             </section>
           </div>
