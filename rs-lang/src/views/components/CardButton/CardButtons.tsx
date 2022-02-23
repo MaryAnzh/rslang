@@ -133,7 +133,7 @@ class CardButtons extends React.Component<CardButtonsProps & ArrayActionProps> {
           <img  src={trending} alt="sound" className="card-buttons__pic"/>
         </button>
         {hardBtn}
-        {this.state.isShowPopup && <ProgressPopup />}
+        {this.state.isShowPopup && <ProgressPopup wordId={this.props.wordId}/>}
         {easyBtn}
       </div>
     );

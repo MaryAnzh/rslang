@@ -1,4 +1,4 @@
-import { PaginatedResults, RequestWord, RequestWordBody, WordCardType } from '../interfaces/types';
+import { PaginatedResults, RequestWord, RequestWordBody, ResponseProgressBody, WordCardType } from '../interfaces/types';
 import { IUser, IUserLogInResponse, IUserRegisterResponse, ISignInResponse, ISignInUserInfo, IGetUser } from '../interfaces/userInterface';
 import { userStorage } from '../model/UserStorage';
 
@@ -160,6 +160,72 @@ class DataService {
       }
     } else
       return false;
+  }
+
+  async getProgressWord(wordId: string) {
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${userStorage.auth.token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    };
+    const wordIdP = '4' + wordId.slice(1);
+    try {
+      const response = await fetch(`${this.user}/${userStorage.auth.userId}/words/${wordIdP}`, requestOptions);
+      const result = <ResponseProgressBody>(await response.json());
+      return result;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  async addProgressWord(wordId: string, game: string, isRight: boolean) {
+    let word = {
+      'difficulty': 'new',
+      'optional': {
+        'sprint': {
+          'right': 0,
+          'wrong': 0,
+        },
+        'audio': {
+          'right': 0,
+          'wrong': 0,
+        },
+      },
+    };
+
+    const getWord = await this.getProgressWord(wordId);
+    if (getWord) {
+      word = getWord;
+    }
+    if (game === 'sprint') {
+      if (isRight) {
+        word.optional.sprint.right += 1;
+      } else {
+        word.optional.sprint.wrong += 1;
+      }
+    } else if (game === 'audio') {
+      if (isRight) {
+        word.optional.audio.right += 1;
+      } else {
+        word.optional.audio.wrong += 1;
+      }
+    }
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${userStorage.auth.token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(word),
+    };
+    const wordIdP = '4' + wordId.slice(1);
+
+    await fetch(`${this.user}/${userStorage.auth.userId}/words/${wordIdP}`, requestOptions);
   }
 }
 
