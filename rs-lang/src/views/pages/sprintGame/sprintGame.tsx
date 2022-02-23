@@ -67,6 +67,8 @@ type SprintGameType = {
   pointStyle_8: { display: string },
   pointStyle_9: { display: string },
   pointStyle_10: { display: string },
+  startButton: string,
+  startTime: string,
 }
 
 class SprintGame extends React.Component {
@@ -150,6 +152,8 @@ class SprintGame extends React.Component {
       pointStyle_8: { display: 'none' },
       pointStyle_9: { display: 'none' },
       pointStyle_10: { display: 'none' },
+      startButton: 'games-page-wrap__sprint__wrap__timer__start',
+      startTime: 'games-page-wrap__sprint__wrap__timer__current-time__sec-count',
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -367,6 +371,8 @@ class SprintGame extends React.Component {
     let time = this.gameTime;
     this.setState({
       gameClass: 'games-page-wrap__sprint__wrap__game__body',
+      startButton: 'games-page-wrap__sprint__wrap__timer__start blocked',
+      startTime: 'games-page-wrap__sprint__wrap__timer__current-time__sec-count blocked',
     });
     const timer = setInterval(() => {
       if (time == 0) {
@@ -491,6 +497,8 @@ class SprintGame extends React.Component {
       pointStyle_8: { display: 'none' },
       pointStyle_9: { display: 'none' },
       pointStyle_10: { display: 'none' },
+      startButton: 'games-page-wrap__sprint__wrap__timer__start',
+      startTime: 'games-page-wrap__sprint__wrap__timer__current-time__sec-count',
     });
   }
 
@@ -727,7 +735,7 @@ class SprintGame extends React.Component {
                 <div className='games-page-wrap__sprint__wrap__timer__current-time'>
                   
                   <p>Выбрать продолжительность игры</p>
-                  <div className='games-page-wrap__sprint__wrap__timer__current-time__sec-count'>
+                  <div className={this.state.startTime}>
                     <div className='games-page-wrap__sprint__wrap__timer__current-time__sec-count__seconds'>
                       <p>15</p>
                       <div className='check'
@@ -762,7 +770,7 @@ class SprintGame extends React.Component {
                   </p>
                 </div>
                 <button
-                  className='games-page-wrap__sprint__wrap__timer__start'
+                  className={this.state.startButton}
                   onClick={(e) => { this.startGame(e) }}
                   tabIndex={1}
                   onKeyDown={(e) => { this.onKeyDownButton(e)}}
