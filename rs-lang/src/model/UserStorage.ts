@@ -158,6 +158,10 @@ class UserStorage {
     const result = await newDataService.getProgressWord(wordId);
     return result;
   }
+
+  async addProgressWord(wordId: string, game: string, isRight: boolean) {
+    await newDataService.addProgressWord(wordId, game, isRight);
+  }
 }
 
 const userStorage = new UserStorage();

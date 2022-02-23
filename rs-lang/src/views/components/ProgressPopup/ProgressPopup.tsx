@@ -22,14 +22,15 @@ class ProgressPopup extends React.Component<{ wordId: string }> {
             wrong: 0,
           },
         },
-
       },
     };
   }
 
   async componentDidMount() {
     const word = await userStorage.getProgressWord(this.props.wordId);
-    this.setState( { word: word } );
+    if (word) {
+      this.setState( { word: word } );
+    }
   }
 
   render() {
