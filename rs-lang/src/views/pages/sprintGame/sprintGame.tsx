@@ -12,6 +12,9 @@ import { ISprintRoundWords } from '../../../interfaces/wordsInterface';
 import { userStorage } from '../../../model/UserStorage';
 import true_answer from '../../../sound/true_answer.mp3';
 import false_answer from '../../../sound/false_answer.mp3';
+import bell_sound from '../../../sound/bell-sound.mp3'
+import over from '../../../sound/over.mp3';
+
 
 type SprintGameType = {
   isLoading: boolean,
@@ -54,6 +57,16 @@ type SprintGameType = {
   check_30: { display: string },
   check_60: { display: string },
   gameClass: string,
+  pointStyle_1: { display: string },
+  pointStyle_2: { display: string },
+  pointStyle_3: { display: string },
+  pointStyle_4: { display: string },
+  pointStyle_5: { display: string },
+  pointStyle_6: { display: string },
+  pointStyle_7: { display: string },
+  pointStyle_8: { display: string },
+  pointStyle_9: { display: string },
+  pointStyle_10: { display: string },
 }
 
 class SprintGame extends React.Component {
@@ -122,11 +135,21 @@ class SprintGame extends React.Component {
       currentQuestion: '',
       statisticsDisplay: { display: 'none' },
       smile: 'games-page-wrap__sprint__wrap__game__body__question question',
-      currentTime: this.gameTime,
+      currentTime: 15,
       check_15: { display: 'block' },
       check_30: { display: 'none' },
       check_60: { display: 'none' },
       gameClass: 'games-page-wrap__sprint__wrap__game__body blocked',
+      pointStyle_1: { display: 'flex' },
+      pointStyle_2: { display: 'none' },
+      pointStyle_3: { display: 'none' },
+      pointStyle_4: { display: 'none' },
+      pointStyle_5: { display: 'none' },
+      pointStyle_6: { display: 'none' },
+      pointStyle_7: { display: 'none' },
+      pointStyle_8: { display: 'none' },
+      pointStyle_9: { display: 'none' },
+      pointStyle_10: { display: 'none' },
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -176,7 +199,6 @@ class SprintGame extends React.Component {
     if (this.wordsArray != undefined) {
       this.gameModel = new AudioCallGameModel(this.wordsArray);
     }
-    this.upDateRound();
     //this.updatePageInfo();
   }
 
@@ -219,17 +241,99 @@ class SprintGame extends React.Component {
 
     if (elemType != null) {
       if ((elemType === 'true' && isAnswerTrue) || (elemType === 'false' && !isAnswerTrue)) {
+        this.trueAnswerCount += 1;
+        this.correctAnswersSeries += 1;
+
+        const dauble = 4;
+        if (this.correctAnswersSeries < dauble) {
+          this.gamePoint += this.pointCoustCoust[0];
+        }
+        if (this.correctAnswersSeries >= dauble && this.correctAnswersSeries < (2 * dauble)) {
+          this.gamePoint += this.pointCoustCoust[1];
+          this.setState({
+            heardFill_2g: '#E9A847',
+            pointStyle_1: { display: 'none' },
+            pointStyle_2: { display: 'flex' },
+          });
+        }
+        if (this.correctAnswersSeries >= (2 * dauble) && this.correctAnswersSeries < (3 * dauble)) {
+          this.gamePoint += this.pointCoustCoust[2];
+          this.setState({
+            heardFill_3g: '#D29F4E',
+            pointStyle_2: { display: 'none' },
+            pointStyle_3: { display: 'flex' },
+          });
+        }
+        if (this.correctAnswersSeries >= (3 * dauble) && this.correctAnswersSeries < (4 * dauble)) {
+          this.gamePoint += this.pointCoustCoust[3];
+          this.setState({
+            heardFill_4g: '#B99555',
+            pointStyle_3: { display: 'none' },
+            pointStyle_4: { display: 'flex' },
+          });
+        }
+        if (this.correctAnswersSeries >= (4 * dauble) && this.correctAnswersSeries < (5 * dauble)) {
+          this.gamePoint += this.pointCoustCoust[4];
+          this.setState({
+            heardFill_5g: '#A28B5C',
+            pointStyle_4: { display: 'none' },
+            pointStyle_5: { display: 'flex' },
+          });
+        }
+        if (this.correctAnswersSeries >= (5 * dauble) && this.correctAnswersSeries < (6 * dauble)) {
+          this.gamePoint += this.pointCoustCoust[5];
+          this.setState({
+            heardFill_6g: '#8B8163',
+            pointStyle_5: { display: 'none' },
+            pointStyle_6: { display: 'flex' },
+          });
+        }
+        if (this.correctAnswersSeries >= (6 * dauble) && this.correctAnswersSeries < (7 * dauble)) {
+          this.gamePoint += this.pointCoustCoust[6];
+          this.setState({
+            heardFill_7g: '#74786A',
+            pointStyle_6: { display: 'none' },
+            pointStyle_7: { display: 'flex' },
+          });
+        }
+        if (this.correctAnswersSeries >= (7 * dauble) && this.correctAnswersSeries < (8 * dauble)) {
+          this.gamePoint += this.pointCoustCoust[7];
+          this.setState({
+            heardFill_8g: '#5F6F70',
+            pointStyle_7: { display: 'none' },
+            pointStyle_8: { display: 'flex' },
+          });
+        }
+        if (this.correctAnswersSeries >= (8 * dauble) && this.correctAnswersSeries < (9 * dauble)) {
+          this.gamePoint += this.pointCoustCoust[8];
+          this.setState({
+            heardFill_9g: '#2C5A7F',
+            pointStyle_8: { display: 'none' },
+            pointStyle_9: { display: 'flex' },
+          });
+        }
+        if (this.correctAnswersSeries >= (9 * dauble) && this.correctAnswersSeries < (10 * dauble)) {
+          this.gamePoint += this.pointCoustCoust[9];
+          this.setState({
+            heardFill_10g: '#0C283D',
+            pointStyle_9: { display: 'none' },
+            pointStyle_10: { display: 'flex' },
+          });
+        }
+
         const audio = new Audio(true_answer);
         if (this.isSoundOn) {
           audio.play();
         }
         this.setState({
           smile: 'games-page-wrap__sprint__wrap__game__body__question true',
+
         });
-        this.trueAnswerCount += 1;
-        //this.gamePoint +=  
+
       } else {
         userStorage.delEasyWordGame(this.gameModel.currentTrueWordId);
+        this.correctAnswersSeries = 0;
+        this.defaultHeardState();
         const audio = new Audio(false_answer);
         if (this.isSoundOn) {
           audio.play();
@@ -257,7 +361,7 @@ class SprintGame extends React.Component {
     return pointCoustArray;
   }
 
-  startTimer(e: React.MouseEvent<HTMLElement>) {
+  startGame(e: React.MouseEvent<HTMLElement>) {
     let time = this.gameTime;
     this.setState({
       gameClass: 'games-page-wrap__sprint__wrap__game__body',
@@ -265,8 +369,11 @@ class SprintGame extends React.Component {
     const timer = setInterval(() => {
       if (time == 0) {
         clearInterval(timer);
+        if (this.isSoundOn) {
+          const audio = new Audio(over);
+          audio.play();
+        }
         const text = `${this.trueAnswerCount}  из  ${this.allRoundAnswerCount}`;
-
         this.setState({
           statisticsDisplay: { display: 'flex' },
           statisticsRoundInfo: text,
@@ -276,11 +383,15 @@ class SprintGame extends React.Component {
       }
       this.setState({
         currentTime: time - 1,
-
-
       });
       time -= 1;
     }, 1000);
+    if (this.isSoundOn) {
+      const audio = new Audio(bell_sound);
+      audio.play();
+    }
+
+    this.upDateRound();
   }
 
   chackTimeOnClick(e: React.MouseEvent<HTMLElement>) {
@@ -330,14 +441,16 @@ class SprintGame extends React.Component {
     this.allRoundAnswerCount = 0;
     this.trueAnswerCount = 0;
     this.gamePoint = 0;
+    this.correctAnswersSeries = 0;
 
     this.gameModel.sprintRoundWords();
     this.defaultState();
-    this.upDateRound();
     // this.forceUpdate();
   }
 
   defaultState() {
+    this.gamePoint = 0;
+    this.correctAnswersSeries = 0;
     this.setState({
       heardFill_2g: 'none',
       heardFill_3g: 'none',
@@ -360,12 +473,45 @@ class SprintGame extends React.Component {
       currentQuestion: '',
       statisticsDisplay: { display: 'none' },
       smile: 'games-page-wrap__sprint__wrap__game__body__question question',
-      currentTime: this.gameTime,
+      currentTime: 15,
       check_15: { display: 'block' },
       check_30: { display: 'none' },
       check_60: { display: 'none' },
       gameClass: 'games-page-wrap__sprint__wrap__game__body blocked',
+      pointStyle_1: { display: 'flex' },
+      pointStyle_2: { display: 'none' },
+      pointStyle_3: { display: 'none' },
+      pointStyle_4: { display: 'none' },
+      pointStyle_5: { display: 'none' },
+      pointStyle_6: { display: 'none' },
+      pointStyle_7: { display: 'none' },
+      pointStyle_8: { display: 'none' },
+      pointStyle_9: { display: 'none' },
+      pointStyle_10: { display: 'none' },
+    });
+  }
 
+  defaultHeardState() {
+    this.setState({
+      heardFill_2g: 'none',
+      heardFill_3g: 'none',
+      heardFill_4g: 'none',
+      heardFill_5g: 'none',
+      heardFill_6g: 'none',
+      heardFill_7g: 'none',
+      heardFill_8g: 'none',
+      heardFill_9g: 'none',
+      heardFill_10g: 'none',
+      pointStyle_1: { display: 'flex' },
+      pointStyle_2: { display: 'none' },
+      pointStyle_3: { display: 'none' },
+      pointStyle_4: { display: 'none' },
+      pointStyle_5: { display: 'none' },
+      pointStyle_6: { display: 'none' },
+      pointStyle_7: { display: 'none' },
+      pointStyle_8: { display: 'none' },
+      pointStyle_9: { display: 'none' },
+      pointStyle_10: { display: 'none' },
     });
   }
 
@@ -416,60 +562,70 @@ class SprintGame extends React.Component {
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_1} />
                   </div>
+                  <div style={this.state.pointStyle_1} className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__current-point'></div>
                   <p>{this.pointCoustCoust[0]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_2} />
                   </div>
+                  <div style={this.state.pointStyle_2} className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__current-point'></div>
                   <p>{this.pointCoustCoust[1]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_3} />
                   </div>
+                  <div style={this.state.pointStyle_3} className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__current-point'></div>
                   <p>{this.pointCoustCoust[2]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_4} />
                   </div>
+                  <div style={this.state.pointStyle_4} className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__current-point'></div>
                   <p>{this.pointCoustCoust[3]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_5} />
                   </div>
+                  <div style={this.state.pointStyle_5} className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__current-point'></div>
                   <p>{this.pointCoustCoust[4]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_6} />
                   </div>
+                  <div style={this.state.pointStyle_6} className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__current-point'></div>
                   <p>{this.pointCoustCoust[5]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_7} />
                   </div>
+                  <div style={this.state.pointStyle_7} className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__current-point'></div>
                   <p>{this.pointCoustCoust[6]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_8} />
                   </div>
+                  <div style={this.state.pointStyle_8} className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__current-point'></div>
                   <p>{this.pointCoustCoust[7]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_9} />
                   </div>
+                  <div style={this.state.pointStyle_9} className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__current-point'></div>
                   <p>{this.pointCoustCoust[8]}</p>
                 </div>
                 <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap'>
                   <div className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__heard'>
                     <HeardsError heardStroke={this.state.heardStroke} heardFill={this.state.heardFill_10} />
                   </div>
+                  <div style={this.state.pointStyle_10} className='games-page-wrap__sprint__wrap__point-panel__heard-wrap__current-point'></div>
                   <p>{this.pointCoustCoust[9]}</p>
                 </div>
               </section>
@@ -477,6 +633,10 @@ class SprintGame extends React.Component {
                 <div className='sprint-round-statistics'
                   style={this.state.statisticsDisplay}>
                   <h2>Статистика раунда</h2>
+                  <p >Набранные баллы</p>
+                  <p className='sprint-round-statistics__answer-count'>
+                    {this.gamePoint}
+                  </p>
                   <p >Прввильные слова</p>
                   <p className='sprint-round-statistics__answer-count'>
                     {this.state.statisticsRoundInfo}
@@ -512,10 +672,9 @@ class SprintGame extends React.Component {
                   <div className='games-page-wrap__sprint__wrap__game__settings__right'>
                     <p className='games-page-wrap__sprint__wrap__game__settings__right__question-count'>{this.trueAnswerCount} / {this.allRoundAnswerCount}</p>
                     <div className='games-page-wrap__sprint__wrap__game__settings__right__point'>
-                      0
+                      {this.gamePoint}
                     </div>
                   </div>
-
                 </section>
                 <section className={this.state.gameClass}>
                   <div className={this.state.smile}>
@@ -556,6 +715,7 @@ class SprintGame extends React.Component {
               </section>
               <section className='games-page-wrap__sprint__wrap__timer'>
                 <div className='games-page-wrap__sprint__wrap__timer__current-time'>
+                  
                   <p>Выбрать продолжительность игры</p>
                   <div className='games-page-wrap__sprint__wrap__timer__current-time__sec-count'>
                     <div className='games-page-wrap__sprint__wrap__timer__current-time__sec-count__seconds'>
@@ -593,7 +753,7 @@ class SprintGame extends React.Component {
                 </div>
                 <button
                   className='games-page-wrap__sprint__wrap__timer__start'
-                  onClick={(e) => { this.startTimer(e) }}
+                  onClick={(e) => { this.startGame(e) }}
                 >Начать</button>
               </section>
             </section>
