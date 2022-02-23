@@ -144,7 +144,7 @@ class UserStorage {
     await newDataService.deleteHardWord(wordId);
     await this.getUserWordsSimple();
   }
-
+  
   async delEasyWordGame(wordId: string) {
     if (this.isAuthorize) {
       if (this.easyWordsSimple.some(word => word.wordId === wordId)) {
@@ -152,6 +152,11 @@ class UserStorage {
         await this.getUserWordsSimple();
       }
     }
+  }
+
+  async getProgressWord(wordId: string) {
+    const result = await newDataService.getProgressWord(wordId);
+    return result;
   }
 }
 

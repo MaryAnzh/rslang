@@ -1,4 +1,4 @@
-import { PaginatedResults, RequestWord, RequestWordBody, WordCardType } from '../interfaces/types';
+import { PaginatedResults, RequestWord, RequestWordBody, ResponseProgressBody, WordCardType } from '../interfaces/types';
 import { IUser, IUserLogInResponse, IUserRegisterResponse, ISignInResponse, ISignInUserInfo, IGetUser } from '../interfaces/userInterface';
 import { userStorage } from '../model/UserStorage';
 
@@ -160,6 +160,20 @@ class DataService {
       }
     } else
       return false;
+  }
+
+  async getProgressWord(wordId: string) {
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${userStorage.auth.token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    };
+    const wordIdP = '4' + wordId.slice(1);
+    const response = await fetch(`${this.user}/${userStorage.auth.userId}/words/${wordIdP}`, requestOptions);
+    return <ResponseProgressBody>(await response.json());
   }
 }
 

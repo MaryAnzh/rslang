@@ -81,6 +81,7 @@ export type RequestWordBody = {
   optional?: {}, 
 }
 
+
 export type RequestWord = RequestWordBody & {
   id: string,
   wordId: string,
@@ -94,4 +95,19 @@ export type PaginatedResults = {
 export type ArrayActionProps = {
   hardsArray?: string[],
   easyArray?: string[],
+}
+
+export type ResponseProgressBody = {
+  difficulty: string, 
+  wordId: string,
+  optional: {
+    sprint: {
+      right: number,
+      wrong: number
+    },
+    audio: {
+      right: number,
+      wrong: number
+    },
+  },
 }
