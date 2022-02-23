@@ -1,4 +1,4 @@
-import React, { AnimationEvent } from 'react';
+import React, { AnimationEvent, HTMLAttributeAnchorTarget } from 'react';
 import { Link } from 'react-router-dom';
 import './../AudioCallGame/AudioCallGame.scss';
 import './sprintGame.scss';
@@ -533,6 +533,10 @@ class SprintGame extends React.Component {
     }
   }
 
+  onKeyDownButton(e: React.KeyboardEvent<HTMLButtonElement>) {
+    console.log('KeyboardEvent');
+    console.log(e);
+  }
 
   render() {
     const { isLoading } = this.state;
@@ -644,7 +648,8 @@ class SprintGame extends React.Component {
                   </p>
                   <button
                     onClick={(e) => { this.playAgaineOnClick(e) }}
-                    className='round-statistics__button'>Играть этот раунд</button>
+                    className='round-statistics__button'>                    
+                    Играть этот раунд</button>
                   <button
                     style={this.state.levelEnd}
                     onClick={(e) => { this.playNextRoundOnClick(e) }}
@@ -703,11 +708,13 @@ class SprintGame extends React.Component {
                       className='games-page-wrap__sprint__wrap__game__body__buttons__answer'
                       onClick={(e) => { this.getButtonDatatypeOnClick(e) }}
                       data-index='true'
+                      
                     >Верно</button>
                     <button
                       className='games-page-wrap__sprint__wrap__game__body__buttons__answer'
                       onClick={(e) => { this.getButtonDatatypeOnClick(e) }}
                       data-index='false'
+                      
                     >Не верно</button>
                   </div>
 
@@ -755,6 +762,8 @@ class SprintGame extends React.Component {
                 <button
                   className='games-page-wrap__sprint__wrap__timer__start'
                   onClick={(e) => { this.startGame(e) }}
+                  tabIndex={1}
+                  onKeyDown={(e) => { this.onKeyDownButton(e)}}
                 >Начать</button>
               </section>
             </section>
