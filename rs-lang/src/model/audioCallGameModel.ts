@@ -37,6 +37,8 @@ class AudioCallGameModel {
 
   errorAnxwerCount = 0;
 
+  currentTrueWordId = '';
+
   roundTrueAnswer = 0;
 
   constructor(currentWordsArray: WordCardType[]) {
@@ -60,6 +62,8 @@ class AudioCallGameModel {
   roundWords() {
     const roundArray: IAnxwer[] = [];
     const wordEng = this.currentWordsArray[this.itemIndex].word;
+    const wordId = this.currentWordsArray[this.itemIndex]._id;
+    this.currentTrueWordId = wordId;
     const currentRoundWord = this.currentWordsArray[this.itemIndex].wordTranslate;
     this.currentTrueWordEng = wordEng;
     this.trueRoundWord = `${wordEng} -- ${this.currentWordsArray[this.itemIndex].wordTranslate}`;
