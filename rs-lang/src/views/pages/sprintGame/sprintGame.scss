@@ -29,12 +29,21 @@
         flex-direction: column;
         justify-content: space-around;
 
+
         &__heard-wrap {
           width: 245px;
           height: 40px;
           display: flex;
           align-items: center;
           justify-content: space-between;
+
+           &__current-point {
+          width: 60px;
+          height: 4px;
+          border-radius: 2px;
+          background: white;
+
+        }
 
           &__heard {
             width: 40px;
