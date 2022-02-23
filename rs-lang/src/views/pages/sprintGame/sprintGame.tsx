@@ -362,6 +362,15 @@ class SprintGame extends React.Component {
     });
   }
 
+  async nextRoundOnClick(e: React.MouseEvent<HTMLElement>) {
+    this.gameModel.itemIndex += 1;
+    this.gameModel.currentRound += 1;
+    this.gameModel.roundWordsArray = [];
+    this.gameModel.roundWords();
+    // this.nwxtRoundUpdateState();
+    // this.updatePageInfo();
+  }
+
   render() {
     const { isLoading } = this.state;
     const pountUp = 2;
@@ -459,13 +468,13 @@ class SprintGame extends React.Component {
                   <button
                     onClick={(e) => { this.playAgaineOnClick(e) }}
                     className='round-statistics__button'>Играть этот раунд</button>
-                  {/* <button
+                   <button
                     style={this.state.levelEnd}
                     onClick={(e) => { this.playNextRoundOnClick(e) }}
                     className='round-statistics__button'>
                     Следующий раунд
                   </button>
-                  <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
+                 {/* <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
                   <Link to='/audiocall-settings'>
                     <p>Выйти</p>
                     <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>
