@@ -9,11 +9,7 @@ import { AudioCallGameModel } from '../../../model/audioCallGameModel';
 import { WordCardType } from '../../../interfaces/types';
 import { applicationModel } from '../../../model/ApplicationModel';
 import { ISprintRoundWords } from '../../../interfaces/wordsInterface';
-import { Music } from '../../components/music/music';
-import { GameInfo } from '../../audioCallElements/gameInfo/gameInfo';
-import { Soundview } from '../../audioCallElements/soundView/soundview';
-import trueCheck from '../../../img/png/true.png';
-import cross from '../../../img/png/cross.png';
+import { userStorage } from '../../../model/UserStorage';
 import true_answer from '../../../sound/true_answer.mp3';
 import false_answer from '../../../sound/false_answer.mp3';
 
@@ -233,6 +229,7 @@ class SprintGame extends React.Component {
         this.trueAnswerCount += 1;
         //this.gamePoint +=  
       } else {
+        userStorage.delEasyWordGame(this.gameModel.currentTrueWordId);
         const audio = new Audio(false_answer);
         if (this.isSoundOn) {
           audio.play();
@@ -279,7 +276,7 @@ class SprintGame extends React.Component {
       }
       this.setState({
         currentTime: time - 1,
-        
+
 
       });
       time -= 1;
@@ -487,13 +484,13 @@ class SprintGame extends React.Component {
                   <button
                     onClick={(e) => { this.playAgaineOnClick(e) }}
                     className='round-statistics__button'>Играть этот раунд</button>
-                   <button
+                  <button
                     style={this.state.levelEnd}
                     onClick={(e) => { this.playNextRoundOnClick(e) }}
                     className='round-statistics__button'>
                     Следующий раунд
                   </button>
-                 <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
+                  <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
                   <Link to='/sprint-settings'>
                     <p>Выйти</p>
                     <div className='setting-icon'></div>
