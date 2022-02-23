@@ -201,13 +201,13 @@ class AudioCallGame extends React.Component {
           const audio = new Audio(true_answer);
           audio.play();
         }
-
+        userStorage.addProgressWord(this.gameModel.currentTrueWordId, 'audio', true);
         this.setState({ answerIndicator: { background: 'url(' + trueCheck + ')' } });
         this.gameModel.roundTrueAnswer += 1;
       } else {
         userStorage.delEasyWordGame(this.gameModel.currentTrueWordId);
-        // console.log('this.gameModel.currentTrueWordEng ' + this.gameModel.currentTrueWordId);
-        // console.log(this.gameModel.currentTrueWordEng);
+        userStorage.addProgressWord(this.gameModel.currentTrueWordId, 'audio', false);
+        
         if (this.isSound) {
           const audio = new Audio(false_answer);
           audio.play();

@@ -241,6 +241,7 @@ class SprintGame extends React.Component {
 
     if (elemType != null) {
       if ((elemType === 'true' && isAnswerTrue) || (elemType === 'false' && !isAnswerTrue)) {
+        userStorage.addProgressWord(this.gameModel.currentTrueWordId, 'sprint', true);
         this.trueAnswerCount += 1;
         this.correctAnswersSeries += 1;
 
@@ -331,6 +332,7 @@ class SprintGame extends React.Component {
         });
 
       } else {
+        userStorage.addProgressWord(this.gameModel.currentTrueWordId, 'sprint', false);
         userStorage.delEasyWordGame(this.gameModel.currentTrueWordId);
         this.correctAnswersSeries = 0;
         this.defaultHeardState();
