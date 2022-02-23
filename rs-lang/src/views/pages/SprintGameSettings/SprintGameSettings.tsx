@@ -11,7 +11,7 @@ class SprintGameSettings extends React.Component {
     return (
       <main className="main">
         <div className='games-page-wrap'>
-          <h1>С П Р И Н Е</h1>
+          <h1>С П Р И Н Т</h1>
           <div className='games-page-wrap__games-wrap'>
             <SettingPanel />
             <div className='games-page-wrap__games-wrap__audio-call'>
