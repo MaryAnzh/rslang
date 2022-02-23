@@ -33,6 +33,8 @@ class AudioCallGameModel {
 
   trueRoundWord = '';
 
+  currentTrueWordEng = '';
+
   errorAnxwerCount = 0;
 
   roundTrueAnswer = 0;
@@ -59,6 +61,7 @@ class AudioCallGameModel {
     const roundArray: IAnxwer[] = [];
     const wordEng = this.currentWordsArray[this.itemIndex].word;
     const currentRoundWord = this.currentWordsArray[this.itemIndex].wordTranslate;
+    this.currentTrueWordEng = wordEng;
     this.trueRoundWord = `${wordEng} -- ${this.currentWordsArray[this.itemIndex].wordTranslate}`;
     const trueWord: IAnxwer = {
       word: currentRoundWord,
