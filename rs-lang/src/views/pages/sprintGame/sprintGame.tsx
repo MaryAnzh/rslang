@@ -221,15 +221,17 @@ class SprintGame extends React.Component {
 
     if (elemType != null) {
       if ((elemType === 'true' && isAnswerTrue) || (elemType === 'false' && !isAnswerTrue)) {
+        this.trueAnswerCount += 1;
+        this.gamePoint += 1;
         const audio = new Audio(true_answer);
         if (this.isSoundOn) {
           audio.play();
         }
         this.setState({
           smile: 'games-page-wrap__sprint__wrap__game__body__question true',
+          
         });
-        this.trueAnswerCount += 1;
-        //this.gamePoint +=  
+        
       } else {
         userStorage.delEasyWordGame(this.gameModel.currentTrueWordId);
         const audio = new Audio(false_answer);
@@ -259,7 +261,7 @@ class SprintGame extends React.Component {
     return pointCoustArray;
   }
 
-  startTimer(e: React.MouseEvent<HTMLElement>) {
+  startGame(e: React.MouseEvent<HTMLElement>) {
     let time = this.gameTime;
     this.setState({
       gameClass: 'games-page-wrap__sprint__wrap__game__body',
@@ -485,6 +487,10 @@ class SprintGame extends React.Component {
                 <div className='sprint-round-statistics'
                   style={this.state.statisticsDisplay}>
                   <h2>Статистика раунда</h2>
+                  <p >Набранные баллы</p>
+                  <p className='sprint-round-statistics__answer-count'>
+                    {this.gamePoint}
+                  </p>
                   <p >Прввильные слова</p>
                   <p className='sprint-round-statistics__answer-count'>
                     {this.state.statisticsRoundInfo}
@@ -520,7 +526,7 @@ class SprintGame extends React.Component {
                   <div className='games-page-wrap__sprint__wrap__game__settings__right'>
                     <p className='games-page-wrap__sprint__wrap__game__settings__right__question-count'>{this.trueAnswerCount} / {this.allRoundAnswerCount}</p>
                     <div className='games-page-wrap__sprint__wrap__game__settings__right__point'>
-                      0
+                      {this.gamePoint}
                     </div>
                   </div>
 
@@ -601,7 +607,7 @@ class SprintGame extends React.Component {
                 </div>
                 <button
                   className='games-page-wrap__sprint__wrap__timer__start'
-                  onClick={(e) => { this.startTimer(e) }}
+                  onClick={(e) => { this.startGame(e) }}
                 >Начать</button>
               </section>
             </section>
