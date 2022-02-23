@@ -39,7 +39,7 @@ class ProgressPopup extends React.Component<{ wordId: string }> {
         <table>
         <tbody>
           <tr>
-            <th></th>
+            <th>Мини-игра</th>
             <th>Верно</th>
             <th>Неверно</th>
           </tr>

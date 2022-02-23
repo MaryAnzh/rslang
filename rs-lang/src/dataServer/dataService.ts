@@ -197,8 +197,11 @@ class DataService {
     };
 
     const getWord = await this.getProgressWord(wordId);
+    let method = 'POST';
     if (getWord) {
-      word = getWord;
+      word.difficulty = getWord.difficulty;
+      word.optional = getWord.optional;
+      method = 'PUT';
     }
     if (game === 'sprint') {
       if (isRight) {
@@ -213,9 +216,10 @@ class DataService {
         word.optional.audio.wrong += 1;
       }
     }
+    // console.log(JSON.stringify(word));
 
     const requestOptions = {
-      method: 'POST',
+      method: method,
       headers: {
         'Authorization': `Bearer ${userStorage.auth.token}`,
         'Accept': 'application/json',
