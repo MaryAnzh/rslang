@@ -14,6 +14,7 @@ import trueCheck from '../../../img/png/true.png';
 import cross from '../../../img/png/cross.png';
 import true_answer from '../../../sound/true_answer.mp3';
 import false_answer from '../../../sound/false_answer.mp3';
+import { userStorage } from '../../../model/UserStorage';
 
 type AudioCallGameType = {
   isLoading: boolean,
@@ -204,6 +205,9 @@ class AudioCallGame extends React.Component {
         this.setState({ answerIndicator: { background: 'url(' + trueCheck + ')' } });
         this.gameModel.roundTrueAnswer += 1;
       } else {
+        userStorage.delEasyWordGame(this.gameModel.currentTrueWordEng);
+        // console.log('this.gameModel.currentTrueWordEng');
+        // console.log(this.gameModel.currentTrueWordEng);
         if (this.isSound) {
           const audio = new Audio(false_answer);
           audio.play();

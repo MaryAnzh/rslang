@@ -29,6 +29,15 @@ type SprintGameType = {
   heardFill_8: string,
   heardFill_9: string,
   heardFill_10: string,
+  heardFill_2g: string,
+  heardFill_3g: string,
+  heardFill_4g: string,
+  heardFill_5g: string,
+  heardFill_6g: string,
+  heardFill_7g: string,
+  heardFill_8g: string,
+  heardFill_9g: string,
+  heardFill_10g: string
   heardStroke: string,
   heardStroke2: string,
   currentLevel: string,
@@ -63,6 +72,8 @@ class SprintGame extends React.Component {
 
   gamePoint = 0;
 
+  pointCoustCoust = this.pointCoust();
+
   correctAnswersSeries = 0;
 
   constructor(props: {}) {
@@ -73,16 +84,25 @@ class SprintGame extends React.Component {
     this.state = {
       isLoading: true,
       heardFill_1: '#FFB140',
-      heardFill_2: 'none',
-      heardFill_3: 'none',
-      heardFill_4: 'none',
-      heardFill_5: 'none',
-      heardFill_6: 'none',
-      heardFill_7: 'none',
-      heardFill_8: 'none',
-      heardFill_9: 'none',
-      heardFill_10: 'none',
+      heardFill_2: '#E9A847',
+      heardFill_3: '#D29F4E',
+      heardFill_4: '#B99555',
+      heardFill_5: '#A28B5C',
+      heardFill_6: '#8B8163',
+      heardFill_7: '#74786A',
+      heardFill_8: '#5F6F70',
+      heardFill_9: '#2C5A7F',
+      heardFill_10: '#0C283D',
       heardStroke: 'white',
+      heardFill_2g: 'none',
+      heardFill_3g: 'none',
+      heardFill_4g: 'none',
+      heardFill_5g: 'none',
+      heardFill_6g: 'none',
+      heardFill_7g: 'none',
+      heardFill_8g: 'none',
+      heardFill_9g: 'none',
+      heardFill_10g: 'none',
       heardStroke2: '#006DD9',
       currentLevel: 'Уровень сложности ' + (applicationModel.gameLevel + 1),
       currentLevelColor: { background: this.gameLevelColor(applicationModel.gameLevel) },
@@ -214,11 +234,17 @@ class SprintGame extends React.Component {
     this.upDateRound();
   }
 
-  pointCoust(number: number) {
-    const questionCoutВouble = 4;
-    if (this.correctAnswersSeries < 4) {
-
+  pointCoust() {
+    const maxDouble = 9;
+    const minPointCoust = 1;
+    const pointCoustArray: number[] = [];
+    for (let i = 0; i <= maxDouble; i += 1) {
+      const popntCoust = (minPointCoust * 2) ** i;
+      pointCoustArray.push(popntCoust);
     }
+    console.log('pointCoustArray');
+    console.log(pointCoustArray);
+    return pointCoustArray;
   }
 
   render() {
@@ -331,15 +357,15 @@ class SprintGame extends React.Component {
                   <div className={this.state.smile}>
                     <div className='games-page-wrap__sprint__wrap__game__body__question__heard-point'>
                       <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_1} />
-                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_2} />
-                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_3} />
-                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_4} />
-                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_5} />
-                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_6} />
-                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_7} />
-                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_8} />
-                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_9} />
-                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_10} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_2g} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_3g} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_4g} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_5g} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_6g} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_7g} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_8g} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_9g} />
+                      <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_10g} />
 
                     </div>
                     <div className='games-page-wrap__sprint__wrap__game__body__question__text'>

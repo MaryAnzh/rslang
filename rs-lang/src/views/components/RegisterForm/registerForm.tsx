@@ -69,14 +69,14 @@ class RegisterForm extends React.Component<RegisterFormProps> {
             value={this.state.password}
             onChange={this.handleUserInput}
           />
-          <label>*Повторите пароль:</label>
+          {/* <label>*Повторите пароль:</label>
           <FormErrors password={this.state.password} passwordRepeat={this.state.passwordRepeat} name="passwordRepeat" />
           <input
             type="password"
             id="password2"
             name="password2"
             autoComplete=''
-          />
+          /> */}
           <button type="button" onClick={(e) => { this.getUserDataOnClick(e) }}
           // disabled={!this.state.formValid}
           >Регистрация</button>
