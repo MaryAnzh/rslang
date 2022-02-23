@@ -147,8 +147,7 @@ class UserStorage {
 
   async delEasyWordGame(wordId: string) {
     if (this.isAuthorize) {
-      // console.log(wordId);
-      if (this.easyWordsSimple.some(word => word.wordId === wordId)) {
+      if (this.easyWordsSimple.some(word => word.id === wordId)) {
         await newDataService.deleteHardWord(wordId);
         await this.getUserWordsSimple();
       }
