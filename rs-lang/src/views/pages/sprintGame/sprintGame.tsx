@@ -441,6 +441,7 @@ class SprintGame extends React.Component {
     this.allRoundAnswerCount = 0;
     this.trueAnswerCount = 0;
     this.gamePoint = 0;
+    this.correctAnswersSeries = 0;
 
     this.gameModel.sprintRoundWords();
     this.defaultState();
@@ -448,6 +449,8 @@ class SprintGame extends React.Component {
   }
 
   defaultState() {
+    this.gamePoint = 0;
+    this.correctAnswersSeries = 0;
     this.setState({
       heardFill_2g: 'none',
       heardFill_3g: 'none',
@@ -485,7 +488,6 @@ class SprintGame extends React.Component {
       pointStyle_8: { display: 'none' },
       pointStyle_9: { display: 'none' },
       pointStyle_10: { display: 'none' },
-
     });
   }
 
@@ -673,7 +675,6 @@ class SprintGame extends React.Component {
                       {this.gamePoint}
                     </div>
                   </div>
-
                 </section>
                 <section className={this.state.gameClass}>
                   <div className={this.state.smile}>
@@ -714,6 +715,7 @@ class SprintGame extends React.Component {
               </section>
               <section className='games-page-wrap__sprint__wrap__timer'>
                 <div className='games-page-wrap__sprint__wrap__timer__current-time'>
+                  
                   <p>Выбрать продолжительность игры</p>
                   <div className='games-page-wrap__sprint__wrap__timer__current-time__sec-count'>
                     <div className='games-page-wrap__sprint__wrap__timer__current-time__sec-count__seconds'>
