@@ -60,11 +60,21 @@ class AudioCallGameModel {
   }
 
   roundWords() {
+    console.log(this.currentWordsArray[this.itemIndex].id);
     const roundArray: IAnxwer[] = [];
     const wordEng = this.currentWordsArray[this.itemIndex].word;
-    const wordId = this.currentWordsArray[this.itemIndex]._id;
+    console.log('Правильное слово');
+    console.log(this.currentWordsArray[this.itemIndex].word);
+    const wordId = this.currentWordsArray[this.itemIndex].id;
     this.currentTrueWordId = wordId;
+    console.log('id');
+    console.log(this.currentWordsArray[this.itemIndex].id);
+
     const currentRoundWord = this.currentWordsArray[this.itemIndex].wordTranslate;
+    console.log('Правильное слово перевод');
+    console.log(this.currentWordsArray[this.itemIndex].wordTranslate);
+
+
     this.currentTrueWordEng = wordEng;
     this.trueRoundWord = `${wordEng} -- ${this.currentWordsArray[this.itemIndex].wordTranslate}`;
     const trueWord: IAnxwer = {
