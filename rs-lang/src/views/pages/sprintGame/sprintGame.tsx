@@ -362,14 +362,23 @@ class SprintGame extends React.Component {
     });
   }
 
-  async nextRoundOnClick(e: React.MouseEvent<HTMLElement>) {
-    this.gameModel.itemIndex += 1;
-    this.gameModel.currentRound += 1;
-    this.gameModel.roundWordsArray = [];
-    this.gameModel.roundWords();
-    // this.nwxtRoundUpdateState();
-    // this.updatePageInfo();
+  async playNextRoundOnClick(e: React.MouseEvent<HTMLElement>) {
+    const maxPageNumber = 29;
+
+    if (applicationModel.gamePage < maxPageNumber) {
+      applicationModel.gamePage += 1;
+      await this.loadGame();
+      this.gameAgainUpdate();
+      this.forceUpdate();
+    } else {
+      applicationModel.gamePage = 0;
+      this.setState({
+        levelEnd: { display: 'none' },
+        levelEndText: { display: 'block' },
+      });
+    }
   }
+
 
   render() {
     const { isLoading } = this.state;
