@@ -8,7 +8,7 @@
   color: white;
 
   &__hidden-burger-menu {
-    position: absolute;
+    position: fixed;
     z-index: 10;
     width: 13rem;
     display: none;
@@ -46,7 +46,7 @@
     }
 
     .enclosed-burger {
-      display: flex;
+         display: flex;
       flex-direction: column;
 
       &__wrap {

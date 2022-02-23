@@ -306,6 +306,7 @@ class Header extends React.Component<HeaderProps> {
         <Logo funCall={this.defaulteHeaderSatstate.bind(this)} />
         <div className='header__burger'>
           <Burger burgerUp={this.burgerUp} />
+          
         </div>
         <div
           className='header__hidden-burger-menu'
