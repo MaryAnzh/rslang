@@ -351,3 +351,19 @@
     }
   }
 }
+
+.setting-icon {
+  width: 30px;
+  height: 30px;
+  background: url(../../../img/svg/settings.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  transition: 0.5s;
+
+    &:hover {
+      background: url(../../../img/svg/settings_hover.svg);
+      transform: rotate(180deg);
+    }
+}

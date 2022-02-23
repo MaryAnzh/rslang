@@ -123,7 +123,7 @@ class SprintGame extends React.Component {
       levelEnd: { display: 'block' },
       levelEndText: { display: 'none' },
       currentQuestion: '',
-      statisticsDisplay: { display: 'flex' },
+      statisticsDisplay: { display: 'none' },
       smile: 'games-page-wrap__sprint__wrap__game__body__question question',
       currentTime: this.gameTime,
       check_15: { display: 'block' },
@@ -483,11 +483,11 @@ class SprintGame extends React.Component {
                     className='round-statistics__button'>
                     Следующий раунд
                   </button>
-                 {/* <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
-                  <Link to='/audiocall-settings'>
+                 <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
+                  <Link to='/sprint-settings'>
                     <p>Выйти</p>
-                    <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>
-                  </Link> */}
+                    <div className='setting-icon'></div>
+                  </Link>
 
                 </div>
                 <section className='games-page-wrap__sprint__wrap__game__settings'>
