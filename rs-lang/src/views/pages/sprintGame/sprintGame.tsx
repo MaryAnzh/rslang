@@ -57,6 +57,7 @@ type SprintGameType = {
   check_15: { display: string },
   check_30: { display: string },
   check_60: { display: string },
+  gameClass: string,
 }
 
 class SprintGame extends React.Component {
@@ -129,6 +130,7 @@ class SprintGame extends React.Component {
       check_15: { display: 'block' },
       check_30: { display: 'none' },
       check_60: { display: 'none' },
+      gameClass: 'games-page-wrap__sprint__wrap__game__body blocked',
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -260,6 +262,9 @@ class SprintGame extends React.Component {
 
   startTimer(e: React.MouseEvent<HTMLElement>) {
     let time = this.gameTime;
+    this.setState({
+      gameClass: 'games-page-wrap__sprint__wrap__game__body',
+    });
     const timer = setInterval(() => {
       if (time == 0) {
         clearInterval(timer);
@@ -268,11 +273,14 @@ class SprintGame extends React.Component {
         this.setState({
           statisticsDisplay: { display: 'flex' },
           statisticsRoundInfo: text,
+          gameClass: 'games-page-wrap__sprint__wrap__game__body blocked',
         });
         return;
       }
       this.setState({
         currentTime: time - 1,
+        
+
       });
       time -= 1;
     }, 1000);
@@ -359,6 +367,8 @@ class SprintGame extends React.Component {
       check_15: { display: 'block' },
       check_30: { display: 'none' },
       check_60: { display: 'none' },
+      gameClass: 'games-page-wrap__sprint__wrap__game__body blocked',
+
     });
   }
 
@@ -466,7 +476,7 @@ class SprintGame extends React.Component {
                   <p>{this.pointCoustCoust[9]}</p>
                 </div>
               </section>
-              <section className='games-page-wrap__sprint__wrap__game'>
+              <section className="games-page-wrap__sprint__wrap__game">
                 <div className='sprint-round-statistics'
                   style={this.state.statisticsDisplay}>
                   <h2>Статистика раунда</h2>
@@ -510,7 +520,7 @@ class SprintGame extends React.Component {
                   </div>
 
                 </section>
-                <section className='games-page-wrap__sprint__wrap__game__body'>
+                <section className={this.state.gameClass}>
                   <div className={this.state.smile}>
                     <div className='games-page-wrap__sprint__wrap__game__body__question__heard-point'>
                       <HeardsError heardStroke={this.state.heardStroke2} heardFill={this.state.heardFill_1} />

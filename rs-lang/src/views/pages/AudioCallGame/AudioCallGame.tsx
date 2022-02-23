@@ -206,8 +206,7 @@ class AudioCallGame extends React.Component {
         this.gameModel.roundTrueAnswer += 1;
       } else {
         userStorage.delEasyWordGame(this.gameModel.currentTrueWordId);
-        // console.log('this.gameModel.currentTrueWordEng');
-        // console.log(this.gameModel.currentTrueWordEng);
+       
         if (this.isSound) {
           const audio = new Audio(false_answer);
           audio.play();
