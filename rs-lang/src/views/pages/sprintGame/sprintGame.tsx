@@ -451,6 +451,7 @@ class SprintGame extends React.Component {
   defaultState() {
     this.gamePoint = 0;
     this.correctAnswersSeries = 0;
+    this.gameTime = 15;
     this.setState({
       heardFill_2g: 'none',
       heardFill_3g: 'none',
