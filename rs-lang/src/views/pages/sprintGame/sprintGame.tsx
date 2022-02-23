@@ -12,6 +12,9 @@ import { ISprintRoundWords } from '../../../interfaces/wordsInterface';
 import { userStorage } from '../../../model/UserStorage';
 import true_answer from '../../../sound/true_answer.mp3';
 import false_answer from '../../../sound/false_answer.mp3';
+import bell_sound from '../../../sound/bell-sound.mp3'
+import over from '../../../sound/over.mp3';
+
 
 type SprintGameType = {
   isLoading: boolean,
@@ -122,7 +125,7 @@ class SprintGame extends React.Component {
       currentQuestion: '',
       statisticsDisplay: { display: 'none' },
       smile: 'games-page-wrap__sprint__wrap__game__body__question question',
-      currentTime: this.gameTime,
+      currentTime: 15,
       check_15: { display: 'block' },
       check_30: { display: 'none' },
       check_60: { display: 'none' },
@@ -176,7 +179,6 @@ class SprintGame extends React.Component {
     if (this.wordsArray != undefined) {
       this.gameModel = new AudioCallGameModel(this.wordsArray);
     }
-    this.upDateRound();
     //this.updatePageInfo();
   }
 
@@ -265,8 +267,11 @@ class SprintGame extends React.Component {
     const timer = setInterval(() => {
       if (time == 0) {
         clearInterval(timer);
+        if (this.isSoundOn) {
+          const audio = new Audio(over);
+          audio.play();
+        }
         const text = `${this.trueAnswerCount}  из  ${this.allRoundAnswerCount}`;
-
         this.setState({
           statisticsDisplay: { display: 'flex' },
           statisticsRoundInfo: text,
@@ -276,11 +281,15 @@ class SprintGame extends React.Component {
       }
       this.setState({
         currentTime: time - 1,
-
-
       });
       time -= 1;
     }, 1000);
+    if (this.isSoundOn) {
+      const audio = new Audio(bell_sound);
+      audio.play();
+    }
+
+    this.upDateRound();
   }
 
   chackTimeOnClick(e: React.MouseEvent<HTMLElement>) {
@@ -333,7 +342,6 @@ class SprintGame extends React.Component {
 
     this.gameModel.sprintRoundWords();
     this.defaultState();
-    this.upDateRound();
     // this.forceUpdate();
   }
 
@@ -360,7 +368,7 @@ class SprintGame extends React.Component {
       currentQuestion: '',
       statisticsDisplay: { display: 'none' },
       smile: 'games-page-wrap__sprint__wrap__game__body__question question',
-      currentTime: this.gameTime,
+      currentTime: 15,
       check_15: { display: 'block' },
       check_30: { display: 'none' },
       check_60: { display: 'none' },

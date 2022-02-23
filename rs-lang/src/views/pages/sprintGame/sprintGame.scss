@@ -231,10 +231,28 @@
 
             &:nth-child(1) {
                background: #006DD9;
+               transition: .3s;
+
+               &:hover {
+                 background: #3596f8;
+               }
+
+               &:active {
+                  background: #69b0f7;
+               }
             }
 
              &:nth-child(2) {
                background: #A66200;
+               transition: .3s;
+
+               &:hover {
+                 background: #df8e1e;
+               }
+
+               &:active {
+                  background: #eea949;
+               }
             }
           }
           }
@@ -295,6 +313,17 @@
           font-size: 1.6rem;
           color: 006DD9;
           border: 2px solid #006DD9;
+          transition: 0.3s;
+
+          &:hover {
+              background: #5d9bc5;
+              color: white;
+              border: 1px solid white;
+          }
+
+          &:active {
+             background: #d9e7f0;
+          }
         }
       }
     }
