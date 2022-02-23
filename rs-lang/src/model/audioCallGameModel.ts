@@ -93,6 +93,9 @@ class AudioCallGameModel {
 
   sprintRoundWords() {
     const roundArray: ISprintRoundWords[] = [];
+    if (this.itemIndex > this.currentWordsArrayLangth - 1) {
+      this.itemIndex = 0;
+    }
     const wordEng = this.currentWordsArray[this.itemIndex].word;
     const wordRus = this.currentWordsArray[this.itemIndex].wordTranslate;
 

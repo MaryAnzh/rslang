@@ -47,8 +47,6 @@ type SprintGameType = {
   currentRoundNumber: string,
   roundAudio: string,
   gameInfoStyle: { display: string },
-  answerIndicator: { background: string },
-  nextRoundBUttonWrapClass: string,
   statisticsRoundInfo: string,
   statisticsDisplay: { display: string },
   soundClass: string,
@@ -81,6 +79,10 @@ class SprintGame extends React.Component {
   correctAnswersSeries = 0;
 
   gameTime = 15;
+
+  trueAnswerCount = 0;
+
+  allRoundAnswerCount = 0;
 
   constructor(props: {}) {
     super(props);
@@ -116,14 +118,12 @@ class SprintGame extends React.Component {
       currentRoundNumber: '',
       roundAudio: '',
       gameInfoStyle: { display: 'flex' },
-      answerIndicator: { background: '' },
-      nextRoundBUttonWrapClass: 'games-page-wrap__game-wrap__audio-call__game__repeat displayNone',
-      statisticsRoundInfo: '',
+      statisticsRoundInfo: `${this.trueAnswerCount}  из  ${this.allRoundAnswerCount}`,
       soundClass: 'games-page-wrap__sprint__wrap__game__settings__left__bell-on',
       levelEnd: { display: 'block' },
       levelEndText: { display: 'none' },
       currentQuestion: '',
-      statisticsDisplay: { display: 'none' },
+      statisticsDisplay: { display: 'flex' },
       smile: 'games-page-wrap__sprint__wrap__game__body__question question',
       currentTime: this.gameTime,
       check_15: { display: 'block' },
@@ -184,7 +184,7 @@ class SprintGame extends React.Component {
 
   upDateRound() {
     this.sprintRoundWordsArray = this.gameModel.sprintRoundWords();
-    console.log(this.gameModel.sprintRoundWordsArray);
+    // console.log(this.gameModel.sprintRoundWordsArray);
     const question = this.gameModel.sprintRoundWordsArray[0];
     const questionText = question.word + ' - ' + question.translate;
     this.setState({
@@ -213,6 +213,8 @@ class SprintGame extends React.Component {
   }
 
   getButtonDatatypeOnClick(e: React.MouseEvent<HTMLElement>) {
+    this.allRoundAnswerCount += 1;
+
     const elem = e.target as HTMLElement;
     const elemType = elem.getAttribute('data-index');
     const isAnswerTrue = this.sprintRoundWordsArray[0].isTrueAnxwer;
@@ -226,6 +228,7 @@ class SprintGame extends React.Component {
         this.setState({
           smile: 'games-page-wrap__sprint__wrap__game__body__question true',
         });
+        this.trueAnswerCount += 1;
         //this.gamePoint +=  
       } else {
         const audio = new Audio(false_answer);
@@ -260,6 +263,12 @@ class SprintGame extends React.Component {
     const timer = setInterval(() => {
       if (time == 0) {
         clearInterval(timer);
+        const text = `${this.trueAnswerCount}  из  ${this.allRoundAnswerCount}`;
+
+        this.setState({
+          statisticsDisplay: { display: 'flex' },
+          statisticsRoundInfo: text,
+        });
         return;
       }
       this.setState({
@@ -305,6 +314,53 @@ class SprintGame extends React.Component {
 
   }
 
+  playAgaineOnClick(e: React.MouseEvent<HTMLElement>) {
+    this.gameAgainUpdate();
+  }
+
+  gameAgainUpdate() {
+    this.gameModel.itemIndex = 0;
+    this.gameModel.currentRound = 1;
+
+    this.allRoundAnswerCount = 0;
+    this.trueAnswerCount = 0;
+    this.gamePoint = 0;
+
+    this.gameModel.sprintRoundWords();
+    this.defaultState();
+    this.upDateRound();
+    // this.forceUpdate();
+  }
+
+  defaultState() {
+    this.setState({
+      heardFill_2g: 'none',
+      heardFill_3g: 'none',
+      heardFill_4g: 'none',
+      heardFill_5g: 'none',
+      heardFill_6g: 'none',
+      heardFill_7g: 'none',
+      heardFill_8g: 'none',
+      heardFill_9g: 'none',
+      heardFill_10g: 'none',
+      heardStroke2: '#006DD9',
+      currentLevel: 'Уровень сложности ' + (applicationModel.gameLevel + 1),
+      currentLevelColor: { background: this.gameLevelColor(applicationModel.gameLevel) },
+      currentRound: '',
+      currentRoundNumber: '',
+      roundAudio: '',
+      statisticsRoundInfo: `${this.trueAnswerCount}  из  ${this.allRoundAnswerCount}`,
+      levelEnd: { display: 'block' },
+      levelEndText: { display: 'none' },
+      currentQuestion: '',
+      statisticsDisplay: { display: 'none' },
+      smile: 'games-page-wrap__sprint__wrap__game__body__question question',
+      currentTime: this.gameTime,
+      check_15: { display: 'block' },
+      check_30: { display: 'none' },
+      check_60: { display: 'none' },
+    });
+  }
 
   render() {
     const { isLoading } = this.state;
@@ -393,6 +449,29 @@ class SprintGame extends React.Component {
                 </div>
               </section>
               <section className='games-page-wrap__sprint__wrap__game'>
+                <div className='sprint-round-statistics'
+                  style={this.state.statisticsDisplay}>
+                  <h2>Статистика раунда</h2>
+                  <p >Прввильные слова</p>
+                  <p className='sprint-round-statistics__answer-count'>
+                    {this.state.statisticsRoundInfo}
+                  </p>
+                  <button
+                    onClick={(e) => { this.playAgaineOnClick(e) }}
+                    className='round-statistics__button'>Играть этот раунд</button>
+                  {/* <button
+                    style={this.state.levelEnd}
+                    onClick={(e) => { this.playNextRoundOnClick(e) }}
+                    className='round-statistics__button'>
+                    Следующий раунд
+                  </button>
+                  <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
+                  <Link to='/audiocall-settings'>
+                    <p>Выйти</p>
+                    <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>
+                  </Link> */}
+
+                </div>
                 <section className='games-page-wrap__sprint__wrap__game__settings'>
                   <div className='games-page-wrap__sprint__wrap__game__settings__left'>
                     <div
@@ -406,6 +485,7 @@ class SprintGame extends React.Component {
                   </div>
 
                   <div className='games-page-wrap__sprint__wrap__game__settings__right'>
+                    <p className='games-page-wrap__sprint__wrap__game__settings__right__question-count'>{this.trueAnswerCount} / {this.allRoundAnswerCount}</p>
                     <div className='games-page-wrap__sprint__wrap__game__settings__right__point'>
                       0
                     </div>
