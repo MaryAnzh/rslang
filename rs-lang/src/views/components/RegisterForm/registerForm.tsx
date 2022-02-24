@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './registerForm.scss';
 import { startPageModel } from '../../../model/StartPageModel';
 import { FormErrors } from '../../elements/FormErrors/FormErrors';
 import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
 import { applicationModel } from '../../../model/ApplicationModel';
 import { AppProperties } from '../../../interfaces/appProperties';
+
+//const emailField = useRef(null);
 
 type FormState = {
   name: string;
@@ -22,6 +24,8 @@ type RegisterFormProps = {
 
 class RegisterForm extends React.Component<RegisterFormProps> {
   state: FormState;
+  
+  //emailField = useRef(null);
 
   constructor(props: RegisterFormProps) {
     super(props);
