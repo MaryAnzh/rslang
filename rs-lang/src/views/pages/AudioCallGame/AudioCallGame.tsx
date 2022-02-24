@@ -481,14 +481,14 @@ class AudioCallGame extends React.Component {
                   <button
                     onClick={(e) => { this.playAgaineOnClick(e) }}
                     className='round-statistics__button'>Играть этот раунд</button>
-                  <button
+                  {/* <button
                     style={this.state.levelEnd}
                     onClick={(e) => { this.playNextRoundOnClick(e) }}
                     className={this.state.lexelButton}>
                     Следующий раунд
                   </button>
                   <p className={this.state.lexelButtonStr}>Раунд -- странице учебника. Текущая страница {applicationModel.gamePage + 1}</p>
-                  <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
+                  <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p> */}
                   <Link
                     to='/audiocall-settings'
                     onClick={(e) => { this.navTiSetting(e) }}
