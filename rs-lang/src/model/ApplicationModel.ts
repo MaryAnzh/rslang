@@ -34,6 +34,8 @@ class ApplicationModel {
 
   isBurgerOpen = false;
 
+  secondClickSingInForm = true;
+
   constructor(dataServ: DataService) {
     this.dataServ = dataServ;
     this.currentMail = '';

@@ -4,6 +4,7 @@ import './SignInForm.scss';
 import { applicationModel } from '../../../model/ApplicationModel';
 import { authorizationAppModel } from '../../../model/AuthorizationAppModel';
 import { FormErrors } from '../../elements/FormErrors/FormErrors';
+import { JsxFlags } from 'typescript';
 
 type SignInFormState = {
   email: string;
@@ -96,11 +97,25 @@ class SignInForm extends React.Component<SignInFormProps> {
 
   async getUserDataOnClick(e: React.MouseEvent<HTMLButtonElement>) {
     this.upDateValue();
+
     if (this.state.email === '' || this.state.password === '') {
-      this.setState({
-        classError: 'form-error-on-click',
-        errorText: 'Заполните все поля',
-      });
+      if (applicationModel.secondClickSingInForm) {
+        this.setState({
+          classError: 'form-error-on-click',
+          errorText: 'Если у вас включено автозаполнение полей Хром, то нажмите Войти еще раз',
+        });
+        setTimeout(() => this.setState({
+          classError: 'form-error-on-click',
+          errorText: '',
+        }), 3000);
+        applicationModel.secondClickSingInForm = false;
+      } else {
+        this.setState({
+          classError: 'form-error-on-click',
+          errorText: 'Заполните все поля',
+        });
+      }
+
     } else if (!authorizationAppModel.isMailValid || !authorizationAppModel.isPasswordValid) {
       this.setState({
         errorText: 'Одно из полей заполнено неверно',
@@ -109,6 +124,7 @@ class SignInForm extends React.Component<SignInFormProps> {
       applicationModel.currentMail = this.state.email;
       applicationModel.currentPassword = this.state.password;
       let signInUser = await applicationModel.signInUser();
+      applicationModel.secondClickSingInForm = true;
       if (signInUser) {
         authorizationAppModel.closeForm();
         const greating = 'Добро пожаловать на сайт, ' + applicationModel.currentUserName;
@@ -122,6 +138,7 @@ class SignInForm extends React.Component<SignInFormProps> {
   }
 
   navToRegisterFormOnClick(e: React.MouseEvent<HTMLElement>) {
+    applicationModel.secondClickSingInForm = false;
     authorizationAppModel.registerOnClick(e);
     this.removeInputValue();
   }

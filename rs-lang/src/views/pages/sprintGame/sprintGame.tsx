@@ -1,4 +1,4 @@
-import React, { AnimationEvent, HTMLAttributeAnchorTarget } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './../AudioCallGame/AudioCallGame.scss';
 import './sprintGame.scss';
@@ -14,7 +14,6 @@ import true_answer from '../../../sound/true_answer.mp3';
 import false_answer from '../../../sound/false_answer.mp3';
 import bell_sound from '../../../sound/bell-sound.mp3'
 import over from '../../../sound/over.mp3';
-
 
 type SprintGameType = {
   isLoading: boolean,
