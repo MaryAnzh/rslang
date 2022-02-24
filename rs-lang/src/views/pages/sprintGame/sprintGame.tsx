@@ -69,6 +69,7 @@ type SprintGameType = {
   startButton: string,
   startTime: string,
   lexelButton: string,
+  lexelButtonStr: string,
 }
 
 class SprintGame extends React.Component {
@@ -155,6 +156,7 @@ class SprintGame extends React.Component {
       startButton: 'games-page-wrap__sprint__wrap__timer__start',
       startTime: 'games-page-wrap__sprint__wrap__timer__current-time__sec-count',
       lexelButton: 'round-statistics__button',
+      lexelButtonStr: '',
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -389,6 +391,7 @@ class SprintGame extends React.Component {
             statisticsRoundInfo: text,
             gameClass: 'games-page-wrap__sprint__wrap__game__body blocked',
             lexelButton: 'round-statistics__button hidden',
+            lexelButtonStr: 'hidden',
           });
         } else {
           this.setState({
@@ -683,6 +686,8 @@ class SprintGame extends React.Component {
                     className={this.state.lexelButton}>
                     Следующий раунд
                   </button>
+                 
+                  <p className={this.state.lexelButtonStr}>Раунд -- странице учебника. Текущая страница {applicationModel.gamePage + 1 }</p>
                   <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
                   <Link
                     to='/sprint-settings'

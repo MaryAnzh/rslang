@@ -54,6 +54,8 @@ type AudioCallGameType = {
   soundClass: string,
   levelEnd: { display: string },
   levelEndText: { display: string },
+  lexelButton: string,
+  lexelButtonStr: string,
 }
 
 type ButtonType = {
@@ -116,6 +118,8 @@ class AudioCallGame extends React.Component {
       soundClass: 'games-page-wrap__game-wrap__audio-call__top-settings__left__bell',
       levelEnd: { display: 'block' },
       levelEndText: { display: 'none' },
+      lexelButton: 'round-statistics__button',
+      lexelButtonStr: '',
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -196,6 +200,7 @@ class AudioCallGame extends React.Component {
                 statisticsRoundInfo: this.gameModel.roundTrueAnswer + '/' + this.gameModel.currentWordsArrayLangth,
                 statisticsDosplay: { display: 'flex' },
                 lexelButton: 'round-statistics__button hidden',
+                lexelButtonStr: 'hidden',
               })
             } else {
               this.setState({
@@ -479,9 +484,10 @@ class AudioCallGame extends React.Component {
                   <button
                     style={this.state.levelEnd}
                     onClick={(e) => { this.playNextRoundOnClick(e) }}
-                    className='round-statistics__button'>
+                    className={this.state.lexelButton}>
                     Следующий раунд
                   </button>
+                  <p className={this.state.lexelButtonStr}>Раунд -- странице учебника. Текущая страница {applicationModel.gamePage + 1}</p>
                   <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
                   <Link
                     to='/audiocall-settings'
