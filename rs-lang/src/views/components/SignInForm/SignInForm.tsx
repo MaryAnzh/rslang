@@ -104,6 +104,10 @@ class SignInForm extends React.Component<SignInFormProps> {
           classError: 'form-error-on-click',
           errorText: 'Если у вас включено автозаполнение полей Хром, то нажмите Войти еще раз',
         });
+        setTimeout(() => this.setState({
+          classError: 'form-error-on-click',
+          errorText: '',
+        }), 3000);
         applicationModel.secondClickSingInForm = false;
       } else {
         this.setState({
@@ -134,7 +138,7 @@ class SignInForm extends React.Component<SignInFormProps> {
   }
 
   navToRegisterFormOnClick(e: React.MouseEvent<HTMLElement>) {
-    this.secondClick = false;
+    applicationModel.secondClickSingInForm = false;
     authorizationAppModel.registerOnClick(e);
     this.removeInputValue();
   }
