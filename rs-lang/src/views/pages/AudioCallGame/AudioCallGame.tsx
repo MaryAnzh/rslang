@@ -402,6 +402,10 @@ class AudioCallGame extends React.Component {
     audip.play();
   }
 
+  navTiSetting(e: React.MouseEvent<HTMLElement>) {
+    applicationModel.gameFromBook = false;
+  }
+
   render() {
     //console.log('Рендер вызвался');
     const { isLoading } = this.state;
@@ -479,7 +483,10 @@ class AudioCallGame extends React.Component {
                     Следующий раунд
                   </button>
                   <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
-                  <Link to='/audiocall-settings'>
+                  <Link
+                    to='/audiocall-settings'
+                    onClick={(e) => { this.navTiSetting(e) }}
+                  >
                     <p>Выйти</p>
                     <div className='games-page-wrap__game-wrap__audio-call__top-settings__right__cross'></div>
                   </Link>

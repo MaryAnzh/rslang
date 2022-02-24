@@ -555,6 +555,10 @@ class SprintGame extends React.Component {
     }
   }
 
+  navTiSetting(e: React.MouseEvent<HTMLElement>) {
+    applicationModel.gameFromBook = false;
+  }
+
   onKeyDownButton(e: React.KeyboardEvent<HTMLButtonElement>) {
     console.log('KeyboardEvent');
     console.log(e);
@@ -680,7 +684,11 @@ class SprintGame extends React.Component {
                     Следующий раунд
                   </button>
                   <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
-                  <Link to='/sprint-settings'>
+                  <Link
+                    to='/sprint-settings'
+                  
+                    onClick={(e) => { this.navTiSetting(e) }}>
+                    
                     <p>Выйти</p>
                     <div className='setting-icon'></div>
                   </Link>
