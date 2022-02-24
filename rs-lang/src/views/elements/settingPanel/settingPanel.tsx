@@ -43,17 +43,20 @@ class SettingPanel extends React.Component {
       this.activeButton = buttonNumber;
       this.activeButtonState(buttonNumber);
       applicationModel.gameLevel = buttonNumber;
+      applicationModel.gamePage = 0;
     } else {
       this.unActiveButtonState();
       if (this.activeButton === buttonNumber) {
         this.isActive = false;
         this.activeButton = -1;
         applicationModel.gameLevel = 0;
+        applicationModel.gamePage = 0;
       } else {
         this.isActive = true;
         this.activeButton = buttonNumber;
         this.activeButtonState(buttonNumber);
         applicationModel.gameLevel = buttonNumber;
+        applicationModel.gamePage = 0;
       }
 
     }
