@@ -68,6 +68,7 @@ type SprintGameType = {
   pointStyle_10: { display: string },
   startButton: string,
   startTime: string,
+  lexelButton: string,
 }
 
 class SprintGame extends React.Component {
@@ -153,6 +154,7 @@ class SprintGame extends React.Component {
       pointStyle_10: { display: 'none' },
       startButton: 'games-page-wrap__sprint__wrap__timer__start',
       startTime: 'games-page-wrap__sprint__wrap__timer__current-time__sec-count',
+      lexelButton: 'round-statistics__button',
     }
     this.roundAudio = new Audio(this.state.roundAudio);
   }
@@ -381,11 +383,22 @@ class SprintGame extends React.Component {
           audio.play();
         }
         const text = `${this.trueAnswerCount}  из  ${this.allRoundAnswerCount}`;
-        this.setState({
-          statisticsDisplay: { display: 'flex' },
-          statisticsRoundInfo: text,
-          gameClass: 'games-page-wrap__sprint__wrap__game__body blocked',
-        });
+        if (applicationModel.gameFromBook) {
+          this.setState({
+            statisticsDisplay: { display: 'flex' },
+            statisticsRoundInfo: text,
+            gameClass: 'games-page-wrap__sprint__wrap__game__body blocked',
+            lexelButton: 'round-statistics__button hidden',
+          });
+        } else {
+          this.setState({
+            statisticsDisplay: { display: 'flex' },
+            statisticsRoundInfo: text,
+            gameClass: 'games-page-wrap__sprint__wrap__game__body blocked',
+            lexelButton: 'round-statistics__button',
+          });
+        }
+
         return;
       }
       this.setState({
@@ -657,12 +670,13 @@ class SprintGame extends React.Component {
                   </p>
                   <button
                     onClick={(e) => { this.playAgaineOnClick(e) }}
-                    className='round-statistics__button'>                    
+                    className='round-statistics__button'>
                     Играть этот раунд</button>
                   <button
                     style={this.state.levelEnd}
                     onClick={(e) => { this.playNextRoundOnClick(e) }}
-                    className='round-statistics__button'>
+
+                    className={this.state.lexelButton}>
                     Следующий раунд
                   </button>
                   <p style={this.state.levelEndText}>Поздравляю! Вы прошли уровень. Перейдите в настройки, что бы выбрать новый уровень</p>
@@ -717,13 +731,13 @@ class SprintGame extends React.Component {
                       className='games-page-wrap__sprint__wrap__game__body__buttons__answer'
                       onClick={(e) => { this.getButtonDatatypeOnClick(e) }}
                       data-index='true'
-                      
+
                     >Верно</button>
                     <button
                       className='games-page-wrap__sprint__wrap__game__body__buttons__answer'
                       onClick={(e) => { this.getButtonDatatypeOnClick(e) }}
                       data-index='false'
-                      
+
                     >Не верно</button>
                   </div>
 
@@ -732,7 +746,7 @@ class SprintGame extends React.Component {
               </section>
               <section className='games-page-wrap__sprint__wrap__timer'>
                 <div className='games-page-wrap__sprint__wrap__timer__current-time'>
-                  
+
                   <p>Выбрать продолжительность игры</p>
                   <div className={this.state.startTime}>
                     <div className='games-page-wrap__sprint__wrap__timer__current-time__sec-count__seconds'>
@@ -772,7 +786,7 @@ class SprintGame extends React.Component {
                   className={this.state.startButton}
                   onClick={(e) => { this.startGame(e) }}
                   tabIndex={1}
-                  onKeyDown={(e) => { this.onKeyDownButton(e)}}
+                  onKeyDown={(e) => { this.onKeyDownButton(e) }}
                 >Начать</button>
               </section>
             </section>

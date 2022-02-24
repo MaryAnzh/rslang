@@ -191,10 +191,20 @@ class AudioCallGame extends React.Component {
             nextRoundButtonCLass: 'games-page-wrap__game-wrap__audio-call__game__repeat__button nav-button round-end-anim',
           });
           setTimeout(() => {
-            this.setState({
-              statisticsRoundInfo: this.gameModel.roundTrueAnswer + '/' + this.gameModel.currentWordsArrayLangth,
-              statisticsDosplay: { display: 'flex' },
-            })
+            if (applicationModel.gameFromBook) {
+              this.setState({
+                statisticsRoundInfo: this.gameModel.roundTrueAnswer + '/' + this.gameModel.currentWordsArrayLangth,
+                statisticsDosplay: { display: 'flex' },
+                lexelButton: 'round-statistics__button hidden',
+              })
+            } else {
+              this.setState({
+                statisticsRoundInfo: this.gameModel.roundTrueAnswer + '/' + this.gameModel.currentWordsArrayLangth,
+                statisticsDosplay: { display: 'flex' },
+                lexelButton: 'round-statistics__button',
+              })
+            }
+
           }, 3000);
         }
         if (this.isSound) {
@@ -207,7 +217,7 @@ class AudioCallGame extends React.Component {
       } else {
         userStorage.delEasyWordGame(this.gameModel.currentTrueWordId);
         userStorage.addProgressWord(this.gameModel.currentTrueWordId, 'audio', false);
-        
+
         if (this.isSound) {
           const audio = new Audio(false_answer);
           audio.play();
@@ -434,7 +444,7 @@ class AudioCallGame extends React.Component {
                   <div
                     className='games-page-wrap__game-wrap__audio-call__top-settings__left__level'
                     style={this.state.currentLevelColor}
-                  >{this.state.currentLevel}</div>                
+                  >{this.state.currentLevel}</div>
                 </div>
                 <div className='games-page-wrap__game-wrap__audio-call__top-settings__center'>
                   <p className='games-page-wrap__game-wrap__audio-call__top-settings__center__page-number'>
