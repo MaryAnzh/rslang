@@ -33,7 +33,7 @@ class SettingPanel extends React.Component {
   }
 
   buttonOnClick(e: React.MouseEvent<HTMLDivElement>) {
-    applicationModel.gameFromBook = false;
+
     const elem = e.target as HTMLButtonElement;
     let buttonNumberTxt = elem.dataset.index;
     const buttonNumber = (buttonNumberTxt == undefined) ? 0 : +buttonNumberTxt;
@@ -43,8 +43,14 @@ class SettingPanel extends React.Component {
       this.isActive = true;
       this.activeButton = buttonNumber;
       this.activeButtonState(buttonNumber);
-      applicationModel.gameLevel = buttonNumber;
-      applicationModel.gamePage = 0;
+      if (buttonNumber === 6) {
+        applicationModel.gameFromBook = true;
+      } else {
+        applicationModel.gameLevel = buttonNumber;
+        applicationModel.gamePage = 0;
+        applicationModel.gameFromBook = false;
+      }
+
     } else {
       this.unActiveButtonState();
       if (this.activeButton === buttonNumber) {
@@ -125,10 +131,10 @@ class SettingPanel extends React.Component {
           <div
             onClick={(e) => { this.buttonOnClick(e) }}
             data-index='4' className={this.state.activeClass__4}>Уровень сложности 5</div>
-          <div
+          <div 
             onClick={(e) => { this.buttonOnClick(e) }}
             data-index='5' className={this.state.activeClass__5}>Уровень сложности 6</div>
-          <div data-index='6' className={userClass}>Сложные слова</div>
+          <div style={{ display: 'none' }} data-index='6' className={userClass}>Сложные слова</div>
         </div>
       </div>
     )
