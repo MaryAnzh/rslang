@@ -4,9 +4,14 @@ import './SprintGameSettings.scss';
 import '../../elements/settingPanel/settingPanel';
 import { audioCallPageModel } from '../../../model/AudioCallPageModel';
 import { SettingPanel } from '../../elements/settingPanel/settingPanel';
-
+import { applicationModel } from '../../../model/ApplicationModel';
 
 class SprintGameSettings extends React.Component {
+
+  startGame(e: React.MouseEvent<HTMLElement>) {
+    applicationModel.gameFromBook = false;
+  }
+
   render() {
     return (
       <main className="main">
@@ -16,10 +21,12 @@ class SprintGameSettings extends React.Component {
             <SettingPanel />
             <div className='games-page-wrap__games-wrap__audio-call'>
               <h2>Спринт</h2>
-              <Link to="/sprint-game">
-                 <div className='games-page-wrap__games-wrap__audio-call__game-start'>Играть</div>
+              <Link
+                onClick={(e) => { this.startGame(e) }}
+                to="/sprint-game">
+                <div className='games-page-wrap__games-wrap__audio-call__game-start'>Играть</div>
               </Link>
-             
+
             </div>
           </div>
         </div>

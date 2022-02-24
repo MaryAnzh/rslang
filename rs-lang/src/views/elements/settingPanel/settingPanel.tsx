@@ -33,6 +33,7 @@ class SettingPanel extends React.Component {
   }
 
   buttonOnClick(e: React.MouseEvent<HTMLDivElement>) {
+    applicationModel.gameFromBook = false;
     const elem = e.target as HTMLButtonElement;
     let buttonNumberTxt = elem.dataset.index;
     const buttonNumber = (buttonNumberTxt == undefined) ? 0 : +buttonNumberTxt;

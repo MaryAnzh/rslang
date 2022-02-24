@@ -4,12 +4,17 @@ import './AudioCallGameSettings.scss';
 import '../../elements/settingPanel/settingPanel';
 import { audioCallPageModel } from '../../../model/AudioCallPageModel';
 import { SettingPanel } from '../../elements/settingPanel/settingPanel';
+import { applicationModel } from '../../../model/ApplicationModel';
 
 class AudioCallGameSettings extends React.Component {
 
   startGameOnClick(e: React.MouseEvent<HTMLElement>) {
     audioCallPageModel.isSetting = false;
     this.forceUpdate();
+  }
+
+  startGame(e: React.MouseEvent<HTMLElement>) {
+    applicationModel.gameFromBook = false;
   }
 
   render() {
@@ -21,11 +26,13 @@ class AudioCallGameSettings extends React.Component {
             <SettingPanel />
             <section className='games-page-wrap__settings-wrap__audio-call'>
               <h2>Аудиовызов</h2>
-              <Link to="/audiocall-game">
+              <Link
+                to="/audiocall-game"
+                onClick={(e) => { this.startGame(e) }}>
                 <button
-                className='games-page-wrap__settings-wrap__audio-call__game-start'>
-                Играть</button> </Link>
-              
+                  className='games-page-wrap__settings-wrap__audio-call__game-start'>
+                  Играть</button> </Link>
+
             </section>
           </div>
         </div>
