@@ -189,6 +189,12 @@ class TextBook extends React.Component< ArrayActionProps > {
           }
         } else {
           applicationModel.currentWordArray = this.state.words;
+          if (this.state.group === 6) {
+            applicationModel.currentWordArray.forEach(word => {
+              word.id = word._id;
+            });
+          }
+          console.log(applicationModel.currentWordArray);
         }
       }
     } else {
