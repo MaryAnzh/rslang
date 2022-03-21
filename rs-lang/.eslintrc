@@ -17,7 +17,7 @@
     }
   },
   "rules": {
-    "object-curly-spacing": ["warn", "always"],
+    // "object-curly-spacing": ["warn", "always"],
     "no-unused-vars": [
       "warn",
       {
@@ -39,15 +39,6 @@
       "error",
       {
         "ignoreRestArgs": true
-      }
-    ],
-    "max-len": [
-      "warn",
-      {
-        "code": 80,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true,
-        "ignoreComments": true
       }
     ],
     "no-plusplus": [
@@ -77,6 +68,6 @@
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-wrap-multilines": "off",
     "react/destructuring-assignment": "off",
-    "indent": ["error", 2]
+    //"indent": ["error", 2]
   }
 }

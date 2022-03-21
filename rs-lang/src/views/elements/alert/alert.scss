@@ -1,0 +1,22 @@
+.alert {
+  display: none;
+  width: 18rem;
+  height: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  background: #00488D;
+  border: 2px dashed white;
+  border-radius: 10px;
+  top: 20%;
+  left: calc(50% - 9rem);
+  position: absolute;
+  z-index: 10;
+
+  &__text {
+    color: white;
+    text-align: center;
+    
+  }
+}

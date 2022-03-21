@@ -10,8 +10,9 @@ h6 {
 
 .root-container {
   display: flex;
-  min-height: 100vh;
+  min-height: 98vh;
   flex-direction: column;
+  align-content: center;
   color: #fff;
 }
 
@@ -20,7 +21,6 @@ h6 {
 }
 
 .main {
-  padding: 1rem 2rem;
   flex: 1 0 auto;
 }
 

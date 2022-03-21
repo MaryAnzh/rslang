@@ -1,0 +1,127 @@
+@import '../../../css/variables';
+
+.group-pagination {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  background: $second-color-dark;
+  color: #fff;
+  font-size: 1.2rem;
+
+  // @media screen and (max-width: 960px) {
+  //   width: 100%;
+  // }
+
+  &__btn {
+    height: 100%;
+    padding: 0 1.3rem;
+    border: none;
+    outline: none;
+    background: #0000;
+    font-size: 1.2rem;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:nth-child(2) {
+      background: #FFB140;
+      border-right: 1px dashed white;
+    }
+    
+    &:nth-child(3) {
+      background: #DEA854;
+      border-right: 1px dashed white;
+    }
+    
+    &:nth-child(4) {
+      background: #AE9B71;
+      border-right: 1px dashed white;
+    }
+    
+    &:nth-child(5) {
+      background: #818F8C;
+      border-right: 1px dashed white;
+    }
+    
+    &:nth-child(6) {
+      background: #5D86A1;
+      border-right: 1px dashed white;
+    }
+    
+    &:nth-child(7) {
+      background: #2777C2;
+    }
+    
+    &:nth-child(8) {
+      border-left: 1px dashed white;
+      background: #006DD9;
+    }
+    
+    &:hover {
+      box-shadow: inset 0 0 6px rgba(10, 10, 10, 0.5), 0 0 6px rgba(65, 65, 65, 0.2);
+      outline-color: rgba(255, 255, 255, 0);
+      outline-offset: 15px;
+      text-shadow: 1px 1px 2px #2a4b58; 
+    }
+  }
+  
+  &__text {
+    height: 100%;
+    line-height: 3rem;
+    border-right: 1px dashed white;
+    padding: 0 1rem;
+    @media screen and (max-width: 520px) {
+      display: none;
+    }
+  }
+}
+.tooltip {
+  position: relative;
+
+  &:hover:after {
+    display: inline-block;
+  }
+
+  &::after {
+    z-index: 200;
+    display: none;
+    content: "Сложные слова";
+    font-size: 0.9rem;
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    position: absolute;
+    background: #555;
+    color: #fff;
+    bottom: -3.5rem;
+    left: 1.5rem;
+    transform: translate(-50%);
+  }
+  &__del::after {
+    width: 5rem;
+    content: "Удалить из сложных";
+  }
+  &__add::after {
+    width: 5rem;
+    content: "Добавить в сложные";
+  }
+  &__apply::after {
+    left:  -1rem;
+    width: 5rem;
+    content: "Добавить в изученные";
+  }
+  &__del-easy::after {
+    left:  -1rem;
+    width: 5rem;
+    content: "Удалить из изученных";
+  }
+  &__sound::after {
+    left:  -1rem;
+    width: 6.5rem;
+    content: "Воспроизвести пример";
+  }
+  &__statistics::after {
+    left:  0.5rem;
+    width: 5rem;
+    content: "Прогресс изучения";
+  }
+}

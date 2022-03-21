@@ -1,0 +1,108 @@
+import { WordCardType } from '../interfaces/types';
+import { IUser, IUserLogInResponse, IUserRegisterResponse, ISignInResponse, ISignInUserInfo } from '../interfaces/userInterface';
+
+class DataService {
+  baseURL: string;
+
+  private user: string;
+
+  private signin: string;
+
+<<<<<<< HEAD
+  public myStorage: Storage;
+=======
+  private words: string;
+
+  private currentToken: string;
+>>>>>>> origin/develop
+
+  get currentRefreshToken() {
+    return this.myStorage.localStorage.getItem('refreshtoken');
+  }
+
+  set currentRefreshToken(value: string) {
+    this.myStorage.localStorage.setItem('refreshtoken', value);
+  }
+
+  get currentToken() {
+    return this.myStorage.localStorage.getItem('token');
+  }
+
+  set currentToken(value: string) {
+    this.myStorage.localStorage.setItem('token', value);
+  }
+
+  // private currentRefreshToken: string;
+
+
+  constructor(baseURL: string) {
+    this.baseURL = baseURL;
+    this.user = `${this.baseURL}/users`;
+    this.signin = `${this.baseURL}/signin`;
+<<<<<<< HEAD
+    this.myStorage = window.localStorage;
+=======
+    this.words = `${this.baseURL}/words`;
+    this.currentToken = '';
+    this.currentRefreshToken = '';
+>>>>>>> origin/develop
+  }
+
+  async registereUser(newUser: IUser) {
+    const response = await fetch(`${this.user}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newUser),
+    });
+    const status = await response.status;
+    if (status !== 200) {
+      throw new Error(status.toString());
+    } else {
+
+      return response.json();
+    }
+
+
+  }
+
+  async signInUser(user: ISignInUserInfo): Promise<ISignInResponse> {
+    const response = await fetch(`${this.signin}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+
+<<<<<<< HEAD
+    const status = await response.status;
+    if (status !== 200) {
+      throw new Error(status.toString());
+    } else {
+      const responseJson: ISignInResponse = await response.json();
+      this.currentToken = responseJson.token;
+      this.currentRefreshToken = responseJson.refreshToken;
+      return responseJson;
+    }
+
+=======
+  async getWords(group: number, page: number): Promise<WordCardType[]> {
+    const requestOptions = {
+      method: 'GET',
+    };
+    const response = await fetch(`${this.words}?group=${group}&page=${page}`, requestOptions);
+    return <WordCardType[]>(await response.json());
+>>>>>>> origin/develop
+  }
+}
+
+const dataUrl = 'https://react-rslang-team-mary.herokuapp.com';
+const newDataService = new DataService(dataUrl);
+//user@mail.ru
+//11111111
+
+export { newDataService, DataService };
